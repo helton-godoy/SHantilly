@@ -1,0 +1,3 @@
+**Diretório `packaging`:**
+
+Este diretório é dedicado exclusivamente ao armazenamento dos scripts responsáveis pela construção das versões empacotadas do Showbox, abrangendo todos os formatos de distribuição suportados pelo projeto. Ele abriga os scripts que geram os artefatos finais, direcionados ao diretório @/dist/, assegurando que todos os pacotes estejam prontos para distribuição e instalação imediata em diversos ambientes e plataformas. Esses scripts são otimizados para a execução eficiente do build de cada formato correspondente, facilitando o deploy e a entrega aos usuários finais, com ênfase na compatibilidade e eficiência do processo de instalação.
