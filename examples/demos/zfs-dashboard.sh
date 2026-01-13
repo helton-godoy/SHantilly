@@ -1,4 +1,4 @@
-#!/bin/bash
+j#!/bin/bash
 SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/showbox/bin/showbox}"
 DIALOGBOX=${1:-./dist_qt6/dialogbox}
 
