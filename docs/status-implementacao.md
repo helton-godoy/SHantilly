@@ -10,7 +10,7 @@
 ## Resumo Executivo
 
 | Categoria              | Status          | Progresso |
-| ---------------------- | --------------- | --------- |
+|------------------------|-----------------|-----------|
 | **Parser V1**          | 🟢 Completo     | 100%      |
 | **Parser V2**          | 🟡 Parcial      | 70%       |
 | **Comandos**           | 🟢 Completo     | 100%      |
@@ -60,7 +60,7 @@
 ### Comandos Implementados no V2
 
 | Comando   | Factory | Execute | Status | Notas                 |
-| --------- | ------- | ------- | ------ | --------------------- |
+|-----------|---------|---------|--------|-----------------------|
 | `add`     | ✓       | ✓       | 🟢     | AddCommandFactory     |
 | `set`     | ✓       | ✓       | 🟢     | SetCommandFactory     |
 | `query`   | ✓       | ✓       | 🟢     | QueryCommandFactory   |
@@ -88,7 +88,7 @@
 ### Widgets Padrão
 
 | Widget        | ShowBox.h | Implementado | Testado | Status |
-| ------------- | --------- | ------------ | ------- | ------ |
+|---------------|-----------|--------------|---------|--------|
 | `label`       | ✓         | ✓            | ?       | 🟢     |
 | `pushbutton`  | ✓         | ✓            | ?       | 🟢     |
 | `checkbox`    | ✓         | ✓            | ?       | 🟢     |
@@ -111,7 +111,7 @@
 ### Widgets Estendidos
 
 | Widget     | Classe Custom     | Implementado | Testado | Status |
-| ---------- | ----------------- | ------------ | ------- | ------ |
+|------------|-------------------|--------------|---------|--------|
 | `table`    | CustomTableWidget | ✓            | ?       | 🟢     |
 | `chart`    | CustomChartWidget | ✓            | ?       | 🟢     |
 | `calendar` | QCalendarWidget   | ✓            | ?       | 🟢     |
@@ -125,7 +125,7 @@
 ### Opções de Comando (OptionMask)
 
 | Opção        | Código           | Implementada | Status |
-| ------------ | ---------------- | ------------ | ------ |
+|--------------|------------------|--------------|--------|
 | `enabled`    | OptionEnabled    | ✓            | 🟢     |
 | `focus`      | OptionFocus      | ✓            | 🟢     |
 | `stylesheet` | OptionStyleSheet | ✓            | 🟢     |
@@ -156,7 +156,7 @@
 ### Formatos Implementados
 
 | Formato            | Implementado | Status |
-| ------------------ | ------------ | ------ |
+|--------------------|--------------|--------|
 | PushButton click   | ✓            | 🟢     |
 | Toggle PushButton  | ✓            | 🟢     |
 | Slider value       | ✓            | 🟢     |
@@ -266,7 +266,7 @@
 ### Plataformas Suportadas
 
 | Plataforma           | Docker | Scripts | Status |
-| -------------------- | ------ | ------- | ------ |
+|----------------------|--------|---------|--------|
 | Debian/Ubuntu (.deb) | ✓      | ✓       | 🟢     |
 | Fedora (.rpm)        | ✓      | ✓       | 🟢     |
 | AppImage             | ✓      | ✓       | 🟢     |
@@ -284,7 +284,7 @@
 ### Documentos Existentes
 
 | Documento             | Localização                                 | Status      |
-| --------------------- | ------------------------------------------- | ----------- |
+|-----------------------|---------------------------------------------|-------------|
 | README principal      | `README.md`                                 | 🟡 Básico   |
 | Man page              | `man/showbox.md`                            | 🟡 Parcial  |
 | Dialogbox Reference   | `docs/dialogbox-reference.md`               | 🟢 Completo |
@@ -332,29 +332,30 @@
 ### Vantagens do Showbox
 
 1. **Arquitetura Moderna**
-
+   
    - Command Registry Pattern
    - Factory Pattern para extensibilidade
    - Separação clara de responsabilidades
 
 2. **Sistema de Temas**
-
+   
    - ThemeManager integrado
    - Alternância dinâmica de temas
    - Não presente no Dialogbox original
 
 3. **Logging**
-
+   
    - Sistema de logs estruturado
    - Debugging facilitado
 
 4. **Widgets Customizados**
-
+   
    - CustomTableWidget com funcionalidades extras
    - CustomChartWidget com exportação
    - Melhorias sobre Dialogbox
 
 5. **Qt6**
+   
    - Versão moderna do Qt
    - Melhor performance
    - Recursos atualizados

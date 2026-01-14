@@ -352,30 +352,30 @@ enum Stage {
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                      DialogParser                           │
-│  - run()           : Thread principal de parsing           │
-│  - processToken()  : Analisa tokens e monta comandos       │
-│  - issueCommand()  : Emite comando para execução           │
+│  - run()           : Thread principal de parsing            │
+│  - processToken()  : Analisa tokens e monta comandos        │
+│  - issueCommand()  : Emite comando para execução            │
 └────────────────┬────────────────────────────────────────────┘
                  │
                  │ emit sendCommand(DialogCommand)
                  ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                        ShowBox                              │
-│  executeCommand() : Executa comandos do parser             │
-│  - add*()         : Métodos de criação de widgets          │
-│  - setOptions()   : Configura propriedades                 │
-│  - slots          : handlers de eventos                    │
+│  executeCommand() : Executa comandos do parser              │
+│  - add*()         : Métodos de criação de widgets           │
+│  - setOptions()   : Configura propriedades                  │
+│  - slots          : handlers de eventos                     │
 └────────────────┬────────────────────────────────────────────┘
                  │
                  │ Event signals
                  ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                     Widgets Qt                              │
-│  - QLabel, QPushButton, QCheckBox                          │
-│  - QLineEdit, QTextEdit, QListWidget                       │
-│  - QComboBox, QProgressBar, QSlider                        │
-│  - QTabWidget, QCalendarWidget                             │
-│  - CustomTableWidget, CustomChartWidget                    │
+│  - QLabel, QPushButton, QCheckBox                           │
+│  - QLineEdit, QTextEdit, QListWidget                        │
+│  - QComboBox, QProgressBar, QSlider                         │
+│  - QTabWidget, QCalendarWidget                              │
+│  - CustomTableWidget, CustomChartWidget                     │
 └─────────────────────────────────────────────────────────────┘
 ```
 

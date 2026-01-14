@@ -1,226 +1,81 @@
-# Visão Geral do Projeto ShowBox
+# Visão Geral do Projeto Showbox
 
-## Resumo
+## Descrição
 
-**ShowBox** é uma ferramenta de linha de comando baseada em Qt6 que fornece **widgets GUI avançados para scripts shell**. Ele permite que desenvolvedores criem interfaces gráficas ricas e interativas diretamente a partir de scripts Bash, oferecendo uma alternativa moderna a ferramentas como `dialog`, `zenity` ou `yad`.
+O **Showbox** é uma biblioteca de widgets GUI para scripts shell, desenvolvida em C++ utilizando o framework Qt. Permite criar interfaces gráficas interativas através de comandos enviados via entrada padrão (stdin), facilitando a criação de diálogos e formulários a partir de scripts de shell.
 
-## Propósito
+## Objetivo Principal
 
-O ShowBox democratiza o desenvolvimento de interfaces gráficas para administradores de sistemas e desenvolvedores de scripts, eliminando a necessidade de conhecimento profundo em programação GUI. Com simples comandos de linha de comando, é possível criar diálogos complexos, formulários, tabelas, gráficos e muito mais.
+Fornecer uma ponte entre scripts shell e interfaces gráficas modernas, permitindo que desenvolvedores criem aplicações com interface visual sem necessidade de conhecimento avançado em linguagens de programação GUI.
 
-## Principais Características
+## Arquitetura Técnica
 
-### 🎨 Widgets Disponíveis
+- **Linguagem**: C++ com Qt Framework
+- **Paradigma**: Programação orientada a objetos
+- **Padrão**: Command Pattern para processamento de comandos
+- **Interface**: Parsing de comandos textuais via stdin
+- **Saída**: Valores dos widgets via stdout
 
-- **Botões**: PushButton, CheckBox, RadioButton
-- **Entrada de Texto**: TextBox (normal e com senha)
-- **Seleção**: ListBox, ComboBox com suporte a edição
-- **Exibição**: Label (HTML/texto/imagem), TextView, Separator
-- **Controles**: ProgressBar (normal e busy mode), Slider
-- **Organizacionais**: GroupBox, Frame, Tabs, Page
-- **Avançados**: Calendar, Table (com busca), Charts (Qt Charts)
+## Componentes Principais
 
-### ⚙️ Recursos Técnicos
+### Classe ShowBox
 
-- **Sistema de Temas**: Suporte a temas claro/escuro via `ThemeManager`
-- **Ícones Customizados**: Integração com `icon_helper` para ícones personalizados
-- **Arquitetura Modular**: Baseada em padrão Command para extensibilidade
-- **Parser Próprio**: Tokenização e parsing de comandos customizados
-- **Widgets Customizados**: `CustomTableWidget` e `CustomChartWidget` especializados
+Classe principal que herda de `QDialog` e gerencia:
 
-## Arquitetura de Alto Nível
+- Criação dinâmica de widgets Qt
+- Layout automático e posicionamento
+- Gerenciamento de eventos e sinais
+- Suporte a temas (claro/escuro)
 
-```diagram
-┌─────────────────────────────────────────┐
-│      Script Shell (Bash/sh)             │
-│  (showbox --title "..." --add-button)   │
-└──────────────┬──────────────────────────┘
-               │
-               ▼
-┌─────────────────────────────────────────┐
-│   Tokenizer + Parser                    │
-│   (Processa argumentos CLI)             │
-└──────────────┬──────────────────────────┘
-               │
-               ▼
-┌─────────────────────────────────────────┐
-│   Command Registry                      │
-│   (Executa comandos registrados)        │
-└──────────────┬──────────────────────────┘
-               │
-               ▼
-┌─────────────────────────────────────────┐
-│   ShowBox (Qt6 QDialog)                 │
-│   - Gerencia layouts                    │
-│   - Cria widgets dinamicamente          │
-│   - Aplica temas                        │
-└──────────────┬──────────────────────────┘
-               │
-               ▼
-┌─────────────────────────────────────────┐
-│   Widgets Qt6                           │
-│   (Renderização nativa multi-plataforma)│
-└─────────────────────────────────────────┘
-```
+### DialogParser
 
-## Tecnologias Utilizadas
+Thread responsável por:
 
-- **Linguagem**: C++17
-- **Framework GUI**: Qt6 (widgets, svg, charts)
-- **Build System**: qmake (`.pro` files)
-- **Containerização**: Docker (Debian Trixie)
-- **Documentação**: Pandoc (geração de man pages)
+- Parsing de comandos textuais
+- Execução sequencial de operações
+- Comunicação assíncrona com interface
 
-## Estrutura do Projeto
+### Sistema de Comandos
 
-```shell
-showbox/
-├── src/code/showbox/      # Código-fonte principal (C++/Qt6)
-│   ├── showbox.{cc,h}     # Classe principal (~1500 linhas)
-│   ├── commands/          # Implementação de comandos
-│   ├── *.pro              # Arquivo de projeto Qt
-│   └── obj/               # Objetos compilados
-│
-├── examples/              # Scripts de demonstração (a serem criados)
-│   ├── showbox_calendar.sh
-│   ├── showbox_charts.sh
-│   └── ...
-│
-├── packaging/             # Empacotamento multiplataforma
-│   ├── deb/               # Pacotes Debian
-│   ├── rpm/               # Pacotes RedHat
-│   ├── appimage/          # AppImage universal
-│   ├── flatpak/           # Flatpak
-│   ├── dmg/               # macOS
-│   └── msix/              # Windows
-│
-├── tools/                 # Ferramentas de desenvolvimento
-│   └── start-docker-*.sh  # Scripts Docker para builds
-│
-├── man/                   # Manuais (man pages)
-├── docs/                  # Documentação do desenvolvedor
-└── tests/                 # Testes (a serem implementados)
-```
+Implementa pattern de command registry com suporte a:
+
+- `add`: Adicionar widgets (botões, caixas de texto, listas, etc.)
+- `set`: Configurar propriedades de widgets
+- `query`: Consultar valores de widgets
+- `position`: Reposicionar elementos na interface
+
+## Ambiente de Desenvolvimento
+
+- **Containerização**: Docker para ambiente reprodutível
+- **Build System**: Qt qmake/Makefile
+- **Testes**: Framework Qt Test
+- **Empacotamento**: Suporte a múltiplas distribuições (DEB, RPM, AppImage, DMG, MSI)
 
 ## Casos de Uso
 
-### 1. Instaladores Interativos
+- Scripts de instalação e configuração
+- Ferramentas administrativas
+- Interfaces para comandos complexos
+- Formulários interativos em shell
 
-```bash
-#!/bin/bash
-showbox --title "Instalador" \
-  --add-textbox "Nome:" "username" \
-  --add-checkbox "Instalar extras?" "extras" \
-  --add-button "Instalar" --exit
-```
+## Vantagens
 
-### 2. Dashboards de Monitoramento
+- **Simplicidade**: Interface baseada em texto
+- **Flexibilidade**: Suporte a diversos tipos de widgets
+- **Integração**: Fácil incorporação em scripts existentes
+- **Portabilidade**: Funciona em múltiplas plataformas
+- **Customização**: Suporte a temas e layouts complexos
 
-```bash
-#!/bin/bash
-showbox --title "Sistema" \
-  --add-chart "CPU" \
-  --add-progressbar "memoria" \
-  --add-table "processos"
-```
+## Limitações Técnicas
 
-### 3. Formulários de Configuração
+- Dependente do Qt e X11/Wayland
+- Execução síncrona (bloqueante)
+- Parsing limitado a formato específico
+- Sem suporte nativo a expressões complexas
 
-```bash
-#!/bin/bash
-showbox --title "Config" \
-  --add-tabs "config_tabs" \
-  --add-page "Rede" \
-  --add-textbox "IP:" "ip_address"
-```
+## Estado do Projeto
 
-## Estratégia de Desenvolvimento
-
-### Ambiente de Desenvolvimento
-
-O projeto utiliza **Docker** para garantir reprodutibilidade:
-
-1. Clone do repositório
-2. Execução de `tools/start-docker-dev.sh`
-3. Container com todas as dependências disponível
-
-O código dentro do container é mapeado para `src/code/` permitindo desenvolvimento tanto no container quanto no host.
-
-### Workflow de Build
-
-```bash
-# Build local (dentro do Docker)
-cd src/code/showbox
-qmake6
-make
-
-# Build de pacotes
-./tools/start-docker-build-deb.sh    # Debian
-./tools/start-docker-build-rpm.sh    # RedHat
-./tools/start-docker-appimage.sh     # AppImage
-```
-
-## Público-Alvo
-
-- **Administradores de Sistemas**: Criação de ferramentas de configuração e manutenção
-- **DevOps**: Construção de interfaces para pipelines e automações
-- **Desenvolvedores Shell**: Adição de GUIs a scripts existentes
-- **Usuários Avançados**: Customização de workflows sem aprender frameworks GUI
-
-## Diferenciais
-
-### vs Dialog/Zenity
-
-- ✅ Widgets mais ricos (charts, tables com busca)
-- ✅ Sistema de temas integrado
-- ✅ Renderização Qt nativa
-
-### vs Yad
-
-- ✅ Melhor integração com Qt/KDE
-- ✅ Arquitetura mais extensível
-- ✅ Widgets customizados especializados
-
-### vs Python/Tkinter
-
-- ✅ Menor curva de aprendizagem
-- ✅ Integração direta com shell scripts
-- ✅ Não requer conhecimento de linguagens de programação
-
-## Roadmap
-
-### Curto Prazo (v1.0)
-
-- [ ] Completar scripts de exemplo
-- [ ] Implementar suite de testes
-- [ ] Finalizar Makefile
-- [ ] Criar documentação de usuário
-
-### Médio Prazo (v1.5)
-
-- [ ] Adicionar novos widgets (TreeView, FileDialog)
-- [ ] Melhorar sistema de temas
-- [ ] Plugins para extensão
-
-### Longo Prazo (v2.0)
-
-- [ ] Suporte a scripts Python/Ruby
-- [ ] Editor visual de diálogos
-- [ ] Biblioteca de templates
-
-## Licença
-
-*TODO: Definir licença (sugestão: GPL v3 ou MIT).*
-
-## Contribuições
-
-O projeto está em desenvolvimento ativo. Contribuições são bem-vindas especialmente em:
-
-- Criação de exemplos práticos
-- Testes de widgets
-- Empacotamento para diferentes distribuições
-- Documentação de uso
-
----
-
-*Última atualização: 2026-01-12.*
+- **Versão**: 1.0
+- **Licença**: GPL v3
+- **Mantenedor**: Andriy Martynets
+- **Status**: Estável e maduro

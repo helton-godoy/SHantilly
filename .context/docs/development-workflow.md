@@ -1,325 +1,254 @@
 # Workflow de Desenvolvimento
 
-Este documento descreve o processo de desenvolvimento padrão para contribuições ao **ShowBox**.
+## Ambiente de Desenvolvimento
 
-## Configuração Inicial
+O Showbox utiliza um ambiente containerizado com Docker para garantir reprodutibilidade e consistência entre diferentes máquinas de desenvolvimento.
 
-### 1. Fork e Clone
+### Pré-requisitos
+
+- Docker Engine instalado
+- Git para controle de versão
+- Conhecimento básico de C++ e Qt
+
+### Configuração Inicial
 
 ```bash
-# Fork no GitHub
-# Depois:
-git clone https://github.com/SEU_USER/showbox.git
+# Clonar repositório
+git clone https://github.com/helton-godoy/showbox.git
 cd showbox
 
-# Adicionar upstream
-git remote add upstream https://github.com/showbox/showbox.git
-```
-
-### 2. Ambiente de Desenvolvimento
-
-**Opção A: Docker (Recomendado).**
-
-```bash
+# Executar script de configuração Docker
 ./tools/start-docker-dev.sh
-# Container inicia com todas as dependências
 ```
 
-**Opção B: Local.**
+### Estrutura do Container
+
+- **Base**: Ubuntu/Debian com Qt5/Qt6
+- **Volumes**: Código fonte montado em `/src`
+- **Ferramentas**: qmake, make, gcc, gdb
+- **Display**: Suporte a X11 forwarding
+
+## Processo de Build
+
+### Compilação Local
 
 ```bash
-# Debian/Ubuntu
-sudo apt-get install -y \
-    build-essential \
-    qt6-base-dev \
-    libqt6charts6-dev \
-    libqt6svg6-dev \
-    qmake6 \
-    git \
-    pandoc
-
-# Fedora
-sudo dnf install -y \
-    qt6-qtbase-devel \
-    qt6-qtcharts-devel \
-    qt6-qtsvg-devel
+# Dentro do container
+cd /src/code/showbox
+qmake
+make
 ```
 
-## Git Workflow
-
-### Branching Strategy
-
-```shell
-main
-  ├── develop (integração)
-  ├── feature/add-treeview-widget
-  ├── feature/improve-theme-system
-  ├── fix/crash-on-empty-table
-  └── release/1.1.0
-```
-
-**Convenções**:
-
-- `feature/` - Novas features
-- `fix/` - Bug fixes
-- `refactor/` - Refatorações
-- `docs/` - Documentação
-- `release/` - Preparação de release
-
-### Criar Feature Branch
-
-```bash
-git checkout develop
-git pull upstream develop
-git checkout -b feature/minha-feature
-```
-
-## Ciclo de Desenvolvimento
-
-### 1. Planejar
-
-- [ ] Criar issue no GitHub descrevendo feature/bug
-- [ ] Discutir abordagem se mudança grande
-- [ ] Atualizar `task.md` com checklist
-
-### 2. Desenvolver
-
-```bash
-# Fazer mudanças
-vim src/code/showbox/showbox.cc
-
-# Build frequente
-cd src/code/showbox
-qmake6 && make -j$(nproc)
-
-# Testar
-./bin/showbox --add-button "Test"
-```
-
-### 3. Testar
-
-```bash
-# Testes unitários
-cd tests/auto
-qmake6 && make
-./test_showbox
-
-# Memory leaks
-valgrind --leak-check=full ../src/code/showbox/bin/showbox ...
-
-# Lint
-# (adicionar linter no futuro)
-```
-
-### 4. Documentar
-
-```bash
-# Criar exemplo
-echo '#!/bin/bash
-showbox --add-mywidget "Test" "widget"' > examples/showbox_mywidget.sh
-chmod +x examples/showbox_mywidget.sh
-
-# Atualizar man page
-vim man/showbox.md
-pandoc -s -f markdown -t man man/showbox.md -o man/showbox.1
-```
-
-### 5. Commit
-
-**Convenção de Commit Messages**:
-
-```git
-Tipo: Descrição curta (máx 50 chars)
-
-Descrição detalhada do que mudou e por quê.
-Pode ter múltiplas linhas.
-
-Closes #123
-```
-
-**Tipos**:
-
-- `feat:` - Nova feature
-- `fix:` - Bug fix
-- `refactor:` - Refatoração
-- `docs:` - Documentação
-- `test:` - Testes
-- `chore:` - Tarefas de manutenção
-
-**Exemplos**:
-
-```bash
-git commit -m "feat: Add TreeView widget
-
-Implementa widget TreeView para exibir hierarquias de dados.
-Suporta expansão/colapso de nós e seleção.
-
-Closes #45"
-
-git commit -m "fix: Crash ao adicionar tabela vazia
-
-Valida ponteiro de arquivo antes de carregar dados.
-
-Closes #123"
-
-git commit -m "docs: Update man page with TreeView examples"
-```
-
-### 6. Push e Pull Request
-
-```bash
-git push origin feature/minha-feature
-```
-
-**No GitHub**:
-
-1. Criar Pull Request para `develop`
-2. Preencher template de PR
-3. Aguardar CI passar
-4. Solicitar review
-
-## Code Review
-
-### Para Autor
-
-- Responder comentários prontamente
-- Fazer mudanças solicitadas
-- Marcar conversas como resolvidas
-
-### Para Reviewer
-
-- Usar checklist de [`code-reviewer.md`](.context/agents/code-reviewer.md)
-- Ser construtivo nos comentários
-- Aprovar quando satisfeito
-
-## Merge
-
-**Squash and Merge** para manter histórico limpo:
-
-```bash
-git checkout develop
-git merge --squash feature/minha-feature
-git commit -m "feat: Descrição da feature"
-git push upstream develop
-```
-
-## Release Process
-
-### 1. Preparação
-
-```bash
-git checkout develop
-git pull
-git checkout -b release/1.1.0
-
-# Atualizar versão
-vim src/code/showbox/showbox.pro  # VERSION = 1.1.0
-
-# Atualizar changelog
-vim CHANGELOG.md
-```
-
-### 2. Testes Finais
+### Build de Distribuição
 
 ```bash
 # Build completo
-cd src/code/showbox
-qmake6 && make clean && make -j$(nproc)
+npm run build
 
-# Todos os testes
-cd tests
-./run_all_tests.sh
-
-# Empacotamento
-./tools/start-docker-build-deb.sh
-./tools/start-docker-build-rpm.sh
-./tools/start-docker-appimage.sh
+# Build específico de plataforma
+npm run build:linux
+npm run build:windows
+npm run build:macos
 ```
 
-### 3. Tag e Release
+### Artefatos Gerados
+
+- Binário executável (`showbox`)
+- Bibliotecas compartilhadas (`.so`/`.dll`)
+- Arquivos de configuração
+- Pacotes de instalação (`.deb`, `.rpm`, `.appimage`)
+
+## Testes
+
+### Suite de Testes Automatizados
 
 ```bash
-git tag -a v1.1.0 -m "Release 1.1.0"
-git push upstream v1.1.0
+# Executar todos os testes
+npm run test
 
-# GitHub Actions cria assets automaticamente
+# Testes com watch mode (desenvolvimento)
+npm run test:watch
+
+# Testes específicos
+npm run test:unit
+npm run test:integration
 ```
 
-## Boas Práticas
+### Testes Manuais
 
-### Commits
+```bash
+# Scripts de exemplo
+cd examples
+./showbox_textbox.sh
+./showbox_buttons.sh
 
-- ✅ Commits pequenos e focados
-- ✅ Mensagens descritivas
-- ✅ Testar antes de commitar
-- ❌ Não commitar código quebrado
-- ❌ Não commitar commented code
+# Testes visuais
+cd examples/demos
+./visual_layout_test.sh
+```
 
-### Código
+### Cobertura de Testes
 
-- ✅ Seguir style guide
-- ✅ Adicionar testes
-- ✅ Documentar código complexo
-- ✅ Verificar memory leaks
-- ❌ Não deixar TODOs sem issue
+- **Unitários**: Classes individuais e funções
+- **Integração**: Fluxos completos de comandos
+- **Funcionais**: Exemplos práticos e casos de uso
+- **Performance**: Benchmarks de parsing e renderização
 
-### Pull Requests
+## Controle de Qualidade
 
-- ✅ Descrição clara
-- ✅ Referência a issue
-- ✅ Screenshots para mudanças visuais
-- ✅ Changelog entry
-- ❌ Não fazer PRs gigantes
+### Linting e Formatação
 
-## Ferramentas Recomendadas
+```bash
+# Verificar estilo de código
+npm run lint
 
-### IDEs/Editores
+# Formatar código
+npm run format
 
-- **Qt Creator** - IDE oficial Qt
-- **VS Code** - Com extensões C++/Qt
-- **CLion** - IDE JetBrains
+# Verificar conformidade
+npm run check
+```
 
-### Git GUI
+### Análise Estática
 
-- **GitKraken**
-- **GitHub Desktop**
-- **git gui** (built-in)
+```bash
+# Clang Static Analyzer
+npm run analyze:clang
 
-### Debug
+# Valgrind (memory leaks)
+npm run analyze:valgrind
 
-- **gdb** - CLI debugger
-- **valgrind** - Memory profiler
-- **Qt Creator Debugger** - GUI debugger
+# Sanitizers
+npm run analyze:sanitizers
+```
+
+## Versionamento e Releases
+
+### Conventional Commits
+
+```bash
+# Exemplos de commits
+git commit -m "feat: add calendar widget support"
+git commit -m "fix: resolve memory leak in parser"
+git commit -m "docs: update command reference"
+git commit -m "refactor: simplify command registry"
+```
+
+### Processo de Release
+
+1. **Desenvolvimento**: Feature branches com PRs
+2. **Staging**: Merge para `develop` com testes
+3. **Release**: Merge para `main` com versionamento
+4. **Distribuição**: Build e upload para todas as plataformas
+
+### Versionamento Semântico
+
+- **MAJOR**: Quebra de compatibilidade
+- **MINOR**: Novos recursos compatíveis
+- **PATCH**: Correções de bugs
+
+## Debugging
+
+### Debug com GDB
+
+```bash
+# Dentro do container
+cd /src/code/showbox
+gdb ./showbox
+
+# Comandos úteis
+(gdb) break ShowBox::executeCommand
+(gdb) run < examples/showbox_buttons.sh
+```
+
+### Logging e Tracing
+
+```bash
+# Executar com debug logging
+./showbox --debug < input.txt
+
+# Analisar logs
+tail -f /tmp/showbox.log
+```
+
+### Profiling
+
+```bash
+# Valgrind para performance
+valgrind --tool=callgrind ./showbox < script.sh
+
+# Analisar resultados
+kcachegrind callgrind.out.*
+```
+
+## Contribuição
+
+### Fluxo de Contribuição
+
+1. **Fork** do repositório
+2. **Branch** para feature/fix
+3. **Desenvolvimento** com testes
+4. **Pull Request** com descrição detalhada
+5. **Code Review** e aprovação
+6. **Merge** após CI passar
+
+### Guidelines
+
+- **Commits**: Mensagens claras em português
+- **Branches**: `feature/nome`, `fix/issue-id`
+- **PRs**: Template preenchido, testes incluídos
+- **Issues**: Labels apropriadas, reprodutores quando possível
+
+## CI/CD Pipeline
+
+### GitHub Actions
+
+- **Build**: Compilação para todas as plataformas
+- **Test**: Execução da suite completa
+- **Lint**: Verificação de código
+- **Release**: Upload automático de artefatos
+
+### Docker Images
+
+- **Base**: Ubuntu com Qt dependencies
+- **Build**: Imagem otimizada para compilação
+- **Test**: Imagem com ferramentas de análise
+- **Release**: Imagens específicas por plataforma
 
 ## Troubleshooting
 
-### Build Fails
+### Problemas Comuns
+
+#### Erro de Display
 
 ```bash
-# Limpar e rebuildar
+# Verificar X11 forwarding
+echo $DISPLAY
+xeyes  # Testar conectividade
+```
+
+#### Problemas de Build
+
+```bash
+# Limpar build
 make clean
-rm -rf src/code/showbox/obj src/code/showbox/bin
-qmake6 && make
+rm -rf obj/
+
+# Rebuild completo
+qmake && make
 ```
 
-### Tests Fail
+#### Falhas de Teste
 
 ```bash
-# Rodar teste individual com verbose
-./test_showbox -v2
+# Executar teste específico
+./tst_commands -functions
+gdb ./tst_commands core
 ```
 
-### Git Issues
+### Suporte
 
-```bash
-# Sincronizar com upstream
-git fetch upstream
-git rebase upstream/develop
-
-# Resolver conflitos
-git mergetool
-```
-
----
-
-**Dúvidas?** Abra uma issue ou pergunte no Discord!
+- **Issues**: Para bugs e solicitações
+- **Discussions**: Para dúvidas gerais
+- **Wiki**: Documentação detalhada
+- **Discord/Slack**: Comunicação síncrona

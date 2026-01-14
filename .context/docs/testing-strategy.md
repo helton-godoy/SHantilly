@@ -2,178 +2,289 @@
 
 ## Visão Geral
 
-ShowBox utiliza uma abordagem multi-camadas de testes para garantir qualidade e estabilidade.
+O Showbox implementa uma estratégia abrangente de testes que cobre desde unidades individuais até fluxos completos de usuário, garantindo qualidade e confiabilidade em todas as camadas da aplicação.
 
 ## Pirâmide de Testes
 
-```diagram
-       /\
-      /  \
-     /E2E \ ← End-to-End (poucos)
-    /------\
-   /Integr. \ ← Integração (moderado)
-  /----------\
- /Unitários   \ ← Unitários (muitos)
-/--------------\
+```
+      /\
+     /  \
+    / UI \
+   /______\
+  /        \
+ /Integração\
+---------------
+|   Unidade   |
+---------------
+
+UI: 20% (Testes manuais + visuais)
+Integração: 30% (Fluxos completos)
+Unidade: 50% (Classes e funções)
 ```
 
-### 1. Testes Unitários (~70%)
+## Testes Unitários
 
-**Foco**: Funções e métodos isolados
+### Framework Utilizado
 
-**Framework**: Qt Test
+- **Qt Test**: Framework nativo do Qt
+- **Estrutura**: Classe `QObject` com slots de teste
+- **Execução**: `tst_units` binary
 
-**Exemplos**:
+### Cobertura
 
-- Tokenizer parseando argumentos
-- CommandRegistry registrando comandos
-- ThemeManager aplicando paletas
+- **Classes Core**: `ShowBox`, `DialogParser`, `CommandRegistry`
+- **Utilitários**: `IconHelper`, `ThemeManager`
+- **Widgets Custom**: `CustomTableWidget`, `CustomChartWidget`
+- **Parsing**: Tokenização e validação
 
-**Localização**: `tests/auto/test_*`
+### Exemplos de Testes
 
-### 2. Testes de Integração (~20%)
-
-**Foco**: Interação entre componentes
-
-**Exemplos**:
-
-- Parser → CommandRegistry → ShowBox
-- Criação de widget via comando CLI
-- Aplicação de tema ao diálogo completo
-
-### 3. Testes End-to-End (~10%)
-
-**Foco**: Fluxo completo do usuário
-
-**Exemplos**:
-
-- Script bash executando showbox
-- Verificação de output correto
-- Testes de diferentes plataformas
-
-## Ferramentas
-
-### Qt Test Framework
+#### Teste de Comando Add
 
 ```cpp
-#include <QtTest/QtTest>
+void TestCommands::testAddPushButton()
+{
+    ShowBox dialog("Test", nullptr, false);
+    DialogCommand cmd = createCommand(AddCommand, PushButtonWidget,
+                                    "OK", "btn_ok");
 
-class TestWidget : public QObject {
-    Q_OBJECT
-private slots:
-    void testCreation();
-    void testProperties();
-};
+    dialog.executeCommand(cmd);
 
-QTEST_MAIN(TestWidget)
+    QPushButton* btn = dialog.findChild<QPushButton*>("btn_ok");
+    QVERIFY(btn != nullptr);
+    QCOMPARE(btn->text(), QString("OK"));
+}
 ```
 
-### Valgrind
+#### Teste de Parsing
+
+```cpp
+void TestParser::testCommandParsing()
+{
+    DialogParser parser;
+    QString input = "add pushbutton OK btn_ok apply exit";
+
+    parser.processInput(input);
+
+    QCOMPARE(parser.getLastCommand().command, AddCommand);
+    QCOMPARE(parser.getLastCommand().control, PushButtonWidget);
+}
+```
+
+### Métricas de Qualidade
+
+- **Cobertura**: Mínimo 80% de linhas de código
+- **Performance**: Testes executam em < 30s
+- **Isolamento**: Cada teste independente
+- **Determinístico**: Resultados consistentes
+
+## Testes de Integração
+
+### Cenários Testados
+
+- **Fluxos Completos**: Criação → configuração → interação → saída
+- **Parsing de Scripts**: Arquivos de exemplo completos
+- **Múltiplas Plataformas**: Linux, Windows, macOS
+- **Configurações**: Diferentes temas e layouts
+
+### Testes End-to-End
 
 ```bash
-valgrind --leak-check=full \
-         --show-leak-kinds=all \
-         ./test_showbox
+# Script de teste
+echo "add pushbutton OK btn_ok apply exit" | ./showbox
+echo "add textbox Name name_field" | ./showbox
+echo "add listbox Items list1" | ./showbox
 ```
 
-### Code Coverage
+### Validação de Saída
 
-```bash
-qmake CONFIG+=coverage
-make
-lcov --capture --directory . --output-file coverage.info
-genhtml coverage.info --output-directory coverage_html
-```
-
-## Alvos de Qualidade
-
-| Métrica             | Alvo  | Atual |
-|---------------------|-------|-------|
-| Cobertura de Código | ≥ 80% | TBD   |
-| Cobertura de Branch | ≥ 70% | TBD   |
-| Memory Leaks        | 0     | TBD   |
-| Warnings Compilação | 0     | TBD   |
-| Testes Passando     | 100%  | TBD   |
-
-## CI/CD
-
-### GitHub Actions
-
-- Build em múltiplas plataformas
-- Testes automatizados
-- Verificação de memory leaks
-- Code coverage reporting
-
-### Pre-commit Hooks
-
-```bash
-# .git/hooks/pre-commit
-#!/bin/bash
-cd tests
-./run_tests.sh || exit 1
-```
-
-## Categorias de Testes
-
-### Funcionais
-
-- Widgets são criados corretamente
-- Comandos executam como esperado
-- Output está no formato correto
-
-### Não-Funcionais
-
-- **Performance**: Benchmark de operações
-- **Memória**: Sem leaks
-- **Segurança**: Validação de inputs
-- **Usabilidade**: Testes manuais
-
-### Regressão
-
-- Teste para cada bug corrigido
-- Previne reintrodução de bugs
+- **Format**: Valores separados por tabulação
+- **Encoding**: UTF-8 consistente
+- **Completude**: Todos os widgets reportados
+- **Precisão**: Valores corretos retornados
 
 ## Testes Manuais
 
-### Checklist de Release
+### Testes Visuais
 
-- [ ] Testar em Debian 12
-- [ ] Testar em Ubuntu 24.04
-- [ ] Testar em Fedora 40
-- [ ] Testar todos os widgets visuais
-- [ ] Testar temas claro/escuro
-- [ ] Testar exemplos funcionam
-- [ ] Verificar man page correta
+- **Layout**: Alinhamento e posicionamento correto
+- **Temas**: Renderização clara/escura
+- **Responsividade**: Redimensionamento adequado
+- **Internacionalização**: Textos em diferentes idiomas
 
-## Relatórios de Bugs
+### Testes de Usabilidade
 
-**Template**:
+- **Navegação**: Tab order e foco
+- **Acessibilidade**: Suporte a leitores de tela
+- **Performance**: Resposta a eventos em tempo real
+- **Erros**: Tratamento graceful de entradas inválidas
 
-```markdown
-### Descrição
-[Descrição clara do bug]
+### Matriz de Compatibilidade
 
-### Passos para Reproduzir
-1. ...
-2. ...
+| Sistema      | Qt Version | Status  | Notas                |
+|--------------|------------|---------|----------------------|
+| Ubuntu 20.04 | Qt5        | ✅      | Totalmente suportado |
+| Ubuntu 22.04 | Qt6        | ✅      | Suporte experimental |
+| Windows 10   | Qt5        | ✅      | Build automatizado   |
+| macOS 12     | Qt5        | ✅      | Build via CI         |
 
-### Comportamento Esperado
-[O que deveria acontecer]
+## Testes de Performance
 
-### Comportamento Atual
-[O que acontece]
+### Benchmarks
 
-### Ambiente
-- OS: Ubuntu 24.04
-- Qt: 6.6.1
-- ShowBox: 1.0.0
+- **Parsing**: 1000+ comandos/segundo
+- **Renderização**: < 100ms para layouts complexos
+- **Memória**: < 50MB para aplicações típicas
+- **Startup**: < 500ms para inicialização
 
-### Logs/Stack Trace
-\```
-[colar logs]
-\```
+### Profiling
+
+```cpp
+// Medição de performance
+QElapsedTimer timer;
+timer.start();
+
+// Operação a ser medida
+dialog.executeCommand(cmd);
+
+qint64 elapsed = timer.elapsed();
+QVERIFY(elapsed < 100); // Máximo 100ms
 ```
 
----
+### Memory Leaks
 
-Testes são investimento, não custo!
+```bash
+# Valgrind check
+valgrind --leak-check=full --show-leak-kinds=all ./tst_units
+
+# Address sanitizer
+export ASAN_OPTIONS=detect_leaks=1
+./tst_units
+```
+
+## Testes de Segurança
+
+### Validações de Entrada
+
+- **Buffer Overflow**: Limites de 1024 bytes
+- **Injection**: Sanitização de comandos
+- **Path Traversal**: Validação de caminhos de arquivo
+- **Null Pointers**: Checks em todas as operações
+
+### Sandboxing
+
+- **Container**: Execução em ambientes isolados
+- **Permissions**: Acesso mínimo ao sistema
+- **Network**: Bloqueio de conexões externas
+- **Filesystem**: Restrição a diretórios permitidos
+
+## Automação de Testes
+
+### CI/CD Integration
+
+```yaml
+# .github/workflows/test.yml
+- name: Run Unit Tests
+  run: |
+    cd src/code/showbox
+    qmake CONFIG+=test
+    make
+    ./tst_units
+
+- name: Run Integration Tests
+  run: |
+    cd examples
+    ./run_all_examples.sh
+
+- name: Performance Benchmarks
+  run: |
+    ./benchmarks/run_benchmarks.sh
+```
+
+### Test Scripts
+
+```bash
+# Run all tests
+npm run test
+
+# Run with coverage
+npm run test:coverage
+
+# Run specific suite
+npm run test:unit
+npm run test:integration
+npm run test:performance
+```
+
+## Métricas e Relatórios
+
+### Cobertura de Código
+
+```bash
+# Gerar relatório
+lcov --capture --directory . --output-file coverage.info
+genhtml coverage.info --output-directory coverage_report/
+
+# Verificar mínimo
+coverage=$(lcov --summary coverage.info | grep lines | awk '{print $2}')
+if (( $(echo "$coverage < 80.0" | bc -l) )); then
+    echo "Coverage too low: $coverage%"
+    exit 1
+fi
+```
+
+### Relatórios de Performance
+
+- **Throughput**: Comandos processados por segundo
+- **Latency**: Tempo de resposta a eventos
+- **Memory**: Pico de uso e vazamentos
+- **CPU**: Utilização durante operações intensas
+
+## Estratégia de Regressão
+
+### Testes de Smoke
+
+- **Build**: Compilação bem-sucedida
+- **Basic UI**: Janela abre corretamente
+- **Simple Commands**: Add/remove widgets básicos
+- **Output**: Valores retornados corretamente
+
+### Testes de Regressão
+
+- **Known Issues**: Casos que já foram corrigidos
+- **Edge Cases**: Condições limite validadas
+- **Platform Specific**: Bugs específicos por SO
+- **Version Compatibility**: Funciona com versões anteriores
+
+## Plano de Contingência
+
+### Falhas de Teste
+
+1. **Análise**: Investigar causa raiz
+2. **Isolamento**: Criar teste reprodutível
+3. **Correção**: Implementar fix
+4. **Verificação**: Testar correção
+5. **Prevenção**: Adicionar testes para prevenir recorrência
+
+### Métricas de Qualidade
+
+- **Defect Density**: Bugs por 1000 linhas de código
+- **Mean Time To Fix**: Tempo médio para correção
+- **Test Effectiveness**: Porcentagem de bugs encontrados por testes
+- **Customer Satisfaction**: Feedback de usuários
+
+## Ferramentas e Infraestrutura
+
+### Ambiente de Teste
+
+- **Docker**: Containers para isolamento
+- **VMs**: Para testes multi-plataforma
+- **CI Services**: GitHub Actions, GitLab CI
+- **Cloud**: AWS Device Farm para testes móveis
+
+### Ferramentas de Análise
+
+- **Valgrind**: Memory leaks e profiling
+- **AddressSanitizer**: Buffer overflows
+- **Clang Analyzer**: Análise estática
+- **Qt Creator**: Debug integrado
