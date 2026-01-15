@@ -1,6 +1,7 @@
 #include "widget_factory.h"
 #include <QPushButton>
 #include <QLabel>
+#include "custom_chart_widget.h"
 
 std::map<QString, WidgetFactory::CreatorFunc>& WidgetFactory::registry() {
     static std::map<QString, CreatorFunc> reg;
@@ -8,6 +9,7 @@ std::map<QString, WidgetFactory::CreatorFunc>& WidgetFactory::registry() {
     if (reg.empty()) {
         reg["button"] = []() { return new QPushButton("Factory Button"); };
         reg["label"]  = []() { return new QLabel("Factory Label"); };
+        reg["chart"]  = []() { return new CustomChartWidget(); };
     }
     return reg;
 }
