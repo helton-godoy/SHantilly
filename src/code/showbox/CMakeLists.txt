@@ -13,6 +13,7 @@ file(GLOB_RECURSE SRCS
     "*.cc" 
     "*.h"
 )
+list(FILTER SRCS EXCLUDE REGEX ".*/obj/.*")
 
 add_executable(showbox 
     ${SRCS}
