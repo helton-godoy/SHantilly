@@ -17,3 +17,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 add_subdirectory(libs/showbox-ui)
 add_subdirectory(src/code/showbox)
 # add_subdirectory(apps/studio) # Habilitaremos quando iniciarmos o Studio
+
+enable_testing()
+add_subdirectory(tests)

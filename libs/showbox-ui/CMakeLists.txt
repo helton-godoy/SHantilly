@@ -16,6 +16,8 @@ add_library(showbox-ui STATIC
     include/custom_table_widget.h
     src/theme_manager.cpp
     include/theme_manager.h
+    src/widget_factory.cpp
+    include/widget_factory.h
 )
 
 target_include_directories(showbox-ui PUBLIC 
