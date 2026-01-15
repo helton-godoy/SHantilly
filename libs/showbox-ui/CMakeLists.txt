@@ -18,6 +18,8 @@ add_library(showbox-ui STATIC
     include/theme_manager.h
     src/widget_factory.cpp
     include/widget_factory.h
+    src/push_button_widget.cpp
+    include/push_button_widget.h
 )
 
 target_include_directories(showbox-ui PUBLIC 

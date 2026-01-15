@@ -13,3 +13,15 @@ target_link_libraries(tst_widgetfactory PRIVATE
 )
 
 add_test(NAME tst_widgetfactory COMMAND tst_widgetfactory)
+
+add_executable(tst_pushbutton
+    auto/tst_pushbutton.cpp
+)
+
+target_link_libraries(tst_pushbutton PRIVATE
+    Qt6::Widgets
+    Qt6::Test
+    showbox-ui
+)
+
+add_test(NAME tst_pushbutton COMMAND tst_pushbutton)

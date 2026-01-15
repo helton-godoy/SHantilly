@@ -31,4 +31,6 @@ target_link_libraries(showbox PRIVATE
 # Includes
 target_include_directories(showbox PRIVATE 
     ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/legacy/v2_incomplete
+    ${CMAKE_CURRENT_SOURCE_DIR}/legacy/v1_monolith
 )
