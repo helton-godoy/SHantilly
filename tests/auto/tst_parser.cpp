@@ -21,6 +21,8 @@ public:
     QWidget* buildComboBox(const Showbox::Models::ComboBoxConfig& config) override { Q_UNUSED(config); return nullptr; }
     QWidget* buildList(const Showbox::Models::ListConfig& config) override { Q_UNUSED(config); return nullptr; }
     QWidget* buildTable(const Showbox::Models::TableConfig& config) override { Q_UNUSED(config); return nullptr; }
+    QWidget* buildProgressBar(const Showbox::Models::ProgressBarConfig& config) override { Q_UNUSED(config); return nullptr; }
+    QWidget* buildChart(const Showbox::Models::ChartConfig& config) override { Q_UNUSED(config); return nullptr; }
     QLayout* buildLayout(const Showbox::Models::LayoutConfig& config) override { Q_UNUSED(config); return nullptr; }
 
     QString lastTitle;

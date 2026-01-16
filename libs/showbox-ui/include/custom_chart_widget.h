@@ -17,6 +17,10 @@ public:
     explicit CustomChartWidget(QWidget *parent = nullptr);
     ~CustomChartWidget() override;
 
+    void setChartTitle(const QString &title);
+    void addPoint(const QString &label, double value);
+    void clearSeries();
+
     void setData(const QString &data);
     void appendData(const QString &data);
     void loadFromFile(const QString &filePath);

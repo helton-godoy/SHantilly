@@ -106,11 +106,23 @@ QWidget* CLIBuilder::buildTable(const Showbox::Models::TableConfig& config) {
 
 
 
+
+
+
+
     Q_UNUSED(config);
 
 
 
+
+
+
+
     return nullptr;
+
+
+
+
 
 
 
@@ -122,7 +134,103 @@ QWidget* CLIBuilder::buildTable(const Showbox::Models::TableConfig& config) {
 
 
 
+
+
+
+
+
+
+
+
+QWidget* CLIBuilder::buildProgressBar(const Showbox::Models::ProgressBarConfig& config) {
+
+
+
+
+
+
+
+    Q_UNUSED(config);
+
+
+
+
+
+
+
+    return nullptr;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+QWidget* CLIBuilder::buildChart(const Showbox::Models::ChartConfig& config) {
+
+
+
+
+
+
+
+    Q_UNUSED(config);
+
+
+
+
+
+
+
+    return nullptr;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 QLayout* CLIBuilder::buildLayout(const Showbox::Models::LayoutConfig& config) {
+
+
+
+
+
+
+
+
 
 
 

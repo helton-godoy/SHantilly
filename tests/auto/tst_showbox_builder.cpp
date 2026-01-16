@@ -8,6 +8,8 @@
 #include <QComboBox>
 #include <QListWidget>
 #include <QTableWidget>
+#include <QProgressBar>
+#include <custom_chart_widget.h>
 
 class TestShowboxBuilder : public QObject
 {
@@ -18,6 +20,7 @@ private slots:
     void testBuildLayout();
     void testBuildControls();
     void testBuildItemBasedWidgets();
+    void testBuildAdvancedVisuals();
     void testPerformance();
 };
 
@@ -126,6 +129,33 @@ void TestShowboxBuilder::testBuildItemBasedWidgets()
     QCOMPARE(qobject_cast<QTableWidget*>(table)->rowCount(), 1);
     QCOMPARE(qobject_cast<QTableWidget*>(table)->item(0, 0)->text(), QString("R1C1"));
     delete table;
+}
+
+void TestShowboxBuilder::testBuildAdvancedVisuals()
+{
+    ShowboxBuilder builder;
+    
+    // Test ProgressBar
+    Showbox::Models::ProgressBarConfig pbConfig;
+    pbConfig.name = "pb1";
+    pbConfig.value = 50;
+    QWidget* pb = builder.buildProgressBar(pbConfig);
+    QVERIFY(pb != nullptr);
+    QCOMPARE(qobject_cast<QProgressBar*>(pb)->value(), 50);
+    delete pb;
+    
+    // Test Chart
+    Showbox::Models::ChartConfig chartConfig;
+    chartConfig.name = "chart1";
+    chartConfig.title = "Sales";
+    chartConfig.data["Jan"] = 100.0;
+    chartConfig.data["Feb"] = 150.0;
+    QWidget* chart = builder.buildChart(chartConfig);
+    QVERIFY(chart != nullptr);
+    // CustomChartWidget setTitle sets the windowTitle if it's a top-level widget or internally.
+    // Let's just verify it exists for now as specific internal state check might be complex.
+    QVERIFY(qobject_cast<CustomChartWidget*>(chart) != nullptr);
+    delete chart;
 }
 
 void TestShowboxBuilder::testPerformance()

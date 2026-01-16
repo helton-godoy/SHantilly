@@ -6,8 +6,10 @@
 #include <QComboBox>
 #include <QListWidget>
 #include <QTableWidget>
+#include <QProgressBar>
 #include <QVBoxLayout>
 #include "push_button_widget.h"
+#include "custom_chart_widget.h"
 
 ShowboxBuilder::ShowboxBuilder(QObject *parent) : QObject(parent)
 {
@@ -91,6 +93,31 @@ QWidget* ShowboxBuilder::buildTable(const Showbox::Models::TableConfig& config)
         }
     }
     return tw;
+}
+
+QWidget* ShowboxBuilder::buildProgressBar(const Showbox::Models::ProgressBarConfig& config)
+{
+    auto *pb = new QProgressBar();
+    pb->setObjectName(config.name);
+    pb->setMinimum(config.minimum);
+    pb->setMaximum(config.maximum);
+    pb->setValue(config.value);
+    pb->setFormat(config.format);
+    return pb;
+}
+
+QWidget* ShowboxBuilder::buildChart(const Showbox::Models::ChartConfig& config)
+{
+    auto *chart = new CustomChartWidget();
+    chart->setObjectName(config.name);
+    chart->setChartTitle(config.title);
+    
+    // Populate chart data from config
+    for (auto it = config.data.begin(); it != config.data.end(); ++it) {
+        chart->addPoint(it.key(), it.value());
+    }
+    
+    return chart;
 }
 
 QLayout* ShowboxBuilder::buildLayout(const Showbox::Models::LayoutConfig& config)

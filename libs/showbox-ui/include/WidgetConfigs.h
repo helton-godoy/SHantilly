@@ -4,6 +4,7 @@
 #include <QString>
 #include <QStringList>
 #include <QList>
+#include <QMap>
 
 namespace Showbox {
 namespace Models {
@@ -61,6 +62,20 @@ struct ListConfig : public BaseConfig {
 struct TableConfig : public BaseConfig {
     QStringList headers;
     QList<QStringList> rows;
+};
+
+struct ProgressBarConfig : public BaseConfig {
+    int value = 0;
+    int minimum = 0;
+    int maximum = 100;
+    QString format = "%p%";
+};
+
+struct ChartConfig : public BaseConfig {
+    enum Type { Line, Bar, Pie };
+    Type type = Line;
+    QString title;
+    QMap<QString, double> data;
 };
 
 struct LayoutConfig : public BaseConfig {

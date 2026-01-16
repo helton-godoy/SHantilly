@@ -23,6 +23,8 @@ public:
     QWidget* buildComboBox(const Showbox::Models::ComboBoxConfig& config) override;
     QWidget* buildList(const Showbox::Models::ListConfig& config) override;
     QWidget* buildTable(const Showbox::Models::TableConfig& config) override;
+    QWidget* buildProgressBar(const Showbox::Models::ProgressBarConfig& config) override;
+    QWidget* buildChart(const Showbox::Models::ChartConfig& config) override;
     QLayout* buildLayout(const Showbox::Models::LayoutConfig& config) override;
 
 private:

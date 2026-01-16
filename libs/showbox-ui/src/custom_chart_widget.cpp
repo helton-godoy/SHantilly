@@ -32,6 +32,35 @@ CustomChartWidget::~CustomChartWidget()
 {
 }
 
+void CustomChartWidget::setChartTitle(const QString &title)
+{
+    m_chart->setTitle(title);
+}
+
+void CustomChartWidget::clearSeries()
+{
+    m_chart->removeAllSeries();
+}
+
+void CustomChartWidget::addPoint(const QString &label, double value)
+{
+    QPieSeries *series = nullptr;
+    if (m_chart->series().isEmpty()) {
+        series = new QPieSeries();
+        connect(series, &QPieSeries::hovered, this, &CustomChartWidget::onPieSeriesHovered);
+        connect(series, &QPieSeries::clicked, this, [this](QPieSlice *slice) {
+            emit itemClicked(slice->label());
+        });
+        m_chart->addSeries(series);
+    } else {
+        series = qobject_cast<QPieSeries *>(m_chart->series().first());
+    }
+
+    if (series) {
+        series->append(label, value);
+    }
+}
+
 void CustomChartWidget::setData(const QString &data)
 {
     m_chart->removeAllSeries();
