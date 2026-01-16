@@ -21,3 +21,18 @@ PushButtonWidget* CLIBuilder::buildPushButton(const QString &title, const QStrin
     }
     return btn;
 }
+
+QWidget* CLIBuilder::buildWindow(const Showbox::Models::WindowConfig& config) {
+    Q_UNUSED(config);
+    return nullptr;
+}
+
+QWidget* CLIBuilder::buildButton(const Showbox::Models::ButtonConfig& config) {
+    Q_UNUSED(config);
+    return nullptr;
+}
+
+QWidget* CLIBuilder::buildLabel(const Showbox::Models::LabelConfig& config) {
+    Q_UNUSED(config);
+    return nullptr;
+}

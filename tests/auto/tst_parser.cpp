@@ -1,6 +1,7 @@
 #include <QtTest>
 #include <ParserMain.h>
 #include <IShowboxBuilder.h>
+#include <QWidget>
 
 // Mock Builder
 class MockBuilder : public IShowboxBuilder {
@@ -11,6 +12,12 @@ public:
         called = true;
         return nullptr;
     }
+    
+    // Stubs for new interface to allow instantiation
+    QWidget* buildWindow(const Showbox::Models::WindowConfig& config) override { Q_UNUSED(config); return nullptr; }
+    QWidget* buildButton(const Showbox::Models::ButtonConfig& config) override { Q_UNUSED(config); return nullptr; }
+    QWidget* buildLabel(const Showbox::Models::LabelConfig& config) override { Q_UNUSED(config); return nullptr; }
+
     QString lastTitle;
     QString lastName;
     bool called = false;
@@ -38,4 +45,3 @@ void TestParser::testParseAddPushButton()
 
 QTEST_MAIN(TestParser)
 #include "tst_parser.moc"
-

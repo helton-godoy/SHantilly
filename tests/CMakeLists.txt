@@ -71,3 +71,15 @@ target_link_libraries(tst_widget_configs PRIVATE
 )
 
 add_test(NAME tst_widget_configs COMMAND tst_widget_configs)
+
+add_executable(tst_interface_builder
+    auto/tst_interface_builder.cpp
+)
+
+target_link_libraries(tst_interface_builder PRIVATE
+    Qt6::Widgets
+    Qt6::Test
+    showbox-ui
+)
+
+add_test(NAME tst_interface_builder COMMAND tst_interface_builder)

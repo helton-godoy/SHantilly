@@ -11,7 +11,14 @@ class CLIBuilder : public QObject, public IShowboxBuilder
     Q_OBJECT
 public:
     explicit CLIBuilder(QObject *parent = nullptr);
+    
+    // Legacy
     PushButtonWidget* buildPushButton(const QString &title, const QString &name) override;
+
+    // New Architecture
+    QWidget* buildWindow(const Showbox::Models::WindowConfig& config) override;
+    QWidget* buildButton(const Showbox::Models::ButtonConfig& config) override;
+    QWidget* buildLabel(const Showbox::Models::LabelConfig& config) override;
 
 private:
     QDialog *m_window;
