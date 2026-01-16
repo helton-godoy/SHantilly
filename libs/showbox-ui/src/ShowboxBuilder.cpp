@@ -3,6 +3,9 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QLineEdit>
+#include <QComboBox>
+#include <QListWidget>
+#include <QTableWidget>
 #include <QVBoxLayout>
 #include "push_button_widget.h"
 
@@ -51,6 +54,43 @@ QWidget* ShowboxBuilder::buildLineEdit(const Showbox::Models::LineEditConfig& co
         le->setEchoMode(QLineEdit::Password);
     }
     return le;
+}
+
+QWidget* ShowboxBuilder::buildComboBox(const Showbox::Models::ComboBoxConfig& config)
+{
+    auto *cb = new QComboBox();
+    cb->setObjectName(config.name);
+    cb->addItems(config.items);
+    if (config.currentIndex >= 0 && config.currentIndex < cb->count()) {
+        cb->setCurrentIndex(config.currentIndex);
+    }
+    return cb;
+}
+
+QWidget* ShowboxBuilder::buildList(const Showbox::Models::ListConfig& config)
+{
+    auto *lw = new QListWidget();
+    lw->setObjectName(config.name);
+    lw->addItems(config.items);
+    if (config.multipleSelection) {
+        lw->setSelectionMode(QAbstractItemView::MultiSelection);
+    }
+    return lw;
+}
+
+QWidget* ShowboxBuilder::buildTable(const Showbox::Models::TableConfig& config)
+{
+    auto *tw = new QTableWidget();
+    tw->setObjectName(config.name);
+    tw->setColumnCount(config.headers.size());
+    tw->setHorizontalHeaderLabels(config.headers);
+    tw->setRowCount(config.rows.size());
+    for (int r = 0; r < config.rows.size(); ++r) {
+        for (int c = 0; c < config.rows[r].size() && c < config.headers.size(); ++c) {
+            tw->setItem(r, c, new QTableWidgetItem(config.rows[r][c]));
+        }
+    }
+    return tw;
 }
 
 QLayout* ShowboxBuilder::buildLayout(const Showbox::Models::LayoutConfig& config)

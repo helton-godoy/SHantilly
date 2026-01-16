@@ -44,15 +44,89 @@ QWidget* CLIBuilder::buildLabel(const Showbox::Models::LabelConfig& config) {
 
 QWidget* CLIBuilder::buildLineEdit(const Showbox::Models::LineEditConfig& config) {
 
+
+
     Q_UNUSED(config);
 
+
+
     return nullptr;
+
+
 
 }
 
 
 
+
+
+
+
+QWidget* CLIBuilder::buildComboBox(const Showbox::Models::ComboBoxConfig& config) {
+
+
+
+    Q_UNUSED(config);
+
+
+
+    return nullptr;
+
+
+
+}
+
+
+
+
+
+
+
+QWidget* CLIBuilder::buildList(const Showbox::Models::ListConfig& config) {
+
+
+
+    Q_UNUSED(config);
+
+
+
+    return nullptr;
+
+
+
+}
+
+
+
+
+
+
+
+QWidget* CLIBuilder::buildTable(const Showbox::Models::TableConfig& config) {
+
+
+
+    Q_UNUSED(config);
+
+
+
+    return nullptr;
+
+
+
+}
+
+
+
+
+
+
+
 QLayout* CLIBuilder::buildLayout(const Showbox::Models::LayoutConfig& config) {
+
+
+
+
 
 
 

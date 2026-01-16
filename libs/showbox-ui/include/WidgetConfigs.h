@@ -2,6 +2,8 @@
 #define WIDGET_CONFIGS_H
 
 #include <QString>
+#include <QStringList>
+#include <QList>
 
 namespace Showbox {
 namespace Models {
@@ -44,6 +46,21 @@ struct LineEditConfig : public BaseConfig {
     QString text;
     QString placeholder;
     bool passwordMode = false;
+};
+
+struct ComboBoxConfig : public BaseConfig {
+    QStringList items;
+    int currentIndex = -1;
+};
+
+struct ListConfig : public BaseConfig {
+    QStringList items;
+    bool multipleSelection = false;
+};
+
+struct TableConfig : public BaseConfig {
+    QStringList headers;
+    QList<QStringList> rows;
 };
 
 struct LayoutConfig : public BaseConfig {

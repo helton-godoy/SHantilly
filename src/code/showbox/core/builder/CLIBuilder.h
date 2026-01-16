@@ -20,6 +20,9 @@ public:
     QWidget* buildButton(const Showbox::Models::ButtonConfig& config) override;
     QWidget* buildLabel(const Showbox::Models::LabelConfig& config) override;
     QWidget* buildLineEdit(const Showbox::Models::LineEditConfig& config) override;
+    QWidget* buildComboBox(const Showbox::Models::ComboBoxConfig& config) override;
+    QWidget* buildList(const Showbox::Models::ListConfig& config) override;
+    QWidget* buildTable(const Showbox::Models::TableConfig& config) override;
     QLayout* buildLayout(const Showbox::Models::LayoutConfig& config) override;
 
 private:
