@@ -15,6 +15,8 @@
 #include <QSpinBox>
 #include <QSlider>
 #include <QTextEdit>
+#include <QGroupBox>
+#include <QTabWidget>
 #include "push_button_widget.h"
 #include "custom_chart_widget.h"
 
@@ -198,6 +200,56 @@ QWidget* ShowboxBuilder::buildTextEdit(const Showbox::Models::TextEditConfig& co
     }
     te->setReadOnly(config.readOnly);
     return te;
+}
+
+QWidget* ShowboxBuilder::buildGroupBox(const Showbox::Models::GroupBoxConfig& config)
+{
+    auto *gb = new QGroupBox(config.title);
+    gb->setObjectName(config.name);
+    
+    // Build and set layout if valid
+    QLayout* layout = buildLayout(config.layout);
+    if (layout) {
+        gb->setLayout(layout);
+    }
+    
+    return gb;
+}
+
+QWidget* ShowboxBuilder::buildFrame(const Showbox::Models::FrameConfig& config)
+{
+    auto *frame = new QFrame();
+    frame->setObjectName(config.name);
+    frame->setFrameShape(QFrame::StyledPanel);
+    frame->setFrameShadow(QFrame::Raised);
+    
+    // Build and set layout if valid
+    QLayout* layout = buildLayout(config.layout);
+    if (layout) {
+        frame->setLayout(layout);
+    }
+    
+    return frame;
+}
+
+QWidget* ShowboxBuilder::buildTabWidget(const Showbox::Models::TabWidgetConfig& config)
+{
+    auto *tabWidget = new QTabWidget();
+    tabWidget->setObjectName(config.name);
+    
+    for (const auto& pageConfig : config.pages) {
+        auto *page = new QWidget();
+        page->setObjectName(pageConfig.name);
+        
+        QLayout* layout = buildLayout(pageConfig.layout);
+        if (layout) {
+            page->setLayout(layout);
+        }
+        
+        tabWidget->addTab(page, pageConfig.title);
+    }
+    
+    return tabWidget;
 }
 
 QLayout* ShowboxBuilder::buildLayout(const Showbox::Models::LayoutConfig& config)

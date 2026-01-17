@@ -32,6 +32,9 @@ public:
     QWidget* buildSpinBox(const Showbox::Models::SpinBoxConfig& config) override;
     QWidget* buildSlider(const Showbox::Models::SliderConfig& config) override;
     QWidget* buildTextEdit(const Showbox::Models::TextEditConfig& config) override;
+    QWidget* buildGroupBox(const Showbox::Models::GroupBoxConfig& config) override;
+    QWidget* buildFrame(const Showbox::Models::FrameConfig& config) override;
+    QWidget* buildTabWidget(const Showbox::Models::TabWidgetConfig& config) override;
     QLayout* buildLayout(const Showbox::Models::LayoutConfig& config) override;
 
 private:

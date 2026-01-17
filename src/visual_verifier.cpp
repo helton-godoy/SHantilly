@@ -99,6 +99,47 @@ int main(int argc, char *argv[])
 
     contentLayout->addWidget(gbInput);
 
+    // --- Phase 4: Containers & Tabs ---
+    QGroupBox* gbContainers = new QGroupBox("Phase 4: Containers & Tabs");
+    QVBoxLayout* layContainers = new QVBoxLayout(gbContainers);
+
+    // Frame
+    Showbox::Models::FrameConfig fr;
+    fr.layout.type = Showbox::Models::LayoutConfig::HBox;
+    QWidget* frame = builder.buildFrame(fr);
+    // Add some content to frame manually for demo since config doesn't list children
+    if (frame->layout()) {
+        frame->layout()->addWidget(new QLabel("Inside Frame (HBox)"));
+        frame->layout()->addWidget(new QPushButton("Frame Button"));
+    }
+    layContainers->addWidget(frame);
+
+    // Tab Widget
+    Showbox::Models::TabWidgetConfig tabs;
+    
+    Showbox::Models::PageConfig p1;
+    p1.title = "Page 1";
+    p1.layout.type = Showbox::Models::LayoutConfig::VBox;
+    
+    Showbox::Models::PageConfig p2;
+    p2.title = "Page 2";
+    p2.layout.type = Showbox::Models::LayoutConfig::VBox;
+
+    tabs.pages << p1 << p2;
+
+    QWidget* tw = builder.buildTabWidget(tabs);
+    // Populate tabs manually for visual verification
+    QTabWidget* realTab = qobject_cast<QTabWidget*>(tw);
+    if (realTab && realTab->count() >= 2) {
+        if (realTab->widget(0)->layout())
+            realTab->widget(0)->layout()->addWidget(new QLabel("Content of Page 1"));
+        if (realTab->widget(1)->layout())
+            realTab->widget(1)->layout()->addWidget(new QPushButton("Button on Page 2"));
+    }
+
+    layContainers->addWidget(tw);
+    contentLayout->addWidget(gbContainers);
+
     // Show
     mainWindow->show();
 

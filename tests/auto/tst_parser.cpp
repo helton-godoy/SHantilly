@@ -30,6 +30,9 @@ public:
     QWidget* buildSpinBox(const Showbox::Models::SpinBoxConfig& config) override { Q_UNUSED(config); return nullptr; }
     QWidget* buildSlider(const Showbox::Models::SliderConfig& config) override { Q_UNUSED(config); return nullptr; }
     QWidget* buildTextEdit(const Showbox::Models::TextEditConfig& config) override { Q_UNUSED(config); return nullptr; }
+    QWidget* buildGroupBox(const Showbox::Models::GroupBoxConfig& config) override { Q_UNUSED(config); return nullptr; }
+    QWidget* buildFrame(const Showbox::Models::FrameConfig& config) override { Q_UNUSED(config); return nullptr; }
+    QWidget* buildTabWidget(const Showbox::Models::TabWidgetConfig& config) override { Q_UNUSED(config); return nullptr; }
     QLayout* buildLayout(const Showbox::Models::LayoutConfig& config) override { Q_UNUSED(config); return nullptr; }
 
     QString lastTitle;

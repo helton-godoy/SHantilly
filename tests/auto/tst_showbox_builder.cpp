@@ -16,6 +16,8 @@
 #include <QSpinBox>
 #include <QSlider>
 #include <QTextEdit>
+#include <QGroupBox>
+#include <QTabWidget>
 #include <custom_chart_widget.h>
 
 class TestShowboxBuilder : public QObject
@@ -31,6 +33,8 @@ private slots:
     void testBuildUtilityWidgets();
     void testBuildNumericalInputs();
     void testBuildTextInputs();
+    void testBuildBasicContainers();
+    void testBuildTabWidget();
     void testBuildAdvancedVisuals();
     void testPerformance();
 };
@@ -258,6 +262,71 @@ void TestShowboxBuilder::testBuildTextInputs()
     QCOMPARE(te->toPlainText(), QString("Initial Text"));
     QCOMPARE(te->isReadOnly(), true);
     delete textEdit;
+}
+
+void TestShowboxBuilder::testBuildBasicContainers()
+{
+    ShowboxBuilder builder;
+
+    // Test GroupBox
+    Showbox::Models::GroupBoxConfig gbConfig;
+    gbConfig.name = "gb1";
+    gbConfig.title = "My Group";
+    gbConfig.layout.type = Showbox::Models::LayoutConfig::VBox;
+
+    QWidget* gb = builder.buildGroupBox(gbConfig);
+    QVERIFY(gb != nullptr);
+    QGroupBox* groupBox = qobject_cast<QGroupBox*>(gb);
+    QVERIFY(groupBox != nullptr);
+    QCOMPARE(groupBox->title(), QString("My Group"));
+    QVERIFY(groupBox->layout() != nullptr);
+    QVERIFY(qobject_cast<QVBoxLayout*>(groupBox->layout()) != nullptr);
+    delete gb;
+
+    // Test Frame
+    Showbox::Models::FrameConfig frConfig;
+    frConfig.name = "fr1";
+    frConfig.layout.type = Showbox::Models::LayoutConfig::HBox;
+
+    QWidget* fr = builder.buildFrame(frConfig);
+    QVERIFY(fr != nullptr);
+    QFrame* frame = qobject_cast<QFrame*>(fr);
+    QVERIFY(frame != nullptr);
+    QVERIFY(frame->layout() != nullptr);
+    QVERIFY(qobject_cast<QHBoxLayout*>(frame->layout()) != nullptr);
+    delete fr;
+}
+
+void TestShowboxBuilder::testBuildTabWidget()
+{
+    ShowboxBuilder builder;
+
+    Showbox::Models::TabWidgetConfig tabConfig;
+    tabConfig.name = "tabs1";
+    
+    Showbox::Models::PageConfig page1;
+    page1.title = "Page 1";
+    page1.layout.type = Showbox::Models::LayoutConfig::VBox;
+    
+    Showbox::Models::PageConfig page2;
+    page2.title = "Page 2";
+    page2.layout.type = Showbox::Models::LayoutConfig::HBox;
+
+    tabConfig.pages << page1 << page2;
+
+    QWidget* tw = builder.buildTabWidget(tabConfig);
+    QVERIFY(tw != nullptr);
+    QTabWidget* tabWidget = qobject_cast<QTabWidget*>(tw);
+    QVERIFY(tabWidget != nullptr);
+    QCOMPARE(tabWidget->count(), 2);
+    QCOMPARE(tabWidget->tabText(0), QString("Page 1"));
+    QCOMPARE(tabWidget->tabText(1), QString("Page 2"));
+    
+    // Check if pages have layouts
+    QVERIFY(tabWidget->widget(0)->layout() != nullptr);
+    QVERIFY(qobject_cast<QVBoxLayout*>(tabWidget->widget(0)->layout()) != nullptr);
+    
+    delete tw;
 }
 
 void TestShowboxBuilder::testBuildAdvancedVisuals()
