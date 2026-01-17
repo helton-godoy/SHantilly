@@ -29,6 +29,9 @@ public:
     QWidget* buildRadioButton(const Showbox::Models::RadioButtonConfig& config) override;
     QWidget* buildCalendar(const Showbox::Models::CalendarConfig& config) override;
     QWidget* buildSeparator(const Showbox::Models::SeparatorConfig& config) override;
+    QWidget* buildSpinBox(const Showbox::Models::SpinBoxConfig& config) override;
+    QWidget* buildSlider(const Showbox::Models::SliderConfig& config) override;
+    QWidget* buildTextEdit(const Showbox::Models::TextEditConfig& config) override;
     QLayout* buildLayout(const Showbox::Models::LayoutConfig& config) override;
 
 private:

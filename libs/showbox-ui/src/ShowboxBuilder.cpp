@@ -12,6 +12,9 @@
 #include <QRadioButton>
 #include <QCalendarWidget>
 #include <QFrame>
+#include <QSpinBox>
+#include <QSlider>
+#include <QTextEdit>
 #include "push_button_widget.h"
 #include "custom_chart_widget.h"
 
@@ -158,6 +161,43 @@ QWidget* ShowboxBuilder::buildSeparator(const Showbox::Models::SeparatorConfig& 
     }
     line->setFrameShadow(QFrame::Sunken);
     return line;
+}
+
+QWidget* ShowboxBuilder::buildSpinBox(const Showbox::Models::SpinBoxConfig& config)
+{
+    auto *sb = new QSpinBox();
+    sb->setObjectName(config.name);
+    sb->setMinimum(config.min);
+    sb->setMaximum(config.max);
+    sb->setValue(config.value);
+    sb->setSingleStep(config.step);
+    sb->setPrefix(config.prefix);
+    sb->setSuffix(config.suffix);
+    return sb;
+}
+
+QWidget* ShowboxBuilder::buildSlider(const Showbox::Models::SliderConfig& config)
+{
+    auto *sl = new QSlider();
+    sl->setObjectName(config.name);
+    sl->setMinimum(config.min);
+    sl->setMaximum(config.max);
+    sl->setValue(config.value);
+    sl->setOrientation(static_cast<Qt::Orientation>(config.orientation));
+    return sl;
+}
+
+QWidget* ShowboxBuilder::buildTextEdit(const Showbox::Models::TextEditConfig& config)
+{
+    auto *te = new QTextEdit();
+    te->setObjectName(config.name);
+    if (config.richText) {
+        te->setHtml(config.text);
+    } else {
+        te->setPlainText(config.text);
+    }
+    te->setReadOnly(config.readOnly);
+    return te;
 }
 
 QLayout* ShowboxBuilder::buildLayout(const Showbox::Models::LayoutConfig& config)

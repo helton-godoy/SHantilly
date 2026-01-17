@@ -28,6 +28,9 @@ public:
     virtual QWidget* buildRadioButton(const Showbox::Models::RadioButtonConfig& config) = 0;
     virtual QWidget* buildCalendar(const Showbox::Models::CalendarConfig& config) = 0;
     virtual QWidget* buildSeparator(const Showbox::Models::SeparatorConfig& config) = 0;
+    virtual QWidget* buildSpinBox(const Showbox::Models::SpinBoxConfig& config) = 0;
+    virtual QWidget* buildSlider(const Showbox::Models::SliderConfig& config) = 0;
+    virtual QWidget* buildTextEdit(const Showbox::Models::TextEditConfig& config) = 0;
     virtual QLayout* buildLayout(const Showbox::Models::LayoutConfig& config) = 0;
 
     // --- Legacy Methods (To be deprecated/removed) ---

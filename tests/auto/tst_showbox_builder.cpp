@@ -13,6 +13,9 @@
 #include <QRadioButton>
 #include <QCalendarWidget>
 #include <QFrame>
+#include <QSpinBox>
+#include <QSlider>
+#include <QTextEdit>
 #include <custom_chart_widget.h>
 
 class TestShowboxBuilder : public QObject
@@ -26,6 +29,8 @@ private slots:
     void testBuildItemBasedWidgets();
     void testBuildSelectionWidgets();
     void testBuildUtilityWidgets();
+    void testBuildNumericalInputs();
+    void testBuildTextInputs();
     void testBuildAdvancedVisuals();
     void testPerformance();
 };
@@ -191,6 +196,68 @@ void TestShowboxBuilder::testBuildUtilityWidgets()
     QVERIFY(frame != nullptr);
     QCOMPARE(frame->frameShape(), QFrame::HLine);
     delete separator;
+}
+
+void TestShowboxBuilder::testBuildNumericalInputs()
+{
+    ShowboxBuilder builder;
+
+    // Test SpinBox
+    Showbox::Models::SpinBoxConfig spinConfig;
+    spinConfig.name = "spin1";
+    spinConfig.min = 10;
+    spinConfig.max = 50;
+    spinConfig.value = 25;
+    spinConfig.step = 5;
+    spinConfig.suffix = " units";
+    
+    QWidget* spinBox = builder.buildSpinBox(spinConfig);
+    QVERIFY(spinBox != nullptr);
+    QSpinBox* sb = qobject_cast<QSpinBox*>(spinBox);
+    QVERIFY(sb != nullptr);
+    QCOMPARE(sb->minimum(), 10);
+    QCOMPARE(sb->maximum(), 50);
+    QCOMPARE(sb->value(), 25);
+    QCOMPARE(sb->singleStep(), 5);
+    QCOMPARE(sb->suffix(), QString(" units"));
+    delete spinBox;
+
+    // Test Slider
+    Showbox::Models::SliderConfig sliderConfig;
+    sliderConfig.name = "slider1";
+    sliderConfig.min = 0;
+    sliderConfig.max = 100;
+    sliderConfig.value = 75;
+    sliderConfig.orientation = Qt::Vertical;
+
+    QWidget* slider = builder.buildSlider(sliderConfig);
+    QVERIFY(slider != nullptr);
+    QSlider* sl = qobject_cast<QSlider*>(slider);
+    QVERIFY(sl != nullptr);
+    QCOMPARE(sl->minimum(), 0);
+    QCOMPARE(sl->maximum(), 100);
+    QCOMPARE(sl->value(), 75);
+    QCOMPARE(sl->orientation(), Qt::Vertical);
+    delete slider;
+}
+
+void TestShowboxBuilder::testBuildTextInputs()
+{
+    ShowboxBuilder builder;
+
+    // Test TextEdit
+    Showbox::Models::TextEditConfig textConfig;
+    textConfig.name = "text1";
+    textConfig.text = "Initial Text";
+    textConfig.readOnly = true;
+
+    QWidget* textEdit = builder.buildTextEdit(textConfig);
+    QVERIFY(textEdit != nullptr);
+    QTextEdit* te = qobject_cast<QTextEdit*>(textEdit);
+    QVERIFY(te != nullptr);
+    QCOMPARE(te->toPlainText(), QString("Initial Text"));
+    QCOMPARE(te->isReadOnly(), true);
+    delete textEdit;
 }
 
 void TestShowboxBuilder::testBuildAdvancedVisuals()
