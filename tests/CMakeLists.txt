@@ -95,3 +95,20 @@ target_link_libraries(tst_showbox_builder PRIVATE
 )
 
 add_test(NAME tst_showbox_builder COMMAND tst_showbox_builder)
+
+add_executable(tst_tokenizer
+    auto/tst_tokenizer.cpp
+    ../src/code/showbox/core/parser/Tokenizer.cpp
+)
+
+target_link_libraries(tst_tokenizer PRIVATE
+    Qt6::Widgets
+    Qt6::Test
+    showbox-ui
+)
+
+target_include_directories(tst_tokenizer PRIVATE
+    ../src/code/showbox/core/parser
+)
+
+add_test(NAME tst_tokenizer COMMAND tst_tokenizer)
