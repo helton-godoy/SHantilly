@@ -85,6 +85,67 @@ struct LayoutConfig : public BaseConfig {
     int margin = 5;
 };
 
+
+struct CheckBoxConfig : public BaseConfig {
+    QString text = "CheckBox";
+    bool checked = false;
+};
+
+struct RadioButtonConfig : public BaseConfig {
+    QString text = "RadioButton";
+    bool checked = false;
+};
+
+struct SpinBoxConfig : public BaseConfig {
+    int value = 0;
+    int min = 0;
+    int max = 100;
+    int step = 1;
+    QString prefix;
+    QString suffix;
+};
+
+struct SliderConfig : public BaseConfig {
+    int value = 0;
+    int min = 0;
+    int max = 100;
+    int orientation = 1; // Qt::Horizontal = 0x1
+};
+
+
+struct CalendarConfig : public BaseConfig {
+    // Data atual ou selecionada pode ser adicionada aqui se necessário via QString ISO
+};
+
+struct TextEditConfig : public BaseConfig {
+    QString text;
+    bool readOnly = false;
+    bool richText = false;
+};
+
+struct SeparatorConfig : public BaseConfig {
+    int orientation = 1; // Qt::Horizontal
+};
+
+
+struct GroupBoxConfig : public BaseConfig {
+    QString title = "Group";
+    LayoutConfig layout;
+};
+
+struct FrameConfig : public BaseConfig {
+    LayoutConfig layout;
+};
+
+struct PageConfig : public BaseConfig {
+    QString title = "Page";
+    LayoutConfig layout;
+};
+
+struct TabWidgetConfig : public BaseConfig {
+    QList<PageConfig> pages;
+};
+
 } // namespace Models
 } // namespace Showbox
 
