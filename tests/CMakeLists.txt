@@ -46,6 +46,8 @@ add_test(NAME tst_clibuilder COMMAND tst_clibuilder)
 add_executable(tst_parser
     auto/tst_parser.cpp
     ../src/code/showbox/core/parser/ParserMain.cpp
+    ../src/code/showbox/core/parser/CommandParser.cpp
+    ../src/code/showbox/core/parser/Tokenizer.cpp
 )
 
 target_link_libraries(tst_parser PRIVATE
@@ -112,3 +114,21 @@ target_include_directories(tst_tokenizer PRIVATE
 )
 
 add_test(NAME tst_tokenizer COMMAND tst_tokenizer)
+
+add_executable(tst_command_parser
+    auto/tst_command_parser.cpp
+    ../src/code/showbox/core/parser/CommandParser.cpp
+    ../src/code/showbox/core/parser/Tokenizer.cpp
+)
+
+target_link_libraries(tst_command_parser PRIVATE
+    Qt6::Widgets
+    Qt6::Test
+    showbox-ui
+)
+
+target_include_directories(tst_command_parser PRIVATE
+    ../src/code/showbox/core/parser
+)
+
+add_test(NAME tst_command_parser COMMAND tst_command_parser)

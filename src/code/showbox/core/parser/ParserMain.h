@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QStringList>
+#include "CommandParser.h"
 
 class IShowboxBuilder;
 
@@ -21,6 +22,7 @@ private:
     void handleAdd(const QStringList &args);
 
     IShowboxBuilder *m_builder;
+    CommandParser m_commandParser;
 };
 
 #endif // PARSERMAIN_H
