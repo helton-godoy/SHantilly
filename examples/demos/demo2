@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/SHantilly/bin/SHantilly}"
+SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
 
 flag=0
 
@@ -27,7 +27,7 @@ while IFS=$'=' read key value; do
 	esac
 done < <(
 
-	${SHOWBOX_BIN} <<EODEMO
+	${SHANTILLY_BIN} <<EODEMO
 add label "<small>This script demonstrates unidirectional communication with the SHantilly application." note
 set note stylesheet "qproperty-textInteractionFlags: NoTextInteraction;"
 add separator

@@ -1,20 +1,20 @@
 # Início Rápido
 
-Aprenda a criar interfaces gráficas com Showbox em minutos! Este guia apresenta os conceitos fundamentais através de exemplos progressivos.
+Aprenda a criar interfaces gráficas com SHantilly em minutos! Este guia apresenta os conceitos fundamentais através de exemplos progressivos.
 
 ---
 
 ## Conceitos Fundamentais
 
-### Como o Showbox Funciona
+### Como o SHantilly Funciona
 
 1. **Seu script** envia comandos via **stdin**
-2. **Showbox** interpreta os comandos e cria a interface
+2. **SHantilly** interpreta os comandos e cria a interface
 3. **Usuário** interage com a interface
-4. **Showbox** reporta eventos via **stdout**
+4. **SHantilly** reporta eventos via **stdout**
 
 ```
-Script ──stdin──▶ Showbox ──GUI──▶ Usuário
+Script ──stdin──▶ SHantilly ──GUI──▶ Usuário
                      │
                      └──stdout──▶ Script (eventos)
 ```
@@ -51,7 +51,7 @@ O diálogo mais simples possível.
 
 SHantilly << 'EOF'
 set title "Olá Mundo"
-add label "Bem-vindo ao Showbox!"
+add label "Bem-vindo ao SHantilly!"
 add pushbutton "OK" btn_ok exit default
 show
 EOF

@@ -4,7 +4,7 @@
 #include <QThread>
 #include <QTimer>
 #include <QWidget>
-#include <ShowboxBuilder.h>
+#include <SHantillyBuilder.h>
 #include <iostream>
 #include <string>
 
@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  ShowboxBuilder builder;
+  SHantillyBuilder builder;
   ParserMain parser(&builder);
 
   // Conectar showRequested para mostrar janelas

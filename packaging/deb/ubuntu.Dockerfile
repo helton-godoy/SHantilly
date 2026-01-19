@@ -3,7 +3,7 @@ FROM ubuntu:24.04
 # Avoid interactive prompts during package installation
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install build and runtime dependencies for ShowBox
+# Install build and runtime dependencies for SHantilly
 RUN apt-get update -qq && apt-get install -qqy \
     # Build tools
     build-essential \

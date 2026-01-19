@@ -1,9 +1,9 @@
 j#!/bin/bash
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/SHantilly/bin/SHantilly}"
+SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
 DIALOGBOX=${1:-./dist_qt6/dialogbox}
 
-if [[ ! -x ${SHOWBOX_BIN} ]]; then
-	echo "Error: ${SHOWBOX_BIN} not found or not executable."
+if [[ ! -x ${SHANTILLY_BIN} ]]; then
+	echo "Error: ${SHANTILLY_BIN} not found or not executable."
 	exit 1
 fi
 
@@ -11,7 +11,7 @@ FIFO=$(mktemp -u)
 mkfifo "${FIFO}"
 trap "rm -f ${FIFO}" EXIT
 
-${SHOWBOX_BIN} <"${FIFO}" &
+${SHANTILLY_BIN} <"${FIFO}" &
 DIALOG_PID=$!
 
 exec 3>"${FIFO}"

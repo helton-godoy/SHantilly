@@ -4,10 +4,10 @@
 # Usa FIFO para capturar callbacks continuamente
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SHOWBOX="${SCRIPT_DIR}/../../build/bin/SHantilly"
+SHANTILLY="${SCRIPT_DIR}/../../build/bin/SHantilly"
 
 # Verificar se o SHantilly foi compilado
-if [[ ! -x ${SHOWBOX} ]]; then
+if [[ ! -x ${SHANTILLY} ]]; then
 	echo "ERRO: SHantilly não encontrado em${$SHOWBO}X"
 	exit 1
 fi
@@ -24,7 +24,7 @@ cleanup() {
 trap cleanup EXIT
 
 # === Função principal ===
-echo "=== Teste de Actions no Showbox ==="
+echo "=== Teste de Actions no SHantilly ==="
 echo "Clique nos botões para testar os callbacks!"
 echo ""
 
@@ -42,10 +42,10 @@ echo ""
 			# Executar ação específica
 			case "${callback_name}" in
 			btn_test_clicked)
-				notify-send "Showbox" "Botão de teste clicado!" 2>/dev/null || true
+				notify-send "SHantilly" "Botão de teste clicado!" 2>/dev/null || true
 				;;
 			btn_alert_clicked)
-				notify-send "Showbox" "Alerta disparado!" 2>/dev/null || true
+				notify-send "SHantilly" "Alerta disparado!" 2>/dev/null || true
 				;;
 			esac
 		else
@@ -55,7 +55,7 @@ echo ""
 ) &
 
 # Executar SHantilly com output redirecionado para o FIFO
-cat <<'EOF' | "${SHOWBOX}" >"${FIFO}" 2>&1
+cat <<'EOF' | "${SHANTILLY}" >"${FIFO}" 2>&1
 add window "Teste de Actions" main width=400 height=300
 add button "Testar Callback" btn_test action="btn_test_clicked"
 add button "Disparar Alerta" btn_alert action="btn_alert_clicked"
@@ -64,4 +64,4 @@ show
 EOF
 
 echo ""
-echo "=== Showbox fechado ==="
+echo "=== SHantilly fechado ==="

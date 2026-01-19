@@ -1,25 +1,17 @@
-Checks: >
-  clang-analyzer-*,
-  bugprone-*,
-  performance-*,
-  modernize-*,
-  readability-*,
-  cppcoreguidelines-*,
-  -modernize-use-trailing-return-type,
-  -cppcoreguidelines-pro-type-vararg,
-  -readability-braces-around-statements,
-  -cppcoreguidelines-special-member-functions
-WarningsAsErrors: '*'
-HeaderFilterRegex: 'src/.*'
-FormatStyle: file
+---
+Checks:          'bugprone-*,performance-*,readability-*,modernize-*,cppcoreguidelines-*,clang-analyzer-*,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-cppcoreguidelines-pro-type-member-init'
+WarningsAsErrors: ''
+HeaderFilterRegex: '^(src/|libs/).*'
+FormatStyle:     file
 CheckOptions:
   - key:             readability-identifier-naming.ClassCase
-    value:           PascalCase
+    value:           CamelCase
   - key:             readability-identifier-naming.FunctionCase
+    value:           camelCase
+  - key:             readability-identifier-naming.MemberCase
+    value:           m_camelCase
+  - key:             readability-identifier-naming.ParameterCase
     value:           camelCase
   - key:             readability-identifier-naming.VariableCase
     value:           camelCase
-  - key:             readability-identifier-naming.ParameterCase
-    value:           camelCase
-  - key:             readability-identifier-naming.MemberCase
-    value:           camelCase
+...

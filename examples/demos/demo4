@@ -1,5 +1,5 @@
 #!/bin/bash
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/SHantilly/bin/SHantilly}"
+SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
 
 FIFOIN="./pipe-in"   # FIFO the SHantilly process writes to
 FIFOOUT="./pipe-out" # FIFO the SHantilly process reads from
@@ -8,7 +8,7 @@ rm -rf "${FIFOIN}" "${FIFOOUT}" # sanity removal
 
 mkfifo "${FIFOIN}" "${FIFOOUT}"
 
-${SHOWBOX_BIN} <"${FIFOOUT}" >"${FIFOIN}" &
+${SHANTILLY_BIN} <"${FIFOOUT}" >"${FIFOIN}" &
 DBPID=$! # PID of the SHantilly, if you need it for any purpose... e.g. to kill it
 
 trap "kill ${DBPID} &>/dev/null; wait ${DBPID}; rm -rf \"${FIFOIN}\" \"${FIFOOUT}\"" EXIT

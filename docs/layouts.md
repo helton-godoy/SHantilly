@@ -1,12 +1,12 @@
 # Guia de Layouts
 
-Aprenda a criar interfaces complexas com o sistema de layouts do Showbox.
+Aprenda a criar interfaces complexas com o sistema de layouts do SHantilly.
 
 ---
 
 ## Sistema de 3 Níveis
 
-O Showbox usa um sistema hierárquico de layouts:
+O SHantilly usa um sistema hierárquico de layouts:
 
 ```
 ┌────────────────────────────────────────────────────────────┐

@@ -1,6 +1,6 @@
 # Exemplos Ilustrados
 
-Tutoriais práticos passo a passo para aprender Showbox.
+Tutoriais práticos passo a passo para aprender SHantilly.
 
 ---
 

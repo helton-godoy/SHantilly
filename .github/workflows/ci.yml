@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libgl1-mesa-dev libx11-dev libxkbcommon-dev libfontconfig1-dev libdbus-1-dev libicu-dev xvfb
+          sudo apt-get install -y libgl1-mesa-dev libx11-dev libxkbcommon-dev libfontconfig1-dev libdbus-1-dev libicu-dev xvfb clang-format clang-tidy cppcheck lcov
 
       - name: Cache vcpkg
         uses: actions/cache@v4
@@ -39,23 +39,32 @@ jobs:
       - name: Run Trunk Check
         uses: trunk-io/trunk-action@v1
 
-      - name: Configure CMake
+      - name: Build, Test and Generate Coverage
         run: |
-          cmake -B build -S . \
-            -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+          xvfb-run make coverage_internal
 
-      - name: Build
-        run: cmake --build build -j$(nproc)
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage_report/
 
-      - name: Run Tests
-        if: always()
-        run: |
-          if [ -d "build/bin" ]; then
-            cd build
-            xvfb-run ctest --output-on-failure
-          fi
+      - name: Run Clang-Tidy
+        run: make tidy_internal
+
+      - name: Run Cppcheck
+        run: make cppcheck_internal
+
+      - name: Run Trivy Vulnerability Scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          hide-progress: false
+          format: 'table'
+          exit-code: '0'
+          ignore-unfixed: true
+          severity: 'CRITICAL,HIGH'
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master

@@ -4,12 +4,12 @@
 #include "execution_context.h"
 
 /**
- * ShowBox Unit Tests
+ * SHantilly Unit Tests
  * 
  * These tests verify individual components without requiring
- * the full ShowBox class (which has Qt widget dependencies).
+ * the full SHantilly class (which has Qt widget dependencies).
  */
-class TestShowBoxUnits : public QObject
+class TestSHantillyUnits : public QObject
 {
     Q_OBJECT
 
@@ -26,17 +26,17 @@ private slots:
     void testExecutionContextNullDialog();
 };
 
-void TestShowBoxUnits::initTestCase()
+void TestSHantillyUnits::initTestCase()
 {
-    qDebug() << "Starting ShowBox unit tests...";
+    qDebug() << "Starting SHantilly unit tests...";
 }
 
-void TestShowBoxUnits::cleanupTestCase()
+void TestSHantillyUnits::cleanupTestCase()
 {
-    qDebug() << "Finished ShowBox unit tests.";
+    qDebug() << "Finished SHantilly unit tests.";
 }
 
-void TestShowBoxUnits::testLoggerCategoriesExist()
+void TestSHantillyUnits::testLoggerCategoriesExist()
 {
     // Verify that logging categories are properly declared
     qCDebug(parserLog) << "Test parser log message";
@@ -44,7 +44,7 @@ void TestShowBoxUnits::testLoggerCategoriesExist()
     QVERIFY(true);  // Categories should exist without crash
 }
 
-void TestShowBoxUnits::testLoggerDebugOutput()
+void TestSHantillyUnits::testLoggerDebugOutput()
 {
     // Test that logging works without crashing
     qCWarning(parserLog) << "Test warning message";
@@ -52,14 +52,14 @@ void TestShowBoxUnits::testLoggerDebugOutput()
     QVERIFY(true);
 }
 
-void TestShowBoxUnits::testExecutionContextCreation()
+void TestSHantillyUnits::testExecutionContextCreation()
 {
     // ExecutionContext should be creatable with nullptr
     ExecutionContext ctx(nullptr);
     QVERIFY(true);
 }
 
-void TestShowBoxUnits::testExecutionContextNullDialog()
+void TestSHantillyUnits::testExecutionContextNullDialog()
 {
     // Operations on ExecutionContext with null dialog should not crash
     ExecutionContext ctx(nullptr);
@@ -67,6 +67,6 @@ void TestShowBoxUnits::testExecutionContextNullDialog()
     QVERIFY(true);
 }
 
-QTEST_MAIN(TestShowBoxUnits)
+QTEST_MAIN(TestSHantillyUnits)
 
 #include "tst_units.moc"

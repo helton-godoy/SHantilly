@@ -1,0 +1,602 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.4">
+    
+    
+      
+        <title>Estratégia de Refatoração SHantilly 2026: Arquitetura Orientada a Studio - SHantilly Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#estrategia-de-refatoracao-shantilly-2026-arquitetura-orientada-a-studio" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="SHantilly Documentation" class="md-header__button md-logo" aria-label="SHantilly Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SHantilly Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Estratégia de Refatoração SHantilly 2026: Arquitetura Orientada a Studio
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../architecture.md" class="md-tabs__link">
+        
+  
+    
+  
+  Architecture
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../doxygen/index.html" class="md-tabs__link">
+        
+  
+    
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="SHantilly Documentation" class="md-nav__button md-logo" aria-label="SHantilly Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SHantilly Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../doxygen/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-visao-geral-da-arquitetura" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Visão Geral da Arquitetura
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Visão Geral da Arquitetura">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#o-conceito-core-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      O Conceito "Core Library"
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-estrategia-de-build-hibrida-legado-moderno" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Estratégia de Build Híbrida (Legado + Moderno)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-log-de-migracao-de-componentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Log de Migração de Componentes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-design-patterns-adotados" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Design Patterns Adotados
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Design Patterns Adotados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-builder-pattern-o-coracao-da-construcao" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1. Builder Pattern (O Coração da Construção)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-passive-view-mvp-model-view-presenter" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2. Passive View (MVP - Model View Presenter)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-estrutura-de-diretorios-proposta" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Estrutura de Diretórios Proposta
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="estrategia-de-refatoracao-shantilly-2026-arquitetura-orientada-a-studio">Estratégia de Refatoração SHantilly 2026: Arquitetura Orientada a Studio</h1>
+<blockquote>
+<p><strong>Status:</strong> Em Progresso (Fase Híbrida)
+<strong>Data:</strong> 14 de Janeiro de 2026
+<strong>Objetivo:</strong> Elevar a qualidade de código (Premium Code Quality) e permitir a criação do SHantilly Studio através do desacoplamento do núcleo.</p>
+</blockquote>
+<hr />
+<h2 id="1-visao-geral-da-arquitetura">1. Visão Geral da Arquitetura</h2>
+<p>Para permitir que o <strong>SHantilly Studio</strong> e o <strong>SHantilly CLI</strong> coexistam com 100% de paridade visual e funcional, o código monolítico atual será refatorado em uma arquitetura de camadas baseada em <strong>Biblioteca Compartilhada</strong>.</p>
+<h3 id="o-conceito-core-library">O Conceito "Core Library"</h3>
+<p>O código fonte será reorganizado para isolar a lógica de UI da lógica de parsing de texto.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>graph TD
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    subgraph &quot;Aplicações (Consumers)&quot;
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        CLI[SHantilly CLI] -- Lê Stdin --&gt; Lib
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        Studio[SHantilly Studio] -- Interação Visual --&gt; Lib
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    end
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    subgraph &quot;SHantilly Shared Ecosystem&quot;
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        Lib[libs/SHantilly-ui]
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    end
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    CLI --&gt; Lib
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    Studio --&gt; Lib
+</code></pre></div>
+<hr />
+<h2 id="2-estrategia-de-build-hibrida-legado-moderno">2. Estratégia de Build Híbrida (Legado + Moderno)</h2>
+<p>Para manter a compatibilidade com o sistema de empacotamento existente (<code>packaging/deb</code>, <code>packaging/rpm</code>, etc.), adotamos uma abordagem de build duplo durante a transição:</p>
+<ol>
+<li>
+<p><strong>Build Legado (QMake):</strong></p>
+<ul>
+<li>Mantido em <code>src/code/SHantilly/SHantilly.pro</code>.</li>
+<li>Configurado para incluir arquivos fonte (<code>SOURCES</code>) e cabeçalhos (<code>HEADERS</code>) diretamente da pasta <code>libs/SHantilly-ui</code> usando caminhos relativos (<code>../../../libs/...</code>).</li>
+<li><strong>Garante:</strong> Que os pacotes <code>.deb</code>, <code>.rpm</code>, <code>.AppImage</code> continuem sendo gerados sem alteração nos scripts de CI/CD.</li>
+</ul>
+</li>
+<li>
+<p><strong>Build Moderno (CMake):</strong></p>
+<ul>
+<li>Configurado na raiz (<code>CMakeLists.txt</code>) e em <code>libs/SHantilly-ui</code>.</li>
+<li>Trata <code>SHantilly-ui</code> como uma biblioteca estática real.</li>
+<li>Usado para o desenvolvimento do <strong>SHantilly Studio</strong> e testes unitários.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="3-log-de-migracao-de-componentes">3. Log de Migração de Componentes</h2>
+<p>Este registro rastreia quais componentes foram movidos do monólito (<code>src/code/SHantilly</code>) para a biblioteca (<code>libs/SHantilly-ui</code>).</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Componente</th>
+<th style="text-align: left;">Data</th>
+<th style="text-align: left;">Motivo da Migração</th>
+<th style="text-align: left;">Dependências</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>IconHelper</strong></td>
+<td style="text-align: left;">14/01/2026</td>
+<td style="text-align: left;">Utilitário independente necessário para UI.</td>
+<td style="text-align: left;"><code>Logger</code> (Moveu junto)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Logger</strong></td>
+<td style="text-align: left;">14/01/2026</td>
+<td style="text-align: left;">Dependência direta de <code>IconHelper</code> e usada globalmente.</td>
+<td style="text-align: left;">Nenhuma (Qt Core)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-design-patterns-adotados">4. Design Patterns Adotados</h2>
+<h3 id="41-builder-pattern-o-coracao-da-construcao">4.1. Builder Pattern (O Coração da Construção)</h3>
+<p>Atualmente, o SHantilly constrói widgets "on-the-fly" enquanto lê o texto. Isso impede o Studio de instanciar um widget sem simular um arquivo de texto.</p>
+<p><strong>Solução:</strong> Implementar o <code>SHantillyBuilder</code>.</p>
+<ul>
+<li><strong>Intenção:</strong> Separar a construção de um objeto complexo da sua representação.</li>
+<li><strong>Aplicação:</strong></li>
+<li>O CLI lê <code>add pushbutton "OK" btn_ok</code> -&gt; Chama <code>builder-&gt;createButton("OK", "btn_ok")</code>.</li>
+<li>O Studio recebe um Drag &amp; Drop -&gt; Chama <code>builder-&gt;createButton("OK", "btn_ok")</code>.</li>
+<li><strong>Benefício:</strong> Garante que a inicialização de propriedades, estilos padrão e conexões de sinais internos sejam idênticas em ambos os apps.</li>
+</ul>
+<h3 id="42-passive-view-mvp-model-view-presenter">4.2. Passive View (MVP - Model View Presenter)</h3>
+<p>Os Widgets Qt atuais contêm lógica de execução de shell script (ex: <code>system()</code>, <code>popen()</code>). Isso é uma violação do Princípio de Responsabilidade Única (SRP).</p>
+<p><strong>Solução:</strong> Tornar os Widgets "Passivos".</p>
+<ul>
+<li><strong>View (Widget):</strong> Apenas exibe dados e emite sinais Qt puros (<code>signal: clicked()</code>). Não sabe o que é "Shell Script".</li>
+<li><strong>Presenter (Controller):</strong></li>
+<li>No <strong>CLI</strong>: O Presenter conecta <code>clicked()</code> a uma função que escreve no stdout ou executa um comando.</li>
+<li>No <strong>Studio</strong>: O Presenter conecta <code>clicked()</code> a uma função que seleciona o widget no Property Editor.</li>
+</ul>
+<hr />
+<h2 id="5-estrutura-de-diretorios-proposta">5. Estrutura de Diretórios Proposta</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>/
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── CMakeLists.txt          # Build system mestre (Novo)
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>├── libs/
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>│   └── SHantilly-ui/         # A Biblioteca (Static/Shared Lib)
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│       ├── include/        # Headers públicos (icon_helper.h, logger.h)
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>│       └── src/            # Implementação (icon_helper.cpp, logger.cpp)
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>├── src/
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│   └── code/
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>│       └── SHantilly/        # Aplicação CLI (Legacy path mantido)
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>│           ├── SHantilly.pro # Build Legacy (Aponta para ../../../libs)
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>│           └── ...
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>└── apps/
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    └── studio/             # O novo Editor (IDE)
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "content.code.copy"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
+      
+    
+  </body>
+</html>

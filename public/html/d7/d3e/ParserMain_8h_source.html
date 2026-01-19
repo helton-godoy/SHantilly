@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SHantilly: Código-Fonte de src/code/SHantilly/core/parser/ParserMain.h</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js"></script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">SHantilly<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.9.8 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "../../search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('../../',true,false,'search.php','Localizar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function() { init_codefold(1); });
+/* @license-end */
+</script>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrada</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_3ef7287b8e7a9ed45eff58e9a3bb8bc1.html">code</a></li><li class="navelem"><a class="el" href="../../dir_d10175a52dfb51cdde537464ad84eea6.html">SHantilly</a></li><li class="navelem"><a class="el" href="../../dir_6375871cf748812a5b940c58bc14c762.html">core</a></li><li class="navelem"><a class="el" href="../../dir_64c9f57210c391cc7e1596d6cdb292a0.html">parser</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">ParserMain.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="../../d7/d3e/ParserMain_8h.html">Ir para a documentação deste ficheiro.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef PARSERMAIN_H</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define PARSERMAIN_H</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="../../da/d64/CommandParser_8h.html">CommandParser.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;QMap&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;QObject&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;QPointer&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;QStack&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;QStringList&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;functional&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">class </span><a class="code hl_class" href="../../d8/db2/classISHantillyBuilder.html">ISHantillyBuilder</a>;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">class </span>QWidget;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="../../d9/dd1/classParserMain.html">   15</a></span><span class="keyword">class </span><a class="code hl_class" href="../../d9/dd1/classParserMain.html">ParserMain</a> : <span class="keyword">public</span> QObject {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  Q_OBJECT</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  <span class="keyword">explicit</span> <a class="code hl_class" href="../../d9/dd1/classParserMain.html">ParserMain</a>(<a class="code hl_class" href="../../d8/db2/classISHantillyBuilder.html">ISHantillyBuilder</a> *builder, QObject *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="../../d9/dd1/classParserMain.html#a1a6264d59b86f46c4d42899525d3762a">run</a>();</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="../../d9/dd1/classParserMain.html#a77256c8a50b1aef8557b98d489baa71b">processLine</a>(<span class="keyword">const</span> QString &amp;line);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>signals:</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="../../d9/dd1/classParserMain.html#ad6feeeb4267dc42c559d4b5e48c21169">   23</a></span>  <span class="keywordtype">void</span> <a class="code hl_signal" href="../../d9/dd1/classParserMain.html#ad6feeeb4267dc42c559d4b5e48c21169">showRequested</a>();</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="../../d9/dd1/classParserMain.html#a1eaada3632282ec12c211fbebb4e5b52">handleAdd</a>(<span class="keyword">const</span> QStringList &amp;args);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="../../d9/dd1/classParserMain.html#ad255fe1d40e19e4e6b0f25c2dd1241e2">handleEnd</a>(<span class="keyword">const</span> QStringList &amp;args);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="../../d9/dd1/classParserMain.html#a9bcc77bbd8aece9240972321147930a5">handleSet</a>(<span class="keyword">const</span> QStringList &amp;args);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="../../d9/dd1/classParserMain.html#a05e8082a57620856cda3259307a59f8a">handleUnset</a>(<span class="keyword">const</span> QStringList &amp;args);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="../../d9/dd1/classParserMain.html#a313ab29f93bb72b138325a54a57f92e2">handleQuery</a>(<span class="keyword">const</span> QStringList &amp;args);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="../../d9/dd1/classParserMain.html#ac04632dc5f8d544962ad9d7e4e3fccd9">handleRemove</a>(<span class="keyword">const</span> QStringList &amp;args);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="../../d9/dd1/classParserMain.html#aa8706958141051c90a0effbd5208f997">handleClear</a>(<span class="keyword">const</span> QStringList &amp;args);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="comment">// Helper to add created widget to current context and registry</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="../../d9/dd1/classParserMain.html#a995535a209c724fea48de00642b09e57">addToContext</a>(QWidget *widget);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="../../d9/dd1/classParserMain.html#ab11d97672ad66fbde8e8053a1b7d7936">runInMainThread</a>(std::function&lt;<span class="keywordtype">void</span>()&gt; func);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="../../d9/dd1/classParserMain.html#ad081c995d9f9e53ff280a67a12586508">   39</a></span>  <a class="code hl_class" href="../../d8/db2/classISHantillyBuilder.html">ISHantillyBuilder</a> *<a class="code hl_variable" href="../../d9/dd1/classParserMain.html#ad081c995d9f9e53ff280a67a12586508">m_builder</a>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="../../d9/dd1/classParserMain.html#afb85e66c74a19cf4cd2f5a033b9699e1">   40</a></span>  <a class="code hl_class" href="../../d0/d55/classCommandParser.html">CommandParser</a> <a class="code hl_variable" href="../../d9/dd1/classParserMain.html#afb85e66c74a19cf4cd2f5a033b9699e1">m_commandParser</a>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="../../d9/dd1/classParserMain.html#a5bd6b9922f46d7d6754f777bff9a2eb1">   41</a></span>  QStack&lt;QWidget *&gt; <a class="code hl_variable" href="../../d9/dd1/classParserMain.html#a5bd6b9922f46d7d6754f777bff9a2eb1">m_contextStack</a>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="../../d9/dd1/classParserMain.html#a299c615a8cccf5093498ad09d6ea47a5">   42</a></span>  QMap&lt;QString, QPointer&lt;QWidget&gt;&gt; <a class="code hl_variable" href="../../d9/dd1/classParserMain.html#a299c615a8cccf5093498ad09d6ea47a5">m_widgetRegistry</a>;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>};</div>
+</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="preprocessor">#endif </span><span class="comment">// PARSERMAIN_H</span></div>
+<div class="ttc" id="aCommandParser_8h_html"><div class="ttname"><a href="../../da/d64/CommandParser_8h.html">CommandParser.h</a></div></div>
+<div class="ttc" id="aclassCommandParser_html"><div class="ttname"><a href="../../d0/d55/classCommandParser.html">CommandParser</a></div><div class="ttdef"><b>Definição</b> CommandParser.h:9</div></div>
+<div class="ttc" id="aclassISHantillyBuilder_html"><div class="ttname"><a href="../../d8/db2/classISHantillyBuilder.html">ISHantillyBuilder</a></div><div class="ttdef"><b>Definição</b> ISHantillyBuilder.h:12</div></div>
+<div class="ttc" id="aclassParserMain_html"><div class="ttname"><a href="../../d9/dd1/classParserMain.html">ParserMain</a></div><div class="ttdef"><b>Definição</b> ParserMain.h:15</div></div>
+<div class="ttc" id="aclassParserMain_html_a05e8082a57620856cda3259307a59f8a"><div class="ttname"><a href="../../d9/dd1/classParserMain.html#a05e8082a57620856cda3259307a59f8a">ParserMain::handleUnset</a></div><div class="ttdeci">void handleUnset(const QStringList &amp;args)</div><div class="ttdef"><b>Definição</b> ParserMain.cpp:208</div></div>
+<div class="ttc" id="aclassParserMain_html_a1a6264d59b86f46c4d42899525d3762a"><div class="ttname"><a href="../../d9/dd1/classParserMain.html#a1a6264d59b86f46c4d42899525d3762a">ParserMain::run</a></div><div class="ttdeci">void run()</div><div class="ttdef"><b>Definição</b> ParserMain.cpp:87</div></div>
+<div class="ttc" id="aclassParserMain_html_a1eaada3632282ec12c211fbebb4e5b52"><div class="ttname"><a href="../../d9/dd1/classParserMain.html#a1eaada3632282ec12c211fbebb4e5b52">ParserMain::handleAdd</a></div><div class="ttdeci">void handleAdd(const QStringList &amp;args)</div><div class="ttdef"><b>Definição</b> ParserMain.cpp:268</div></div>
+<div class="ttc" id="aclassParserMain_html_a299c615a8cccf5093498ad09d6ea47a5"><div class="ttname"><a href="../../d9/dd1/classParserMain.html#a299c615a8cccf5093498ad09d6ea47a5">ParserMain::m_widgetRegistry</a></div><div class="ttdeci">QMap&lt; QString, QPointer&lt; QWidget &gt; &gt; m_widgetRegistry</div><div class="ttdef"><b>Definição</b> ParserMain.h:42</div></div>
+<div class="ttc" id="aclassParserMain_html_a313ab29f93bb72b138325a54a57f92e2"><div class="ttname"><a href="../../d9/dd1/classParserMain.html#a313ab29f93bb72b138325a54a57f92e2">ParserMain::handleQuery</a></div><div class="ttdeci">void handleQuery(const QStringList &amp;args)</div><div class="ttdef"><b>Definição</b> ParserMain.cpp:239</div></div>
+<div class="ttc" id="aclassParserMain_html_a5bd6b9922f46d7d6754f777bff9a2eb1"><div class="ttname"><a href="../../d9/dd1/classParserMain.html#a5bd6b9922f46d7d6754f777bff9a2eb1">ParserMain::m_contextStack</a></div><div class="ttdeci">QStack&lt; QWidget * &gt; m_contextStack</div><div class="ttdef"><b>Definição</b> ParserMain.h:41</div></div>
+<div class="ttc" id="aclassParserMain_html_a77256c8a50b1aef8557b98d489baa71b"><div class="ttname"><a href="../../d9/dd1/classParserMain.html#a77256c8a50b1aef8557b98d489baa71b">ParserMain::processLine</a></div><div class="ttdeci">void processLine(const QString &amp;line)</div><div class="ttdef"><b>Definição</b> ParserMain.cpp:97</div></div>
+<div class="ttc" id="aclassParserMain_html_a995535a209c724fea48de00642b09e57"><div class="ttname"><a href="../../d9/dd1/classParserMain.html#a995535a209c724fea48de00642b09e57">ParserMain::addToContext</a></div><div class="ttdeci">void addToContext(QWidget *widget)</div><div class="ttdef"><b>Definição</b> ParserMain.cpp:101</div></div>
+<div class="ttc" id="aclassParserMain_html_a9bcc77bbd8aece9240972321147930a5"><div class="ttname"><a href="../../d9/dd1/classParserMain.html#a9bcc77bbd8aece9240972321147930a5">ParserMain::handleSet</a></div><div class="ttdeci">void handleSet(const QStringList &amp;args)</div><div class="ttdef"><b>Definição</b> ParserMain.cpp:157</div></div>
+<div class="ttc" id="aclassParserMain_html_aa8706958141051c90a0effbd5208f997"><div class="ttname"><a href="../../d9/dd1/classParserMain.html#aa8706958141051c90a0effbd5208f997">ParserMain::handleClear</a></div><div class="ttdeci">void handleClear(const QStringList &amp;args)</div><div class="ttdef"><b>Definição</b> ParserMain.cpp:615</div></div>
+<div class="ttc" id="aclassParserMain_html_ab11d97672ad66fbde8e8053a1b7d7936"><div class="ttname"><a href="../../d9/dd1/classParserMain.html#ab11d97672ad66fbde8e8053a1b7d7936">ParserMain::runInMainThread</a></div><div class="ttdeci">void runInMainThread(std::function&lt; void()&gt; func)</div><div class="ttdef"><b>Definição</b> ParserMain.cpp:145</div></div>
+<div class="ttc" id="aclassParserMain_html_ac04632dc5f8d544962ad9d7e4e3fccd9"><div class="ttname"><a href="../../d9/dd1/classParserMain.html#ac04632dc5f8d544962ad9d7e4e3fccd9">ParserMain::handleRemove</a></div><div class="ttdeci">void handleRemove(const QStringList &amp;args)</div><div class="ttdef"><b>Definição</b> ParserMain.cpp:596</div></div>
+<div class="ttc" id="aclassParserMain_html_ad081c995d9f9e53ff280a67a12586508"><div class="ttname"><a href="../../d9/dd1/classParserMain.html#ad081c995d9f9e53ff280a67a12586508">ParserMain::m_builder</a></div><div class="ttdeci">ISHantillyBuilder * m_builder</div><div class="ttdef"><b>Definição</b> ParserMain.h:39</div></div>
+<div class="ttc" id="aclassParserMain_html_ad255fe1d40e19e4e6b0f25c2dd1241e2"><div class="ttname"><a href="../../d9/dd1/classParserMain.html#ad255fe1d40e19e4e6b0f25c2dd1241e2">ParserMain::handleEnd</a></div><div class="ttdeci">void handleEnd(const QStringList &amp;args)</div><div class="ttdef"><b>Definição</b> ParserMain.cpp:137</div></div>
+<div class="ttc" id="aclassParserMain_html_ad6feeeb4267dc42c559d4b5e48c21169"><div class="ttname"><a href="../../d9/dd1/classParserMain.html#ad6feeeb4267dc42c559d4b5e48c21169">ParserMain::showRequested</a></div><div class="ttdeci">void showRequested()</div></div>
+<div class="ttc" id="aclassParserMain_html_afb85e66c74a19cf4cd2f5a033b9699e1"><div class="ttname"><a href="../../d9/dd1/classParserMain.html#afb85e66c74a19cf4cd2f5a033b9699e1">ParserMain::m_commandParser</a></div><div class="ttdeci">CommandParser m_commandParser</div><div class="ttdef"><b>Definição</b> ParserMain.h:40</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Gerado por&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="../../doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+</small></address>
+</body>
+</html>

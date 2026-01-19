@@ -1,6 +1,6 @@
 #include <QtTest>
 #include <ParserMain.h>
-#include <IShowboxBuilder.h>
+#include <ISHantillyBuilder.h>
 #include <QWidget>
 #include <QTabWidget>
 #include <QVBoxLayout>
@@ -15,7 +15,7 @@
 #include <QPointer>
 
 // Mock Builder returning real widgets for runtime interaction tests
-class MockBuilder : public IShowboxBuilder {
+class MockBuilder : public ISHantillyBuilder {
 public:
     QList<QPointer<QWidget>> createdWidgets;
 
@@ -40,7 +40,7 @@ public:
         return nullptr;
     }
     
-    QWidget* buildWindow(const Showbox::Models::WindowConfig& config) override { 
+    QWidget* buildWindow(const Sbx::Models::WindowConfig& config) override { 
         lastWindow = config;
         called = true;
         auto* w = createReal<QWidget>(config.name); 
@@ -48,67 +48,67 @@ public:
         return w;
     }
     
-    QWidget* buildButton(const Showbox::Models::ButtonConfig& config) override { 
+    QWidget* buildButton(const Sbx::Models::ButtonConfig& config) override { 
         lastButton = config;
         called = true;
         return createReal<QPushButton>(config.name); 
     }
     
-    QWidget* buildLabel(const Showbox::Models::LabelConfig& config) override { 
+    QWidget* buildLabel(const Sbx::Models::LabelConfig& config) override { 
         lastLabel = config;
         called = true;
         return createReal<QLabel>(config.name); 
     }
 
-    QWidget* buildCheckBox(const Showbox::Models::CheckBoxConfig& config) override {
+    QWidget* buildCheckBox(const Sbx::Models::CheckBoxConfig& config) override {
         lastCheckBox = config;
         called = true;
         return createReal<QCheckBox>(config.name);
     }
 
-    QWidget* buildRadioButton(const Showbox::Models::RadioButtonConfig& config) override {
+    QWidget* buildRadioButton(const Sbx::Models::RadioButtonConfig& config) override {
         lastRadioButton = config;
         called = true;
         return createReal<QRadioButton>(config.name);
     }
 
-    QWidget* buildComboBox(const Showbox::Models::ComboBoxConfig& config) override {
+    QWidget* buildComboBox(const Sbx::Models::ComboBoxConfig& config) override {
         lastComboBox = config;
         called = true;
         return createReal<QWidget>(config.name); // Simplified
     }
 
-    QWidget* buildList(const Showbox::Models::ListConfig& config) override {
+    QWidget* buildList(const Sbx::Models::ListConfig& config) override {
         lastList = config;
         called = true;
         return createReal<QWidget>(config.name); // Simplified
     }
 
-    QWidget* buildSpinBox(const Showbox::Models::SpinBoxConfig& config) override {
+    QWidget* buildSpinBox(const Sbx::Models::SpinBoxConfig& config) override {
         lastSpinBox = config;
         called = true;
         return createReal<QSpinBox>(config.name);
     }
 
-    QWidget* buildSlider(const Showbox::Models::SliderConfig& config) override {
+    QWidget* buildSlider(const Sbx::Models::SliderConfig& config) override {
         lastSlider = config;
         called = true;
         return createReal<QSlider>(config.name);
     }
 
-    QWidget* buildLineEdit(const Showbox::Models::LineEditConfig& config) override {
+    QWidget* buildLineEdit(const Sbx::Models::LineEditConfig& config) override {
         lastLineEdit = config;
         called = true;
         return createReal<QLineEdit>(config.name);
     }
 
-    QWidget* buildTextEdit(const Showbox::Models::TextEditConfig& config) override {
+    QWidget* buildTextEdit(const Sbx::Models::TextEditConfig& config) override {
         lastTextEdit = config;
         called = true;
         return createReal<QTextEdit>(config.name);
     }
 
-    QWidget* buildGroupBox(const Showbox::Models::GroupBoxConfig& config) override {
+    QWidget* buildGroupBox(const Sbx::Models::GroupBoxConfig& config) override {
         lastGroupBox = config;
         called = true;
         auto* w = createReal<QWidget>(config.name);
@@ -116,7 +116,7 @@ public:
         return w;
     }
 
-    QWidget* buildFrame(const Showbox::Models::FrameConfig& config) override {
+    QWidget* buildFrame(const Sbx::Models::FrameConfig& config) override {
         lastFrame = config;
         called = true;
         auto* w = createReal<QWidget>(config.name);
@@ -124,7 +124,7 @@ public:
         return w;
     }
 
-    QWidget* buildTabWidget(const Showbox::Models::TabWidgetConfig& config) override {
+    QWidget* buildTabWidget(const Sbx::Models::TabWidgetConfig& config) override {
         lastTabWidget = config;
         called = true;
         auto* w = new QTabWidget();
@@ -134,28 +134,28 @@ public:
     }
 
     // Stubs for remaining methods
-    QWidget* buildTable(const Showbox::Models::TableConfig& config) override { Q_UNUSED(config); return nullptr; }
-    QWidget* buildProgressBar(const Showbox::Models::ProgressBarConfig& config) override { Q_UNUSED(config); return nullptr; }
-    QWidget* buildChart(const Showbox::Models::ChartConfig& config) override { Q_UNUSED(config); return nullptr; }
-    QWidget* buildCalendar(const Showbox::Models::CalendarConfig& config) override { Q_UNUSED(config); return nullptr; }
-    QWidget* buildSeparator(const Showbox::Models::SeparatorConfig& config) override { Q_UNUSED(config); return nullptr; }
-    QLayout* buildLayout(const Showbox::Models::LayoutConfig& config) override { Q_UNUSED(config); return nullptr; }
+    QWidget* buildTable(const Sbx::Models::TableConfig& config) override { Q_UNUSED(config); return nullptr; }
+    QWidget* buildProgressBar(const Sbx::Models::ProgressBarConfig& config) override { Q_UNUSED(config); return nullptr; }
+    QWidget* buildChart(const Sbx::Models::ChartConfig& config) override { Q_UNUSED(config); return nullptr; }
+    QWidget* buildCalendar(const Sbx::Models::CalendarConfig& config) override { Q_UNUSED(config); return nullptr; }
+    QWidget* buildSeparator(const Sbx::Models::SeparatorConfig& config) override { Q_UNUSED(config); return nullptr; }
+    QLayout* buildLayoutStructure(const Sbx::Models::SbxLayoutConfig& config) override { Q_UNUSED(config); return nullptr; }
 
     // State capture for verification
-    Showbox::Models::ButtonConfig lastButton;
-    Showbox::Models::LabelConfig lastLabel;
-    Showbox::Models::CheckBoxConfig lastCheckBox;
-    Showbox::Models::RadioButtonConfig lastRadioButton;
-    Showbox::Models::ComboBoxConfig lastComboBox;
-    Showbox::Models::ListConfig lastList;
-    Showbox::Models::WindowConfig lastWindow;
-    Showbox::Models::SpinBoxConfig lastSpinBox;
-    Showbox::Models::SliderConfig lastSlider;
-    Showbox::Models::LineEditConfig lastLineEdit;
-    Showbox::Models::TextEditConfig lastTextEdit;
-    Showbox::Models::GroupBoxConfig lastGroupBox;
-    Showbox::Models::FrameConfig lastFrame;
-    Showbox::Models::TabWidgetConfig lastTabWidget;
+    Sbx::Models::ButtonConfig lastButton;
+    Sbx::Models::LabelConfig lastLabel;
+    Sbx::Models::CheckBoxConfig lastCheckBox;
+    Sbx::Models::RadioButtonConfig lastRadioButton;
+    Sbx::Models::ComboBoxConfig lastComboBox;
+    Sbx::Models::ListConfig lastList;
+    Sbx::Models::WindowConfig lastWindow;
+    Sbx::Models::SpinBoxConfig lastSpinBox;
+    Sbx::Models::SliderConfig lastSlider;
+    Sbx::Models::LineEditConfig lastLineEdit;
+    Sbx::Models::TextEditConfig lastTextEdit;
+    Sbx::Models::GroupBoxConfig lastGroupBox;
+    Sbx::Models::FrameConfig lastFrame;
+    Sbx::Models::TabWidgetConfig lastTabWidget;
     bool called = false;
 };
 

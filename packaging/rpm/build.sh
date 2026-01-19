@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ShowBox RPM Package Builder
+# SHantilly RPM Package Builder
 #
 
 set -e
@@ -10,7 +10,7 @@ PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 DIST_DIR="${PROJECT_ROOT}/dist"
 VERSION="1.0.0"
 
-echo "=== ShowBox RPM Package Builder ==="
+echo "=== SHantilly RPM Package Builder ==="
 
 # Setup rpmbuild directory structure
 mkdir -p ~/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}

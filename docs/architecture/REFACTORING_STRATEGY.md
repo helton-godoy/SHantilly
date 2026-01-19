@@ -1,14 +1,14 @@
-# Estratégia de Refatoração Showbox 2026: Arquitetura Orientada a Studio
+# Estratégia de Refatoração SHantilly 2026: Arquitetura Orientada a Studio
 
 > **Status:** Em Progresso (Fase Híbrida)
 > **Data:** 14 de Janeiro de 2026
-> **Objetivo:** Elevar a qualidade de código (Premium Code Quality) e permitir a criação do Showbox Studio através do desacoplamento do núcleo.
+> **Objetivo:** Elevar a qualidade de código (Premium Code Quality) e permitir a criação do SHantilly Studio através do desacoplamento do núcleo.
 
 ---
 
 ## 1. Visão Geral da Arquitetura
 
-Para permitir que o **Showbox Studio** e o **Showbox CLI** coexistam com 100% de paridade visual e funcional, o código monolítico atual será refatorado em uma arquitetura de camadas baseada em **Biblioteca Compartilhada**.
+Para permitir que o **SHantilly Studio** e o **SHantilly CLI** coexistam com 100% de paridade visual e funcional, o código monolítico atual será refatorado em uma arquitetura de camadas baseada em **Biblioteca Compartilhada**.
 
 ### O Conceito "Core Library"
 
@@ -17,11 +17,11 @@ O código fonte será reorganizado para isolar a lógica de UI da lógica de par
 ```mermaid
 graph TD
     subgraph "Aplicações (Consumers)"
-        CLI[Showbox CLI] -- Lê Stdin --> Lib
-        Studio[Showbox Studio] -- Interação Visual --> Lib
+        CLI[SHantilly CLI] -- Lê Stdin --> Lib
+        Studio[SHantilly Studio] -- Interação Visual --> Lib
     end
 
-    subgraph "Showbox Shared Ecosystem"
+    subgraph "SHantilly Shared Ecosystem"
         Lib[libs/SHantilly-ui]
     end
 
@@ -43,7 +43,7 @@ Para manter a compatibilidade com o sistema de empacotamento existente (`packagi
 2.  **Build Moderno (CMake):**
     - Configurado na raiz (`CMakeLists.txt`) e em `libs/SHantilly-ui`.
     - Trata `SHantilly-ui` como uma biblioteca estática real.
-    - Usado para o desenvolvimento do **Showbox Studio** e testes unitários.
+    - Usado para o desenvolvimento do **SHantilly Studio** e testes unitários.
 
 ---
 
@@ -62,9 +62,9 @@ Este registro rastreia quais componentes foram movidos do monólito (`src/code/S
 
 ### 4.1. Builder Pattern (O Coração da Construção)
 
-Atualmente, o Showbox constrói widgets "on-the-fly" enquanto lê o texto. Isso impede o Studio de instanciar um widget sem simular um arquivo de texto.
+Atualmente, o SHantilly constrói widgets "on-the-fly" enquanto lê o texto. Isso impede o Studio de instanciar um widget sem simular um arquivo de texto.
 
-**Solução:** Implementar o `ShowboxBuilder`.
+**Solução:** Implementar o `SHantillyBuilder`.
 
 - **Intenção:** Separar a construção de um objeto complexo da sua representação.
 - **Aplicação:**

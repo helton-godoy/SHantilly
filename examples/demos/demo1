@@ -1,7 +1,7 @@
 #!/bin/bash
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/SHantilly/bin/SHantilly}"
+SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
 
-${SHOWBOX_BIN} <<EODEMO
+${SHANTILLY_BIN} <<EODEMO
 add label "<small>This script demonstrates the SHantilly application exit codes usage." note
 set note stylesheet "qproperty-textInteractionFlags: NoTextInteraction;"
 add separator

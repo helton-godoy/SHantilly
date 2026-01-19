@@ -1,6 +1,6 @@
 #!/bin/bash
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/SHantilly/bin/SHantilly}"
-coproc ${SHOWBOX_BIN}
+SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
+coproc ${SHANTILLY_BIN}
 INPUTFD=${COPROC[0]}  # file descriptor the SHantilly process writes to
 OUTPUTFD=${COPROC[1]} # file descriptor the SHantilly process reads from
 DBPID=${COPROC_PID}   # PID of the SHantilly, if you need it for any purpose... e.g. to kill it

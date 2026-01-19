@@ -19,6 +19,17 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+# ============================================================================
+# Cobertura de Código (Coverage)
+# ============================================================================
+option(ENABLE_COVERAGE "Enable coverage reporting" OFF)
+if(ENABLE_COVERAGE)
+    if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+        add_compile_options(--coverage -O0 -g)
+        add_link_options(--coverage)
+    endif()
+endif()
+
 # Subprojetos
 add_subdirectory(libs/SHantilly-ui)
 add_subdirectory(src/code/SHantilly)
@@ -56,3 +67,34 @@ target_link_libraries(visual_verifier PRIVATE
     Qt6::Widgets
     SHantilly-ui
 )
+
+# ============================================================================
+# Instalação
+# ============================================================================
+include(GNUInstallDirs)
+
+install(TARGETS SHantilly poc_modern_cli visual_verifier
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
+
+install(DIRECTORY libs/SHantilly-ui/include/
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/SHantilly
+)
+
+install(TARGETS SHantilly-ui
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+)
+
+# ============================================================================
+# CPack - Empacotamento DEB
+# ============================================================================
+set(CPACK_PACKAGE_NAME "shantilly")
+set(CPACK_PACKAGE_VENDOR "helton-godoy")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "SHantilly - Modern UI Builder for Shell Scripts")
+set(CPACK_PACKAGE_VERSION "1.0.0")
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Helton Godoy <helton@example.com>")
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "libqt6widgets6, libqt6charts6, libqt6svg6")
+set(CPACK_GENERATOR "DEB")
+
+include(CPack)

@@ -1,6 +1,6 @@
-# Status da Implementação - Showbox
+# Status da Implementação - SHantilly
 
-> Relatório detalhado do status de implementação do Showbox comparado com a referência do Dialogbox.
+> Relatório detalhado do status de implementação do SHantilly comparado com a referência do Dialogbox.
 
 **Data:** 15/01/2026  
 **Versão:** 1.1 (em refatoração)

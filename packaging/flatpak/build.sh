@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ShowBox Flatpak Builder
+# SHantilly Flatpak Builder
 #
 
 set -e
@@ -9,7 +9,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 DIST_DIR="${PROJECT_ROOT}/dist"
 
-echo "=== ShowBox Flatpak Builder ==="
+echo "=== SHantilly Flatpak Builder ==="
 
 # Install Flatpak SDK if needed
 flatpak install -y flathub org.kde.Platform//6.6 org.kde.Sdk//6.6 || true

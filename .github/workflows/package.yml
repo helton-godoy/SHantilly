@@ -31,7 +31,7 @@ jobs:
       - name: Configure and Build
         run: |
           cmake -B build -S . \
-            -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake \
+            -DCMAKE_TOOLCHAIN_FILE=${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake \
             -DCMAKE_BUILD_TYPE=Release
           cmake --build build -j$(nproc)
 
@@ -40,7 +40,14 @@ jobs:
           cd build
           cpack -G DEB
 
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: shantilly-deb
+          path: build/*.deb
+
       - name: Upload .deb to Release
+        if: github.event_name == 'release'
         uses: softprops/action-gh-release@v2
         with:
           files: build/*.deb

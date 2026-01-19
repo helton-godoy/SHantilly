@@ -1,0 +1,1607 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.4">
+    
+    
+      
+        <title>Referência do Dialogbox - SHantilly Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#referencia-do-dialogbox" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="SHantilly Documentation" class="md-header__button md-logo" aria-label="SHantilly Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SHantilly Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Referência do Dialogbox
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../architecture.md" class="md-tabs__link">
+        
+  
+    
+  
+  Architecture
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../doxygen/index.html" class="md-tabs__link">
+        
+  
+    
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SHantilly Documentation" class="md-nav__button md-logo" aria-label="SHantilly Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SHantilly Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../doxygen/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Reference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sumario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sumário
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visao-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visão Geral
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Visão Geral">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caracteristicas-principais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Características Principais
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comandos-suportados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comandos Suportados
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comandos Suportados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#detalhes-dos-comandos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Detalhes dos Comandos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Detalhes dos Comandos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-type-title-name-options-text-auxtext" class="md-nav__link">
+    <span class="md-ellipsis">
+      add type [title] [name] [options] [text] [auxtext]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#end-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      end [type]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-name-options-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      set [name] options [text]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unset-name-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      unset [name] options
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#widgets-suportados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Widgets Suportados
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Widgets Suportados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#widgets-padrao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Widgets Padrão
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#widgets-estendidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Widgets Estendidos
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#opcoes-e-propriedades" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opções e Propriedades
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Opções e Propriedades">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#opcoes-de-comando" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opções de Comando
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#propriedades-de-widget" class="md-nav__link">
+    <span class="md-ellipsis">
+      Propriedades de Widget
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formato-de-saida" class="md-nav__link">
+    <span class="md-ellipsis">
+      Formato de Saída
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Formato de Saída">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pushbutton-click" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pushbutton Click
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#toggle-pushbutton" class="md-nav__link">
+    <span class="md-ellipsis">
+      Toggle Pushbutton
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slider" class="md-nav__link">
+    <span class="md-ellipsis">
+      Slider
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listboxcombobox-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      ListBox/ComboBox Selection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listbox-activation" class="md-nav__link">
+    <span class="md-ellipsis">
+      ListBox Activation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#table-cell-edit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table Cell Edit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chart-slice-click" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chart Slice Click
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calendar-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Calendar Selection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      Query Command
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkbox-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checkbox State
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tokens-e-enums" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tokens e Enums
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tokens e Enums">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dialogcommandtokens-namespace" class="md-nav__link">
+    <span class="md-ellipsis">
+      DialogCommandTokens Namespace
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arquitetura" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquitetura
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Arquitetura">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#componentes-principais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Componentes Principais
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fluxo-de-parsing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fluxo de Parsing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dialogcommand-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      DialogCommand Structure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemplo de Uso
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-de-implementacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notas de Implementação
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Notas de Implementação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diferencas-qt5-vs-qt6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diferenças Qt5 vs Qt6
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-widgets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Widgets
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#thread-safety" class="md-nav__link">
+    <span class="md-ellipsis">
+      Thread Safety
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="referencia-do-dialogbox">Referência do Dialogbox</h1>
+<blockquote>
+<p>Documentação técnica das funcionalidades do Dialogbox versão 1.0 para referência e validação do SHantilly (Qt6).</p>
+</blockquote>
+<h2 id="sumario">Sumário</h2>
+<ol>
+<li><a href="#visão-geral">Visão Geral</a></li>
+<li><a href="#comandos-suportados">Comandos Suportados</a></li>
+<li><a href="#widgets-suportados">Widgets Suportados</a></li>
+<li><a href="#opções-e-propriedades">Opções e Propriedades</a></li>
+<li><a href="#formato-de-saída">Formato de Saída</a></li>
+<li><a href="#tokens-e-enums">Tokens e Enums</a></li>
+<li><a href="#arquitetura">Arquitetura</a></li>
+</ol>
+<hr />
+<h2 id="visao-geral">Visão Geral</h2>
+<p>O Dialogbox é uma ferramenta CLI para criação de interfaces gráficas em scripts shell. Ele recebe comandos via stdin e gera widgets Qt, reportando interações do usuário para stdout.</p>
+<h3 id="caracteristicas-principais">Características Principais</h3>
+<ul>
+<li><strong>Parser Thread:</strong> Thread separada para parsing de comandos</li>
+<li><strong>Thread-safe:</strong> Usa <code>Qt::BlockingQueuedConnection</code> para garantir execução sequencial</li>
+<li><strong>Formato de tokens:</strong> Suporta aspas, escape com backslash</li>
+<li><strong>Extensível:</strong> Sistema de comandos e widgets modular</li>
+</ul>
+<hr />
+<h2 id="comandos-suportados">Comandos Suportados</h2>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Descrição</th>
+<th>Estágios</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>add</code></td>
+<td>Adiciona widget ao diálogo</td>
+<td>Type, Title, Name, Options, Text, AuxText, Command</td>
+</tr>
+<tr>
+<td><code>end</code></td>
+<td>Finaliza container atual</td>
+<td>Type, Command</td>
+</tr>
+<tr>
+<td><code>position</code></td>
+<td>Posiciona widget</td>
+<td>Options, Text, Command</td>
+</tr>
+<tr>
+<td><code>remove</code></td>
+<td>Remove widget pelo nome</td>
+<td>Name, Command</td>
+</tr>
+<tr>
+<td><code>clear</code></td>
+<td>Limpa widget ou diálogo</td>
+<td>Name, Command</td>
+</tr>
+<tr>
+<td><code>step</code></td>
+<td>Move para próximo step</td>
+<td>Options, Command</td>
+</tr>
+<tr>
+<td><code>set</code></td>
+<td>Define opções/propriedades</td>
+<td>Name, Options, Text, Command</td>
+</tr>
+<tr>
+<td><code>unset</code></td>
+<td>Remove opções/propriedades</td>
+<td>Name, Options, Command</td>
+</tr>
+<tr>
+<td><code>enable</code></td>
+<td>Habilita widget</td>
+<td>Name, Command</td>
+</tr>
+<tr>
+<td><code>disable</code></td>
+<td>Desabilita widget</td>
+<td>Name, Command</td>
+</tr>
+<tr>
+<td><code>show</code></td>
+<td>Exibe widget</td>
+<td>Name, Command</td>
+</tr>
+<tr>
+<td><code>hide</code></td>
+<td>Oculta widget</td>
+<td>Name, Command</td>
+</tr>
+<tr>
+<td><code>query</code></td>
+<td>Reporta todos os widgets</td>
+<td>Command</td>
+</tr>
+</tbody>
+</table>
+<h3 id="detalhes-dos-comandos">Detalhes dos Comandos</h3>
+<h4 id="add-type-title-name-options-text-auxtext"><code>add type [title] [name] [options] [text] [auxtext]</code></h4>
+<p>Adiciona um novo widget ao diálogo.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Exemplo: Adicionar botão</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>add<span class="w"> </span>pushbutton<span class="w"> </span><span class="s2">&quot;Clique aqui&quot;</span><span class="w"> </span>botao_ok<span class="w"> </span>default<span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+</code></pre></div>
+<h4 id="end-type"><code>end [type]</code></h4>
+<p>Finaliza containers (groupbox, frame, listbox, tabs, page).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Exemplo: Finalizar groupbox</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>end<span class="w"> </span>groupbox
+</code></pre></div>
+<h4 id="set-name-options-text"><code>set [name] options [text]</code></h4>
+<p>Define propriedades de um widget ou do diálogo.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Exemplo: Definir título</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">set</span><span class="w"> </span>main<span class="w"> </span>title<span class="w"> </span><span class="s2">&quot;Novo Título&quot;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># Exemplo: Definir texto em textbox</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nb">set</span><span class="w"> </span>textbox1<span class="w"> </span>text<span class="w"> </span><span class="s2">&quot;Conteúdo&quot;</span>
+</code></pre></div>
+<h4 id="unset-name-options"><code>unset [name] options</code></h4>
+<p>Remove propriedades.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">unset</span><span class="w"> </span>textbox1<span class="w"> </span><span class="nb">readonly</span>
+</code></pre></div>
+<hr />
+<h2 id="widgets-suportados">Widgets Suportados</h2>
+<h3 id="widgets-padrao">Widgets Padrão</h3>
+<table>
+<thead>
+<tr>
+<th>Widget</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>label</code></td>
+<td>LabelWidget</td>
+<td>Rótulo de texto, imagem ou animação</td>
+</tr>
+<tr>
+<td><code>pushbutton</code></td>
+<td>PushButtonWidget</td>
+<td>Botão de pressão</td>
+</tr>
+<tr>
+<td><code>checkbox</code></td>
+<td>CheckBoxWidget</td>
+<td>Caixa de seleção</td>
+</tr>
+<tr>
+<td><code>radiobutton</code></td>
+<td>RadioButtonWidget</td>
+<td>Botão de rádio</td>
+</tr>
+<tr>
+<td><code>textbox</code></td>
+<td>TextBoxWidget</td>
+<td>Caixa de texto (QLineEdit)</td>
+</tr>
+<tr>
+<td><code>textview</code></td>
+<td>TextViewWidget</td>
+<td>Área de texto multi-linha (QTextEdit)</td>
+</tr>
+<tr>
+<td><code>listbox</code></td>
+<td>ListBoxWidget</td>
+<td>Lista de itens (QListWidget)</td>
+</tr>
+<tr>
+<td><code>dropdownlist</code></td>
+<td>ComboBoxWidget</td>
+<td>Lista suspensa não-editável</td>
+</tr>
+<tr>
+<td><code>combobox</code></td>
+<td>ComboBoxWidget</td>
+<td>Lista suspensa editável</td>
+</tr>
+<tr>
+<td><code>progressbar</code></td>
+<td>ProgressBarWidget</td>
+<td>Barra de progresso</td>
+</tr>
+<tr>
+<td><code>slider</code></td>
+<td>SliderWidget</td>
+<td>Controle deslizante</td>
+</tr>
+<tr>
+<td><code>separator</code></td>
+<td>SeparatorWidget</td>
+<td>Separador visual</td>
+</tr>
+<tr>
+<td><code>space</code></td>
+<td>OptionSpace</td>
+<td>Espaço vertical</td>
+</tr>
+<tr>
+<td><code>stretch</code></td>
+<td>OptionStretch</td>
+<td>Expansor de espaço</td>
+</tr>
+<tr>
+<td><code>frame</code></td>
+<td>FrameWidget</td>
+<td>Frame com borda</td>
+</tr>
+<tr>
+<td><code>groupbox</code></td>
+<td>GroupBoxWidget</td>
+<td>Grupo com título</td>
+</tr>
+<tr>
+<td><code>tabs</code></td>
+<td>TabsWidget</td>
+<td>Abas</td>
+</tr>
+<tr>
+<td><code>page</code></td>
+<td>PageWidget</td>
+<td>Página em abas</td>
+</tr>
+<tr>
+<td><code>item</code></td>
+<td>ItemWidget</td>
+<td>Item de lista</td>
+</tr>
+</tbody>
+</table>
+<h3 id="widgets-estendidos">Widgets Estendidos</h3>
+<table>
+<thead>
+<tr>
+<th>Widget</th>
+<th>Tipo</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>table</code></td>
+<td>TableWidget</td>
+<td>Tabela editável (CustomTableWidget)</td>
+</tr>
+<tr>
+<td><code>chart</code></td>
+<td>ChartWidget</td>
+<td>Gráfico (CustomChartWidget)</td>
+</tr>
+<tr>
+<td><code>calendar</code></td>
+<td>CalendarWidget</td>
+<td>Calendário (QCalendarWidget)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="opcoes-e-propriedades">Opções e Propriedades</h2>
+<h3 id="opcoes-de-comando">Opções de Comando</h3>
+<table>
+<thead>
+<tr>
+<th>Opção</th>
+<th>Código</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td>OptionEnabled</td>
+<td>Habilita widget</td>
+</tr>
+<tr>
+<td><code>focus</code></td>
+<td>OptionFocus</td>
+<td>Foca no widget</td>
+</tr>
+<tr>
+<td><code>stylesheet</code></td>
+<td>OptionStyleSheet</td>
+<td>Aplica stylesheet</td>
+</tr>
+<tr>
+<td><code>visible</code></td>
+<td>OptionVisible</td>
+<td>Exibe widget</td>
+</tr>
+<tr>
+<td><code>horizontal</code></td>
+<td>OptionVertical</td>
+<td>Orientation horizontal (inverte)</td>
+</tr>
+<tr>
+<td><code>vertical</code></td>
+<td>OptionVertical</td>
+<td>Orientation vertical</td>
+</tr>
+<tr>
+<td><code>behind</code></td>
+<td>OptionBehind</td>
+<td>Posiciona atrás</td>
+</tr>
+<tr>
+<td><code>onto</code></td>
+<td>OptionOnto</td>
+<td>Posiciona sobre</td>
+</tr>
+<tr>
+<td><code>space</code></td>
+<td>OptionSpace</td>
+<td>Adiciona espaço</td>
+</tr>
+<tr>
+<td><code>stretch</code></td>
+<td>OptionStretch</td>
+<td>Adiciona stretch</td>
+</tr>
+</tbody>
+</table>
+<h3 id="propriedades-de-widget">Propriedades de Widget</h3>
+<table>
+<thead>
+<tr>
+<th>Propriedade</th>
+<th>Código</th>
+<th>Widgets</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>checkable</code></td>
+<td>PropertyCheckable</td>
+<td>GroupBox, Button</td>
+<td>Permite seleção</td>
+</tr>
+<tr>
+<td><code>checked</code></td>
+<td>PropertyChecked</td>
+<td>Button, CheckBox, Radio</td>
+<td>Estado marcado</td>
+</tr>
+<tr>
+<td><code>text</code></td>
+<td>PropertyText</td>
+<td>LineEdit</td>
+<td>Texto do campo</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>PropertyTitle</td>
+<td>Label, GroupBox, Page</td>
+<td>Título/texto</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>PropertyPassword</td>
+<td>TextBox</td>
+<td>Modo senha</td>
+</tr>
+<tr>
+<td><code>placeholder</code></td>
+<td>PropertyPlaceholder</td>
+<td>TextBox</td>
+<td>Texto placeholder</td>
+</tr>
+<tr>
+<td><code>icon</code></td>
+<td>PropertyIcon</td>
+<td>Button, Page, Item</td>
+<td>Ícone</td>
+</tr>
+<tr>
+<td><code>iconsize</code></td>
+<td>PropertyIconSize</td>
+<td>Widgets com ícone</td>
+<td>Tamanho do ícone</td>
+</tr>
+<tr>
+<td><code>animation</code></td>
+<td>PropertyAnimation</td>
+<td>Label</td>
+<td>Animação GIF</td>
+</tr>
+<tr>
+<td><code>picture</code></td>
+<td>PropertyPicture</td>
+<td>Label</td>
+<td>Imagem</td>
+</tr>
+<tr>
+<td><code>apply</code></td>
+<td>PropertyApply</td>
+<td>PushButton</td>
+<td>Gera report ao clicar</td>
+</tr>
+<tr>
+<td><code>exit</code></td>
+<td>PropertyExit</td>
+<td>PushButton</td>
+<td>Fecha diálogo ao clicar</td>
+</tr>
+<tr>
+<td><code>default</code></td>
+<td>PropertyDefault</td>
+<td>PushButton</td>
+<td>Botão padrão</td>
+</tr>
+<tr>
+<td><code>default</code></td>
+<td>PropertyDefault</td>
+<td>Widget</td>
+<td>Define foco padrão</td>
+</tr>
+<tr>
+<td><code>plain</code></td>
+<td>PropertyPlain</td>
+<td>Frame</td>
+<td>Borda plain</td>
+</tr>
+<tr>
+<td><code>raised</code></td>
+<td>PropertyRaised</td>
+<td>Frame</td>
+<td>Borda raised</td>
+</tr>
+<tr>
+<td><code>sunken</code></td>
+<td>PropertySunken</td>
+<td>Frame</td>
+<td>Borda sunken</td>
+</tr>
+<tr>
+<td><code>noframe</code></td>
+<td>PropertyNoframe</td>
+<td>Frame</td>
+<td>Sem borda</td>
+</tr>
+<tr>
+<td><code>box</code></td>
+<td>PropertyBox</td>
+<td>Frame</td>
+<td>Borda box</td>
+</tr>
+<tr>
+<td><code>panel</code></td>
+<td>PropertyPanel</td>
+<td>Frame</td>
+<td>Borda panel</td>
+</tr>
+<tr>
+<td><code>styled</code></td>
+<td>PropertyStyled</td>
+<td>Frame</td>
+<td>Borda styled panel</td>
+</tr>
+<tr>
+<td><code>current</code></td>
+<td>PropertyCurrent</td>
+<td>Item, Page</td>
+<td>Item/página atual</td>
+</tr>
+<tr>
+<td><code>activation</code></td>
+<td>PropertyActivation</td>
+<td>ListBox</td>
+<td>Ativação de itens</td>
+</tr>
+<tr>
+<td><code>selection</code></td>
+<td>PropertySelection</td>
+<td>ListBox, ComboBox</td>
+<td>Seleção de itens</td>
+</tr>
+<tr>
+<td><code>minimum</code></td>
+<td>PropertyMinimum</td>
+<td>Slider, Calendar</td>
+<td>Valor mínimo</td>
+</tr>
+<tr>
+<td><code>maximum</code></td>
+<td>PropertyMaximum</td>
+<td>Slider, Calendar</td>
+<td>Valor máximo</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>PropertyValue</td>
+<td>Slider, ProgressBar</td>
+<td>Valor atual</td>
+</tr>
+<tr>
+<td><code>busy</code></td>
+<td>PropertyBusy</td>
+<td>ProgressBar</td>
+<td>Modo busy (0-100)</td>
+</tr>
+<tr>
+<td><code>file</code></td>
+<td>PropertyFile</td>
+<td>TextView, Table, Chart</td>
+<td>Carrega de arquivo</td>
+</tr>
+<tr>
+<td><code>top</code></td>
+<td>PropertyPositionTop</td>
+<td>Tabs</td>
+<td>Abas no topo</td>
+</tr>
+<tr>
+<td><code>bottom</code></td>
+<td>PropertyPositionBottom</td>
+<td>Tabs</td>
+<td>Abas embaixo</td>
+</tr>
+<tr>
+<td><code>left</code></td>
+<td>PropertyPositionLeft</td>
+<td>Tabs</td>
+<td>Abas à esquerda</td>
+</tr>
+<tr>
+<td><code>right</code></td>
+<td>PropertyPositionRight</td>
+<td>Tabs</td>
+<td>Abas à direita</td>
+</tr>
+<tr>
+<td><code>readonly</code></td>
+<td>PropertyReadOnly</td>
+<td>Table</td>
+<td>Apenas leitura</td>
+</tr>
+<tr>
+<td><code>headers</code></td>
+<td>PropertyHeaders</td>
+<td>Table</td>
+<td>Headers de coluna</td>
+</tr>
+<tr>
+<td><code>add_line</code></td>
+<td>PropertyAddLine</td>
+<td>Table</td>
+<td>Adiciona linha</td>
+</tr>
+<tr>
+<td><code>del_line</code></td>
+<td>PropertyDelLine</td>
+<td>Table</td>
+<td>Remove linha</td>
+</tr>
+<tr>
+<td><code>search</code></td>
+<td>PropertySearch</td>
+<td>Table</td>
+<td>Mostra busca</td>
+</tr>
+<tr>
+<td><code>append</code></td>
+<td>PropertyAppend</td>
+<td>Chart</td>
+<td>Append dados</td>
+</tr>
+<tr>
+<td><code>axis</code></td>
+<td>PropertyAxis</td>
+<td>Chart</td>
+<td>Define eixo</td>
+</tr>
+<tr>
+<td><code>export</code></td>
+<td>PropertyExport</td>
+<td>Chart</td>
+<td>Exporta gráfico</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>PropertyDate</td>
+<td>Calendar</td>
+<td>Define data</td>
+</tr>
+<tr>
+<td><code>navigation</code></td>
+<td>PropertyNavigation</td>
+<td>Calendar</td>
+<td>Mostra navegação</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="formato-de-saida">Formato de Saída</h2>
+<h3 id="pushbutton-click">Pushbutton Click</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>&lt;pushbutton name&gt;=clicked
+</code></pre></div>
+<h3 id="toggle-pushbutton">Toggle Pushbutton</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&lt;pushbutton name&gt;=pressed
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>&lt;pushbutton name&gt;=released
+</code></pre></div>
+<h3 id="slider">Slider</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>&lt;slider name&gt;=&lt;value&gt;
+</code></pre></div>
+<h3 id="listboxcombobox-selection">ListBox/ComboBox Selection</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>&lt;list widget name&gt;=&lt;value&gt;
+</code></pre></div>
+<h3 id="listbox-activation">ListBox Activation</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>&lt;list widget name&gt;=&lt;value&gt;
+</code></pre></div>
+<h3 id="table-cell-edit">Table Cell Edit</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>&lt;table name&gt;[&lt;row&gt;][&lt;col&gt;]=&lt;value&gt;
+</code></pre></div>
+<h3 id="chart-slice-click">Chart Slice Click</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>&lt;chart name&gt;.slice[&quot;&lt;label&gt;&quot;]=&lt;value&gt;
+</code></pre></div>
+<h3 id="calendar-selection">Calendar Selection</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>&lt;calendar name&gt;=&lt;date&gt;
+</code></pre></div>
+<h3 id="query-command">Query Command</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>&lt;name&gt;=&lt;value&gt;
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>&lt;name&gt;=&lt;value&gt;
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>...
+</code></pre></div>
+<h3 id="checkbox-state">Checkbox State</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>&lt;checkbox name&gt;=1
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>&lt;checkbox name&gt;=0
+</code></pre></div>
+<hr />
+<h2 id="tokens-e-enums">Tokens e Enums</h2>
+<h3 id="dialogcommandtokens-namespace">DialogCommandTokens Namespace</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">namespace</span><span class="w"> </span><span class="nn">DialogCommandTokens</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="c1">// Command codes</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="k">enum</span><span class="w"> </span><span class="nc">Command</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">    </span><span class="n">NoopCommand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">    </span><span class="n">AddCommand</span><span class="p">,</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">    </span><span class="n">EndCommand</span><span class="p">,</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">    </span><span class="n">PositionCommand</span><span class="p">,</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">    </span><span class="n">RemoveCommand</span><span class="p">,</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="w">    </span><span class="n">ClearCommand</span><span class="p">,</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="w">    </span><span class="n">StepCommand</span><span class="p">,</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="w">    </span><span class="n">SetCommand</span><span class="p">,</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="w">    </span><span class="n">UnsetCommand</span><span class="p">,</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="w">    </span><span class="n">QueryCommand</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="p">};</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="c1">// Control type (widget type)</span>
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a><span class="k">enum</span><span class="w"> </span><span class="nc">Control</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="w">    </span><span class="n">WidgetMask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xFF00</span><span class="p">,</span>
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a><span class="w">    </span><span class="n">CheckBoxWidget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0100</span><span class="p">,</span>
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a><span class="w">    </span><span class="n">FrameWidget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0200</span><span class="p">,</span>
+<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a><span class="w">    </span><span class="n">GroupBoxWidget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0400</span><span class="p">,</span>
+<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a><span class="w">    </span><span class="n">LabelWidget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0800</span><span class="p">,</span>
+<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a><span class="w">    </span><span class="n">PushButtonWidget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x1000</span><span class="p">,</span>
+<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a><span class="w">    </span><span class="n">RadioButtonWidget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x2000</span><span class="p">,</span>
+<a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a><span class="w">    </span><span class="n">SeparatorWidget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x4000</span><span class="p">,</span>
+<a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a><span class="w">    </span><span class="n">TextBoxWidget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0108</span><span class="p">,</span>
+<a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a><span class="w">    </span><span class="n">ListBoxWidget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0110</span><span class="p">,</span>
+<a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a><span class="w">    </span><span class="n">ComboBoxWidget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0120</span><span class="p">,</span>
+<a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a><span class="w">    </span><span class="n">ItemWidget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0140</span><span class="p">,</span>
+<a id="__codelineno-14-31" name="__codelineno-14-31" href="#__codelineno-14-31"></a><span class="w">    </span><span class="n">ProgressBarWidget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0180</span><span class="p">,</span>
+<a id="__codelineno-14-32" name="__codelineno-14-32" href="#__codelineno-14-32"></a><span class="w">    </span><span class="n">SliderWidget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0208</span><span class="p">,</span>
+<a id="__codelineno-14-33" name="__codelineno-14-33" href="#__codelineno-14-33"></a><span class="w">    </span><span class="n">TextViewWidget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0408</span><span class="p">,</span>
+<a id="__codelineno-14-34" name="__codelineno-14-34" href="#__codelineno-14-34"></a><span class="w">    </span><span class="n">TabsWidget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0800</span><span class="p">,</span>
+<a id="__codelineno-14-35" name="__codelineno-14-35" href="#__codelineno-14-35"></a><span class="w">    </span><span class="n">PageWidget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x1000</span><span class="p">,</span>
+<a id="__codelineno-14-36" name="__codelineno-14-36" href="#__codelineno-14-36"></a><span class="w">    </span><span class="n">TableWidget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x2000</span><span class="p">,</span>
+<a id="__codelineno-14-37" name="__codelineno-14-37" href="#__codelineno-14-37"></a><span class="w">    </span><span class="n">ChartWidget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x4000</span><span class="p">,</span>
+<a id="__codelineno-14-38" name="__codelineno-14-38" href="#__codelineno-14-38"></a><span class="w">    </span><span class="n">CalendarWidget</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x8000</span>
+<a id="__codelineno-14-39" name="__codelineno-14-39" href="#__codelineno-14-39"></a><span class="p">};</span>
+<a id="__codelineno-14-40" name="__codelineno-14-40" href="#__codelineno-14-40"></a>
+<a id="__codelineno-14-41" name="__codelineno-14-41" href="#__codelineno-14-41"></a><span class="c1">// Property mask (applied to control)</span>
+<a id="__codelineno-14-42" name="__codelineno-14-42" href="#__codelineno-14-42"></a><span class="k">enum</span><span class="w"> </span><span class="nc">Property</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-43" name="__codelineno-14-43" href="#__codelineno-14-43"></a><span class="w">    </span><span class="n">PropertyMask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xFF</span><span class="p">,</span>
+<a id="__codelineno-14-44" name="__codelineno-14-44" href="#__codelineno-14-44"></a><span class="w">    </span><span class="n">PropertyCheckable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x01</span><span class="p">,</span>
+<a id="__codelineno-14-45" name="__codelineno-14-45" href="#__codelineno-14-45"></a><span class="w">    </span><span class="n">PropertyChecked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x02</span><span class="p">,</span>
+<a id="__codelineno-14-46" name="__codelineno-14-46" href="#__codelineno-14-46"></a><span class="w">    </span><span class="n">PropertyText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x04</span><span class="p">,</span>
+<a id="__codelineno-14-47" name="__codelineno-14-47" href="#__codelineno-14-47"></a><span class="w">    </span><span class="n">PropertyTitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x08</span><span class="p">,</span>
+<a id="__codelineno-14-48" name="__codelineno-14-48" href="#__codelineno-14-48"></a><span class="w">    </span><span class="n">PropertyPassword</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x10</span><span class="p">,</span>
+<a id="__codelineno-14-49" name="__codelineno-14-49" href="#__codelineno-14-49"></a><span class="w">    </span><span class="n">PropertyPlaceholder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x20</span><span class="p">,</span>
+<a id="__codelineno-14-50" name="__codelineno-14-50" href="#__codelineno-14-50"></a><span class="w">    </span><span class="n">PropertyIcon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x40</span><span class="p">,</span>
+<a id="__codelineno-14-51" name="__codelineno-14-51" href="#__codelineno-14-51"></a><span class="w">    </span><span class="n">PropertyIconSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x80</span>
+<a id="__codelineno-14-52" name="__codelineno-14-52" href="#__codelineno-14-52"></a><span class="p">};</span>
+<a id="__codelineno-14-53" name="__codelineno-14-53" href="#__codelineno-14-53"></a>
+<a id="__codelineno-14-54" name="__codelineno-14-54" href="#__codelineno-14-54"></a><span class="c1">// Option mask (applied to command)</span>
+<a id="__codelineno-14-55" name="__codelineno-14-55" href="#__codelineno-14-55"></a><span class="k">enum</span><span class="w"> </span><span class="nc">Option</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-56" name="__codelineno-14-56" href="#__codelineno-14-56"></a><span class="w">    </span><span class="n">OptionMask</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xFF</span><span class="p">,</span>
+<a id="__codelineno-14-57" name="__codelineno-14-57" href="#__codelineno-14-57"></a><span class="w">    </span><span class="n">OptionSpace</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x01</span><span class="p">,</span>
+<a id="__codelineno-14-58" name="__codelineno-14-58" href="#__codelineno-14-58"></a><span class="w">    </span><span class="n">OptionStretch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x02</span><span class="p">,</span>
+<a id="__codelineno-14-59" name="__codelineno-14-59" href="#__codelineno-14-59"></a><span class="w">    </span><span class="n">OptionBehind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x04</span><span class="p">,</span>
+<a id="__codelineno-14-60" name="__codelineno-14-60" href="#__codelineno-14-60"></a><span class="w">    </span><span class="n">OptionOnto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x08</span><span class="p">,</span>
+<a id="__codelineno-14-61" name="__codelineno-14-61" href="#__codelineno-14-61"></a><span class="w">    </span><span class="n">OptionEnabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x10</span><span class="p">,</span>
+<a id="__codelineno-14-62" name="__codelineno-14-62" href="#__codelineno-14-62"></a><span class="w">    </span><span class="n">OptionFocus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x20</span><span class="p">,</span>
+<a id="__codelineno-14-63" name="__codelineno-14-63" href="#__codelineno-14-63"></a><span class="w">    </span><span class="n">OptionStyleSheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x40</span><span class="p">,</span>
+<a id="__codelineno-14-64" name="__codelineno-14-64" href="#__codelineno-14-64"></a><span class="w">    </span><span class="n">OptionVisible</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x80</span>
+<a id="__codelineno-14-65" name="__codelineno-14-65" href="#__codelineno-14-65"></a><span class="p">};</span>
+<a id="__codelineno-14-66" name="__codelineno-14-66" href="#__codelineno-14-66"></a>
+<a id="__codelineno-14-67" name="__codelineno-14-67" href="#__codelineno-14-67"></a><span class="c1">// Stages for parsing</span>
+<a id="__codelineno-14-68" name="__codelineno-14-68" href="#__codelineno-14-68"></a><span class="k">enum</span><span class="w"> </span><span class="nc">Stage</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-69" name="__codelineno-14-69" href="#__codelineno-14-69"></a><span class="w">    </span><span class="n">StageCommand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x01</span><span class="p">,</span>
+<a id="__codelineno-14-70" name="__codelineno-14-70" href="#__codelineno-14-70"></a><span class="w">    </span><span class="n">StageType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x02</span><span class="p">,</span>
+<a id="__codelineno-14-71" name="__codelineno-14-71" href="#__codelineno-14-71"></a><span class="w">    </span><span class="n">StageTitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x04</span><span class="p">,</span>
+<a id="__codelineno-14-72" name="__codelineno-14-72" href="#__codelineno-14-72"></a><span class="w">    </span><span class="n">StageName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x08</span><span class="p">,</span>
+<a id="__codelineno-14-73" name="__codelineno-14-73" href="#__codelineno-14-73"></a><span class="w">    </span><span class="n">StageOptions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x10</span><span class="p">,</span>
+<a id="__codelineno-14-74" name="__codelineno-14-74" href="#__codelineno-14-74"></a><span class="w">    </span><span class="n">StageText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x20</span><span class="p">,</span>
+<a id="__codelineno-14-75" name="__codelineno-14-75" href="#__codelineno-14-75"></a><span class="w">    </span><span class="n">StageAuxText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x40</span>
+<a id="__codelineno-14-76" name="__codelineno-14-76" href="#__codelineno-14-76"></a><span class="p">};</span>
+<a id="__codelineno-14-77" name="__codelineno-14-77" href="#__codelineno-14-77"></a>
+<a id="__codelineno-14-78" name="__codelineno-14-78" href="#__codelineno-14-78"></a><span class="p">}</span><span class="w"> </span><span class="c1">// namespace DialogCommandTokens</span>
+</code></pre></div>
+<hr />
+<h2 id="arquitetura">Arquitetura</h2>
+<h3 id="componentes-principais">Componentes Principais</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>┌─────────────────────────────────────────────────────────────┐
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>│                      DialogParser                           │
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>│  - run()           : Thread principal de parsing            │
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>│  - processToken()  : Analisa tokens e monta comandos        │
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>│  - issueCommand()  : Emite comando para execução            │
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>└────────────────┬────────────────────────────────────────────┘
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>                 │
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>                 │ emit sendCommand(DialogCommand)
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>                 ▼
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>┌─────────────────────────────────────────────────────────────┐
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>│                        SHantilly                              │
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>│  executeCommand() : Executa comandos do parser              │
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>│  - add*()         : Métodos de criação de widgets           │
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>│  - setOptions()   : Configura propriedades                  │
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>│  - slots          : handlers de eventos                     │
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>└────────────────┬────────────────────────────────────────────┘
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>                 │
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>                 │ Event signals
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>                 ▼
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a>┌─────────────────────────────────────────────────────────────┐
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a>│                     Widgets Qt                              │
+<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a>│  - QLabel, QPushButton, QCheckBox                           │
+<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a>│  - QLineEdit, QTextEdit, QListWidget                        │
+<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a>│  - QComboBox, QProgressBar, QSlider                         │
+<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a>│  - QTabWidget, QCalendarWidget                              │
+<a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a>│  - CustomTableWidget, CustomChartWidget                     │
+<a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a>└─────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<h3 id="fluxo-de-parsing">Fluxo de Parsing</h3>
+<ol>
+<li><strong>Leitura:</strong> Thread lê stdin caractere por caractere</li>
+<li><strong>Tokenização:</strong> Reconhece tokens (palavras, aspas, escapes)</li>
+<li><strong>Processamento:</strong> <code>processToken()</code> identifica tipo de token</li>
+<li><strong>Montagem:</strong> Constrói <code>DialogCommand</code> com estágios</li>
+<li><strong>Emissão:</strong> <code>issueCommand()</code> envia para thread principal</li>
+<li><strong>Execução:</strong> <code>executeCommand()</code> cria/configura widgets</li>
+<li><strong>Report:</strong> Slots capturam eventos e escrevem em stdout</li>
+</ol>
+<h3 id="dialogcommand-structure">DialogCommand Structure</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">struct</span><span class="w"> </span><span class="nc">DialogCommand</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">command</span><span class="p">;</span><span class="w">  </span><span class="c1">// Código do comando + opções</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">control</span><span class="p">;</span><span class="w">  </span><span class="c1">// Tipo do widget + propriedades</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">title</span><span class="p">;</span><span class="w">     </span><span class="c1">// Ponteiro para título no buffer</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">;</span><span class="w">      </span><span class="c1">// Ponteiro para nome no buffer</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">text</span><span class="p">;</span><span class="w">      </span><span class="c1">// Ponteiro para texto no buffer</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">auxtext</span><span class="p">;</span><span class="w">   </span><span class="c1">// Ponteiro para texto auxiliar</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="nf">getTitle</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">BUFFER_SIZE</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="k">nullptr</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">buffer</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">title</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="w">    </span><span class="c1">// ... métodos similares para name, text, auxtext</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="p">};</span>
+</code></pre></div>
+<hr />
+<h2 id="exemplo-de-uso">Exemplo de Uso</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="c1"># Exemplo de diálogo com SHantilly</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="c1"># Criar diálogo principal</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>add<span class="w"> </span>groupbox<span class="w"> </span><span class="s2">&quot;Configurações&quot;</span><span class="w"> </span>main
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">    </span><span class="c1"># Adicionar checkbox</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">    </span>add<span class="w"> </span>checkbox<span class="w"> </span><span class="s2">&quot;Opção 1&quot;</span><span class="w"> </span>opt1<span class="w"> </span>checked
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="w">    </span>add<span class="w"> </span>checkbox<span class="w"> </span><span class="s2">&quot;Opção 2&quot;</span><span class="w"> </span>opt2
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="w">    </span><span class="c1"># Adicionar botão</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="w">    </span>add<span class="w"> </span>pushbutton<span class="w"> </span><span class="s2">&quot;Salvar&quot;</span><span class="w"> </span>btn_save<span class="w"> </span>default<span class="w"> </span><span class="nb">exit</span><span class="w"> </span>apply
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>end<span class="w"> </span>groupbox
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a><span class="c1"># Loop de eventos</span>
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Dialog started&quot;</span>
+</code></pre></div>
+<hr />
+<h2 id="notas-de-implementacao">Notas de Implementação</h2>
+<h3 id="diferencas-qt5-vs-qt6">Diferenças Qt5 vs Qt6</h3>
+<ul>
+<li>O código atual é compatível com Qt5</li>
+<li>SHantilly deve ser portado para Qt6:</li>
+<li>Atualizar includes: <code>QtCharts/QPieSeries</code> → <code>QtCharts</code></li>
+<li>Verificar deprecated APIs</li>
+<li>Atualizar conectores de sinais</li>
+</ul>
+<h3 id="custom-widgets">Custom Widgets</h3>
+<ul>
+<li><strong>CustomTableWidget:</strong> Wrapper para QTableWidget com funcionalidades extras</li>
+<li><strong>CustomChartWidget:</strong> Wrapper para QChartView com gerenciamento de dados</li>
+<li>Ambos usam QtCharts para visualização</li>
+</ul>
+<h3 id="thread-safety">Thread Safety</h3>
+<ul>
+<li><code>Qt::BlockingQueuedConnection</code> garante que comandos sejam executados sequencialmente</li>
+<li>Evita race conditions em sequências show/hide/show</li>
+<li>Parser thread bloqueia até execução completar</li>
+</ul>
+<hr />
+<p><em>Documentação gerada para referência do projeto SHantilly (Qt6).</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "content.code.copy"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f1b6f286.min.js"></script>
+      
+    
+  </body>
+</html>

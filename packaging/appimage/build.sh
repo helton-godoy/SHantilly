@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ShowBox AppImage Builder
+# SHantilly AppImage Builder
 # Uses linuxdeploy with Qt plugin for automatic dependency bundling
 #
 
@@ -9,10 +9,10 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 DIST_DIR="${PROJECT_ROOT}/dist"
-APPDIR="${SCRIPT_DIR}/ShowBox.AppDir"
+APPDIR="${SCRIPT_DIR}/SHantilly.AppDir"
 VERSION="1.0.0"
 
-echo "=== ShowBox AppImage Builder ==="
+echo "=== SHantilly AppImage Builder ==="
 
 # Download linuxdeploy tools if not present
 TOOLS_DIR="${SCRIPT_DIR}/tools"
@@ -32,9 +32,9 @@ if [[ ! -f "${TOOLS_DIR}/linuxdeploy-plugin-qt-x86_64.AppImage" ]]; then
 	chmod +x "${TOOLS_DIR}/linuxdeploy-plugin-qt-x86_64.AppImage"
 fi
 
-# Build ShowBox if not already built
+# Build SHantilly if not already built
 if [[ ! -f "${PROJECT_ROOT}/src/code/SHantilly/bin/SHantilly" ]]; then
-	echo "Building ShowBox..."
+	echo "Building SHantilly..."
 	make -C "${PROJECT_ROOT}/src/code/SHantilly"
 fi
 
@@ -73,7 +73,7 @@ cd "${SCRIPT_DIR}"
 	--desktop-file "${APPDIR}/usr/share/applications/SHantilly.desktop"
 
 # Move to dist
-mv ShowBox*.AppImage "${DIST_DIR}/" 2>/dev/null || true
+mv SHantilly*.AppImage "${DIST_DIR}/" 2>/dev/null || true
 
 # Cleanup
 rm -rf "${APPDIR}"

@@ -1,12 +1,12 @@
 #!/bin/bash
 #
-# ShowBox Demo: Widget Types Demo
+# SHantilly Demo: Widget Types Demo
 # Reproduz a interface completa de demonstração de widgets
 #
 
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/SHantilly/bin/SHantilly}"
+SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
 
-${SHOWBOX_BIN} -r <<EODEMO
+${SHANTILLY_BIN} -r <<EODEMO
 # === Tabs principais (laterais à esquerda) ===
 add tabs "Main Tabs" maintabs left
 

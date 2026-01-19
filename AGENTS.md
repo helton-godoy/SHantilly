@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-ShowBox is a C++/Qt6 application that provides GUI widgets for shell scripts. It uses Qt6 (QtWidgets, QtCharts, QtSVG) with qmake build system.
+SHantilly is a C++/Qt6 application that provides GUI widgets for shell scripts. It uses Qt6 (QtWidgets, QtCharts, QtSVG) with qmake build system.
 
 ## Development Environment
 
@@ -43,7 +43,7 @@ make
 
 # Run single test case (Qt Test)
 cd tests/auto
-./tst_units TestShowBoxUnits::testLoggerCategoriesExist
+./tst_units TestSHantillyUnits::testLoggerCategoriesExist
 ```
 
 ### Linting
@@ -87,19 +87,19 @@ trunk check --filter markdownlint
  *------------------------------------------------------------------------------
  */
 
-#ifndef SHOWBOX_H_
-#define SHOWBOX_H_
+#ifndef SHANTILLY_H_
+#define SHANTILLY_H_
 
 #include <QtGlobal>
 #include <QtWidgets>
 #include "logger.h"
 
-#endif  // SHOWBOX_H_
+#endif  // SHANTILLY_H_
 ```
 
 ### Naming Conventions
 
-- **Classes**: PascalCase (`ShowBox`, `CommandUtils`, `DialogParser`)
+- **Classes**: PascalCase (`SHantilly`, `CommandUtils`, `DialogParser`)
 - **Methods**: camelCase (`executeCommand`, `setOptions`, `findWidget`)
 - **Variables**: camelCase for class members, underscore_case for locals (mixed - follow existing pattern)
 - **Constants**: UPPER_SNAKE_CASE (`BUFFER_SIZE`, `DEFAULT_ALIGNMENT`)
@@ -149,7 +149,7 @@ trunk check --filter markdownlint
 - `src/code/SHantilly/` - Main source code (C++/Qt)
 - `src/code/SHantilly/commands/` - Command implementations (factory pattern)
 - `tests/auto/` - Unit tests
-- `examples/` - Shell script examples demonstrating ShowBox usage
+- `examples/` - Shell script examples demonstrating SHantilly usage
 - `docs/` - Project documentation
 - `packaging/` - Distribution packages (DEB, RPM, Flatpak, etc.)
 

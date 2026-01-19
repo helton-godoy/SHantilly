@@ -18,8 +18,8 @@ jobs:
 
       - name: Generate Doxygen
         run: |
-          if [ -f "docs/Doxyfile" ]; then
-            doxygen docs/Doxyfile
+          if [ -f "Doxyfile" ]; then
+            doxygen Doxyfile
           else
             echo "No Doxyfile found, skipping Doxygen."
           fi
