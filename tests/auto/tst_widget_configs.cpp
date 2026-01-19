@@ -2,8 +2,7 @@
 // We expect this header to exist in libs/SHantilly-ui/include
 #include <WidgetConfigs.h>
 
-class TestWidgetConfigs : public QObject
-{
+class TestWidgetConfigs : public QObject {
     Q_OBJECT
 
 private slots:
@@ -12,8 +11,7 @@ private slots:
     void testLabelConfigDefaults();
 };
 
-void TestWidgetConfigs::testWindowConfigDefaults()
-{
+void TestWidgetConfigs::testWindowConfigDefaults() {
     Sbx::Models::WindowConfig config;
     QCOMPARE(config.title, QString(""));
     QCOMPARE(config.width, 800);
@@ -21,23 +19,21 @@ void TestWidgetConfigs::testWindowConfigDefaults()
     QVERIFY(config.isValid());
 }
 
-void TestWidgetConfigs::testButtonConfigDefaults()
-{
+void TestWidgetConfigs::testButtonConfigDefaults() {
     Sbx::Models::ButtonConfig config;
     QCOMPARE(config.text, QString("Button"));
     QCOMPARE(config.name, QString(""));
     QVERIFY(!config.isValid()); // Name is required for controls
-    
+
     config.name = "btn1";
     QVERIFY(config.isValid());
 }
 
-void TestWidgetConfigs::testLabelConfigDefaults()
-{
+void TestWidgetConfigs::testLabelConfigDefaults() {
     Sbx::Models::LabelConfig config;
     QCOMPARE(config.text, QString("Label"));
     QVERIFY(!config.isValid()); // Name is required
-    
+
     config.name = "lbl1";
     QVERIFY(config.isValid());
 }

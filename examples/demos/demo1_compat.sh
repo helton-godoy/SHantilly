@@ -23,7 +23,7 @@ set title "SHantilly Demo 1"
 show
 EODEMO
 
-if [[ "$?" == "0" ]]; then
+if [[ $? == "0" ]]; then
 	echo "User rejected dialog (exit code 0)"
 else
 	echo "User accepted dialog (exit code 1)"

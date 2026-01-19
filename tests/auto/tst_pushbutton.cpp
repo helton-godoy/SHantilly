@@ -1,8 +1,8 @@
-#include <QtTest>
 #include <push_button_widget.h>
 
-class TestPushButton : public QObject
-{
+#include <QtTest>
+
+class TestPushButton : public QObject {
     Q_OBJECT
 
 private slots:
@@ -10,13 +10,11 @@ private slots:
     void testProperties();
 };
 
-void TestPushButton::initTestCase()
-{
+void TestPushButton::initTestCase() {
     // Called before the first testfunction is executed
 }
 
-void TestPushButton::testProperties()
-{
+void TestPushButton::testProperties() {
     PushButtonWidget btn("Test Label");
     QCOMPARE(btn.text(), QString("Test Label"));
     QVERIFY(btn.isCheckable() == false); // Default

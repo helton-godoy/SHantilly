@@ -30,17 +30,17 @@ make build
 
 ## 🔧 Comandos Principais
 
-| Comando | Descrição |
-|---------|-----------|
-| `make build` | Compila o projeto |
-| `make test` | Executa os testes |
-| `make lint` | Verifica qualidade do código |
-| `make format` | Formata o código |
-| `make docs` | Gera documentação |
-| `make coverage` | Gera relatório de cobertura |
-| `make pkg-deb` | Cria pacote DEB |
-| `make pkg-appimage` | Cria AppImage |
-| `make help` | Lista todos os comandos |
+| Comando             | Descrição                    |
+| ------------------- | ---------------------------- |
+| `make build`        | Compila o projeto            |
+| `make test`         | Executa os testes            |
+| `make lint`         | Verifica qualidade do código |
+| `make format`       | Formata o código             |
+| `make docs`         | Gera documentação            |
+| `make coverage`     | Gera relatório de cobertura  |
+| `make pkg-deb`      | Cria pacote DEB              |
+| `make pkg-appimage` | Cria AppImage                |
+| `make help`         | Lista todos os comandos      |
 
 ## 📁 Estrutura do Projeto
 

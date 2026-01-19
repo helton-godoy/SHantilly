@@ -1,27 +1,27 @@
-#include <QtTest>
 #include <SHantillyBuilder.h>
 #include <WidgetConfigs.h>
-#include <QDialog>
-#include <QPushButton>
-#include <QLabel>
-#include <QLineEdit>
-#include <QComboBox>
-#include <QListWidget>
-#include <QTableWidget>
-#include <QProgressBar>
-#include <QCheckBox>
-#include <QRadioButton>
-#include <QCalendarWidget>
-#include <QFrame>
-#include <QSpinBox>
-#include <QSlider>
-#include <QTextEdit>
-#include <QGroupBox>
-#include <QTabWidget>
 #include <custom_chart_widget.h>
 
-class TestSHantillyBuilder : public QObject
-{
+#include <QCalendarWidget>
+#include <QCheckBox>
+#include <QComboBox>
+#include <QDialog>
+#include <QFrame>
+#include <QGroupBox>
+#include <QLabel>
+#include <QLineEdit>
+#include <QListWidget>
+#include <QProgressBar>
+#include <QPushButton>
+#include <QRadioButton>
+#include <QSlider>
+#include <QSpinBox>
+#include <QTabWidget>
+#include <QTableWidget>
+#include <QTextEdit>
+#include <QtTest>
+
+class TestSHantillyBuilder : public QObject {
     Q_OBJECT
 
 private slots:
@@ -39,48 +39,45 @@ private slots:
     void testPerformance();
 };
 
-void TestSHantillyBuilder::testCreateWindow()
-{
+void TestSHantillyBuilder::testCreateWindow() {
     SHantillyBuilder builder;
     Sbx::Models::WindowConfig config;
     config.title = "Test Window";
     config.width = 400;
     config.height = 300;
-    
+
     QWidget* window = builder.buildWindow(config);
-    
+
     QVERIFY(window != nullptr);
     QCOMPARE(window->windowTitle(), QString("Test Window"));
-    // Note: window geometry might not be exactly 400x300 until shown, 
+    // Note: window geometry might not be exactly 400x300 until shown,
     // but resize() should set the values.
     QCOMPARE(window->width(), 400);
     QCOMPARE(window->height(), 300);
-    
+
     delete window;
 }
 
-void TestSHantillyBuilder::testBuildLayout()
-{
+void TestSHantillyBuilder::testBuildLayout() {
     SHantillyBuilder builder;
     Sbx::Models::SbxLayoutConfig config;
     config.type = Sbx::Models::SbxLayoutConfig::HBox;
     config.spacing = 10;
     config.margin = 15;
-    
+
     QLayout* layout = builder.buildLayoutStructure(config);
-    
+
     QVERIFY(layout != nullptr);
     QCOMPARE(layout->spacing(), 10);
     QCOMPARE(layout->contentsMargins().left(), 15);
     QVERIFY(qobject_cast<QHBoxLayout*>(layout) != nullptr);
-    
+
     delete layout;
 }
 
-void TestSHantillyBuilder::testBuildControls()
-{
+void TestSHantillyBuilder::testBuildControls() {
     SHantillyBuilder builder;
-    
+
     // Test Button
     Sbx::Models::ButtonConfig btnConfig;
     btnConfig.name = "btn1";
@@ -89,7 +86,7 @@ void TestSHantillyBuilder::testBuildControls()
     QVERIFY(btn != nullptr);
     QCOMPARE(qobject_cast<QPushButton*>(btn)->text(), QString("Click Me"));
     delete btn;
-    
+
     // Test Label
     Sbx::Models::LabelConfig lblConfig;
     lblConfig.name = "lbl1";
@@ -98,7 +95,7 @@ void TestSHantillyBuilder::testBuildControls()
     QVERIFY(lbl != nullptr);
     QCOMPARE(qobject_cast<QLabel*>(lbl)->text(), QString("Hello World"));
     delete lbl;
-    
+
     // Test LineEdit
     Sbx::Models::LineEditConfig leConfig;
     leConfig.name = "le1";
@@ -109,35 +106,39 @@ void TestSHantillyBuilder::testBuildControls()
     delete le;
 }
 
-void TestSHantillyBuilder::testBuildItemBasedWidgets()
-{
+void TestSHantillyBuilder::testBuildItemBasedWidgets() {
     SHantillyBuilder builder;
-    
+
     // Test ComboBox
     Sbx::Models::ComboBoxConfig cbConfig;
     cbConfig.name = "cb1";
-    cbConfig.items << "Item 1" << "Item 2" << "Item 3";
+    cbConfig.items << "Item 1"
+                   << "Item 2"
+                   << "Item 3";
     cbConfig.currentIndex = 1;
     QWidget* cb = builder.buildComboBox(cbConfig);
     QVERIFY(cb != nullptr);
     QCOMPARE(qobject_cast<QComboBox*>(cb)->count(), 3);
     QCOMPARE(qobject_cast<QComboBox*>(cb)->currentIndex(), 1);
     delete cb;
-    
+
     // Test List
     Sbx::Models::ListConfig listConfig;
     listConfig.name = "list1";
-    listConfig.items << "Option A" << "Option B";
+    listConfig.items << "Option A"
+                     << "Option B";
     QWidget* list = builder.buildList(listConfig);
     QVERIFY(list != nullptr);
     QCOMPARE(qobject_cast<QListWidget*>(list)->count(), 2);
     delete list;
-    
+
     // Test Table
     Sbx::Models::TableConfig tableConfig;
     tableConfig.name = "table1";
-    tableConfig.headers << "Col 1" << "Col 2";
-    tableConfig.rows << (QStringList() << "R1C1" << "R1C2");
+    tableConfig.headers << "Col 1"
+                        << "Col 2";
+    tableConfig.rows << (QStringList() << "R1C1"
+                                       << "R1C2");
     QWidget* table = builder.buildTable(tableConfig);
     QVERIFY(table != nullptr);
     QCOMPARE(qobject_cast<QTableWidget*>(table)->columnCount(), 2);
@@ -146,8 +147,7 @@ void TestSHantillyBuilder::testBuildItemBasedWidgets()
     delete table;
 }
 
-void TestSHantillyBuilder::testBuildSelectionWidgets()
-{
+void TestSHantillyBuilder::testBuildSelectionWidgets() {
     SHantillyBuilder builder;
 
     // Test CheckBox
@@ -177,8 +177,7 @@ void TestSHantillyBuilder::testBuildSelectionWidgets()
     delete radio;
 }
 
-void TestSHantillyBuilder::testBuildUtilityWidgets()
-{
+void TestSHantillyBuilder::testBuildUtilityWidgets() {
     SHantillyBuilder builder;
 
     // Test Calendar
@@ -202,8 +201,7 @@ void TestSHantillyBuilder::testBuildUtilityWidgets()
     delete separator;
 }
 
-void TestSHantillyBuilder::testBuildNumericalInputs()
-{
+void TestSHantillyBuilder::testBuildNumericalInputs() {
     SHantillyBuilder builder;
 
     // Test SpinBox
@@ -214,7 +212,7 @@ void TestSHantillyBuilder::testBuildNumericalInputs()
     spinConfig.value = 25;
     spinConfig.step = 5;
     spinConfig.suffix = " units";
-    
+
     QWidget* spinBox = builder.buildSpinBox(spinConfig);
     QVERIFY(spinBox != nullptr);
     QSpinBox* sb = qobject_cast<QSpinBox*>(spinBox);
@@ -245,8 +243,7 @@ void TestSHantillyBuilder::testBuildNumericalInputs()
     delete slider;
 }
 
-void TestSHantillyBuilder::testBuildTextInputs()
-{
+void TestSHantillyBuilder::testBuildTextInputs() {
     SHantillyBuilder builder;
 
     // Test TextEdit
@@ -264,8 +261,7 @@ void TestSHantillyBuilder::testBuildTextInputs()
     delete textEdit;
 }
 
-void TestSHantillyBuilder::testBuildBasicContainers()
-{
+void TestSHantillyBuilder::testBuildBasicContainers() {
     SHantillyBuilder builder;
 
     // Test GroupBox
@@ -297,17 +293,16 @@ void TestSHantillyBuilder::testBuildBasicContainers()
     delete fr;
 }
 
-void TestSHantillyBuilder::testBuildTabWidget()
-{
+void TestSHantillyBuilder::testBuildTabWidget() {
     SHantillyBuilder builder;
 
     Sbx::Models::TabWidgetConfig tabConfig;
     tabConfig.name = "tabs1";
-    
+
     Sbx::Models::PageConfig page1;
     page1.title = "Page 1";
     page1.layout.type = Sbx::Models::SbxLayoutConfig::VBox;
-    
+
     Sbx::Models::PageConfig page2;
     page2.title = "Page 2";
     page2.layout.type = Sbx::Models::SbxLayoutConfig::HBox;
@@ -321,18 +316,17 @@ void TestSHantillyBuilder::testBuildTabWidget()
     QCOMPARE(tabWidget->count(), 2);
     QCOMPARE(tabWidget->tabText(0), QString("Page 1"));
     QCOMPARE(tabWidget->tabText(1), QString("Page 2"));
-    
+
     // Check if pages have layouts
     QVERIFY(tabWidget->widget(0)->layout() != nullptr);
     QVERIFY(qobject_cast<QVBoxLayout*>(tabWidget->widget(0)->layout()) != nullptr);
-    
+
     delete tw;
 }
 
-void TestSHantillyBuilder::testBuildAdvancedVisuals()
-{
+void TestSHantillyBuilder::testBuildAdvancedVisuals() {
     SHantillyBuilder builder;
-    
+
     // Test ProgressBar
     Sbx::Models::ProgressBarConfig pbConfig;
     pbConfig.name = "pb1";
@@ -341,7 +335,7 @@ void TestSHantillyBuilder::testBuildAdvancedVisuals()
     QVERIFY(pb != nullptr);
     QCOMPARE(qobject_cast<QProgressBar*>(pb)->value(), 50);
     delete pb;
-    
+
     // Test Chart
     Sbx::Models::ChartConfig chartConfig;
     chartConfig.name = "chart1";
@@ -356,12 +350,11 @@ void TestSHantillyBuilder::testBuildAdvancedVisuals()
     delete chart;
 }
 
-void TestSHantillyBuilder::testPerformance()
-{
+void TestSHantillyBuilder::testPerformance() {
     SHantillyBuilder builder;
     Sbx::Models::ButtonConfig config;
     config.name = "btn";
-    
+
     QBENCHMARK {
         for (int i = 0; i < 100; ++i) {
             delete builder.buildButton(config);

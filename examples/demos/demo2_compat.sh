@@ -9,7 +9,7 @@ SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
 while IFS=$'=' read key value; do
 	case ${key} in
 	cb1)
-		if [[ "${value}" == "1" ]]; then
+		if [[ ${value} == "1" ]]; then
 			echo "Option 1 is checked"
 		else
 			echo "Option 1 is unchecked"

@@ -4,7 +4,7 @@
   "dependencies": [
     {
       "name": "qtbase",
-      "features": [ "widgets", "network", "printsupport", "svg" ]
+      "features": ["widgets", "network", "printsupport", "svg"]
     },
     "qtcharts",
     "qtsvg",

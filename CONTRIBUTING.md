@@ -18,24 +18,27 @@ Obrigado pelo interesse em contribuir com o SHantilly! Este documento define as 
 ## 🛠️ Padrões de Desenvolvimento
 
 ### Estilo de Código
+
 Utilizamos ferramentas automáticas para manter a consistência do código. Por favor, não ignore os avisos do linter.
 
-*   **C++**: Obedece ao padrão definido em `.clang-format` (Google style com ajustes).
-*   **Linting**: Utilizamos `trunk`, `clang-tidy` e `cppcheck`.
+- **C++**: Obedece ao padrão definido em `.clang-format` (Google style com ajustes).
+- **Linting**: Utilizamos `trunk`, `clang-tidy` e `cppcheck`.
 
 Antes de enviar seu código, execute:
+
 ```bash
 make format  # Formata o código
 make lint    # Verifica problemas
 ```
 
 ### Mensagens de Commit
+
 Seguimos a convenção [Conventional Commits](https://www.conventionalcommits.org/).
 
-*   `feat: adicionar novo widget Button`
-*   `fix: corrigir crash ao redimensionar janela`
-*   `docs: atualizar guia de instalação`
-*   `chore: atualizar dependências`
+- `feat: adicionar novo widget Button`
+- `fix: corrigir crash ao redimensionar janela`
+- `docs: atualizar guia de instalação`
+- `chore: atualizar dependências`
 
 ## 📦 Processo de Pull Request
 

@@ -1,7 +1,8 @@
-#include <QtTest>
 #include <ISHantillyBuilder.h>
 #include <WidgetConfigs.h>
+
 #include <QWidget>
+#include <QtTest>
 
 // Mock implementation to verify interface signature
 class MockBuilder : public ISHantillyBuilder {
@@ -10,12 +11,12 @@ public:
         Q_UNUSED(config);
         return nullptr;
     }
-    
+
     QWidget* buildButton(const Sbx::Models::ButtonConfig& config) override {
         Q_UNUSED(config);
         return nullptr;
     }
-    
+
     QWidget* buildLabel(const Sbx::Models::LabelConfig& config) override {
         Q_UNUSED(config);
         return nullptr;
@@ -107,22 +108,20 @@ public:
     }
 
     // Legacy support
-    PushButtonWidget* buildPushButton(const QString &title, const QString &name) override {
+    PushButtonWidget* buildPushButton(const QString& title, const QString& name) override {
         Q_UNUSED(title);
         Q_UNUSED(name);
         return nullptr;
     }
 };
 
-class TestInterfaceBuilder : public QObject
-{
+class TestInterfaceBuilder : public QObject {
     Q_OBJECT
 private slots:
     void testInterfaceExistence();
 };
 
-void TestInterfaceBuilder::testInterfaceExistence()
-{
+void TestInterfaceBuilder::testInterfaceExistence() {
     MockBuilder builder;
     QVERIFY(true);
 }

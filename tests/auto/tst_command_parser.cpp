@@ -1,9 +1,9 @@
-#include <QtTest>
 #include <CommandParser.h>
 #include <Tokenizer.h>
 
-class TestCommandParser : public QObject
-{
+#include <QtTest>
+
+class TestCommandParser : public QObject {
     Q_OBJECT
 
 private slots:
@@ -11,36 +11,32 @@ private slots:
     void testUnknownCommand();
 };
 
-void TestCommandParser::testCommandDispatch()
-{
+void TestCommandParser::testCommandDispatch() {
     CommandParser parser;
     bool called = false;
     QStringList receivedArgs;
 
-    parser.registerCommand("add", [&](const QStringList & args) {
+    parser.registerCommand("add", [&](const QStringList& args) {
         called = true;
         receivedArgs = args;
     });
 
     parser.parseLine("add pushbutton \"Test Button\"");
-    
+
     QVERIFY(called);
     QCOMPARE(receivedArgs.size(), 2);
     QCOMPARE(receivedArgs[0], QString("pushbutton"));
     QCOMPARE(receivedArgs[1], QString("Test Button"));
 }
 
-void TestCommandParser::testUnknownCommand()
-{
+void TestCommandParser::testUnknownCommand() {
     CommandParser parser;
     bool called = false;
 
-    parser.registerCommand("add", [&](const QStringList &) {
-        called = true;
-    });
+    parser.registerCommand("add", [&](const QStringList&) { called = true; });
 
     parser.parseLine("invalid command here");
-    
+
     QVERIFY(!called);
 }
 

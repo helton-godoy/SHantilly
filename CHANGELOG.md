@@ -8,6 +8,7 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ## [Unreleased]
 
 ### Added
+
 - Configuração inicial de templates de Issues e PRs.
 - Automação de CI/CD com GitHub Actions.
 - Estrutura base do projeto.

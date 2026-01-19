@@ -47,7 +47,7 @@ echo 'add label "Olá, SHantilly!" | add pushbutton "Fechar" exit' | SHantilly
 
 ## ✨ Por que SHantilly?
 
-| Característica               | SHantilly        | zenity      | kdialog        |
+| Característica               | SHantilly      | zenity      | kdialog        |
 | ---------------------------- | -------------- | ----------- | -------------- |
 | **Widgets Avançados**        | ✅ 20 tipos    | ⚠️ Limitado | ⚠️ Limitado    |
 | **Layouts Flexíveis**        | ✅ 3 níveis    | ❌          | ❌             |

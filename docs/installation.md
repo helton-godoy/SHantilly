@@ -156,7 +156,7 @@ SHantilly --style fusion < comandos.txt
 | ------------------- | ------------------------------------ |
 | `QT_STYLE_OVERRIDE` | Força um estilo Qt específico        |
 | `QT_SCALE_FACTOR`   | Escala da interface (HiDPI)          |
-| `SHANTILLY_RC`        | Caminho para arquivo de configuração |
+| `SHANTILLY_RC`      | Caminho para arquivo de configuração |
 
 ---
 

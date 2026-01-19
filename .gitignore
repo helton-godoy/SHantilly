@@ -57,6 +57,9 @@ ui_*.h
 
 # Local setup
 .env
+# SonarQube
+.scannerwork/
+.sonar/
 /template/bootstrap.sh.done
 
 # Generated documentation (CI builds these)

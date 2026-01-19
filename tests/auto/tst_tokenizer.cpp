@@ -1,8 +1,8 @@
-#include <QtTest>
 #include <Tokenizer.h>
 
-class TestTokenizer : public QObject
-{
+#include <QtTest>
+
+class TestTokenizer : public QObject {
     Q_OBJECT
 
 private slots:
@@ -13,22 +13,20 @@ private slots:
     void testComplexCommands();
 };
 
-void TestTokenizer::testBasicSplitting()
-{
+void TestTokenizer::testBasicSplitting() {
     Tokenizer tokenizer("add label lbl1");
     QStringList tokens = tokenizer.tokenize();
-    
+
     QCOMPARE(tokens.size(), 3);
     QCOMPARE(tokens[0], QString("add"));
     QCOMPARE(tokens[1], QString("label"));
     QCOMPARE(tokens[2], QString("lbl1"));
 }
 
-void TestTokenizer::testQuotedStrings()
-{
+void TestTokenizer::testQuotedStrings() {
     Tokenizer tokenizer("add button \"Click Me Now\" btn1");
     QStringList tokens = tokenizer.tokenize();
-    
+
     QCOMPARE(tokens.size(), 4);
     QCOMPARE(tokens[0], QString("add"));
     QCOMPARE(tokens[1], QString("button"));
@@ -36,32 +34,29 @@ void TestTokenizer::testQuotedStrings()
     QCOMPARE(tokens[3], QString("btn1"));
 }
 
-void TestTokenizer::testEscapedCharacters()
-{
+void TestTokenizer::testEscapedCharacters() {
     // String: add label "Name: \"SHantilly\"" lbl
     Tokenizer tokenizer("add label \"Name: \\\"SHantilly\\\"\" lbl");
     QStringList tokens = tokenizer.tokenize();
-    
+
     QCOMPARE(tokens.size(), 4);
     QCOMPARE(tokens[2], QString("Name: \"SHantilly\""));
 }
 
-void TestTokenizer::testEmptyAndWhitespace()
-{
+void TestTokenizer::testEmptyAndWhitespace() {
     Tokenizer tokenizer("   add    button    \"\"   ");
     QStringList tokens = tokenizer.tokenize();
-    
+
     QCOMPARE(tokens.size(), 3);
     QCOMPARE(tokens[0], QString("add"));
     QCOMPARE(tokens[1], QString("button"));
     QCOMPARE(tokens[2], QString(""));
 }
 
-void TestTokenizer::testComplexCommands()
-{
+void TestTokenizer::testComplexCommands() {
     Tokenizer tokenizer("add checkbox \"Turbo \\\"Extreme\\\"\" chk1 checked enabled");
     QStringList tokens = tokenizer.tokenize();
-    
+
     QCOMPARE(tokens.size(), 6);
     QCOMPARE(tokens[2], QString("Turbo \"Extreme\""));
     QCOMPARE(tokens[5], QString("enabled"));

@@ -8,19 +8,19 @@ Nós, como membros, colaboradores e líderes, comprometemo-nos a fazer da partic
 
 Exemplos de comportamentos que contribuem para um ambiente positivo:
 
-*   Uso de linguagem acolhedora e inclusiva
-*   Respeito a diferentes pontos de vista e experiências
-*   Aceitação graciosa de críticas construtivas
-*   Foco no que é melhor para a comunidade
-*   Empatia com outros membros da comunidade
+- Uso de linguagem acolhedora e inclusiva
+- Respeito a diferentes pontos de vista e experiências
+- Aceitação graciosa de críticas construtivas
+- Foco no que é melhor para a comunidade
+- Empatia com outros membros da comunidade
 
 Exemplos de comportamentos inaceitáveis:
 
-*   Uso de linguagem ou imagens sexualizadas e atenção ou avanços sexuais indesejados
-*   Trolling, comentários insultuosos ou depreciativos e ataques pessoais ou políticos
-*   Assédio público ou privado
-*   Publicação de informações privadas de outras pessoas sem permissão explícita
-*   Outras condutas que poderiam ser razoavelmente consideradas inadequadas em um ambiente profissional
+- Uso de linguagem ou imagens sexualizadas e atenção ou avanços sexuais indesejados
+- Trolling, comentários insultuosos ou depreciativos e ataques pessoais ou políticos
+- Assédio público ou privado
+- Publicação de informações privadas de outras pessoas sem permissão explícita
+- Outras condutas que poderiam ser razoavelmente consideradas inadequadas em um ambiente profissional
 
 ## Aplicação
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
 
-if [[ ! -f "${SHANTILLY_BIN}" ]]; then
+if [[ ! -f ${SHANTILLY_BIN} ]]; then
 	echo "Error: Binary not found at ${SHANTILLY_BIN}"
 	exit 1
 fi

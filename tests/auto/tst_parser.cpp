@@ -1,18 +1,19 @@
-#include <QtTest>
-#include <ParserMain.h>
 #include <ISHantillyBuilder.h>
-#include <QWidget>
-#include <QTabWidget>
-#include <QVBoxLayout>
+#include <ParserMain.h>
+
 #include <QCheckBox>
-#include <QRadioButton>
-#include <QSpinBox>
-#include <QSlider>
-#include <QLineEdit>
-#include <QTextEdit>
 #include <QLabel>
-#include <QPushButton>
+#include <QLineEdit>
 #include <QPointer>
+#include <QPushButton>
+#include <QRadioButton>
+#include <QSlider>
+#include <QSpinBox>
+#include <QTabWidget>
+#include <QTextEdit>
+#include <QVBoxLayout>
+#include <QWidget>
+#include <QtTest>
 
 // Mock Builder returning real widgets for runtime interaction tests
 class MockBuilder : public ISHantillyBuilder {
@@ -27,7 +28,7 @@ public:
         }
     }
 
-    template<typename T>
+    template <typename T>
     T* createReal(const QString& name) {
         T* w = new T();
         w->setObjectName(name);
@@ -35,29 +36,30 @@ public:
         return w;
     }
 
-    PushButtonWidget* buildPushButton(const QString &title, const QString &name) override {
-        Q_UNUSED(title); Q_UNUSED(name);
+    PushButtonWidget* buildPushButton(const QString& title, const QString& name) override {
+        Q_UNUSED(title);
+        Q_UNUSED(name);
         return nullptr;
     }
-    
-    QWidget* buildWindow(const Sbx::Models::WindowConfig& config) override { 
+
+    QWidget* buildWindow(const Sbx::Models::WindowConfig& config) override {
         lastWindow = config;
         called = true;
-        auto* w = createReal<QWidget>(config.name); 
+        auto* w = createReal<QWidget>(config.name);
         w->setLayout(new QVBoxLayout());
         return w;
     }
-    
-    QWidget* buildButton(const Sbx::Models::ButtonConfig& config) override { 
+
+    QWidget* buildButton(const Sbx::Models::ButtonConfig& config) override {
         lastButton = config;
         called = true;
-        return createReal<QPushButton>(config.name); 
+        return createReal<QPushButton>(config.name);
     }
-    
-    QWidget* buildLabel(const Sbx::Models::LabelConfig& config) override { 
+
+    QWidget* buildLabel(const Sbx::Models::LabelConfig& config) override {
         lastLabel = config;
         called = true;
-        return createReal<QLabel>(config.name); 
+        return createReal<QLabel>(config.name);
     }
 
     QWidget* buildCheckBox(const Sbx::Models::CheckBoxConfig& config) override {
@@ -134,12 +136,30 @@ public:
     }
 
     // Stubs for remaining methods
-    QWidget* buildTable(const Sbx::Models::TableConfig& config) override { Q_UNUSED(config); return nullptr; }
-    QWidget* buildProgressBar(const Sbx::Models::ProgressBarConfig& config) override { Q_UNUSED(config); return nullptr; }
-    QWidget* buildChart(const Sbx::Models::ChartConfig& config) override { Q_UNUSED(config); return nullptr; }
-    QWidget* buildCalendar(const Sbx::Models::CalendarConfig& config) override { Q_UNUSED(config); return nullptr; }
-    QWidget* buildSeparator(const Sbx::Models::SeparatorConfig& config) override { Q_UNUSED(config); return nullptr; }
-    QLayout* buildLayoutStructure(const Sbx::Models::SbxLayoutConfig& config) override { Q_UNUSED(config); return nullptr; }
+    QWidget* buildTable(const Sbx::Models::TableConfig& config) override {
+        Q_UNUSED(config);
+        return nullptr;
+    }
+    QWidget* buildProgressBar(const Sbx::Models::ProgressBarConfig& config) override {
+        Q_UNUSED(config);
+        return nullptr;
+    }
+    QWidget* buildChart(const Sbx::Models::ChartConfig& config) override {
+        Q_UNUSED(config);
+        return nullptr;
+    }
+    QWidget* buildCalendar(const Sbx::Models::CalendarConfig& config) override {
+        Q_UNUSED(config);
+        return nullptr;
+    }
+    QWidget* buildSeparator(const Sbx::Models::SeparatorConfig& config) override {
+        Q_UNUSED(config);
+        return nullptr;
+    }
+    QLayout* buildLayoutStructure(const Sbx::Models::SbxLayoutConfig& config) override {
+        Q_UNUSED(config);
+        return nullptr;
+    }
 
     // State capture for verification
     Sbx::Models::ButtonConfig lastButton;
@@ -159,8 +179,7 @@ public:
     bool called = false;
 };
 
-class TestParser : public QObject
-{
+class TestParser : public QObject {
     Q_OBJECT
 
 private slots:
@@ -179,25 +198,24 @@ private slots:
     void testRuntimeInteraction();
 };
 
-void TestParser::testRuntimeInteraction()
-{
+void TestParser::testRuntimeInteraction() {
     MockBuilder builder;
     ParserMain parser(&builder);
-    
+
     // 1. Create a checkbox
     parser.processLine("add checkbox \"Turbo\" chk1");
     QCheckBox* cb = qobject_cast<QCheckBox*>(builder.createdWidgets.last());
     QVERIFY(cb != nullptr);
     QCOMPARE(cb->isChecked(), false);
-    
+
     // 2. Set it
     parser.processLine("set checked chk1");
     QCOMPARE(cb->isChecked(), true);
-    
+
     // 3. Unset it
     parser.processLine("unset checked chk1");
     QCOMPARE(cb->isChecked(), false);
-    
+
     // 4. Create spinbox and set value
     parser.processLine("add spinbox \"Count\" sb1");
     QSpinBox* sb = qobject_cast<QSpinBox*>(builder.createdWidgets.last());
@@ -205,8 +223,7 @@ void TestParser::testRuntimeInteraction()
     QCOMPARE(sb->value(), 42);
 }
 
-void TestParser::testParseAddButton()
-{
+void TestParser::testParseAddButton() {
     MockBuilder builder;
     ParserMain parser(&builder);
     parser.processLine("add button \"Click Me\" btn_test checkable checked");
@@ -217,8 +234,7 @@ void TestParser::testParseAddButton()
     QCOMPARE(builder.lastButton.checked, true);
 }
 
-void TestParser::testParseAddLabel()
-{
+void TestParser::testParseAddLabel() {
     MockBuilder builder;
     ParserMain parser(&builder);
     parser.processLine("add label \"Hello World\" lbl1 wordwrap");
@@ -228,8 +244,7 @@ void TestParser::testParseAddLabel()
     QCOMPARE(builder.lastLabel.wordWrap, true);
 }
 
-void TestParser::testParseAddCheckBox()
-{
+void TestParser::testParseAddCheckBox() {
     MockBuilder builder;
     ParserMain parser(&builder);
     parser.processLine("add checkbox \"Turbo\" chk1 checked");
@@ -238,8 +253,7 @@ void TestParser::testParseAddCheckBox()
     QCOMPARE(builder.lastCheckBox.checked, true);
 }
 
-void TestParser::testParseAddRadioButton()
-{
+void TestParser::testParseAddRadioButton() {
     MockBuilder builder;
     ParserMain parser(&builder);
     parser.processLine("add radiobutton \"Option 1\" rb1 checked");
@@ -248,8 +262,7 @@ void TestParser::testParseAddRadioButton()
     QCOMPARE(builder.lastRadioButton.checked, true);
 }
 
-void TestParser::testParseAddComboBox()
-{
+void TestParser::testParseAddComboBox() {
     MockBuilder builder;
     ParserMain parser(&builder);
     parser.processLine("add dropdownlist \"Choice\" combo1");
@@ -257,8 +270,7 @@ void TestParser::testParseAddComboBox()
     QCOMPARE(builder.lastComboBox.name, QString("combo1"));
 }
 
-void TestParser::testParseAddListBox()
-{
+void TestParser::testParseAddListBox() {
     MockBuilder builder;
     ParserMain parser(&builder);
     parser.processLine("add listbox \"Select\" list1 selection");
@@ -267,8 +279,7 @@ void TestParser::testParseAddListBox()
     QCOMPARE(builder.lastList.multipleSelection, true);
 }
 
-void TestParser::testParseAddWindow()
-{
+void TestParser::testParseAddWindow() {
     MockBuilder builder;
     ParserMain parser(&builder);
     parser.processLine("add window \"My App\" main_win width 1024 height 768");
@@ -278,8 +289,7 @@ void TestParser::testParseAddWindow()
     QCOMPARE(builder.lastWindow.height, 768);
 }
 
-void TestParser::testParseAddSpinBox()
-{
+void TestParser::testParseAddSpinBox() {
     MockBuilder builder;
     ParserMain parser(&builder);
     parser.processLine("add spinbox \"Count\" sb1 minimum 10 maximum 50 value 20 step 5");
@@ -291,8 +301,7 @@ void TestParser::testParseAddSpinBox()
     QCOMPARE(builder.lastSpinBox.step, 5);
 }
 
-void TestParser::testParseAddSlider()
-{
+void TestParser::testParseAddSlider() {
     MockBuilder builder;
     ParserMain parser(&builder);
     parser.processLine("add slider \"Volume\" sl1 vertical value 75");
@@ -302,8 +311,7 @@ void TestParser::testParseAddSlider()
     QCOMPARE(builder.lastSlider.value, 75);
 }
 
-void TestParser::testParseAddTextBox()
-{
+void TestParser::testParseAddTextBox() {
     MockBuilder builder;
     ParserMain parser(&builder);
     parser.processLine("add textbox \"Initial Value\" tb1 password placeholder \"Enter secret\"");
@@ -313,8 +321,7 @@ void TestParser::testParseAddTextBox()
     QCOMPARE(builder.lastLineEdit.placeholder, QString("Enter secret"));
 }
 
-void TestParser::testParseAddTextView()
-{
+void TestParser::testParseAddTextView() {
     MockBuilder builder;
     ParserMain parser(&builder);
     parser.processLine("add textview \"Long content...\" tv1 readonly");
@@ -323,26 +330,25 @@ void TestParser::testParseAddTextView()
     QCOMPARE(builder.lastTextEdit.readOnly, true);
 }
 
-void TestParser::testParseHierarchicalLayout()
-{
+void TestParser::testParseHierarchicalLayout() {
     MockBuilder builder;
     ParserMain parser(&builder);
-    
+
     // 1. Create Window (Root)
     parser.processLine("add window \"Main\" win");
     QVERIFY(builder.called);
-    
+
     // 2. Add GroupBox (should be added to Window)
     parser.processLine("add groupbox \"Group\" grp1");
     QCOMPARE(builder.lastGroupBox.title, QString("Group"));
-    
+
     // 3. Add Button (should be added to GroupBox)
     parser.processLine("add button \"Inside\" btn1");
     QCOMPARE(builder.lastButton.text, QString("Inside"));
-    
+
     // 4. End GroupBox context
     parser.processLine("end");
-    
+
     // 5. Add Button (should be added to Window now)
     parser.processLine("add button \"Outside\" btn2");
     QCOMPARE(builder.lastButton.text, QString("Outside"));

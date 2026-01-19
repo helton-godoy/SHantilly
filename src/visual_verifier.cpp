@@ -98,7 +98,9 @@ int main(int argc, char* argv[]) {
 
         Sbx::Models::ComboBoxConfig combo;
         combo.name = "combo1";
-        combo.items << "Choice 1" << "Choice 2" << "Choice 3";
+        combo.items << "Choice 1"
+                    << "Choice 2"
+                    << "Choice 3";
         combo.currentIndex = 0;
         t1->layout()->addWidget(builder.buildComboBox(combo));
     }
@@ -177,7 +179,9 @@ int main(int argc, char* argv[]) {
 
         Sbx::Models::ListConfig list;
         list.name = "list1";
-        list.items << "Alpha" << "Beta" << "Gamma";
+        list.items << "Alpha"
+                   << "Beta"
+                   << "Gamma";
         list.multipleSelection = true;
         t4->layout()->addWidget(builder.buildList(list));
 

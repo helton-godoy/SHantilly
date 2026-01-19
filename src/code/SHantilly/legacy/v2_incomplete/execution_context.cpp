@@ -22,6 +22,7 @@ void ExecutionContext::executeOnGui(std::function<void()> func) {
         func();
     } else {
         // Use blocking queued connection
-        QMetaObject::invokeMethod(m_dialogBox, [func]() { func(); }, Qt::BlockingQueuedConnection);
+        QMetaObject::invokeMethod(
+            m_dialogBox, [func]() { func(); }, Qt::BlockingQueuedConnection);
     }
 }
