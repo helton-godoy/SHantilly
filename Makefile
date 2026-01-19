@@ -184,6 +184,18 @@ security: ## Scan Docker image for vulnerabilities using Trivy
 		-v $(HOME)/.cache/trivy:/root/.cache/trivy \
 		aquasec/trivy:latest image --severity HIGH,CRITICAL $(DOCKER_IMAGE)
 
+sonar: ## Run SonarCloud analysis (requires SONAR_TOKEN env var)
+	@if [ -z "$(SONAR_TOKEN)" ]; then \
+		echo "Error: SONAR_TOKEN is not set. Please export it first."; \
+		exit 1; \
+	fi
+	@echo "Running SonarCloud analysis..."
+	docker run --rm \
+		-e SONAR_TOKEN="$(SONAR_TOKEN)" \
+		-e SONAR_HOST_URL="https://sonarcloud.io" \
+		-v "$(PWD):/usr/src" \
+		sonarsource/sonar-scanner-cli
+
 docs:  ## Generate documentation (runs inside Docker)
 	$(call IN_DOCKER_WRAPPER,docs)
 
