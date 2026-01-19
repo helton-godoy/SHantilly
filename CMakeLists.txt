@@ -68,7 +68,7 @@ target_link_libraries(visual_verifier PRIVATE Qt6::Widgets SHantilly-ui)
 # ============================================================================
 include(GNUInstallDirs)
 
-install(TARGETS SHantilly poc_modern_cli visual_verifier
+install(TARGETS shantilly poc_modern_cli visual_verifier
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(DIRECTORY libs/SHantilly-ui/include/

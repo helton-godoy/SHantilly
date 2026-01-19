@@ -5,6 +5,7 @@ bin/
 lib/
 vcpkg_installed/
 vcpkg/
+obj/
 
 # CMake generated
 CMakeCache.txt

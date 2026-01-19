@@ -35,7 +35,10 @@ fi
 # Build SHantilly if not already built
 if [[ ! -f "${PROJECT_ROOT}/src/code/SHantilly/bin/SHantilly" ]]; then
 	echo "Building SHantilly..."
-	make -C "${PROJECT_ROOT}/src/code/SHantilly"
+	cd "${PROJECT_ROOT}/src/code/SHantilly"
+	rm -rf obj bin Makefile  # Clean old build artifacts
+	qmake6 SHantilly.pro
+	make -j$(nproc)
 fi
 
 # Create AppDir structure
@@ -45,15 +48,15 @@ mkdir -p "${APPDIR}/usr/share/applications"
 mkdir -p "${APPDIR}/usr/share/icons/hicolor/256x256/apps"
 
 # Copy files
-cp "${PROJECT_ROOT}/src/code/SHantilly/bin/SHantilly" "${APPDIR}/usr/bin/"
-cp "${SCRIPT_DIR}/SHantilly.desktop" "${APPDIR}/usr/share/applications/"
+cp "${PROJECT_ROOT}/src/code/SHantilly/bin/shantilly" "${APPDIR}/usr/bin/"
+cp "${SCRIPT_DIR}/shantilly.desktop" "${APPDIR}/usr/share/applications/"
 
 # Create a simple icon (placeholder - replace with actual icon)
 if [[ ! -f "${SCRIPT_DIR}/SHantilly.png" ]]; then
 	echo "Warning: No icon found, using placeholder"
 	convert -size 256x256 xc:steelblue -fill white -gravity center \
-		-pointsize 48 -annotate 0 "SB" "${APPDIR}/usr/share/icons/hicolor/256x256/apps/SHantilly.png" 2>/dev/null ||
-		touch "${APPDIR}/usr/share/icons/hicolor/256x256/apps/SHantilly.png"
+		-pointsize 48 -annotate 0 "SB" "${APPDIR}/usr/share/icons/hicolor/256x256/apps/shantilly.png" 2>/dev/null ||
+		touch "${APPDIR}/usr/share/icons/hicolor/256x256/apps/shantilly.png"
 fi
 
 # Create dist directory
@@ -70,10 +73,10 @@ cd "${SCRIPT_DIR}"
 	--appdir "${APPDIR}" \
 	--plugin qt \
 	--output appimage \
-	--desktop-file "${APPDIR}/usr/share/applications/SHantilly.desktop"
+	--desktop-file "${APPDIR}/usr/share/applications/shantilly.desktop"
 
 # Move to dist
-mv SHantilly*.AppImage "${DIST_DIR}/" 2>/dev/null || true
+mv shantilly*.AppImage "${DIST_DIR}/" 2>/dev/null || true
 
 # Cleanup
 rm -rf "${APPDIR}"

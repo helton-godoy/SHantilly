@@ -2,10 +2,12 @@ TEMPLATE = app
 CONFIG += qt thread release c++17
 QT += widgets svg charts
 
-TARGET = SHantilly-legacy
-DESTDIR = $$PWD/bin
-OBJECTS_DIR = $$PWD/obj
-MOC_DIR = $$OBJECTS_DIR
+TARGET = shantilly
+DESTDIR = bin
+OBJECTS_DIR = obj
+MOC_DIR = obj
+RCC_DIR = obj
+UI_DIR = obj
 
 # Input
 INCLUDEPATH += $$PWD/../../../libs/SHantilly-ui/include

@@ -12,16 +12,16 @@ file(GLOB_RECURSE SRCS "*.cpp" "*.cc" "*.h")
 list(FILTER SRCS EXCLUDE REGEX ".*/obj/.*")
 list(FILTER SRCS EXCLUDE REGEX ".*/legacy/v1_monolith/dialog_main.cc")
 
-add_executable(SHantilly ${SRCS})
+add_executable(shantilly ${SRCS})
 
 # Dependências
 target_link_libraries(
-  SHantilly PRIVATE Qt6::Widgets Qt6::Charts Qt6::PrintSupport Qt6::Network
+  shantilly PRIVATE Qt6::Widgets Qt6::Charts Qt6::PrintSupport Qt6::Network
                     SHantilly-ui)
 
 # Includes
 target_include_directories(
-  SHantilly
+  shantilly
   PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
           ${CMAKE_CURRENT_SOURCE_DIR}/core/builder
           ${CMAKE_CURRENT_SOURCE_DIR}/core/parser

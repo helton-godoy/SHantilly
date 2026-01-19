@@ -7,6 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -qq && apt-get install -qqy \
     # Build tools
     build-essential \
+    cmake \
     qmake6 \
     debhelper \
     devscripts \

@@ -1,4 +1,4 @@
-Source: SHantilly
+Source: shantilly
 Section: x11
 Priority: optional
 Maintainer: Helton Godoy <helton@example.com>
@@ -15,7 +15,7 @@ Standards-Version: 4.6.2
 Homepage: https://github.com/helton-godoy/SHantilly
 Rules-Requires-Root: no
 
-Package: SHantilly
+Package: shantilly
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Recommends: libqt6svg6

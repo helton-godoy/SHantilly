@@ -20,7 +20,7 @@ log_warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
 mkdir -p "${DIST_DIR}"
 
 log_info "Building Docker image for AppImage..."
-docker build -f "${SCRIPT_DIR}/appimage.Dockerfile" -t "SHantilly-appimage" "${SCRIPT_DIR}"
+docker build -f "${SCRIPT_DIR}/appimage.Dockerfile" -t "shantilly-appimage" "${SCRIPT_DIR}"
 
 log_info "Building AppImage inside Docker container..."
 docker run --rm \
@@ -28,7 +28,7 @@ docker run --rm \
 	-v "${PROJECT_ROOT}:/build:rw" \
 	-e APPIMAGE_EXTRACT_AND_RUN=1 \
 	-w /build \
-	"SHantilly-appimage" \
+	"shantilly-appimage" \
 	bash -c "./packaging/appimage/build.sh"
 
 log_info "=== Build Complete ==="

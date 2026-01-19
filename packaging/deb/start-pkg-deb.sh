@@ -30,7 +30,7 @@ log_error() { echo -e "${RED}[ERROR]${NC} $1"; }
 build_deb() {
 	local distro="$1"
 	local dockerfile="${SCRIPT_DIR}/${distro}.Dockerfile"
-	local image_name="SHantilly-deb-${distro}"
+	local image_name="shantilly-deb-${distro}"
 
 	if [[ ! -f ${dockerfile} ]]; then
 		log_error "Dockerfile not found: ${dockerfile}"
@@ -49,9 +49,9 @@ build_deb() {
 
 	# Rename output with distro suffix
 	local version=$(head -1 "${SCRIPT_DIR}/debian/changelog" | grep -oP '\(.*?\)' | tr -d '()')
-	local deb_file="${DIST_DIR}/SHantilly_${version}_amd64.deb"
+	local deb_file="${DIST_DIR}/shantilly_${version}_amd64.deb"
 	if [[ -f ${deb_file} ]]; then
-		local new_name="${DIST_DIR}/SHantilly_${version}_${distro}_amd64.deb"
+		local new_name="${DIST_DIR}/shantilly_${version}_${distro}_amd64.deb"
 		mv "${deb_file}" "${new_name}" 2>/dev/null || true
 		log_info "Package created: ${new_name}"
 	fi

@@ -9,6 +9,7 @@ RUN apt-get update -qq && apt-get install -qqy --no-install-recommends \
     build-essential \
     qmake6 \
     wget \
+    ca-certificates \
     file \
     # FUSE for AppImage
     libfuse2 \
@@ -34,9 +35,9 @@ RUN apt-get update -qq && apt-get install -qqy --no-install-recommends \
 
 # Download linuxdeploy and Qt plugin
 WORKDIR /tools
-RUN wget -q https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage \
+RUN wget -q --no-check-certificate https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage \
     && chmod +x linuxdeploy-x86_64.AppImage \
-    && wget -q https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage \
+    && wget -q --no-check-certificate https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage \
     && chmod +x linuxdeploy-plugin-qt-x86_64.AppImage
 
 # Set environment for Qt
