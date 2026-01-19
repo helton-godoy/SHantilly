@@ -59,6 +59,7 @@ ui_*.h
 /template/bootstrap.sh.done
 
 # Generated documentation (CI builds these)
+docs/html/
 site/
 public/
 coverage_report/
