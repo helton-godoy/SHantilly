@@ -4,7 +4,7 @@ cli:
 plugins:
   sources:
     - id: trunk
-      local: true
+      uri: https://github.com/trunk-io/plugins
 lint:
   enabled:
     - clang-format@17.0.6
