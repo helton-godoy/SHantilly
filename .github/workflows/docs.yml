@@ -1,0 +1,40 @@
+name: Docs - Doxygen and MkDocs
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install documentation tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y doxygen graphviz
+          pip install mkdocs mkdocs-material
+
+      - name: Generate Doxygen
+        run: |
+          if [ -f "docs/Doxyfile" ]; then
+            doxygen docs/Doxyfile
+          else
+            echo "No Doxyfile found, skipping Doxygen."
+          fi
+
+      - name: Build MkDocs
+        run: |
+          if [ -f "mkdocs.yml" ]; then
+            mkdocs build --site-dir public
+          else
+            echo "No mkdocs.yml found, skipping MkDocs."
+          fi
+
+      - name: Deploy to GitHub Pages
+        if: success() && (hashFiles('public/**') != '' || hashFiles('docs/html/**') != '')
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: public # Adjust based on where files are
