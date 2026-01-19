@@ -5,6 +5,7 @@ plugins:
   sources:
     - id: trunk
       uri: https://github.com/trunk-io/plugins
+      ref: v1.6.1
 lint:
   enabled:
     - clang-format@17.0.6
@@ -15,6 +16,4 @@ lint:
   ignore:
     - linters: [ALL]
       paths:
-        - vcpkg/
         - build/
-        - vcpkg_installed/
