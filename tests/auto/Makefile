@@ -17,7 +17,7 @@ CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_TESTLIB_LIB -DQT_CORE_LIB -DQT_TESTCASE_BUILDDIR='"/app/tests/auto"'
 CFLAGS        = -pipe -O2 -Wall -Wextra -D_REENTRANT $(DEFINES)
 CXXFLAGS      = -pipe -Wall -Wextra -O2 -std=gnu++1z -Wall -Wextra -D_REENTRANT $(DEFINES)
-INCPATH       = -I. -I../../src/code/showbox -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtTest -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++
+INCPATH       = -I. -I../../src/code/SHantilly -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtTest -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++
 QMAKE         = /usr/bin/qmake6
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -53,8 +53,8 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = tst_units.cpp \
-		../../src/code/showbox/execution_context.cpp \
-		../../src/code/showbox/logger.cpp 
+		../../src/code/SHantilly/execution_context.cpp \
+		../../src/code/SHantilly/logger.cpp 
 OBJECTS       = tst_units.o \
 		execution_context.o \
 		logger.o
@@ -132,10 +132,10 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/lex.prf \
-		units.pro ../../src/code/showbox/execution_context.h \
-		../../src/code/showbox/logger.h tst_units.cpp \
-		../../src/code/showbox/execution_context.cpp \
-		../../src/code/showbox/logger.cpp
+		units.pro ../../src/code/SHantilly/execution_context.h \
+		../../src/code/SHantilly/logger.h tst_units.cpp \
+		../../src/code/SHantilly/execution_context.cpp \
+		../../src/code/SHantilly/logger.cpp
 QMAKE_TARGET  = tst_units
 DESTDIR       = 
 TARGET        = tst_units
@@ -321,8 +321,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt6/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../src/code/showbox/execution_context.h ../../src/code/showbox/logger.h $(DISTDIR)/
-	$(COPY_FILE) --parents tst_units.cpp ../../src/code/showbox/execution_context.cpp ../../src/code/showbox/logger.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../src/code/SHantilly/execution_context.h ../../src/code/SHantilly/logger.h $(DISTDIR)/
+	$(COPY_FILE) --parents tst_units.cpp ../../src/code/SHantilly/execution_context.cpp ../../src/code/SHantilly/logger.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -363,11 +363,11 @@ compiler_moc_source_make_all: tst_units.moc
 compiler_moc_source_clean:
 	-$(DEL_FILE) tst_units.moc
 tst_units.moc: tst_units.cpp \
-		../../src/code/showbox/logger.h \
-		../../src/code/showbox/execution_context.h \
+		../../src/code/SHantilly/logger.h \
+		../../src/code/SHantilly/execution_context.h \
 		moc_predefs.h \
 		/usr/lib/qt6/libexec/moc
-	/usr/lib/qt6/libexec/moc $(DEFINES) --include /app/tests/auto/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/app/tests/auto -I/app/src/code/showbox -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtTest -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/14 -I/usr/include/x86_64-linux-gnu/c++/14 -I/usr/include/c++/14/backward -I/usr/lib/gcc/x86_64-linux-gnu/14/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include tst_units.cpp -o tst_units.moc
+	/usr/lib/qt6/libexec/moc $(DEFINES) --include /app/tests/auto/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -I/app/tests/auto -I/app/src/code/SHantilly -I/usr/include/x86_64-linux-gnu/qt6 -I/usr/include/x86_64-linux-gnu/qt6/QtWidgets -I/usr/include/x86_64-linux-gnu/qt6/QtGui -I/usr/include/x86_64-linux-gnu/qt6/QtTest -I/usr/include/x86_64-linux-gnu/qt6/QtCore -I/usr/include/c++/14 -I/usr/include/x86_64-linux-gnu/c++/14 -I/usr/include/c++/14/backward -I/usr/lib/gcc/x86_64-linux-gnu/14/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include tst_units.cpp -o tst_units.moc
 
 compiler_uic_make_all:
 compiler_uic_clean:
@@ -381,18 +381,18 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_source_clean
 
 ####### Compile
 
-tst_units.o: tst_units.cpp ../../src/code/showbox/logger.h \
-		../../src/code/showbox/execution_context.h \
+tst_units.o: tst_units.cpp ../../src/code/SHantilly/logger.h \
+		../../src/code/SHantilly/execution_context.h \
 		tst_units.moc
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tst_units.o tst_units.cpp
 
-execution_context.o: ../../src/code/showbox/execution_context.cpp ../../src/code/showbox/execution_context.h \
-		../../src/code/showbox/showbox.h \
-		../../src/code/showbox/theme_manager.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o execution_context.o ../../src/code/showbox/execution_context.cpp
+execution_context.o: ../../src/code/SHantilly/execution_context.cpp ../../src/code/SHantilly/execution_context.h \
+		../../src/code/SHantilly/SHantilly.h \
+		../../src/code/SHantilly/theme_manager.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o execution_context.o ../../src/code/SHantilly/execution_context.cpp
 
-logger.o: ../../src/code/showbox/logger.cpp ../../src/code/showbox/logger.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o logger.o ../../src/code/showbox/logger.cpp
+logger.o: ../../src/code/SHantilly/logger.cpp ../../src/code/SHantilly/logger.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o logger.o ../../src/code/SHantilly/logger.cpp
 
 ####### Install
 

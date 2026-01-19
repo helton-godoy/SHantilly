@@ -1,78 +1,73 @@
-name: ShowBox CI
+name: CI - Build and Test
 
 on:
   push:
-    branches: [ main, master, develop ]
+    branches: [ main, develop ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main, develop ]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
-    container:
-      image: debian:trixie-slim
-    
+    env:
+      VCPKG_BINARY_SOURCES: 'clear;nuget,GitHub,readwrite'
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Install dependencies
-      run: |
-        apt-get update -qq
-        apt-get install -qqy \
-          build-essential \
-          qt6-base-dev \
-          libqt6charts6-dev \
-          libqt6svg6-dev \
-          qmake6 \
-          xvfb
-    
-    - name: Build ShowBox
-      run: |
-        cd src/code/showbox
-        qmake6 showbox.pro
-        make -j$(nproc)
-    
-    - name: Build Tests
-      run: |
-        cd tests/auto
-        qmake6 units.pro
-        make
-    
-    - name: Run Unit Tests
-      run: |
-        cd tests/auto
-        xvfb-run ./tst_units
-    
-    - name: Upload Binary
-      uses: actions/upload-artifact@v4
-      with:
-        name: showbox-linux
-        path: src/code/showbox/bin/showbox
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-  test-compatibility:
-    runs-on: ubuntu-latest
-    needs: build
-    container:
-      image: debian:trixie-slim
-    
-    steps:
-    - uses: actions/checkout@v4
-    
-    - name: Install Qt6 runtime
-      run: |
-        apt-get update -qq
-        apt-get install -qqy qt6-base-dev libqt6charts6 libqt6svg6 xvfb
-    
-    - name: Download binary
-      uses: actions/download-artifact@v4
-      with:
-        name: showbox-linux
-        path: bin
-    
-    - name: Make executable
-      run: chmod +x bin/showbox
-    
-    - name: Test basic commands
-      run: |
-        export SHOWBOX_BIN=./bin/showbox
-        timeout 3 xvfb-run $SHOWBOX_BIN <<< 'add label "Test" show' || echo "OK - dialog shown"
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgl1-mesa-dev libx11-dev libxkbcommon-dev libfontconfig1-dev libdbus-1-dev libicu-dev xvfb clang-format clang-tidy cppcheck lcov
+
+      - name: Cache vcpkg
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ github.workspace }}/vcpkg
+            ${{ github.workspace }}/vcpkg_installed
+          key: ${{ runner.os }}-vcpkg-${{ hashFiles('vcpkg.json') }}
+          restore-keys: |
+            ${{ runner.os }}-vcpkg-
+
+      - name: Setup vcpkg
+        uses: lukka/run-vcpkg@v11
+        with:
+          vcpkgJsonGlob: 'vcpkg.json'
+
+      - name: Run Trunk Check
+        uses: trunk-io/trunk-action@v1
+
+      - name: Build, Test and Generate Coverage
+        run: |
+          xvfb-run make coverage_internal
+
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage_report/
+
+      - name: Run Clang-Tidy
+        run: make tidy_internal
+
+      - name: Run Cppcheck
+        run: make cppcheck_internal
+
+      - name: Run Trivy Vulnerability Scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          hide-progress: false
+          format: 'table'
+          exit-code: '0'
+          ignore-unfixed: true
+          severity: 'CRITICAL,HIGH'
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

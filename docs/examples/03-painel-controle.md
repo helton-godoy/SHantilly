@@ -10,6 +10,7 @@ Criando uma interface com sidebar e abas.
 ## Objetivo
 
 Criar um painel de controle profissional com:
+
 - Menu lateral (sidebar) fixo
 - Área principal com abas
 - Layout responsivo
@@ -24,7 +25,7 @@ Criar um painel de controle profissional com:
 # Tutorial 03: Painel de Controle
 # Demonstra layout sidebar + tabs
 
-showbox --resizable << 'EOF'
+SHantilly --resizable << 'EOF'
 set title "Painel de Controle"
 
 # ============================================

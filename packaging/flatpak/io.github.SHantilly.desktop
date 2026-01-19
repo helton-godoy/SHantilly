@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=SHantilly
+Comment=GUI widgets for shell scripts
+Exec=SHantilly
+Icon=io.github.SHantilly
+Terminal=false
+Type=Application
+Categories=Development;Utility;
+Keywords=dialog;gui;shell;script;qt;

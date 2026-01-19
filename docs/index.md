@@ -1,6 +1,6 @@
-# Documentação do Showbox
+# Documentação do SHantilly
 
-> **Showbox** é uma ferramenta poderosa para criar interfaces gráficas (GUI) a partir de shell scripts usando Qt6.
+> **SHantilly** é uma ferramenta poderosa para criar interfaces gráficas (GUI) a partir de shell scripts usando Qt6.
 
 ---
 
@@ -8,7 +8,7 @@
 
 ```bash
 # Seu primeiro diálogo em uma linha!
-echo 'add label "Olá, Showbox!" | add pushbutton "Fechar" exit' | showbox
+echo 'add label "Olá, SHantilly!" | add pushbutton "Fechar" exit' | SHantilly
 ```
 
 ---
@@ -45,15 +45,15 @@ echo 'add label "Olá, Showbox!" | add pushbutton "Fechar" exit' | showbox
 
 ---
 
-## ✨ Por que Showbox?
+## ✨ Por que SHantilly?
 
-| Característica               | Showbox       | zenity      | kdialog        |
-| ---------------------------- | ------------- | ----------- | -------------- |
+| Característica               | SHantilly        | zenity      | kdialog        |
+| ---------------------------- | -------------- | ----------- | -------------- |
 | **Widgets Avançados**        | ✅ 20 tipos    | ⚠️ Limitado | ⚠️ Limitado    |
-| **Layouts Flexíveis**        | ✅ 3 níveis    | ❌           | ❌              |
-| **Abas e Páginas**           | ✅             | ❌           | ❌              |
-| **Tabelas Editáveis**        | ✅             | ❌           | ❌              |
-| **Gráficos**                 | ✅             | ❌           | ❌              |
+| **Layouts Flexíveis**        | ✅ 3 níveis    | ❌          | ❌             |
+| **Abas e Páginas**           | ✅             | ❌          | ❌             |
+| **Tabelas Editáveis**        | ✅             | ❌          | ❌             |
+| **Gráficos**                 | ✅             | ❌          | ❌             |
 | **Stylesheets CSS**          | ✅             | ⚠️ GTK      | ⚠️ Qt limitado |
 | **Comunicação Bidirecional** | ✅ Pipes/FIFOs | ⚠️ Limitado | ⚠️ Limitado    |
 
@@ -63,7 +63,7 @@ echo 'add label "Olá, Showbox!" | add pushbutton "Fechar" exit' | showbox
 
 ```
 ┌─────────────┐     stdin      ┌─────────────┐     Qt Widgets     ┌─────────────┐
-│ Shell Script│ ─────────────▶ │   Showbox   │ ─────────────────▶ │     GUI     │
+│ Shell Script│ ─────────────▶ │   SHantilly   │ ─────────────────▶ │     GUI     │
 └─────────────┘                └─────────────┘                    └─────────────┘
                                      │
                                      │ stdout (eventos)
@@ -78,16 +78,16 @@ echo 'add label "Olá, Showbox!" | add pushbutton "Fechar" exit' | showbox
 
 ## 🔗 Links Úteis
 
-- **Código-fonte**: [GitHub](https://github.com/seu-usuario/showbox)
+- **Código-fonte**: [GitHub](https://github.com/seu-usuario/SHantilly)
 - **Exemplos**: [examples/](../examples/)
-- **Man page**: `man showbox`
+- **Man page**: `man SHantilly`
 
 ---
 
 ## 📖 Licença
 
-Showbox é software livre distribuído sob a [GNU GPL v3](../COPYING).
+SHantilly é software livre distribuído sob a [GNU GPL v3](../COPYING).
 
 ---
 
-*Documentação versão 1.0 | Atualizada em Janeiro 2026*
+_Documentação versão 1.0 | Atualizada em Janeiro 2026_

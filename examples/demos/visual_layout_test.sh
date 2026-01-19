@@ -1,9 +1,9 @@
 #!/bin/bash
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/showbox/bin/showbox}"
+SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
 
-if [ ! -f "$SHOWBOX_BIN" ]; then
-    echo "Error: Binary not found at $SHOWBOX_BIN"
-    exit 1
+if [[ ! -f "${SHANTILLY_BIN}" ]]; then
+	echo "Error: Binary not found at ${SHANTILLY_BIN}"
+	exit 1
 fi
 
 echo "Launching Visual Layout Test..."
@@ -24,4 +24,4 @@ add frame "Inner Frame" Inner
 add label "Deeply nested label"
 add pushbutton "Apply" apply
 add pushbutton "Exit" exit default
-end frame' | $SHOWBOX_BIN   --new-parser --resizable
+end frame' | ${SHANTILLY_BIN} --new-parser --resizable

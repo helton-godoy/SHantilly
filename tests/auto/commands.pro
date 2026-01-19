@@ -5,24 +5,24 @@ CONFIG -= app_bundle
 TEMPLATE = app
 TARGET = tst_commands
 
-# Path to showbox source code (from tests/auto/)
-SHOWBOX_SRC = ../../src/code/showbox
+# Path to SHantilly source code (from tests/auto/)
+SHANTILLY_SRC = ../../src/code/SHantilly
 
 SOURCES += tst_commands.cpp \
-           $$SHOWBOX_SRC/commands/add_command.cpp \
-           $$SHOWBOX_SRC/commands/set_command.cpp \
-           $$SHOWBOX_SRC/commands/command_utils.cpp \
-           $$SHOWBOX_SRC/execution_context.cpp \
-           $$SHOWBOX_SRC/logger.cpp
+           $$SHANTILLY_SRC/commands/add_command.cpp \
+           $$SHANTILLY_SRC/commands/set_command.cpp \
+           $$SHANTILLY_SRC/commands/command_utils.cpp \
+           $$SHANTILLY_SRC/execution_context.cpp \
+           $$SHANTILLY_SRC/logger.cpp
 
-HEADERS += $$SHOWBOX_SRC/commands/add_command.h \
-           $$SHOWBOX_SRC/commands/set_command.h \
-           $$SHOWBOX_SRC/commands/command_utils.h \
-           $$SHOWBOX_SRC/execution_context.h \
-           $$SHOWBOX_SRC/command.h \
-           $$SHOWBOX_SRC/logger.h
+HEADERS += $$SHANTILLY_SRC/commands/add_command.h \
+           $$SHANTILLY_SRC/commands/set_command.h \
+           $$SHANTILLY_SRC/commands/command_utils.h \
+           $$SHANTILLY_SRC/execution_context.h \
+           $$SHANTILLY_SRC/command.h \
+           $$SHANTILLY_SRC/logger.h
 
-INCLUDEPATH += $$SHOWBOX_SRC
+INCLUDEPATH += $$SHANTILLY_SRC
 
 CONFIG += c++17
 QMAKE_CXXFLAGS += -Wall -Wextra

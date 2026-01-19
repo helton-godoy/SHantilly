@@ -1,12 +1,12 @@
 # Resolução de Problemas
 
-Soluções para problemas comuns ao usar o Showbox.
+Soluções para problemas comuns ao usar o SHantilly.
 
 ---
 
 ## Problemas de Instalação
 
-### Erro: "showbox: command not found"
+### Erro: "SHantilly: command not found"
 
 **Causa:** Binário não está no PATH.
 
@@ -14,13 +14,13 @@ Soluções para problemas comuns ao usar o Showbox.
 
 ```bash
 # Verificar onde está instalado
-which showbox || find /usr -name "showbox" 2>/dev/null
+which SHantilly || find /usr -name "SHantilly" 2>/dev/null
 
 # Adicionar ao PATH temporariamente
-export PATH="$PATH:/caminho/para/showbox"
+export PATH="$PATH:/caminho/para/SHantilly"
 
 # Adicionar permanentemente
-echo 'export PATH="$PATH:/caminho/para/showbox"' >> ~/.bashrc
+echo 'export PATH="$PATH:/caminho/para/SHantilly"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -74,14 +74,14 @@ end frame
 **Causas possíveis:**
 
 1. **Falta `show`:**
-   
+
    ```bash
    # Adicione no final do script
    show
    ```
 
 2. **Widget dentro de container fechado:**
-   
+
    ```bash
    add groupbox "Grupo" grp
    add label "Dentro"
@@ -90,7 +90,7 @@ end frame
    ```
 
 3. **Widget oculto:**
-   
+
    ```bash
    # Verificar se não há hide
    show nome_widget
@@ -141,7 +141,7 @@ add label 'Texto com "aspas" internas'
 **Solução:** Use heredoc com aspas:
 
 ```bash
-showbox << 'EOF'   # Note as ASPAS em EOF
+SHantilly << 'EOF'   # Note as ASPAS em EOF
 add label "Preço: $100 & mais!"
 EOF
 ```
@@ -182,7 +182,7 @@ end listbox
 
 ### Pipe fechado prematuramente
 
-**Sintoma:** "Broken pipe" ou showbox fecha sozinho.
+**Sintoma:** "Broken pipe" ou SHantilly fecha sozinho.
 
 **Causa:** Script termina antes de ler toda a entrada.
 
@@ -191,7 +191,7 @@ end listbox
 ```bash
 while IFS='=' read -r widget valor; do
     # processar
-done < <(showbox << 'EOF'
+done < <(SHantilly << 'EOF'
 ...
 EOF
 )
@@ -248,7 +248,7 @@ set stylesheet "* { font-size: 14px; }"
 
 ```bash
 export QT_SCALE_FACTOR=1.5
-showbox < comandos.txt
+SHantilly < comandos.txt
 ```
 
 ---
@@ -261,7 +261,7 @@ showbox < comandos.txt
 
 ```bash
 export QT_STYLE_OVERRIDE=Fusion
-showbox < comandos.txt
+SHantilly < comandos.txt
 ```
 
 ---
@@ -273,14 +273,14 @@ showbox < comandos.txt
 Não há comando direto. Alternativas:
 
 1. Simule clique em botão exit
-2. Termine o processo: `kill $SHOWBOX_PID`
+2. Termine o processo: `kill $SHANTILLY_PID`
 
 ---
 
 ### Como verificar qual botão foi clicado?
 
 ```bash
-OUTPUT=$(showbox << 'EOF'
+OUTPUT=$(SHantilly << 'EOF'
 add pushbutton "OK" btn_ok apply exit
 add pushbutton "Cancelar" btn_cancel exit
 EOF
@@ -340,24 +340,24 @@ add label "/path/to/image.svg" lbl_logo picture
 Não há modo verbose nativo. Para debug:
 
 1. **Teste comandos interativamente:**
-   
+
    ```bash
-   showbox
+   SHantilly
    # Digite comandos manualmente e veja o resultado
    add label "teste"
    show
    ```
 
 2. **Log de comandos:**
-   
+
    ```bash
-   tee /tmp/showbox_debug.log | showbox
+   tee /tmp/SHantilly_debug.log | SHantilly
    ```
 
 3. **Verifique saída:**
-   
+
    ```bash
-   showbox < comandos.txt 2>&1 | tee /tmp/output.log
+   SHantilly < comandos.txt 2>&1 | tee /tmp/output.log
    ```
 
 ---

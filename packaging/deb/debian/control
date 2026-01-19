@@ -1,4 +1,4 @@
-Source: showbox
+Source: SHantilly
 Section: x11
 Priority: optional
 Maintainer: Helton Godoy <helton@example.com>
@@ -12,15 +12,15 @@ Build-Depends: debhelper-compat (= 13),
                libgl-dev,
                libopengl-dev
 Standards-Version: 4.6.2
-Homepage: https://github.com/helton-godoy/showbox
+Homepage: https://github.com/helton-godoy/SHantilly
 Rules-Requires-Root: no
 
-Package: showbox
+Package: SHantilly
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Recommends: libqt6svg6
 Description: GUI widgets for shell scripts
- ShowBox is a Qt6-based tool that provides GUI widgets for shell scripts.
+ SHantilly is a Qt6-based tool that provides GUI widgets for shell scripts.
  It allows creating dialogs, forms, and interactive interfaces directly
  from bash scripts using a simple command-based syntax.
  .

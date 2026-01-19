@@ -1,6 +1,6 @@
 # Guia de Instalação
 
-Este guia cobre todas as formas de instalar o Showbox no seu sistema.
+Este guia cobre todas as formas de instalar o SHantilly no seu sistema.
 
 ---
 
@@ -26,10 +26,10 @@ A forma mais fácil para sistemas baseados em Debian.
 
 ```bash
 # Baixar o pacote mais recente
-wget https://github.com/seu-usuario/showbox/releases/latest/download/showbox_1.0_amd64.deb
+wget https://github.com/seu-usuario/SHantilly/releases/latest/download/SHantilly_1.0_amd64.deb
 
 # Instalar
-sudo dpkg -i showbox_1.0_amd64.deb
+sudo dpkg -i SHantilly_1.0_amd64.deb
 
 # Resolver dependências (se necessário)
 sudo apt-get install -f
@@ -50,16 +50,16 @@ Executável portátil que funciona em qualquer distribuição Linux moderna.
 
 ```bash
 # Baixar
-wget https://github.com/seu-usuario/showbox/releases/latest/download/showbox-1.0-x86_64.AppImage
+wget https://github.com/seu-usuario/SHantilly/releases/latest/download/SHantilly-1.0-x86_64.AppImage
 
 # Tornar executável
-chmod +x showbox-1.0-x86_64.AppImage
+chmod +x SHantilly-1.0-x86_64.AppImage
 
 # Executar diretamente
-./showbox-1.0-x86_64.AppImage
+./SHantilly-1.0-x86_64.AppImage
 
 # Ou mover para o PATH
-sudo mv showbox-1.0-x86_64.AppImage /usr/local/bin/showbox
+sudo mv SHantilly-1.0-x86_64.AppImage /usr/local/bin/SHantilly
 ```
 
 > **Nota**: AppImage inclui todas as dependências Qt6 embutidas.
@@ -95,16 +95,16 @@ sudo pacman -S qt6-base qt6-charts base-devel cmake
 
 ```bash
 # Clonar repositório
-git clone https://github.com/seu-usuario/showbox.git
-cd showbox
+git clone https://github.com/seu-usuario/SHantilly.git
+cd SHantilly
 
 # Compilar
-cd src/code/showbox
-qmake6 showbox.pro
+cd src/code/SHantilly
+qmake6 SHantilly.pro
 make -j$(nproc)
 
 # O binário estará em:
-# ./bin/showbox
+# ./bin/SHantilly
 ```
 
 #### 3.3 Instalar (opcional)
@@ -114,7 +114,7 @@ make -j$(nproc)
 sudo make install
 
 # Ou adicionar ao PATH manualmente
-echo 'export PATH="$PATH:/caminho/para/showbox/src/code/showbox/bin"' >> ~/.bashrc
+echo 'export PATH="$PATH:/caminho/para/SHantilly/src/code/SHantilly/bin"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -126,10 +126,10 @@ Após instalar, verifique se está funcionando:
 
 ```bash
 # Verificar versão
-showbox --version
+SHantilly --version
 
 # Teste rápido
-echo 'add label "Instalação bem sucedida!" | add pushbutton "OK" exit default' | showbox
+echo 'add label "Instalação bem sucedida!" | add pushbutton "OK" exit default' | SHantilly
 ```
 
 Se uma janela aparecer com a mensagem, a instalação foi bem sucedida! 🎉
@@ -140,14 +140,14 @@ Se uma janela aparecer com a mensagem, a instalação foi bem sucedida! 🎉
 
 ### Configuração de Tema (Opcional)
 
-O Showbox detecta automaticamente o tema Qt do sistema. Para forçar um tema específico:
+O SHantilly detecta automaticamente o tema Qt do sistema. Para forçar um tema específico:
 
 ```bash
 # Usar tema Fusion (neutro)
 export QT_STYLE_OVERRIDE=Fusion
 
 # Ou via argumento
-showbox --style fusion < comandos.txt
+SHantilly --style fusion < comandos.txt
 ```
 
 ### Variáveis de Ambiente
@@ -156,7 +156,7 @@ showbox --style fusion < comandos.txt
 | ------------------- | ------------------------------------ |
 | `QT_STYLE_OVERRIDE` | Força um estilo Qt específico        |
 | `QT_SCALE_FACTOR`   | Escala da interface (HiDPI)          |
-| `SHOWBOX_RC`        | Caminho para arquivo de configuração |
+| `SHANTILLY_RC`        | Caminho para arquivo de configuração |
 
 ---
 
@@ -165,19 +165,19 @@ showbox --style fusion < comandos.txt
 ### Pacote DEB
 
 ```bash
-sudo apt-get remove showbox
+sudo apt-get remove SHantilly
 ```
 
 ### AppImage
 
 ```bash
-rm /usr/local/bin/showbox
+rm /usr/local/bin/SHantilly
 ```
 
 ### Compilação Manual
 
 ```bash
-cd showbox/src/code/showbox
+cd SHantilly/src/code/SHantilly
 sudo make uninstall
 ```
 

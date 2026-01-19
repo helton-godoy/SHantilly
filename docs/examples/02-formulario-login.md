@@ -10,6 +10,7 @@ Criando um formulário com campos de entrada e validação.
 ## Objetivo
 
 Criar um formulário de login com:
+
 - Campo de usuário
 - Campo de senha (oculto)
 - Checkbox "Lembrar-me"
@@ -25,8 +26,8 @@ Criar um formulário de login com:
 # Tutorial 02: Formulário de Login
 # Demonstra campos de entrada e processamento de dados
 
-# Capturar a saída do showbox
-OUTPUT=$(showbox << 'EOF'
+# Capturar a saída do SHantilly
+OUTPUT=$(SHantilly << 'EOF'
 set title "Login"
 
 # Ícone do sistema (opcional)
@@ -64,18 +65,18 @@ case $? in
     1)
         # Usuário clicou em "Entrar"
         eval "$OUTPUT"
-        
+
         echo "==== Dados Recebidos ===="
         echo "Usuário: $txt_user"
         echo "Senha: (${#txt_pass} caracteres)"
         echo "Lembrar: $( [ "$chk_remember" = "1" ] && echo "Sim" || echo "Não" )"
-        
+
         # Validação simples
         if [ -z "$txt_user" ] || [ -z "$txt_pass" ]; then
             echo "Erro: Campos obrigatórios não preenchidos"
             exit 1
         fi
-        
+
         echo "Login processado com sucesso!"
         ;;
     *)
@@ -117,11 +118,11 @@ Agrupa widgets visualmente com uma borda e título.
 ### Captura de Dados
 
 ```bash
-OUTPUT=$(showbox << 'EOF' ... EOF)
+OUTPUT=$(SHantilly << 'EOF' ... EOF)
 eval "$OUTPUT"
 ```
 
-- Captura a saída do showbox na variável `OUTPUT`
+- Captura a saída do SHantilly na variável `OUTPUT`
 - `eval` transforma as linhas `nome=valor` em variáveis shell
 
 ### Código de Saída

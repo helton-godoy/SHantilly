@@ -1,7 +1,7 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: showbox
+Upstream-Name: SHantilly
 Upstream-Contact: Helton Godoy <helton@example.com>
-Source: https://github.com/helton-godoy/showbox
+Source: https://github.com/helton-godoy/SHantilly
 
 Files: *
 Copyright: 2015-2016, 2020 Andriy Martynets <andy.martynets@gmail.com>

@@ -1,6 +1,6 @@
 # Referência de Widgets
 
-Documentação completa de todos os widgets disponíveis no Showbox.
+Documentação completa de todos os widgets disponíveis no SHantilly.
 
 ---
 
@@ -351,7 +351,7 @@ add textview nome [file "caminho"]
 **Exemplo:**
 
 ```bash
-add textview tv_licenca file "/usr/share/doc/showbox/LICENSE"
+add textview tv_licenca file "/usr/share/doc/SHantilly/LICENSE"
 set tv_licenca stylesheet "font-family: monospace; min-width: 40em; min-height: 20em;"
 ```
 

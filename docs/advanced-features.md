@@ -1,22 +1,22 @@
 # Funcionalidades Avançadas
 
-Recursos avançados para usuários experientes do Showbox.
+Recursos avançados para usuários experientes do SHantilly.
 
 ---
 
 ## Comunicação Bidirecional
 
-O Showbox suporta modificação dinâmica da interface em resposta a eventos do usuário.
+O SHantilly suporta modificação dinâmica da interface em resposta a eventos do usuário.
 
 ### Usando Pipes (coproc)
 
 ```bash
 #!/bin/bash
 
-# Iniciar showbox como co-processo
-coproc showbox --hidden
-INPUTFD=${COPROC[0]}    # Leitura (saída do showbox)
-OUTPUTFD=${COPROC[1]}   # Escrita (entrada do showbox)
+# Iniciar SHantilly como co-processo
+coproc SHantilly --hidden
+INPUTFD=${COPROC[0]}    # Leitura (saída do SHantilly)
+OUTPUTFD=${COPROC[1]}   # Escrita (entrada do SHantilly)
 
 # Construir interface
 cat >&$OUTPUTFD << 'EOF'
@@ -57,19 +57,19 @@ Para scripts mais complexos ou quando coproc não está disponível.
 ```bash
 #!/bin/bash
 
-FIFO_IN="./showbox_in"
-FIFO_OUT="./showbox_out"
+FIFO_IN="./SHantilly_in"
+FIFO_OUT="./SHantilly_out"
 
 # Criar FIFOs
 rm -f "$FIFO_IN" "$FIFO_OUT"
 mkfifo "$FIFO_IN" "$FIFO_OUT"
 
-# Iniciar showbox em background
-showbox < "$FIFO_OUT" > "$FIFO_IN" &
-SHOWBOX_PID=$!
+# Iniciar SHantilly em background
+SHantilly < "$FIFO_OUT" > "$FIFO_IN" &
+SHANTILLY_PID=$!
 
 # Cleanup ao sair
-trap "kill $SHOWBOX_PID 2>/dev/null; rm -f '$FIFO_IN' '$FIFO_OUT'" EXIT
+trap "kill $SHANTILLY_PID 2>/dev/null; rm -f '$FIFO_IN' '$FIFO_OUT'" EXIT
 
 # Construir interface
 cat > "$FIFO_OUT" << 'EOF'
@@ -96,7 +96,7 @@ done < "$FIFO_IN"
 
 ## Stylesheets Qt
 
-O Showbox suporta stylesheets CSS-like do Qt para customização visual completa.
+O SHantilly suporta stylesheets CSS-like do Qt para customização visual completa.
 
 ### Sintaxe Básica
 
@@ -201,15 +201,15 @@ set chk_terms stylesheet "
 
 ### Tema Global do Sistema
 
-O Showbox respeita o tema Qt do sistema. Para forçar:
+O SHantilly respeita o tema Qt do sistema. Para forçar:
 
 ```bash
 # Via variável de ambiente
 export QT_STYLE_OVERRIDE=Fusion
-showbox < comandos.txt
+SHantilly < comandos.txt
 
 # Via linha de comando
-showbox --style fusion < comandos.txt
+SHantilly --style fusion < comandos.txt
 ```
 
 ### Tema Escuro via Stylesheet
@@ -262,7 +262,7 @@ set stylesheet "
 ```bash
 #!/bin/bash
 
-showbox << 'EOF'
+SHantilly << 'EOF'
 set title "Vendas por Região"
 
 add chart "Distribuição Regional" chart_vendas
@@ -343,7 +343,7 @@ cal_entrega=2026-01-20
 ```bash
 #!/bin/bash
 
-coproc showbox --hidden
+coproc SHantilly --hidden
 INPUTFD=${COPROC[0]}
 OUTPUTFD=${COPROC[1]}
 
@@ -383,7 +383,7 @@ wait $COPROC_PID
 
 ## Ícones do Sistema
 
-O Showbox suporta ícones do tema do sistema por nome:
+O SHantilly suporta ícones do tema do sistema por nome:
 
 ```bash
 add pushbutton "Salvar" btn_save

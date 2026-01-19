@@ -1,34 +1,33 @@
 #!/bin/bash
 #
-# Demo2 - Input de dados com ShowBox
+# Demo2 - Input de dados com SHantilly
 # Teste de compatibilidade - widgets de entrada
 #
 
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/showbox/bin/showbox}"
+SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
 
-while IFS=$'=' read key value
-do
-    case $key in
-        cb1)
-            if [ "$value" == "1" ]; then
-                echo "Option 1 is checked"
-            else
-                echo "Option 1 is unchecked"
-            fi
-            ;;
-        txt1)
-            echo "Text entered: $value"
-            ;;
-        okay)
-            echo "User clicked Ok pushbutton"
-            ;;
-        cancel)
-            echo "User clicked Cancel pushbutton"
-            ;;
-    esac
+while IFS=$'=' read key value; do
+	case ${key} in
+	cb1)
+		if [[ "${value}" == "1" ]]; then
+			echo "Option 1 is checked"
+		else
+			echo "Option 1 is unchecked"
+		fi
+		;;
+	txt1)
+		echo "Text entered: ${value}"
+		;;
+	okay)
+		echo "User clicked Ok pushbutton"
+		;;
+	cancel)
+		echo "User clicked Cancel pushbutton"
+		;;
+	esac
 done < <(
 
-$SHOWBOX_BIN <<EODEMO
+	${SHANTILLY_BIN} <<EODEMO
 add checkbox "&Option 1" cb1
 add textbox "&Text field" txt1 "text to edit"
 add frame horizontal
@@ -38,7 +37,7 @@ add pushbutton &Cancel cancel exit
 end frame
 set okay default
 set cb1 focus
-set title "ShowBox Demo 2"
+set title "SHantilly Demo 2"
 show
 EODEMO
 

@@ -1,12 +1,12 @@
 # Guia de Layouts
 
-Aprenda a criar interfaces complexas com o sistema de layouts do Showbox.
+Aprenda a criar interfaces complexas com o sistema de layouts do SHantilly.
 
 ---
 
 ## Sistema de 3 Níveis
 
-O Showbox usa um sistema hierárquico de layouts:
+O SHantilly usa um sistema hierárquico de layouts:
 
 ```
 ┌────────────────────────────────────────────────────────────┐
@@ -124,7 +124,7 @@ Labels à esquerda, campos à direita.
 
 ```bash
 #!/bin/bash
-showbox << 'EOF'
+SHantilly << 'EOF'
 set title "Formulário"
 
 add textbox "Nome:" txt_nome
@@ -151,7 +151,7 @@ Menu à esquerda, conteúdo à direita.
 
 ```bash
 #!/bin/bash
-showbox --resizable << 'EOF'
+SHantilly --resizable << 'EOF'
 set title "Painel de Controle"
 
 # === SIDEBAR (coluna 1) ===
@@ -214,7 +214,7 @@ Múltiplas linhas e colunas.
 
 ```bash
 #!/bin/bash
-showbox << 'EOF'
+SHantilly << 'EOF'
 set title "Seletor de Ícones"
 
 # Linha 1
@@ -257,7 +257,7 @@ Cada aba com seu próprio layout.
 
 ```bash
 #!/bin/bash
-showbox --resizable << 'EOF'
+SHantilly --resizable << 'EOF'
 set title "Configurações do Sistema"
 
 add tabs tabs_main
@@ -343,7 +343,7 @@ end frame
 ### 3. Use --hidden para Interfaces Complexas
 
 ```bash
-showbox --hidden << 'EOF'
+SHantilly --hidden << 'EOF'
 # Construir toda a interface aqui
 # ...
 # Só mostrar quando pronto

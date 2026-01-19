@@ -10,6 +10,7 @@ Criando gráficos interativos com atualização em tempo real.
 ## Objetivo
 
 Criar um dashboard com:
+
 - Gráfico de pizza interativo
 - Atualização dinâmica de dados
 - Exportação de imagem
@@ -25,12 +26,12 @@ Criar um dashboard com:
 # Tutorial 05: Gráfico Dinâmico
 # Demonstra chart widget com interatividade
 
-FIFO_IN="/tmp/showbox_$$_in"
-FIFO_OUT="/tmp/showbox_$$_out"
+FIFO_IN="/tmp/SHantilly_$$_in"
+FIFO_OUT="/tmp/SHantilly_$$_out"
 
 # Cleanup
 cleanup() {
-    kill $SHOWBOX_PID 2>/dev/null
+    kill $SHANTILLY_PID 2>/dev/null
     rm -f "$FIFO_IN" "$FIFO_OUT"
 }
 trap cleanup EXIT
@@ -38,9 +39,9 @@ trap cleanup EXIT
 # Criar FIFOs
 mkfifo "$FIFO_IN" "$FIFO_OUT"
 
-# Iniciar showbox
-showbox --resizable < "$FIFO_OUT" > "$FIFO_IN" &
-SHOWBOX_PID=$!
+# Iniciar SHantilly
+SHantilly --resizable < "$FIFO_OUT" > "$FIFO_IN" &
+SHANTILLY_PID=$!
 
 # Construir interface
 cat > "$FIFO_OUT" << 'EOF'
@@ -157,11 +158,13 @@ set chart_nome export "/caminho/grafico.png"
 ### Detectando Clique em Fatia
 
 Evento emitido:
+
 ```
 chart_vendas.slice["Norte"]=2500
 ```
 
 Processamento:
+
 ```bash
 REGIAO=$(echo "$widget" | sed 's/.*\["\(.*\)"\].*/\1/')
 ```
@@ -173,6 +176,7 @@ REGIAO=$(echo "$widget" | sed 's/.*\["\(.*\)"\].*/\1/')
 O widget `chart` suporta automaticamente gráficos de pizza. Dados são interpretados como pares `label:valor`.
 
 Para gráficos de barras ou linha, configure o eixo:
+
 ```bash
 set chart_nome axis "horizontal"  # Barras
 set chart_nome axis "vertical"    # Linha/Área
@@ -184,7 +188,7 @@ set chart_nome axis "vertical"    # Linha/Área
 
 ```
 ┌─────────────┐     FIFO_OUT      ┌─────────────┐
-│   Script    │ ─────────────────▶│   Showbox   │
+│   Script    │ ─────────────────▶│   SHantilly   │
 │   (bash)    │                   │   (Qt GUI)  │
 │             │◀───────────────── │             │
 └─────────────┘     FIFO_IN       └─────────────┘

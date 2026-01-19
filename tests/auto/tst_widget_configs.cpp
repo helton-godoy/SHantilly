@@ -1,5 +1,5 @@
 #include <QtTest>
-// We expect this header to exist in libs/showbox-ui/include
+// We expect this header to exist in libs/SHantilly-ui/include
 #include <WidgetConfigs.h>
 
 class TestWidgetConfigs : public QObject
@@ -14,7 +14,7 @@ private slots:
 
 void TestWidgetConfigs::testWindowConfigDefaults()
 {
-    Showbox::Models::WindowConfig config;
+    Sbx::Models::WindowConfig config;
     QCOMPARE(config.title, QString(""));
     QCOMPARE(config.width, 800);
     QCOMPARE(config.height, 600);
@@ -23,7 +23,7 @@ void TestWidgetConfigs::testWindowConfigDefaults()
 
 void TestWidgetConfigs::testButtonConfigDefaults()
 {
-    Showbox::Models::ButtonConfig config;
+    Sbx::Models::ButtonConfig config;
     QCOMPARE(config.text, QString("Button"));
     QCOMPARE(config.name, QString(""));
     QVERIFY(!config.isValid()); // Name is required for controls
@@ -34,7 +34,7 @@ void TestWidgetConfigs::testButtonConfigDefaults()
 
 void TestWidgetConfigs::testLabelConfigDefaults()
 {
-    Showbox::Models::LabelConfig config;
+    Sbx::Models::LabelConfig config;
     QCOMPARE(config.text, QString("Label"));
     QVERIFY(!config.isValid()); // Name is required
     

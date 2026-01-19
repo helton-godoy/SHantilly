@@ -7,18 +7,18 @@ export QT_SELECT = qt6
 	dh $@
 
 override_dh_auto_configure:
-	cd src/code/showbox && qmake6 showbox.pro
+	cd src/code/SHantilly && qmake6 SHantilly.pro
 
 override_dh_auto_build:
-	$(MAKE) -C src/code/showbox
+	$(MAKE) -C src/code/SHantilly
 
 override_dh_auto_install:
-	install -D -m 755 src/code/showbox/bin/showbox debian/showbox/usr/bin/showbox
-	install -D -m 644 packaging/deb/debian/showbox.desktop debian/showbox/usr/share/applications/showbox.desktop
+	install -D -m 755 src/code/SHantilly/bin/SHantilly debian/SHantilly/usr/bin/SHantilly
+	install -D -m 644 packaging/deb/debian/SHantilly.desktop debian/SHantilly/usr/share/applications/SHantilly.desktop
 
 override_dh_auto_clean:
-	$(MAKE) -C src/code/showbox clean || true
-	rm -f src/code/showbox/bin/showbox
+	$(MAKE) -C src/code/SHantilly clean || true
+	rm -f src/code/SHantilly/bin/SHantilly
 
 override_dh_shlibdeps:
 	dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info

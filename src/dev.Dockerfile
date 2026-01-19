@@ -23,6 +23,7 @@ RUN apt-get update -qq && apt-get install -qqy \
     libqt6widgets6 \
     libqt6gui6 \
     libqt6core6t64 \
+    libgtest-dev \
     # XCB dependencies for GUI rendering
     libxcb-cursor0 \
     libxcb-xinerama0 \
@@ -42,7 +43,15 @@ RUN apt-get update -qq && apt-get install -qqy \
     curl \
     wget \
     pandoc \
+    clang-format \
+    clang-tidy \
+    cppcheck \
+    doxygen \
     debhelper \
+    python3-pip \
+    mkdocs \
+    mkdocs-material \
+    lcov \
     && rm -rf /var/lib/apt/lists/*
 
 # Generate locale

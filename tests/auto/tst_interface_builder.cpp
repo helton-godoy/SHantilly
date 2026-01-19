@@ -1,57 +1,107 @@
 #include <QtTest>
-#include <IShowboxBuilder.h>
+#include <ISHantillyBuilder.h>
 #include <WidgetConfigs.h>
 #include <QWidget>
 
 // Mock implementation to verify interface signature
-class MockBuilder : public IShowboxBuilder {
+class MockBuilder : public ISHantillyBuilder {
 public:
-    QWidget* buildWindow(const Showbox::Models::WindowConfig& config) override {
+    QWidget* buildWindow(const Sbx::Models::WindowConfig& config) override {
         Q_UNUSED(config);
         return nullptr;
     }
     
-    QWidget* buildButton(const Showbox::Models::ButtonConfig& config) override {
+    QWidget* buildButton(const Sbx::Models::ButtonConfig& config) override {
         Q_UNUSED(config);
         return nullptr;
     }
     
-    QWidget* buildLabel(const Showbox::Models::LabelConfig& config) override {
+    QWidget* buildLabel(const Sbx::Models::LabelConfig& config) override {
         Q_UNUSED(config);
         return nullptr;
     }
 
-    QWidget* buildLineEdit(const Showbox::Models::LineEditConfig& config) override {
+    QWidget* buildLineEdit(const Sbx::Models::LineEditConfig& config) override {
         Q_UNUSED(config);
         return nullptr;
     }
 
-    QWidget* buildComboBox(const Showbox::Models::ComboBoxConfig& config) override {
+    QWidget* buildComboBox(const Sbx::Models::ComboBoxConfig& config) override {
         Q_UNUSED(config);
         return nullptr;
     }
 
-    QWidget* buildList(const Showbox::Models::ListConfig& config) override {
+    QWidget* buildList(const Sbx::Models::ListConfig& config) override {
         Q_UNUSED(config);
         return nullptr;
     }
 
-    QWidget* buildTable(const Showbox::Models::TableConfig& config) override {
+    QWidget* buildTable(const Sbx::Models::TableConfig& config) override {
         Q_UNUSED(config);
         return nullptr;
     }
 
-    QWidget* buildProgressBar(const Showbox::Models::ProgressBarConfig& config) override {
+    QWidget* buildProgressBar(const Sbx::Models::ProgressBarConfig& config) override {
         Q_UNUSED(config);
         return nullptr;
     }
 
-    QWidget* buildChart(const Showbox::Models::ChartConfig& config) override {
+    QWidget* buildChart(const Sbx::Models::ChartConfig& config) override {
         Q_UNUSED(config);
         return nullptr;
     }
 
-    QLayout* buildLayout(const Showbox::Models::LayoutConfig& config) override {
+    QWidget* buildCheckBox(const Sbx::Models::CheckBoxConfig& config) override {
+        Q_UNUSED(config);
+        return nullptr;
+    }
+
+    QWidget* buildRadioButton(const Sbx::Models::RadioButtonConfig& config) override {
+        Q_UNUSED(config);
+        return nullptr;
+    }
+
+    QWidget* buildCalendar(const Sbx::Models::CalendarConfig& config) override {
+        Q_UNUSED(config);
+        return nullptr;
+    }
+
+    QWidget* buildSeparator(const Sbx::Models::SeparatorConfig& config) override {
+        Q_UNUSED(config);
+        return nullptr;
+    }
+
+    QWidget* buildSpinBox(const Sbx::Models::SpinBoxConfig& config) override {
+        Q_UNUSED(config);
+        return nullptr;
+    }
+
+    QWidget* buildSlider(const Sbx::Models::SliderConfig& config) override {
+        Q_UNUSED(config);
+        return nullptr;
+    }
+
+    QWidget* buildTextEdit(const Sbx::Models::TextEditConfig& config) override {
+        Q_UNUSED(config);
+        return nullptr;
+    }
+
+    QWidget* buildGroupBox(const Sbx::Models::GroupBoxConfig& config) override {
+        Q_UNUSED(config);
+        return nullptr;
+    }
+
+    QWidget* buildFrame(const Sbx::Models::FrameConfig& config) override {
+        Q_UNUSED(config);
+        return nullptr;
+    }
+
+    QWidget* buildTabWidget(const Sbx::Models::TabWidgetConfig& config) override {
+        Q_UNUSED(config);
+        return nullptr;
+    }
+
+    QLayout* buildLayoutStructure(const Sbx::Models::SbxLayoutConfig& config) override {
         Q_UNUSED(config);
         return nullptr;
     }
