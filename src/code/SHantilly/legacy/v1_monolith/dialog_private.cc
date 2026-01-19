@@ -20,12 +20,13 @@
  *------------------------------------------------------------------------------
  */
 
-#include "SHantilly.h"
-#include "custom_table_widget.h"
-#include "custom_chart_widget.h"
-#include <QtCharts>
 #include <QtCharts/QPieSeries>
 #include <QtCharts/QPieSlice>
+#include <QtCharts>
+
+#include "SHantilly.h"
+#include "custom_chart_widget.h"
+#include "custom_table_widget.h"
 
 using namespace DialogCommandTokens;
 
@@ -40,21 +41,20 @@ using namespace DialogCommandTokens;
  *  dialog, not they are created.
  *  It walks through the given or current (the currentLayout is on) page only.
  ******************************************************************************/
-void SHantilly::updateTabsOrder(QWidget *page)
-{
-    QBoxLayout *mainLayout = (QBoxLayout *)(page ? page->layout() :
-                                            currentLayout->parent()->parent());
-    QWidget *prevWidget = nullptr;
-    QWidget *widget;
+void SHantilly::updateTabsOrder(QWidget* page) {
+    QBoxLayout* mainLayout =
+        (QBoxLayout*) (page ? page->layout() : currentLayout->parent()->parent());
+    QWidget* prevWidget = nullptr;
+    QWidget* widget;
 
     // All widgets are chained. Their focus policies define the focus move.
     for (int i = 0, j = mainLayout->count(); i < j; i++) {
-        QHBoxLayout *hLayout = (QHBoxLayout *)mainLayout->itemAt(i)->layout();
+        QHBoxLayout* hLayout = (QHBoxLayout*) mainLayout->itemAt(i)->layout();
         for (int i = 0, j = hLayout->count(); i < j; i++) {
-            QVBoxLayout *vLayout = (QVBoxLayout *)hLayout->itemAt(i)->layout();
+            QVBoxLayout* vLayout = (QVBoxLayout*) hLayout->itemAt(i)->layout();
             for (int i = 0, j = vLayout->count(); i < j; i++) {
-                QLayout *layout;
-                QLayoutItem *li = vLayout->itemAt(i);
+                QLayout* layout;
+                QLayoutItem* li = vLayout->itemAt(i);
 
                 if (!(widget = li->widget())) {
                     if ((layout = li->layout())) {
@@ -70,19 +70,18 @@ void SHantilly::updateTabsOrder(QWidget *page)
                         prevWidget = widget;
                     }
 
-                    if (QBoxLayout *gLayout = (QBoxLayout *)widget->layout()) {
+                    if (QBoxLayout* gLayout = (QBoxLayout*) widget->layout()) {
                         // For QGroupBox/QFrame objects
                         for (int i = 0, j = gLayout->count(); i < j; i++) {
-                            QLayout *layout;
-                            QLayoutItem *li = gLayout->itemAt(i);
+                            QLayout* layout;
+                            QLayoutItem* li = gLayout->itemAt(i);
 
                             if (!(widget = li->widget())) {
                                 if ((layout = li->layout()))
                                     widget = layout->itemAt(1)->widget();
                             }
 
-                            if (widget
-                                && widget->focusPolicy() != Qt::NoFocus) {
+                            if (widget && widget->focusPolicy() != Qt::NoFocus) {
                                 if (prevWidget)
                                     setTabOrder(prevWidget, widget);
                                 prevWidget = widget;
@@ -99,16 +98,15 @@ void SHantilly::updateTabsOrder(QWidget *page)
  *  The layout is empty if it is not the current one, has no child widgets and
  *  the same is true for all its downlinks.
  ******************************************************************************/
-bool SHantilly::isEmpty(QLayout *layout)
-{
+bool SHantilly::isEmpty(QLayout* layout) {
     // Note:
     // layout->isEmpty() returns true even if it contains labels or groupboxes
 
     if (!layout || layout == currentLayout)
         return false;
     for (int i = 0, j = layout->count(); i < j; i++) {
-        QLayoutItem *li;
-        QLayout *child;
+        QLayoutItem* li;
+        QLayout* child;
 
         if ((li = layout->itemAt(i))->widget())
             return false;
@@ -126,14 +124,12 @@ bool SHantilly::isEmpty(QLayout *layout)
  *    - is not the current one
  *    - is not the last one
  ******************************************************************************/
-bool SHantilly::removeIfEmpty(QLayout *layout)
-{
-    QLayout *parent;
+bool SHantilly::removeIfEmpty(QLayout* layout) {
+    QLayout* parent;
 
-    if (isEmpty(layout)
-        && (!(parent = (QLayout *)layout->parent())->isWidgetType())
-        && (parent->count() > 1 || (!parent->parent()->isWidgetType()
-        && ((QLayout *)parent->parent())->count() > 1))) {
+    if (isEmpty(layout) && (!(parent = (QLayout*) layout->parent())->isWidgetType()) &&
+        (parent->count() > 1 ||
+         (!parent->parent()->isWidgetType() && ((QLayout*) parent->parent())->count() > 1))) {
         if (!removeIfEmpty(parent)) {
             parent->removeItem(layout);
             delete layout;
@@ -148,11 +144,10 @@ bool SHantilly::removeIfEmpty(QLayout *layout)
  *  (3rd or 4th level). Actually for the 4th level layout it removes spacer
  *  items only.
  ******************************************************************************/
-void SHantilly::sanitizeLayout(QLayout *layout)
-{
+void SHantilly::sanitizeLayout(QLayout* layout) {
     if (isEmpty(layout) && layout->count()) {
         // Remove all QSpacerItem items
-        while (QLayoutItem *li = layout->takeAt(0))
+        while (QLayoutItem* li = layout->takeAt(0))
             delete li;
     }
 
@@ -162,65 +157,59 @@ void SHantilly::sanitizeLayout(QLayout *layout)
 /*******************************************************************************
  *  sanitizeLabel prepares label for changing its content type
  ******************************************************************************/
-void SHantilly::sanitizeLabel(QWidget *label, enum ContentType content)
-{
+void SHantilly::sanitizeLabel(QWidget* label, enum ContentType content) {
     if (widgetType(label) == LabelWidget) {
-        QMovie *mv;
-        QLayout *layout;
+        QMovie* mv;
+        QLayout* layout;
 
-        if ((mv = ((QLabel *)label)->movie()))
+        if ((mv = ((QLabel*) label)->movie()))
             delete mv;
-        ((QLabel *)label)->clear();
+        ((QLabel*) label)->clear();
 
         if ((layout = findLayout(label))) {
             switch (content) {
-            case PixmapContent:
-                // Set widget alignment
-                layout->setAlignment(label, GRAPHICS_ALIGNMENT);
-                // Set layout alignment
-                layout->setAlignment(GRAPHICS_ALIGNMENT);
-                label->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-                // Reset to defaults
-                ((QLabel *)label)->setTextInteractionFlags(
-                        Qt::LinksAccessibleByMouse);
-                ((QLabel *)label)->setOpenExternalLinks(false);
-                ((QLabel *)label)->setWordWrap(false);
-                break;
-            case MovieContent:
-                layout->setAlignment(label, GRAPHICS_ALIGNMENT);
-                layout->setAlignment(GRAPHICS_ALIGNMENT);
-                label->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-                // Reset to defaults
-                ((QLabel *)label)->setTextInteractionFlags(
-                        Qt::LinksAccessibleByMouse);
-                ((QLabel *)label)->setOpenExternalLinks(false);
-                ((QLabel *)label)->setWordWrap(false);
-                break;
-            case TextContent:
-                // Layout default alignment for proper text displaying
-                layout->setAlignment(label, DEFAULT_ALIGNMENT);
-                layout->setAlignment(DEFAULT_ALIGNMENT);
-                label->setSizePolicy(QSizePolicy::MinimumExpanding,
-                                     QSizePolicy::Minimum);
-                // Qt::TextBrowserInteraction includes:
-                //    TextSelectableByMouse | LinksAccessibleByMouse
-                //    | LinksAccessibleByKeyboard
-                // To make the text label not interactive use stylesheets
-                // (e.g. qproperty-textInteractionFlags: NoTextInteraction;).
-                ((QLabel *)label)->setTextInteractionFlags(
-                        Qt::TextBrowserInteraction);
-                ((QLabel *)label)->setOpenExternalLinks(true);
-                ((QLabel *)label)->setWordWrap(true);
-                break;
+                case PixmapContent:
+                    // Set widget alignment
+                    layout->setAlignment(label, GRAPHICS_ALIGNMENT);
+                    // Set layout alignment
+                    layout->setAlignment(GRAPHICS_ALIGNMENT);
+                    label->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+                    // Reset to defaults
+                    ((QLabel*) label)->setTextInteractionFlags(Qt::LinksAccessibleByMouse);
+                    ((QLabel*) label)->setOpenExternalLinks(false);
+                    ((QLabel*) label)->setWordWrap(false);
+                    break;
+                case MovieContent:
+                    layout->setAlignment(label, GRAPHICS_ALIGNMENT);
+                    layout->setAlignment(GRAPHICS_ALIGNMENT);
+                    label->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+                    // Reset to defaults
+                    ((QLabel*) label)->setTextInteractionFlags(Qt::LinksAccessibleByMouse);
+                    ((QLabel*) label)->setOpenExternalLinks(false);
+                    ((QLabel*) label)->setWordWrap(false);
+                    break;
+                case TextContent:
+                    // Layout default alignment for proper text displaying
+                    layout->setAlignment(label, DEFAULT_ALIGNMENT);
+                    layout->setAlignment(DEFAULT_ALIGNMENT);
+                    label->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Minimum);
+                    // Qt::TextBrowserInteraction includes:
+                    //    TextSelectableByMouse | LinksAccessibleByMouse
+                    //    | LinksAccessibleByKeyboard
+                    // To make the text label not interactive use stylesheets
+                    // (e.g. qproperty-textInteractionFlags: NoTextInteraction;).
+                    ((QLabel*) label)->setTextInteractionFlags(Qt::TextBrowserInteraction);
+                    ((QLabel*) label)->setOpenExternalLinks(true);
+                    ((QLabel*) label)->setWordWrap(true);
+                    break;
             }
         }
     }
 }
 
-void SHantilly::printWidgetsRecursively(QLayoutItem *item)
-{
-    QLayout *layout;
-    QWidget *widget;
+void SHantilly::printWidgetsRecursively(QLayoutItem* item) {
+    QLayout* layout;
+    QWidget* widget;
 
     if ((layout = item->layout())) {
         for (int i = 0, j = layout->count(); i < j; i++)
@@ -232,50 +221,43 @@ void SHantilly::printWidgetsRecursively(QLayoutItem *item)
     }
 }
 
-void SHantilly::printWidget(QWidget *widget)
+void SHantilly::printWidget(QWidget* widget)
 
 {
-
     if (widget->isEnabled()) {
-
         QByteArray nameBA = widget->objectName().toLocal8Bit();
 
-        const char *name = nameBA.constData();
-
-
+        const char* name = nameBA.constData();
 
         if (name[0]) {
+            QWidget* proxyWidget;
 
-            QWidget *proxyWidget;
-
-            const QMetaObject *metaObj = widget->metaObject();
+            const QMetaObject* metaObj = widget->metaObject();
 
             int propertyIndex;
 
+            if (metaObj
+                    ->property(metaObj->indexOfProperty("checkable"))
 
-
-            if (metaObj->property(metaObj->indexOfProperty("checkable"))
-
-                .read(widget).toBool()) {
-
+                    .read(widget)
+                    .toBool()) {
                 fprintf(output, "%s=%s\n", name,
 
                         metaObj->property(metaObj->indexOfProperty("checked"))
 
-                        .read(widget).toBool() ? "1" : "0");
+                                .read(widget)
+                                .toBool()
+                            ? "1"
+                            : "0");
 
                 fflush(output);
 
                 return;
-
             }
-
-
 
             if ((propertyIndex = metaObj->indexOfProperty("value")) >= 0
 
                 && widgetType(widget) != ProgressBarWidget) {
-
                 fprintf(output, "%s=%d\n", name,
 
                         metaObj->property(propertyIndex).read(widget).toInt());
@@ -283,357 +265,118 @@ void SHantilly::printWidget(QWidget *widget)
                 fflush(output);
 
                 return;
-
             }
 
+            if (widgetType(widget) == CalendarWidget) {
+                QCalendarWidget* calendar = (QCalendarWidget*) widget;
 
+                fprintf(output, "%s=%s\n", name,
 
-                        if (widgetType(widget) == CalendarWidget) {
+                        calendar->selectedDate()
+                            .toString(Qt::ISODate)
 
-
-
-                            QCalendarWidget *calendar = (QCalendarWidget *)widget;
-
-
-
-                            fprintf(output, "%s=%s\n", name,
-
-
-
-                                    calendar->selectedDate().toString(Qt::ISODate)
-
-
-
-                                    .toLocal8Bit().constData());
-
-
-
-                            fflush(output);
-
-
-
-                            return;
-
-
-
-                        }
-
-
-
-            
-
-
-
-                                    if (widgetType(widget) == TableWidget) {
-
-
-
-            
-
-
-
-                                        CustomTableWidget *container = (CustomTableWidget *)widget;
-
-
-
-            
-
-
-
-                                        QTableWidget *table = container->table();
-
-
-
-            
-
-
-
-                                        for (int r = 0; r < table->rowCount(); ++r) {
-
-
-
-            
-
-
-
-                                            for (int c = 0; c < table->columnCount(); ++c) {
-
-
-
-            
-
-
-
-                                                QTableWidgetItem *it = table->item(r, c);
-
-
-
-            
-
-
-
-                                                fprintf(output, "%s[%d][%d]=%s\n", name, r, c,
-
-
-
-            
-
-
-
-                                                        it ? it->text().toLocal8Bit().constData() : "");
-
-
-
-            
-
-
-
-                                            }
-
-
-
-            
-
-
-
-                                        }
-
-
-
-            
-
-
-
-                                        fflush(output);
-
-
-
-            
-
-
-
-                                                                                return;
-
-
-
-            
-
-
-
-                                        
-
-
-
-            
-
-
-
-                                                                            }
-
-
-
-            
-
-
-
-                                        
-
-
-
-            
-
-
-
-                                                    if (widgetType(widget) == ChartWidget) {
-
-
-
-            
-
-
-
-                                                        CustomChartWidget *chartView = (CustomChartWidget *)widget;
-
-
-
-            
-
-
-
-                                                        auto seriesList = chartView->chart()->series();
-
-
-
-            
-
-
-
-                                                        for (int s = 0; s < seriesList.size(); ++s) {
-
-
-
-            
-
-
-
-                                                            auto *series = seriesList[s];
-
-
-
-            
-
-
-
-                                                            if (auto *pieSeries = qobject_cast<QPieSeries *>(series)) {
-
-
-
-            
-
-
-
-                                                                for (auto *slice : pieSeries->slices()) {
-
-
-
-            
-
-
-
-                                                                     fprintf(output, "%s.slice[\"%s\"]=%f\n", name, 
-
-
-
-            
-
-
-
-                                                                             slice->label().toLocal8Bit().constData(), 
-
-
-
-            
-
-
-
-                                                                             slice->value());
-
-
-
-            
-
-
-
-                                                                }
-
-
-
-            
-
-
-
-                                                            }
-
-
-
-            
-
-
-
-                                                        }
-
-
-
-            
-
-
-
-                                                        fflush(output);
-
-
-
-            
-
-
-
-                                                        return;
-
-
-
-            
-
-
-
-                                                    }
-
-
-
-            
-
-
-
-                                        
-
-
-
-            
-
-
-
-                                                                if ((proxyWidget = widget->focusProxy())) {
-
-                QListWidgetItem *item;
-
-
-
-                fprintf(output, "%s=", name);
-
-                switch ((unsigned)widgetType(proxyWidget)) {
-
-                case ComboBoxWidget:
-
-                    fprintf(output, "%s\n",
-
-                            ((QComboBox *)proxyWidget)->currentText()
-
-                            .toLocal8Bit().constData());
-
-                    break;
-
-                case ListBoxWidget:
-
-                    item = ((QListWidget *)proxyWidget)->currentItem();
-
-                    fprintf(output, "%s\n",
-
-                            item ? item->text().toLocal8Bit().constData() : "");
-
-                    break;
-
-                default:
-
-                    metaObj = proxyWidget->metaObject();
-
-                    fprintf(output, "%s\n",
-
-                            metaObj->property(metaObj->indexOfProperty("text"))
-
-                            .read(proxyWidget).toString().toLocal8Bit()
-
+                            .toLocal8Bit()
                             .constData());
 
-                    break;
+                fflush(output);
 
+                return;
+            }
+
+            if (widgetType(widget) == TableWidget) {
+                CustomTableWidget* container = (CustomTableWidget*) widget;
+
+                QTableWidget* table = container->table();
+
+                for (int r = 0; r < table->rowCount(); ++r) {
+                    for (int c = 0; c < table->columnCount(); ++c) {
+                        QTableWidgetItem* it = table->item(r, c);
+
+                        fprintf(output, "%s[%d][%d]=%s\n", name, r, c,
+
+                                it ? it->text().toLocal8Bit().constData() : "");
+                    }
                 }
 
                 fflush(output);
 
                 return;
-
             }
 
+            if (widgetType(widget) == ChartWidget) {
+                CustomChartWidget* chartView = (CustomChartWidget*) widget;
+
+                auto seriesList = chartView->chart()->series();
+
+                for (int s = 0; s < seriesList.size(); ++s) {
+                    auto* series = seriesList[s];
+
+                    if (auto* pieSeries = qobject_cast<QPieSeries*>(series)) {
+                        for (auto* slice : pieSeries->slices()) {
+                            fprintf(output, "%s.slice[\"%s\"]=%f\n", name,
+
+                                    slice->label().toLocal8Bit().constData(),
+
+                                    slice->value());
+                        }
+                    }
+                }
+
+                fflush(output);
+
+                return;
+            }
+
+            if ((proxyWidget = widget->focusProxy())) {
+                QListWidgetItem* item;
+
+                fprintf(output, "%s=", name);
+
+                switch ((unsigned) widgetType(proxyWidget)) {
+                    case ComboBoxWidget:
+
+                        fprintf(output, "%s\n",
+
+                                ((QComboBox*) proxyWidget)
+                                    ->currentText()
+
+                                    .toLocal8Bit()
+                                    .constData());
+
+                        break;
+
+                    case ListBoxWidget:
+
+                        item = ((QListWidget*) proxyWidget)->currentItem();
+
+                        fprintf(output, "%s\n",
+
+                                item ? item->text().toLocal8Bit().constData() : "");
+
+                        break;
+
+                    default:
+
+                        metaObj = proxyWidget->metaObject();
+
+                        fprintf(output, "%s\n",
+
+                                metaObj
+                                    ->property(metaObj->indexOfProperty("text"))
+
+                                    .read(proxyWidget)
+                                    .toString()
+                                    .toLocal8Bit()
+
+                                    .constData());
+
+                        break;
+                }
+
+                fflush(output);
+
+                return;
+            }
         }
-
     }
-
 }

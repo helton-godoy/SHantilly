@@ -21,35 +21,34 @@
  */
 
 #include "SHantilly.h"
-#include "icon_helper.h"
-#include "custom_table_widget.h"
-#include "custom_chart_widget.h"
+
 #include <iostream>
+
+#include "custom_chart_widget.h"
+#include "custom_table_widget.h"
+#include "icon_helper.h"
 
 using namespace DialogCommandTokens;
 
-static const char *aboutLabel = "_dbabout_";
+static const char* aboutLabel = "_dbabout_";
 
 /*******************************************************************************
  *  SHantilly constructor
  ******************************************************************************/
-SHantilly::SHantilly(const char *title, const char *about, bool resizable,
-                      FILE *out):
-    defaultPushButton(nullptr),
-    currentLayout(new QVBoxLayout),
-    currentIndex(0),
-    groupLayout(nullptr),
-    currentView(nullptr),
-    currentListWidget(nullptr),
-    currentTabsWidget(nullptr),
-    output(out),
-    empty(true)
-{
-
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+SHantilly::SHantilly(const char* title, const char* about, bool resizable, FILE* out)
+    : defaultPushButton(nullptr),
+      currentLayout(new QVBoxLayout),
+      currentIndex(0),
+      groupLayout(nullptr),
+      currentView(nullptr),
+      currentListWidget(nullptr),
+      currentTabsWidget(nullptr),
+      output(out),
+      empty(true) {
+    QVBoxLayout* mainLayout = new QVBoxLayout;
     mainLayout->setContentsMargins(9, 9, 9, 9);
     mainLayout->setSpacing(6);
-    QHBoxLayout *hl = new QHBoxLayout;
+    QHBoxLayout* hl = new QHBoxLayout;
     hl->setContentsMargins(0, 0, 0, 0);
     hl->setSpacing(6);
 
@@ -71,11 +70,11 @@ SHantilly::SHantilly(const char *title, const char *about, bool resizable,
 
     setWindowTitle(title);
     if (about) {
-        QPushButton *pb = new QPushButton(tr("About"));
+        QPushButton* pb = new QPushButton(tr("About"));
         pb->setObjectName(QString(aboutLabel));
         connect(pb, SIGNAL(clicked()), this, SLOT(pushButtonClicked()));
 
-        QHBoxLayout *hl = new QHBoxLayout();
+        QHBoxLayout* hl = new QHBoxLayout();
         hl->addStretch(1);
         hl->addWidget(pb);
         currentLayout->addLayout(hl);
@@ -83,8 +82,7 @@ SHantilly::SHantilly(const char *title, const char *about, bool resizable,
     }
 }
 
-void SHantilly::setThemeManager(ThemeManager *manager)
-{
+void SHantilly::setThemeManager(ThemeManager* manager) {
     m_themeManager = manager;
     if (m_themeManager) {
         connect(m_themeManager, &ThemeManager::themeChanged, this, &SHantilly::applyTheme);
@@ -92,9 +90,9 @@ void SHantilly::setThemeManager(ThemeManager *manager)
     }
 }
 
-void SHantilly::applyTheme(ThemeManager::ThemeMode mode)
-{
-    if (mode == ThemeManager::Unknown) return;
+void SHantilly::applyTheme(ThemeManager::ThemeMode mode) {
+    if (mode == ThemeManager::Unknown)
+        return;
 
     QPalette pal = palette();
     QString baseStyle;
@@ -113,29 +111,36 @@ void SHantilly::applyTheme(ThemeManager::ThemeMode mode)
         pal.setColor(QPalette::Link, QColor(42, 130, 218));
         pal.setColor(QPalette::Highlight, QColor(42, 130, 218));
         pal.setColor(QPalette::HighlightedText, Qt::black);
-        
-        baseStyle = "QGroupBox { border: 1px solid #444; border-radius: 10px; margin-top: 1.5ex; padding: 10px; }"
-                    "QGroupBox::title { subcontrol-origin: margin; left: 10px; padding: 0 5px; color: #888; }"
+
+        baseStyle = "QGroupBox { border: 1px solid #444; border-radius: 10px; margin-top: 1.5ex; "
+                    "padding: 10px; }"
+                    "QGroupBox::title { subcontrol-origin: margin; left: 10px; padding: 0 5px; "
+                    "color: #888; }"
                     "QFrame { border: 1px solid #444; border-radius: 10px; border-style: solid; }"
-                    "QFrame[frameShape=\"4\"], QFrame[frameShape=\"5\"] { border: none; height: 1px; background: #444; margin: 5px 0; }"
-                    "QFrame[flat=\"true\"], QFrame[frameShadow=\"16\"] { border: none; background: transparent; }";
+                    "QFrame[frameShape=\"4\"], QFrame[frameShape=\"5\"] { border: none; height: "
+                    "1px; background: #444; margin: 5px 0; }"
+                    "QFrame[flat=\"true\"], QFrame[frameShadow=\"16\"] { border: none; background: "
+                    "transparent; }";
     } else {
         pal = QApplication::style()->standardPalette();
-        baseStyle = "QGroupBox { border: 1px solid #ddd; border-radius: 10px; margin-top: 1.5ex; padding: 10px; }"
-                    "QGroupBox::title { subcontrol-origin: margin; left: 10px; padding: 0 5px; color: #999; }"
+        baseStyle = "QGroupBox { border: 1px solid #ddd; border-radius: 10px; margin-top: 1.5ex; "
+                    "padding: 10px; }"
+                    "QGroupBox::title { subcontrol-origin: margin; left: 10px; padding: 0 5px; "
+                    "color: #999; }"
                     "QFrame { border: 1px solid #ddd; border-radius: 10px; border-style: solid; }"
-                    "QFrame[frameShape=\"4\"], QFrame[frameShape=\"5\"] { border: none; height: 1px; background: #ddd; margin: 5px 0; }"
-                    "QFrame[flat=\"true\"], QFrame[frameShadow=\"16\"] { border: none; background: transparent; }";
+                    "QFrame[frameShape=\"4\"], QFrame[frameShape=\"5\"] { border: none; height: "
+                    "1px; background: #ddd; margin: 5px 0; }"
+                    "QFrame[flat=\"true\"], QFrame[frameShadow=\"16\"] { border: none; background: "
+                    "transparent; }";
     }
-    
+
     setPalette(pal);
     setStyleSheet(baseStyle);
 }
 
-void SHantilly::addPushButton(const char *title, const char *name, bool apply,
-                             bool exit, bool def)
-{
-    QPushButton *pb = new QPushButton(title);
+void SHantilly::addPushButton(const char* title, const char* name, bool apply, bool exit,
+                              bool def) {
+    QPushButton* pb = new QPushButton(title);
 
     pb->setObjectName(QString(name));
 
@@ -163,9 +168,8 @@ void SHantilly::addPushButton(const char *title, const char *name, bool apply,
     updateTabsOrder();
 }
 
-void SHantilly::addCheckBox(const char *title, const char *name, bool checked)
-{
-    QCheckBox *cb = new QCheckBox(title);
+void SHantilly::addCheckBox(const char* title, const char* name, bool checked) {
+    QCheckBox* cb = new QCheckBox(title);
 
     cb->setObjectName(QString(name));
     cb->setChecked(checked);
@@ -178,10 +182,8 @@ void SHantilly::addCheckBox(const char *title, const char *name, bool checked)
     updateTabsOrder();
 }
 
-void SHantilly::addRadioButton(const char *title, const char *name,
-                               bool checked)
-{
-    QRadioButton *rb = new QRadioButton(title);
+void SHantilly::addRadioButton(const char* title, const char* name, bool checked) {
+    QRadioButton* rb = new QRadioButton(title);
 
     rb->setObjectName(QString(name));
     rb->setChecked(checked);
@@ -194,10 +196,8 @@ void SHantilly::addRadioButton(const char *title, const char *name,
     updateTabsOrder();
 }
 
-void SHantilly::addLabel(const char *title, const char *name,
-                         enum ContentType content)
-{
-    QLabel *lb = new QLabel;
+void SHantilly::addLabel(const char* title, const char* name, enum ContentType content) {
+    QLabel* lb = new QLabel;
 
     lb->setObjectName(QString(name));
 
@@ -209,34 +209,32 @@ void SHantilly::addLabel(const char *title, const char *name,
     sanitizeLabel(lb, content);
 
     switch (content) {
-    case PixmapContent:
-        lb->setPixmap(QPixmap(title)); // QLabel copies QPixmap object
-        break;
-    case MovieContent: {
-        QMovie *mv = new QMovie(title);
+        case PixmapContent:
+            lb->setPixmap(QPixmap(title)); // QLabel copies QPixmap object
+            break;
+        case MovieContent: {
+            QMovie* mv = new QMovie(title);
 
-        lb->setMovie(mv); // QLabel stores pointer to QMovie object
-        mv->setParent(lb);
-        mv->start();
-        break;
-    }
-    default:
-        lb->setText(title); // QLabel copies QString object
-        break;
+            lb->setMovie(mv); // QLabel stores pointer to QMovie object
+            mv->setParent(lb);
+            mv->start();
+            break;
+        }
+        default:
+            lb->setText(title); // QLabel copies QString object
+            break;
     }
 }
 
-void SHantilly::addGroupBox(const char *title, const char *name, bool vertical,
-                            bool checkable, bool checked)
-{
-    QGroupBox *gb = new QGroupBox(title);
+void SHantilly::addGroupBox(const char* title, const char* name, bool vertical, bool checkable,
+                            bool checked) {
+    QGroupBox* gb = new QGroupBox(title);
 
     gb->setObjectName(QString(name));
     gb->setCheckable(checkable);
     gb->setChecked(checked);
 
-    groupLayout = (vertical ? (QBoxLayout *)new QVBoxLayout
-                  : (QBoxLayout *)new QHBoxLayout);
+    groupLayout = (vertical ? (QBoxLayout*) new QVBoxLayout : (QBoxLayout*) new QHBoxLayout);
     groupIndex = 0;
     gb->setLayout(groupLayout);
     groupLayout->setContentsMargins(9, 9, 9, 9);
@@ -247,9 +245,8 @@ void SHantilly::addGroupBox(const char *title, const char *name, bool vertical,
     updateTabsOrder();
 }
 
-void SHantilly::addFrame(const char *name, bool vertical, unsigned int style)
-{
-    QFrame *frame = new QFrame;
+void SHantilly::addFrame(const char* name, bool vertical, unsigned int style) {
+    QFrame* frame = new QFrame;
 
     frame->setObjectName(QString(name));
 
@@ -258,8 +255,7 @@ void SHantilly::addFrame(const char *name, bool vertical, unsigned int style)
     // Reset this bit instead of masking another 7 bits
     style &= ~PropertyVertical;
 
-    groupLayout = vertical ? (QBoxLayout *)new QVBoxLayout
-                  : (QBoxLayout *)new QHBoxLayout;
+    groupLayout = vertical ? (QBoxLayout*) new QVBoxLayout : (QBoxLayout*) new QHBoxLayout;
     groupIndex = 0;
     frame->setLayout(groupLayout);
     groupLayout->setContentsMargins(9, 9, 9, 9);
@@ -270,13 +266,11 @@ void SHantilly::addFrame(const char *name, bool vertical, unsigned int style)
     updateTabsOrder();
 }
 
-void SHantilly::addTextBox(const char *title, const char *name,
-                           const char *text, const char *placeholder,
-                           bool password)
-{
-    QHBoxLayout *box = new QHBoxLayout;
-    QLabel *label = new QLabel(title);
-    QLineEdit *edit = new QLineEdit(text);
+void SHantilly::addTextBox(const char* title, const char* name, const char* text,
+                           const char* placeholder, bool password) {
+    QHBoxLayout* box = new QHBoxLayout;
+    QLabel* label = new QLabel(title);
+    QLineEdit* edit = new QLineEdit(text);
 
     edit->setPlaceholderText(placeholder);
     edit->setEchoMode(password ? QLineEdit::Password : QLineEdit::Normal);
@@ -289,19 +283,17 @@ void SHantilly::addTextBox(const char *title, const char *name,
     box->addWidget(edit);
 
     if (groupLayout)
-        ((QBoxLayout *)groupLayout)->insertLayout(groupIndex++, box);
+        ((QBoxLayout*) groupLayout)->insertLayout(groupIndex++, box);
     else
-        ((QBoxLayout *)currentLayout)->insertLayout(currentIndex++, box);
+        ((QBoxLayout*) currentLayout)->insertLayout(currentIndex++, box);
 
     updateTabsOrder();
 }
 
-void SHantilly::addListBox(const char *title, const char *name, bool activation,
-                           bool selection)
-{
-    QVBoxLayout *box = new QVBoxLayout;
-    QLabel *label = new QLabel(title);
-    ListBox *list = new ListBox;
+void SHantilly::addListBox(const char* title, const char* name, bool activation, bool selection) {
+    QVBoxLayout* box = new QVBoxLayout;
+    QLabel* label = new QLabel(title);
+    ListBox* list = new ListBox;
 
     label->setObjectName(QString(name));
     label->setBuddy(list);
@@ -319,26 +311,23 @@ void SHantilly::addListBox(const char *title, const char *name, bool activation,
         currentLayout->insertLayout(currentIndex++, box);
 
     if (activation) {
-        connect(list, SIGNAL(activated(const QModelIndex &)), this,
-                SLOT(listBoxItemActivated(const QModelIndex &)));
+        connect(list, SIGNAL(activated(const QModelIndex&)), this,
+                SLOT(listBoxItemActivated(const QModelIndex&)));
         list->setActivateFlag(true);
     }
 
     if (selection) {
-        connect(list,
-            SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)),
-            this, SLOT(listBoxItemSelected(QListWidgetItem *)));
+        connect(list, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this,
+                SLOT(listBoxItemSelected(QListWidgetItem*)));
     }
 
     updateTabsOrder();
 }
 
-void SHantilly::addComboBox(const char *title, const char *name, bool editable,
-                            bool selection)
-{
-    QHBoxLayout *box = new QHBoxLayout;
-    QLabel *label = new QLabel(title);
-    QComboBox *list = new QComboBox;
+void SHantilly::addComboBox(const char* title, const char* name, bool editable, bool selection) {
+    QHBoxLayout* box = new QHBoxLayout;
+    QLabel* label = new QLabel(title);
+    QComboBox* list = new QComboBox;
 
     label->setObjectName(QString(name));
     label->setBuddy(list);
@@ -365,15 +354,14 @@ void SHantilly::addComboBox(const char *title, const char *name, bool editable,
     // Qt::QueuedConnection is used for this type widget to fix the bug when
     // the first added item made current and is reported as an emty one
     if (selection) {
-        connect(list, SIGNAL(currentIndexChanged(int)), this,
-                SLOT(comboBoxItemSelected(int)), Qt::QueuedConnection);
+        connect(list, SIGNAL(currentIndexChanged(int)), this, SLOT(comboBoxItemSelected(int)),
+                Qt::QueuedConnection);
     }
 
     updateTabsOrder();
 }
 
-void SHantilly::addItem(const char *title, const char *icon, bool current)
-{
+void SHantilly::addItem(const char* title, const char* icon, bool current) {
     // It seems the insertRows call triggers signals (e.g.
     // rowsAboutToBeInserted, rowsInserted or so) which are queued or cause
     // delays in some other way for widgets' currentIndexChanged and
@@ -383,19 +371,17 @@ void SHantilly::addItem(const char *title, const char *icon, bool current)
 
     if (currentView) {
         if (widgetType(currentListWidget) == TableWidget) {
-            ((CustomTableWidget *)currentListWidget)->addRowData(QString(title).split(';'));
+            ((CustomTableWidget*) currentListWidget)->addRowData(QString(title).split(';'));
             return;
         }
-        QAbstractItemModel *model = currentView->model();
+        QAbstractItemModel* model = currentView->model();
 
         model->insertRows(viewIndex, 1);
-        model->setData(model->index(viewIndex, 0), IconHelper::loadIcon(icon),
-                       Qt::DecorationRole);
-        model->setData(model->index(viewIndex, 0), QString(title),
-                       Qt::DisplayRole);
+        model->setData(model->index(viewIndex, 0), IconHelper::loadIcon(icon), Qt::DecorationRole);
+        model->setData(model->index(viewIndex, 0), QString(title), Qt::DisplayRole);
         if (current || model->rowCount() == 1) {
             if (widgetType(currentListWidget) == ComboBoxWidget)
-                ((QComboBox *)currentListWidget)->setCurrentIndex(viewIndex);
+                ((QComboBox*) currentListWidget)->setCurrentIndex(viewIndex);
             else
                 currentView->setCurrentIndex(model->index(viewIndex, 0));
         }
@@ -403,30 +389,26 @@ void SHantilly::addItem(const char *title, const char *icon, bool current)
     }
 }
 
-void SHantilly::addSeparator(const char *name, bool vertical,
-                             unsigned int style)
-{
+void SHantilly::addSeparator(const char* name, bool vertical, unsigned int style) {
     unsigned int shadow = QFrame::Sunken;
-    QFrame *separator = new QFrame;
+    QFrame* separator = new QFrame;
 
     separator->setObjectName(name);
 
     if (vertical) {
         separator->setFrameShape(QFrame::VLine);
-        separator->setSizePolicy(QSizePolicy::Fixed,
-                                 QSizePolicy::MinimumExpanding);
+        separator->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::MinimumExpanding);
     } else {
         separator->setFrameShape(QFrame::HLine);
-        separator->setSizePolicy(QSizePolicy::MinimumExpanding,
-                                 QSizePolicy::Fixed);
+        separator->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
     }
 
     // Style is a DialogCommandTokens::Control value
     if (style & SeparatorWidget) {
         style &= PropertyMask;
-        shadow = style & PropertyRaised ? QFrame::Raised
+        shadow = style & PropertyRaised  ? QFrame::Raised
                  : style & PropertyPlain ? QFrame::Plain
-                 : QFrame::Sunken;
+                                         : QFrame::Sunken;
     }
 
     separator->setFrameShadow(QFrame::Shadow(shadow));
@@ -437,9 +419,8 @@ void SHantilly::addSeparator(const char *name, bool vertical,
         currentLayout->insertWidget(currentIndex++, separator);
 }
 
-void SHantilly::addProgressBar(const char *name, bool vertical, bool busy)
-{
-    QProgressBar *pb = new QProgressBar;
+void SHantilly::addProgressBar(const char* name, bool vertical, bool busy) {
+    QProgressBar* pb = new QProgressBar;
 
     pb->setObjectName(QString(name));
 
@@ -459,19 +440,16 @@ void SHantilly::addProgressBar(const char *name, bool vertical, bool busy)
         currentLayout->insertWidget(currentIndex++, pb);
 }
 
-void SHantilly::addSlider(const char *name, bool vertical, int min, int max)
-{
-    QSlider *slider = new QSlider;
+void SHantilly::addSlider(const char* name, bool vertical, int min, int max) {
+    QSlider* slider = new QSlider;
 
     slider->setObjectName(QString(name));
     if (!vertical)
         slider->setOrientation(Qt::Horizontal);
     slider->setTickPosition(QSlider::TicksAbove);
     slider->setTracking(false);
-    connect(slider, SIGNAL(valueChanged(int)), this,
-            SLOT(sliderValueChanged(int)));
-    connect(slider, SIGNAL(rangeChanged(int, int)), this,
-            SLOT(sliderRangeChanged(int, int)));
+    connect(slider, SIGNAL(valueChanged(int)), this, SLOT(sliderValueChanged(int)));
+    connect(slider, SIGNAL(rangeChanged(int, int)), this, SLOT(sliderRangeChanged(int, int)));
 
     slider->setRange(min, max);
 
@@ -483,9 +461,8 @@ void SHantilly::addSlider(const char *name, bool vertical, int min, int max)
     updateTabsOrder();
 }
 
-void SHantilly::addTextView(const char *name, const char *file)
-{
-    QTextEdit *viewer = new QTextEdit;
+void SHantilly::addTextView(const char* name, const char* file) {
+    QTextEdit* viewer = new QTextEdit;
     QFile txt(file);
 
     viewer->setObjectName(QString(name));
@@ -508,9 +485,8 @@ void SHantilly::addTextView(const char *name, const char *file)
     updateTabsOrder();
 }
 
-void SHantilly::addTabs(const char *name, unsigned int position)
-{
-    QTabWidget *tabs = new QTabWidget;
+void SHantilly::addTabs(const char* name, unsigned int position) {
+    QTabWidget* tabs = new QTabWidget;
 
     tabs->setObjectName(QString(name));
 
@@ -518,12 +494,10 @@ void SHantilly::addTabs(const char *name, unsigned int position)
     // Reset this bit instead of masking another 4 bits
     position &= ~PropertyIconSize;
     if (position) {
-        tabs->setTabPosition(position & PropertyPositionTop
-                             ? QTabWidget::North
-                             : position & PropertyPositionBottom
-                             ? QTabWidget::South
-                             : position & PropertyPositionLeft
-                             ? QTabWidget::West : QTabWidget::East);
+        tabs->setTabPosition(position & PropertyPositionTop      ? QTabWidget::North
+                             : position & PropertyPositionBottom ? QTabWidget::South
+                             : position & PropertyPositionLeft   ? QTabWidget::West
+                                                                 : QTabWidget::East);
     }
 
     currentTabsWidget = tabs;
@@ -537,18 +511,16 @@ void SHantilly::addTabs(const char *name, unsigned int position)
     updateTabsOrder();
 }
 
-void SHantilly::addPage(const char *title, const char *name, const char *icon,
-                        bool current)
-{
+void SHantilly::addPage(const char* title, const char* name, const char* icon, bool current) {
     if (currentTabsWidget) {
         endGroup();
 
-        QWidget *page = new QWidget;
+        QWidget* page = new QWidget;
 
         page->setObjectName(QString(name));
 
-        QVBoxLayout *ml = new QVBoxLayout;
-        QHBoxLayout *hl = new QHBoxLayout;
+        QVBoxLayout* ml = new QVBoxLayout;
+        QHBoxLayout* hl = new QHBoxLayout;
         currentLayout = new QVBoxLayout;
         currentIndex = 0;
 
@@ -562,25 +534,21 @@ void SHantilly::addPage(const char *title, const char *name, const char *icon,
 
         pages.append(page);
 
-        connect(page, SIGNAL(destroyed(QObject *)), this,
-                SLOT(removePage(QObject *)));
+        connect(page, SIGNAL(destroyed(QObject*)), this, SLOT(removePage(QObject*)));
 
-        currentTabsWidget->insertTab(tabsIndex, page, IconHelper::loadIcon(icon),
-                                     QString(title));
+        currentTabsWidget->insertTab(tabsIndex, page, IconHelper::loadIcon(icon), QString(title));
         if (current)
             currentTabsWidget->setCurrentIndex(tabsIndex);
         tabsIndex++;
     }
 }
 
-void SHantilly::addCalendar(const char *title, const char *name, const char *date,
-                           const char *min, const char *max, const char *format,
-                           bool selection)
-{
+void SHantilly::addCalendar(const char* title, const char* name, const char* date, const char* min,
+                            const char* max, const char* format, bool selection) {
     Q_UNUSED(title);
     Q_UNUSED(format);
 
-    QCalendarWidget *calendar = new QCalendarWidget();
+    QCalendarWidget* calendar = new QCalendarWidget();
     calendar->setObjectName(QString(name));
 
     if (date) {
@@ -602,8 +570,7 @@ void SHantilly::addCalendar(const char *title, const char *name, const char *dat
     }
 
     if (selection) {
-        connect(calendar, SIGNAL(selectionChanged()), this,
-                SLOT(calendarSelected()));
+        connect(calendar, SIGNAL(selectionChanged()), this, SLOT(calendarSelected()));
     }
 
     if (groupLayout)
@@ -614,12 +581,11 @@ void SHantilly::addCalendar(const char *title, const char *name, const char *dat
     empty = false;
 }
 
-void SHantilly::addTable(const char *headers, const char *name, const char *file,
-                        bool readonly, bool selection, bool search)
-{
-    CustomTableWidget *container = new CustomTableWidget();
+void SHantilly::addTable(const char* headers, const char* name, const char* file, bool readonly,
+                         bool selection, bool search) {
+    CustomTableWidget* container = new CustomTableWidget();
     container->setObjectName(QString(name));
-    QTableWidget *table = container->table();
+    QTableWidget* table = container->table();
 
     if (search) {
         container->setSearchVisible(true);
@@ -634,14 +600,17 @@ void SHantilly::addTable(const char *headers, const char *name, const char *file
     if (readonly) {
         table->setEditTriggers(QAbstractItemView::NoEditTriggers);
     } else {
-        table->setEditTriggers(QAbstractItemView::DoubleClicked | QAbstractItemView::EditKeyPressed | QAbstractItemView::AnyKeyPressed);
+        table->setEditTriggers(QAbstractItemView::DoubleClicked |
+                               QAbstractItemView::EditKeyPressed |
+                               QAbstractItemView::AnyKeyPressed);
     }
 
     if (selection) {
         connect(container, SIGNAL(rowSelected(int)), this, SLOT(tableRowSelected(int)));
     }
 
-    connect(container, SIGNAL(cellEdited(int, int, const QString &)), this, SLOT(tableCellEdited(int, int, const QString &)));
+    connect(container, SIGNAL(cellEdited(int, int, const QString&)), this,
+            SLOT(tableCellEdited(int, int, const QString&)));
 
     if (file) {
         container->loadFromFile(QString(file));
@@ -658,9 +627,8 @@ void SHantilly::addTable(const char *headers, const char *name, const char *file
     updateTabsOrder();
 }
 
-void SHantilly::addChart(const char *title, const char *name)
-{
-    CustomChartWidget *chartView = new CustomChartWidget();
+void SHantilly::addChart(const char* title, const char* name) {
+    CustomChartWidget* chartView = new CustomChartWidget();
     chartView->setObjectName(QString(name));
     if (title)
         chartView->chart()->setTitle(QString(title));
@@ -675,53 +643,48 @@ void SHantilly::addChart(const char *title, const char *name)
     updateTabsOrder();
 }
 
-void SHantilly::endPage()
-{
-    QWidget *page = currentLayout->parentWidget();
+void SHantilly::endPage() {
+    QWidget* page = currentLayout->parentWidget();
 
-    if (page != (QWidget *)this
-        && currentTabsWidget == page->parent()->parent()) {
-        QLayout *layout;
-        QObject *parent;
+    if (page != (QWidget*) this && currentTabsWidget == page->parent()->parent()) {
+        QLayout* layout;
+        QObject* parent;
 
         endGroup();
         layout = findLayout(currentTabsWidget);
         parent = layout->parent();
         if (parent->isWidgetType()) {
-            groupLayout = (QBoxLayout *)layout;
+            groupLayout = (QBoxLayout*) layout;
             groupIndex = layout->indexOf(currentTabsWidget) + 1;
-            currentLayout = (QBoxLayout *)findLayout((QWidget *)parent);
-            currentIndex = currentLayout->indexOf((QWidget *)parent) + 1;
+            currentLayout = (QBoxLayout*) findLayout((QWidget*) parent);
+            currentIndex = currentLayout->indexOf((QWidget*) parent) + 1;
         } else {
-            currentLayout = (QBoxLayout *)layout;
+            currentLayout = (QBoxLayout*) layout;
             currentIndex = layout->indexOf(currentTabsWidget) + 1;
         }
     }
 }
 
-void SHantilly::endTabs()
-{
+void SHantilly::endTabs() {
     endPage();
 
-    QWidget *page = currentLayout->parentWidget();
+    QWidget* page = currentLayout->parentWidget();
 
-    if (page != (QWidget *)this) {
-        currentTabsWidget = (QTabWidget *)page->parent()->parent();
+    if (page != (QWidget*) this) {
+        currentTabsWidget = (QTabWidget*) page->parent()->parent();
         tabsIndex = currentTabsWidget->count();
     } else {
         currentTabsWidget = nullptr;
     }
 }
 
-bool SHantilly::isLayoutOnPage(QWidget *page, QLayout *layout)
-{
+bool SHantilly::isLayoutOnPage(QWidget* page, QLayout* layout) {
     if (!layout)
         return (false);
 
-    QObject *parent = layout->parent();
-    QWidget *parentWidget = parent->isWidgetType()
-                            ? ((QWidget *)parent)->parentWidget()
-                            : layout->parentWidget();
+    QObject* parent = layout->parent();
+    QWidget* parentWidget =
+        parent->isWidgetType() ? ((QWidget*) parent)->parentWidget() : layout->parentWidget();
 
     if (parentWidget == page)
         return true;
@@ -729,31 +692,28 @@ bool SHantilly::isLayoutOnPage(QWidget *page, QLayout *layout)
     if (parentWidget == this)
         return false;
 
-    return isLayoutOnPage(page,
-            findLayout((QWidget *)parentWidget->parent()->parent()));
+    return isLayoutOnPage(page, findLayout((QWidget*) parentWidget->parent()->parent()));
 }
 
-bool SHantilly::isWidgetOnPage(QWidget *page, QWidget *widget)
-{
+bool SHantilly::isWidgetOnPage(QWidget* page, QWidget* widget) {
     if (!widget)
         return false;
 
     return isLayoutOnPage(page, findLayout(widget));
 }
 
-bool SHantilly::isLayoutOnContainer(QWidget *container, QLayout *layout)
-{
+bool SHantilly::isLayoutOnContainer(QWidget* container, QLayout* layout) {
     if (!layout)
         return false;
 
-    QObject *parent = layout->parent();
-    QWidget *page;
+    QObject* parent = layout->parent();
+    QWidget* page;
 
     if (parent->isWidgetType()) {
         if (parent == container)
             return true;
 
-        page = ((QWidget *)parent)->parentWidget();
+        page = ((QWidget*) parent)->parentWidget();
     } else {
         page = layout->parentWidget();
     }
@@ -761,24 +721,21 @@ bool SHantilly::isLayoutOnContainer(QWidget *container, QLayout *layout)
     if (page == this)
         return false;
 
-    return isLayoutOnContainer(container,
-            findLayout((QWidget *)page->parent()->parent()));
+    return isLayoutOnContainer(container, findLayout((QWidget*) page->parent()->parent()));
 }
 
-bool SHantilly::isWidgetOnContainer(QWidget *container, QWidget *widget)
-{
+bool SHantilly::isWidgetOnContainer(QWidget* container, QWidget* widget) {
     if (!widget)
         return false;
 
     return isLayoutOnContainer(container, findLayout(widget));
 }
 
-static int indexOf(QLayout *layout)
-{
+static int indexOf(QLayout* layout) {
     int i = -1;
     int j;
 
-    if (QLayout *parent = (QLayout *)layout->parent()) {
+    if (QLayout* parent = (QLayout*) layout->parent()) {
         for (i = 0, j = parent->count(); i < j; i++) {
             if (parent->itemAt(i)->layout() == layout)
                 return i;
@@ -787,13 +744,11 @@ static int indexOf(QLayout *layout)
     return i;
 }
 
-void SHantilly::stepHorizontal()
-{
-    QBoxLayout *oldLayout = currentLayout;
-    QVBoxLayout *vBox = new QVBoxLayout;
+void SHantilly::stepHorizontal() {
+    QBoxLayout* oldLayout = currentLayout;
+    QVBoxLayout* vBox = new QVBoxLayout;
 
-    ((QBoxLayout *)currentLayout->parent())->insertLayout(
-            indexOf(currentLayout) + 1, vBox);
+    ((QBoxLayout*) currentLayout->parent())->insertLayout(indexOf(currentLayout) + 1, vBox);
     currentLayout = vBox;
     currentIndex = 0;
     currentLayout->setContentsMargins(0, 0, 0, 0);
@@ -803,15 +758,13 @@ void SHantilly::stepHorizontal()
     sanitizeLayout(oldLayout);
 }
 
-void SHantilly::stepVertical()
-{
-    QBoxLayout *oldLayout = currentLayout;
-    QVBoxLayout *vBox = new QVBoxLayout;
-    QHBoxLayout *hBox = new QHBoxLayout;
-    QBoxLayout *rootLayout = (QBoxLayout *)currentLayout->parent()->parent();
+void SHantilly::stepVertical() {
+    QBoxLayout* oldLayout = currentLayout;
+    QVBoxLayout* vBox = new QVBoxLayout;
+    QHBoxLayout* hBox = new QHBoxLayout;
+    QBoxLayout* rootLayout = (QBoxLayout*) currentLayout->parent()->parent();
 
-    rootLayout->insertLayout(indexOf((QLayout *)currentLayout->parent()) + 1,
-                             hBox);
+    rootLayout->insertLayout(indexOf((QLayout*) currentLayout->parent()) + 1, hBox);
     hBox->addLayout(vBox);
     currentLayout = vBox;
     currentIndex = 0;
@@ -822,23 +775,22 @@ void SHantilly::stepVertical()
     sanitizeLayout(oldLayout);
 }
 
-void SHantilly::clear(char *name)
-{
-    QWidget *widget;
+void SHantilly::clear(char* name) {
+    QWidget* widget;
 
     if (name[0]) {
-        if ( (widget = findWidget(name)) ) {
-            switch ((unsigned)widgetType(widget)) {
-            case ListBoxWidget:
-            case ComboBoxWidget:
-                clearChosenList();
-                break;
-            case PageWidget:
-                clearPage(widget);
-                break;
-            case TabsWidget:
-                clearTabs((QTabWidget *)widget);
-                break;
+        if ((widget = findWidget(name))) {
+            switch ((unsigned) widgetType(widget)) {
+                case ListBoxWidget:
+                case ComboBoxWidget:
+                    clearChosenList();
+                    break;
+                case PageWidget:
+                    clearPage(widget);
+                    break;
+                case TabsWidget:
+                    clearTabs((QTabWidget*) widget);
+                    break;
             }
         }
     } else {
@@ -846,10 +798,9 @@ void SHantilly::clear(char *name)
     }
 }
 
-void SHantilly::clearChosenList()
-{
+void SHantilly::clearChosenList() {
     if (chosenView && !chosenRowFlag) {
-        QAbstractItemModel *model = chosenView->model();
+        QAbstractItemModel* model = chosenView->model();
 
         model->removeRows(0, model->rowCount());
         if (chosenView == currentView)
@@ -857,10 +808,9 @@ void SHantilly::clearChosenList()
     }
 }
 
-void SHantilly::clearTabs(QTabWidget *widget)
-{
+void SHantilly::clearTabs(QTabWidget* widget) {
     for (int i = widget->count(); i > 0; i--) {
-        QWidget *page = widget->widget(i - 1);
+        QWidget* page = widget->widget(i - 1);
 
         while (isWidgetOnPage(page, currentTabsWidget))
             endTabs();
@@ -871,15 +821,15 @@ void SHantilly::clearTabs(QTabWidget *widget)
 
         if (isLayoutOnPage(page, currentLayout)) {
             endGroup();
-            QLayout *layout = findLayout(widget);
-            QObject *parent = layout->parent();
+            QLayout* layout = findLayout(widget);
+            QObject* parent = layout->parent();
             if (parent->isWidgetType()) {
-                groupLayout = (QBoxLayout *)layout;
+                groupLayout = (QBoxLayout*) layout;
                 groupIndex = layout->indexOf(widget) + 1;
-                currentLayout = (QBoxLayout *)findLayout((QWidget *)parent);
-                currentIndex = currentLayout->indexOf((QWidget *)parent) + 1;
+                currentLayout = (QBoxLayout*) findLayout((QWidget*) parent);
+                currentIndex = currentLayout->indexOf((QWidget*) parent) + 1;
             } else {
-                currentLayout = (QBoxLayout *)layout;
+                currentLayout = (QBoxLayout*) layout;
                 currentIndex = layout->indexOf(widget) + 1;
             }
         }
@@ -888,12 +838,11 @@ void SHantilly::clearTabs(QTabWidget *widget)
     }
 }
 
-void SHantilly::clearPage(QWidget *widget)
-{
-    QLayout *layout0;
-    QLayout *layout1;
-    QLayout *layout2;
-    QLayout *layout3;
+void SHantilly::clearPage(QWidget* widget) {
+    QLayout* layout0;
+    QLayout* layout1;
+    QLayout* layout2;
+    QLayout* layout3;
 
     layout0 = widget->layout(); // main (vertical one)
 
@@ -906,8 +855,7 @@ void SHantilly::clearPage(QWidget *widget)
 
     if (isLayoutOnPage(widget, currentLayout)) {
         endGroup();
-        currentLayout = (QBoxLayout *)layout0->itemAt(0)->layout()->itemAt(0)
-                        ->layout();
+        currentLayout = (QBoxLayout*) layout0->itemAt(0)->layout()->itemAt(0)->layout();
         currentIndex = 0;
     }
 
@@ -917,14 +865,14 @@ void SHantilly::clearPage(QWidget *widget)
         for (int j = layout1->count() - 1; j >= 0; j--) {
             layout2 = layout1->itemAt(j)->layout(); // Vertical ones
 
-            QLayoutItem *li;
-            QLayoutItem *wi;
-            QWidget *w;
+            QLayoutItem* li;
+            QLayoutItem* wi;
+            QWidget* w;
 
-            while ( (li = layout2->takeAt(0)) ) {
+            while ((li = layout2->takeAt(0))) {
                 if ((layout3 = li->layout())) { // Joint widgets' layout
-                    while ( (wi = layout3->takeAt(0)) ) {
-                        if ( (w = wi->widget()) ) {
+                    while ((wi = layout3->takeAt(0))) {
+                        if ((w = wi->widget())) {
                             // QWidget isn't inherited by QWidgetItem and must
                             // be deleted separately
                             delete w;
@@ -932,7 +880,7 @@ void SHantilly::clearPage(QWidget *widget)
                         delete wi;
                     }
                 }
-                if ( (w = li->widget()) ) {
+                if ((w = li->widget())) {
                     // Container widget owns installed layout and its widgets
                     // and deletes them
                     delete w;
@@ -949,15 +897,13 @@ void SHantilly::clearPage(QWidget *widget)
     }
 }
 
-void SHantilly::clearDialog()
-{
+void SHantilly::clearDialog() {
     defaultPushButton = nullptr;
     currentView = nullptr;
     currentListWidget = nullptr;
     currentTabsWidget = nullptr;
     groupLayout = nullptr;
-    currentLayout = (QBoxLayout *)layout()->itemAt(0)->layout()->itemAt(0)
-                    ->layout();
+    currentLayout = (QBoxLayout*) layout()->itemAt(0)->layout()->itemAt(0)->layout();
     currentIndex = 0;
 
     while (pages.count() > 1)
@@ -966,11 +912,10 @@ void SHantilly::clearDialog()
     clearPage(this);
 }
 
-void SHantilly::removeWidget(char *name)
-{
-    QWidget *widget;
+void SHantilly::removeWidget(char* name) {
+    QWidget* widget;
 
-    if ( (widget = findWidget(name)) ) {
+    if ((widget = findWidget(name))) {
         int type = widgetType(widget);
 
         if (type == ItemWidget) {
@@ -980,81 +925,77 @@ void SHantilly::removeWidget(char *name)
                 chosenView->model()->removeRows(chosenRow, 1);
             }
             chosenRowFlag = false;
-        } else if (QLayout *layout = findLayout(widget)) {
+        } else if (QLayout* layout = findLayout(widget)) {
             switch (type) {
-            case TabsWidget:
-                for (int i = 0, j = ((QTabWidget *)widget)->count(); i < j;
-                     i++) {
-                    QWidget *page = ((QTabWidget *)widget)->widget(i);
+                case TabsWidget:
+                    for (int i = 0, j = ((QTabWidget*) widget)->count(); i < j; i++) {
+                        QWidget* page = ((QTabWidget*) widget)->widget(i);
 
-                    while (isWidgetOnPage(page, currentTabsWidget))
-                        endTabs();
-                    if (currentTabsWidget == widget)
-                        endTabs();
-                    if (isWidgetOnPage(page, currentListWidget))
-                        endList();
-                    if (isWidgetOnPage(page, defaultPushButton))
-                        defaultPushButton = nullptr;
-                    if (isLayoutOnPage(page, currentLayout)) {
-                        // Position focus behind the parent QTabWidget
-                        endGroup();
-                        QObject *parent = layout->parent();
-                        if (parent->isWidgetType()) {
-                            groupLayout = (QBoxLayout *)layout;
-                            groupIndex = layout->indexOf(widget);
-                            currentLayout = (QBoxLayout *)findLayout(
-                                    (QWidget *)parent);
-                            currentIndex = currentLayout->indexOf(
-                                    (QWidget *)parent) + 1;
-                        } else {
-                            currentLayout = (QBoxLayout *)layout;
-                            currentIndex = layout->indexOf(widget);
+                        while (isWidgetOnPage(page, currentTabsWidget))
+                            endTabs();
+                        if (currentTabsWidget == widget)
+                            endTabs();
+                        if (isWidgetOnPage(page, currentListWidget))
+                            endList();
+                        if (isWidgetOnPage(page, defaultPushButton))
+                            defaultPushButton = nullptr;
+                        if (isLayoutOnPage(page, currentLayout)) {
+                            // Position focus behind the parent QTabWidget
+                            endGroup();
+                            QObject* parent = layout->parent();
+                            if (parent->isWidgetType()) {
+                                groupLayout = (QBoxLayout*) layout;
+                                groupIndex = layout->indexOf(widget);
+                                currentLayout = (QBoxLayout*) findLayout((QWidget*) parent);
+                                currentIndex = currentLayout->indexOf((QWidget*) parent) + 1;
+                            } else {
+                                currentLayout = (QBoxLayout*) layout;
+                                currentIndex = layout->indexOf(widget);
+                            }
                         }
                     }
-                }
-                break;
-            case FrameWidget:
-            case GroupBoxWidget:
-                while (isWidgetOnContainer(widget, currentTabsWidget))
-                    endTabs();
-                if (isWidgetOnContainer(widget, currentListWidget))
-                    endList();
-                if (isWidgetOnContainer(widget, defaultPushButton))
-                    defaultPushButton = nullptr;
-                if (isLayoutOnContainer(widget, currentLayout)) {
-                    endGroup();
-                    currentLayout = (QBoxLayout *)layout;
-                    currentIndex = layout->indexOf(widget);
-                }
-                if (groupLayout && widget->layout() == groupLayout)
-                    endGroup();
-                break;
-            case ListBoxWidget:
-            case ComboBoxWidget:
-                if (currentView && chosenView == currentView)
-                    endList();
-                break;
-            case PushButtonWidget:
-                if ((QPushButton *)widget == defaultPushButton)
-                    defaultPushButton = nullptr;
-                break;
+                    break;
+                case FrameWidget:
+                case GroupBoxWidget:
+                    while (isWidgetOnContainer(widget, currentTabsWidget))
+                        endTabs();
+                    if (isWidgetOnContainer(widget, currentListWidget))
+                        endList();
+                    if (isWidgetOnContainer(widget, defaultPushButton))
+                        defaultPushButton = nullptr;
+                    if (isLayoutOnContainer(widget, currentLayout)) {
+                        endGroup();
+                        currentLayout = (QBoxLayout*) layout;
+                        currentIndex = layout->indexOf(widget);
+                    }
+                    if (groupLayout && widget->layout() == groupLayout)
+                        endGroup();
+                    break;
+                case ListBoxWidget:
+                case ComboBoxWidget:
+                    if (currentView && chosenView == currentView)
+                        endList();
+                    break;
+                case PushButtonWidget:
+                    if ((QPushButton*) widget == defaultPushButton)
+                        defaultPushButton = nullptr;
+                    break;
             }
 
             if (layout == groupLayout && layout->indexOf(widget) < groupIndex)
                 groupIndex--;
-            if (layout == currentLayout
-                && layout->indexOf(widget) < currentIndex) {
+            if (layout == currentLayout && layout->indexOf(widget) < currentIndex) {
                 currentIndex--;
             }
 
-            if (QWidget *proxywidget = widget->focusProxy()) {
+            if (QWidget* proxywidget = widget->focusProxy()) {
                 // For joint widgets
                 layout->removeWidget(proxywidget);
                 delete proxywidget;
             }
 
             layout->removeWidget(widget);
-            delete widget;  // This also deletes child layouts and widgets
+            delete widget; // This also deletes child layouts and widgets
             // (parented to parentWidget by addWidget and addLayout) and so
             // forth. For QTabWidget it deletes child pages which triggers
             // removePage slot.
@@ -1073,17 +1014,17 @@ void SHantilly::removeWidget(char *name)
                 // position focus behind the parent QTabWidget
                 endGroup();
 
-                QWidget *tabs = (QWidget *)widget->parent()->parent();
-                layout = (QBoxLayout *)findLayout(tabs);
-                QObject *parent = layout->parent();
+                QWidget* tabs = (QWidget*) widget->parent()->parent();
+                layout = (QBoxLayout*) findLayout(tabs);
+                QObject* parent = layout->parent();
 
                 if (parent->isWidgetType()) {
-                    groupLayout = (QBoxLayout *)layout;
+                    groupLayout = (QBoxLayout*) layout;
                     groupIndex = layout->indexOf(tabs) + 1;
-                    currentLayout = (QBoxLayout *)findLayout((QWidget *)parent);
-                    currentIndex = currentLayout->indexOf((QWidget *)parent) + 1;
+                    currentLayout = (QBoxLayout*) findLayout((QWidget*) parent);
+                    currentIndex = currentLayout->indexOf((QWidget*) parent) + 1;
                 } else {
-                    currentLayout = (QBoxLayout *)layout;
+                    currentLayout = (QBoxLayout*) layout;
                     currentIndex = layout->indexOf(tabs) + 1;
                 }
             }
@@ -1092,17 +1033,16 @@ void SHantilly::removeWidget(char *name)
     }
 }
 
-void SHantilly::position(char *name, bool behind, bool onto)
-{
-    QWidget *widget;
-    QBoxLayout *layout;
+void SHantilly::position(char* name, bool behind, bool onto) {
+    QWidget* widget;
+    QBoxLayout* layout;
     bool tabs_set = false;
 
-    if ( (widget = findWidget(name)) ) {
-        if ( !(layout = (QBoxLayout *)findLayout(widget)) ) {
+    if ((widget = findWidget(name))) {
+        if (!(layout = (QBoxLayout*) findLayout(widget))) {
             // This is page.
             // widget != this isn't tested as root page has no name.
-            currentTabsWidget = (QTabWidget *)widget->parent()->parent();
+            currentTabsWidget = (QTabWidget*) widget->parent()->parent();
             tabsIndex = currentTabsWidget->indexOf(widget);
             if (behind) {
                 tabsIndex++;
@@ -1110,22 +1050,20 @@ void SHantilly::position(char *name, bool behind, bool onto)
             }
             if (onto) {
                 endGroup();
-                layout = (QBoxLayout *)widget->layout();
-                layout = (QBoxLayout *)layout->itemAt(layout->count() - 1)
-                         ->layout();
-                currentLayout = (QBoxLayout *)layout
-                                ->itemAt(layout->count() - 1)->layout();
+                layout = (QBoxLayout*) widget->layout();
+                layout = (QBoxLayout*) layout->itemAt(layout->count() - 1)->layout();
+                currentLayout = (QBoxLayout*) layout->itemAt(layout->count() - 1)->layout();
                 currentIndex = currentLayout->count();
                 return;
             }
             widget = currentTabsWidget;
-            layout = (QBoxLayout *)findLayout(widget);
+            layout = (QBoxLayout*) findLayout(widget);
             tabs_set = true;
         }
 
         if (layout) {
-            QWidget *page;
-            QObject *parent;
+            QWidget* page;
+            QObject* parent;
             int index;
             int type = widgetType(widget);
 
@@ -1133,7 +1071,7 @@ void SHantilly::position(char *name, bool behind, bool onto)
                 // Joint widget
                 parent = layout->parent()->parent();
                 index = indexOf(layout);
-                layout = (QBoxLayout *)layout->parent();
+                layout = (QBoxLayout*) layout->parent();
             } else {
                 parent = layout->parent();
                 index = layout->indexOf(widget);
@@ -1147,8 +1085,7 @@ void SHantilly::position(char *name, bool behind, bool onto)
             if (type & ItemWidget) {
                 currentView = chosenView;
                 currentListWidget = chosenListWidget;
-                viewIndex = chosenRow >= 0 ? chosenRow
-                            : currentView->model()->rowCount();
+                viewIndex = chosenRow >= 0 ? chosenRow : currentView->model()->rowCount();
                 if (behind) {
                     viewIndex++;
                     behind = false;
@@ -1157,17 +1094,17 @@ void SHantilly::position(char *name, bool behind, bool onto)
 
             if (parent->isWidgetType()) {
                 // The widget is installed onto QGroupBox/QFrame
-                page = ((QWidget *)parent)->parentWidget();
+                page = ((QWidget*) parent)->parentWidget();
 
                 groupLayout = layout;
                 groupIndex = index;
                 if (behind)
                     groupIndex++;
 
-                layout = (QBoxLayout *)findLayout((QWidget *)parent);
+                layout = (QBoxLayout*) findLayout((QWidget*) parent);
                 if (layout) {
                     currentLayout = layout;
-                    currentIndex = layout->indexOf((QWidget *)parent) + 1;
+                    currentIndex = layout->indexOf((QWidget*) parent) + 1;
                 }
             } else {
                 page = widget->parentWidget();
@@ -1178,7 +1115,7 @@ void SHantilly::position(char *name, bool behind, bool onto)
                 if (behind)
                     currentIndex++;
 
-                if (onto && (layout = (QBoxLayout *)widget->layout())) {
+                if (onto && (layout = (QBoxLayout*) widget->layout())) {
                     // Position onto QGroupBox/QFrame object
                     groupLayout = layout;
                     groupIndex = layout->count();
@@ -1187,14 +1124,13 @@ void SHantilly::position(char *name, bool behind, bool onto)
 
             if (!tabs_set) {
                 if (onto && type & TabsWidget) {
-                    currentTabsWidget = (QTabWidget *)widget;
-                    tabsIndex = ((QTabWidget *)widget)->count();
+                    currentTabsWidget = (QTabWidget*) widget;
+                    tabsIndex = ((QTabWidget*) widget)->count();
                 } else {
                     if (page == this) {
                         currentTabsWidget = nullptr;
                     } else {
-                        currentTabsWidget = (QTabWidget *)page->parent()
-                                            ->parent();
+                        currentTabsWidget = (QTabWidget*) page->parent()->parent();
                         tabsIndex = currentTabsWidget->indexOf(page);
                     }
                 }
@@ -1203,18 +1139,17 @@ void SHantilly::position(char *name, bool behind, bool onto)
     }
 }
 
-void SHantilly::setEnabled(QWidget *widget, bool enable)
-{
-    switch ((unsigned)widgetType(widget)) {
-    case PageWidget: {
-        QTabWidget *tabs = (QTabWidget *)widget->parent()->parent();
-        tabs->setTabEnabled(tabs->indexOf(widget), enable);
-        break;
-    }
-    default:
-        widget->setEnabled(enable);
-        if (QWidget *proxywidget = widget->focusProxy())
-            proxywidget->setEnabled(enable);
+void SHantilly::setEnabled(QWidget* widget, bool enable) {
+    switch ((unsigned) widgetType(widget)) {
+        case PageWidget: {
+            QTabWidget* tabs = (QTabWidget*) widget->parent()->parent();
+            tabs->setTabEnabled(tabs->indexOf(widget), enable);
+            break;
+        }
+        default:
+            widget->setEnabled(enable);
+            if (QWidget* proxywidget = widget->focusProxy())
+                proxywidget->setEnabled(enable);
     }
 }
 
@@ -1223,16 +1158,15 @@ void SHantilly::setEnabled(QWidget *widget, bool enable)
  *  analysis of the name to recognize list item references (#number and :text)
  *  and sets internal pointer to the QAbstractItemView and to that item.
  ******************************************************************************/
-QWidget *SHantilly::findWidget(char *name)
-{
-    QWidget *widget = nullptr;
+QWidget* SHantilly::findWidget(char* name) {
+    QWidget* widget = nullptr;
 
     chosenView = nullptr;
     chosenRowFlag = false;
 
     if (name) {
         int li_row = -1;
-        char *li_name = nullptr;
+        char* li_name = nullptr;
 
         for (int i = 0; name[i] != 0; i++) {
             if (name[i] == '#') {
@@ -1251,24 +1185,23 @@ QWidget *SHantilly::findWidget(char *name)
         if (name[0])
             for (int i = 0, j = pages.count(); i < j; i++) {
                 widget = pages.at(i);
-                if (!strcmp(widget->objectName().toLocal8Bit().constData(),
-                            name)) {
+                if (!strcmp(widget->objectName().toLocal8Bit().constData(), name)) {
                     // The widget is page
                     break;
                 }
-                if ( (widget = findWidgetRecursively(widget->layout(), name)) )
+                if ((widget = findWidgetRecursively(widget->layout(), name)))
                     break;
             }
 
-        switch ((unsigned)widgetType(widget)) {
-        case ListBoxWidget:
-            chosenListWidget = widget->focusProxy();
-            chosenView = (ListBox *)chosenListWidget;
-            break;
-        case ComboBoxWidget:
-            chosenListWidget = widget->focusProxy();
-            chosenView = ((QComboBox *)chosenListWidget)->view();
-            break;
+        switch ((unsigned) widgetType(widget)) {
+            case ListBoxWidget:
+                chosenListWidget = widget->focusProxy();
+                chosenView = (ListBox*) chosenListWidget;
+                break;
+            case ComboBoxWidget:
+                chosenListWidget = widget->focusProxy();
+                chosenView = ((QComboBox*) chosenListWidget)->view();
+                break;
         }
         if (chosenView) {
             if (li_row >= 0) {
@@ -1276,12 +1209,14 @@ QWidget *SHantilly::findWidget(char *name)
                 chosenRowFlag = true;
             }
             if (li_name) {
-                QAbstractItemModel *model = chosenView->model();
+                QAbstractItemModel* model = chosenView->model();
                 int i;
                 int j;
                 for (i = 0, j = model->rowCount(); i < j; i++) {
                     if (!strcmp(model->data(model->index(i, 0), Qt::DisplayRole)
-                                .toString().toLocal8Bit().constData(),
+                                    .toString()
+                                    .toLocal8Bit()
+                                    .constData(),
                                 li_name)) {
                         chosenRow = i;
                         chosenRowFlag = true;
@@ -1302,17 +1237,16 @@ QWidget *SHantilly::findWidget(char *name)
 /*******************************************************************************
  *  findLayout searches for the layout the given widget is laid on.
  ******************************************************************************/
-QLayout *SHantilly::findLayout(QWidget *widget)
-{
-    QLayout *layout = nullptr;
-    QWidget *page;
+QLayout* SHantilly::findLayout(QWidget* widget) {
+    QLayout* layout = nullptr;
+    QWidget* page;
 
     for (int i = 0, j = pages.count(); i < j; i++) {
-        if ( (page = pages.at(i)) == widget ) {
+        if ((page = pages.at(i)) == widget) {
             // The widget is page
             break;
         }
-        if ( (layout = findLayoutRecursively(page->layout(), widget)) )
+        if ((layout = findLayoutRecursively(page->layout(), widget)))
             break;
     }
 
@@ -1323,9 +1257,8 @@ QLayout *SHantilly::findLayout(QWidget *widget)
  *  Duplicate of void QDialogPrivate::hideDefault() which is made private.
  *  Is called by listbox widget with activation option set when it gets focus.
  ******************************************************************************/
-void SHantilly::holdDefaultPushButton()
-{
-    QList<QPushButton *> list = findChildren<QPushButton *>();
+void SHantilly::holdDefaultPushButton() {
+    QList<QPushButton*> list = findChildren<QPushButton*>();
     for (int i = 0; i < list.size(); i++)
         list.at(i)->setDefault(false);
 }
@@ -1336,8 +1269,7 @@ void SHantilly::holdDefaultPushButton()
  *  pushbuttons management private. Don't see a graceful way to restore default
  *  indicator for an autodefault pushbutton...
  ******************************************************************************/
-void SHantilly::unholdDefaultPushButton()
-{
+void SHantilly::unholdDefaultPushButton() {
     if (defaultPushButton)
         defaultPushButton->setDefault(true);
 }
@@ -1346,17 +1278,16 @@ void SHantilly::unholdDefaultPushButton()
  *  widgetType returns the type of the widget as value of
  *  DialogCommandTokens::Control enum
  ******************************************************************************/
-DialogCommandTokens::Control SHantilly::widgetType(QWidget *widget)
-{
+DialogCommandTokens::Control SHantilly::widgetType(QWidget* widget) {
     if (widget) {
-        if (qobject_cast<QCalendarWidget *>(widget))
-        return CalendarWidget;
-        if (qobject_cast<CustomTableWidget *>(widget))
-        return TableWidget;
-        if (qobject_cast<CustomChartWidget *>(widget))
-        return ChartWidget;
+        if (qobject_cast<QCalendarWidget*>(widget))
+            return CalendarWidget;
+        if (qobject_cast<CustomTableWidget*>(widget))
+            return TableWidget;
+        if (qobject_cast<CustomChartWidget*>(widget))
+            return ChartWidget;
 
-    const char *name = widget->metaObject()->className();
+        const char* name = widget->metaObject()->className();
 
         if (!strcmp(name, "SHantilly"))
             return DialogWidget;
@@ -1367,8 +1298,8 @@ DialogCommandTokens::Control SHantilly::widgetType(QWidget *widget)
         if (!strcmp(name, "QCheckBox"))
             return CheckBoxWidget;
         if (!strcmp(name, "QLabel")) {
-            if (QWidget *proxywidget = widget->focusProxy()) {
-                const char *proxyname = proxywidget->metaObject()->className();
+            if (QWidget* proxywidget = widget->focusProxy()) {
+                const char* proxyname = proxywidget->metaObject()->className();
 
                 if (!strcmp(proxyname, "QLineEdit"))
                     return TextBoxWidget;
@@ -1388,7 +1319,7 @@ DialogCommandTokens::Control SHantilly::widgetType(QWidget *widget)
         if (!strcmp(name, "QGroupBox"))
             return GroupBoxWidget;
         if (!strcmp(name, "QFrame")) {
-            int shape = ((QFrame *)widget)->frameStyle() & QFrame::Shape_Mask;
+            int shape = ((QFrame*) widget)->frameStyle() & QFrame::Shape_Mask;
 
             if (shape == QFrame::HLine || shape == QFrame::VLine)
                 return SeparatorWidget;
@@ -1435,32 +1366,28 @@ DialogCommandTokens::Control SHantilly::widgetType(QWidget *widget)
  *
  ******************************************************************************/
 
-void ListBox::focusInEvent(QFocusEvent *event)
-{
+void ListBox::focusInEvent(QFocusEvent* event) {
     if (activateFlag) {
-        SHantilly *dialog = (SHantilly *)window();
+        SHantilly* dialog = (SHantilly*) window();
         if (dialog)
             dialog->holdDefaultPushButton();
     }
     QListWidget::focusInEvent(event);
 }
 
-void ListBox::focusOutEvent(QFocusEvent *event)
-{
+void ListBox::focusOutEvent(QFocusEvent* event) {
     if (activateFlag) {
-        SHantilly *dialog = (SHantilly *)window();
+        SHantilly* dialog = (SHantilly*) window();
         if (dialog)
             dialog->unholdDefaultPushButton();
     }
     QListWidget::focusOutEvent(event);
 }
 
-void ListBox::setActivateFlag(bool flag)
-{
-    SHantilly *dialog;
+void ListBox::setActivateFlag(bool flag) {
+    SHantilly* dialog;
 
-    if (activateFlag != flag && hasFocus()
-        && (dialog = (SHantilly *)window())) {
+    if (activateFlag != flag && hasFocus() && (dialog = (SHantilly*) window())) {
         if (flag)
             dialog->holdDefaultPushButton();
         else
@@ -1475,10 +1402,9 @@ void ListBox::setActivateFlag(bool flag)
  *
  ******************************************************************************/
 
-QWidget *findWidgetRecursively(QLayoutItem *item, const char *name)
-{
-    QLayout *layout;
-    QWidget *widget;
+QWidget* findWidgetRecursively(QLayoutItem* item, const char* name) {
+    QLayout* layout;
+    QWidget* widget;
 
     if ((layout = item->layout())) {
         for (int i = 0, j = layout->count(); i < j; i++)
@@ -1493,19 +1419,17 @@ QWidget *findWidgetRecursively(QLayoutItem *item, const char *name)
     return nullptr;
 }
 
-QLayout *findLayoutRecursively(QLayout *layout, QWidget *widget)
-{
+QLayout* findLayoutRecursively(QLayout* layout, QWidget* widget) {
     if (widget && layout) {
         for (int i = 0, j = layout->count(); i < j; i++) {
-            QLayoutItem *item = layout->itemAt(i);
-            QWidget *w = item->widget();
-            QLayout *retlayout;
+            QLayoutItem* item = layout->itemAt(i);
+            QWidget* w = item->widget();
+            QLayout* retlayout;
 
             if (w == widget) {
                 return layout;
             } else {
-                retlayout = findLayoutRecursively(w ? w->layout()
-                                                  : item->layout(), widget);
+                retlayout = findLayoutRecursively(w ? w->layout() : item->layout(), widget);
                 if (retlayout)
                     return retlayout;
             }

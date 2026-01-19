@@ -6,12 +6,12 @@
 
 class Tokenizer {
 public:
-  explicit Tokenizer(const QString &input);
+    explicit Tokenizer(const QString& input);
 
-  QStringList tokenize();
+    QStringList tokenize();
 
 private:
-  QString m_input;
+    QString m_input;
 };
 
 #endif // TOKENIZER_H

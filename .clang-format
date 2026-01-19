@@ -22,7 +22,6 @@ AlwaysBreakAfterReturnType: None
 AlwaysBreakBeforeMultilineStrings: false
 AlwaysBreakTemplateDeclarations: true
 BreakBeforeBinaryOperators: None
-BreakBeforeBrackets: Attach
 BreakBeforeTernaryOperators: true
 BreakConstructorInitializers: BeforeColon
 IncludeBlocks: Regroup

@@ -21,16 +21,16 @@
  */
 
 #include "SHantilly.h"
-#include "theme_manager.h"
 #include "command_registry.h"
-#include "parser_driver.h"
-#include "execution_context.h"
 #include "commands/add_command.h"
-#include "commands/set_command.h"
-#include "commands/query_command.h"
-#include "commands/simple_commands.h"
 #include "commands/position_command.h"
+#include "commands/query_command.h"
+#include "commands/set_command.h"
+#include "commands/simple_commands.h"
 #include "commands/unset_command.h"
+#include "execution_context.h"
+#include "parser_driver.h"
+#include "theme_manager.h"
 
 /*  EXIT CODES */
 #define E_SUCCESS 0
@@ -39,7 +39,7 @@
 #define PROGRAM_NAME "SHantilly"
 #define VERSION "1.0"
 
-static const char *about_message =
+static const char* about_message =
     PROGRAM_NAME " v" VERSION "\n"
                  "Copyright (C) 2015-2016, 2020 Andriy Martynets "
                  "<andy.martynets@gmail.com>\n"
@@ -50,7 +50,7 @@ static const char *about_message =
                  "under certain conditions. See the GNU GPL for details.\n\n"
                  "More information on <https://github.com/martynets/SHantilly/>.\n";
 
-static const char *about_html_message =
+static const char* about_html_message =
     "<h3>" PROGRAM_NAME " version " VERSION "</h3>"
     "<p><b>Copyright (C) 2015-2016, 2020 Andriy Martynets </b><a href=\""
     "mailto:andy.martynets@gmail.com\">andy.martynets@gmail.com</a></p>"
@@ -64,13 +64,12 @@ static const char *about_html_message =
     "\"https://github.com/martynets/SHantilly/\">"
     "https://github.com/martynets/SHantilly/</a>.</p>";
 
-static const char *default_title = PROGRAM_NAME " v" VERSION;
+static const char* default_title = PROGRAM_NAME " v" VERSION;
 
 static void help();
 static void version();
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char* argv[]) {
     QApplication::setApplicationName(PROGRAM_NAME);
     QApplication::setApplicationVersion(VERSION);
     QApplication::setDesktopFileName("SHantilly");
@@ -80,30 +79,24 @@ int main(int argc, char *argv[])
     bool useNewParser = false;
 
     // Consider QApplication has removed everything it recognized...
-    for (int i = 1; i < argc; i++)
-    {
-        if (!strcmp(argv[i], "-h") || !strcmp(argv[i], "--help"))
-        {
+    for (int i = 1; i < argc; i++) {
+        if (!strcmp(argv[i], "-h") || !strcmp(argv[i], "--help")) {
             help();
             return E_SUCCESS;
         }
-        if (!strcmp(argv[i], "-v") || !strcmp(argv[i], "--version"))
-        {
+        if (!strcmp(argv[i], "-v") || !strcmp(argv[i], "--version")) {
             version();
             return E_SUCCESS;
         }
-        if (!strcmp(argv[i], "-r") || !strcmp(argv[i], "--resizable"))
-        {
+        if (!strcmp(argv[i], "-r") || !strcmp(argv[i], "--resizable")) {
             resizable = true;
             continue;
         }
-        if (!strcmp(argv[i], "-d") || !strcmp(argv[i], "--hidden"))
-        {
+        if (!strcmp(argv[i], "-d") || !strcmp(argv[i], "--hidden")) {
             hidden = true;
             continue;
         }
-        if (!strcmp(argv[i], "--new-parser"))
-        {
+        if (!strcmp(argv[i], "--new-parser")) {
             useNewParser = true;
             continue;
         }
@@ -115,8 +108,7 @@ int main(int argc, char *argv[])
     ThemeManager themeManager;
     dialog.setThemeManager(&themeManager);
 
-    if (useNewParser)
-    {
+    if (useNewParser) {
         CommandRegistry registry;
         registry.registerCommand("add", std::make_unique<AddCommandFactory>());
         registry.registerCommand("set", std::make_unique<SetCommandFactory>());
@@ -141,9 +133,7 @@ int main(int argc, char *argv[])
             dialog.show();
 
         return QCoreApplication::exec();
-    }
-    else
-    {
+    } else {
         DialogParser parser(&dialog);
 
         parser.start();
@@ -156,70 +146,67 @@ int main(int argc, char *argv[])
     }
 }
 
-static void version()
-{
+static void version() {
     puts(about_message);
 }
 
-static void help()
-{
-    const char *usage =
-        "Usage: " PROGRAM_NAME " [options]\n"
-        "Translate commands on stdin into widgets of GUI SHantilly and output "
-        "user\n"
-        "actions to stdout.\n"
-        "\n"
-        "In addition to standard Qt options the following ones are supported:\n"
-        "  -h, --help  display this help and exit\n"
-        "  -v, --version output version information and exit\n"
-        "  -r, --resizable make the dialog resizable\n"
-        "  -d, --hidden  don't show the dialog until explicit 'show' command\n"
-        "  --new-parser use the new V2 parser engine (recommended)\n"
-        "\n"
-        "Supported commands:\n"
-        "  - add type [title] [name] [options] [text] [auxtext]\n"
-        "  - clear [name]\n"
-        "  - disable [name]\n"
-        "  - enable [name]\n"
-        "  - end [type]\n"
-        "  - hide [name]\n"
-        "  - position [options] name\n"
-        "  - query\n"
-        "  - remove name\n"
-        "  - set [name] options [text]\n"
-        "  - show [name]\n"
-        "  - step [direction]\n"
-        "  - unset [name] options\n"
-        "\n"
-        "Supported widgets (types):\n"
-        "  Standard: checkbox, combobox, frame, groupbox, label, listbox, page,\n"
-        "            progressbar, pushbutton, radiobutton, separator, slider,\n"
-        "            space, stretch, tabs, textbox, textview\n"
-        "  Extended: calendar, chart, table\n"
-        "\n"
-        "Output format:\n"
-        "  - on a pushbutton click:\n"
-        "    <pushbutton name>=clicked\n"
-        "  - on a toggle pushbutton click:\n"
-        "    <pushbutton name>=pressed | released\n"
-        "  - on a slider move:\n"
-        "    <slider name>=<value>\n"
-        "  - on item selection in a list box, drop-down list or combobox with\n"
-        "    'selection' option set:\n"
-        "    <list widget name>=<value>\n"
-        "  - on item activation in a list box with 'activation' option set:\n"
-        "    <list widget name>=<value>\n"
-        "  - on table cell edit (if enabled):\n"
-        "    <table name>[<row>][<col>]=<value>\n"
-        "  - on chart slice click:\n"
-        "    <chart name>.slice[\"<label>\"]=<value>\n"
-        "  - on calendar selection:\n"
-        "    <calendar name>=<date>\n"
-        "  - on the dialog acceptance or 'query' command list all reportable\n"
-        "    enabled named widgets in format:\n"
-        "    <name>=<value>\n"
-        "\n"
-        "Full documentation at: <https://github.com/martynets/SHantilly/>\n";
+static void help() {
+    const char* usage = "Usage: " PROGRAM_NAME " [options]\n"
+                        "Translate commands on stdin into widgets of GUI SHantilly and output "
+                        "user\n"
+                        "actions to stdout.\n"
+                        "\n"
+                        "In addition to standard Qt options the following ones are supported:\n"
+                        "  -h, --help  display this help and exit\n"
+                        "  -v, --version output version information and exit\n"
+                        "  -r, --resizable make the dialog resizable\n"
+                        "  -d, --hidden  don't show the dialog until explicit 'show' command\n"
+                        "  --new-parser use the new V2 parser engine (recommended)\n"
+                        "\n"
+                        "Supported commands:\n"
+                        "  - add type [title] [name] [options] [text] [auxtext]\n"
+                        "  - clear [name]\n"
+                        "  - disable [name]\n"
+                        "  - enable [name]\n"
+                        "  - end [type]\n"
+                        "  - hide [name]\n"
+                        "  - position [options] name\n"
+                        "  - query\n"
+                        "  - remove name\n"
+                        "  - set [name] options [text]\n"
+                        "  - show [name]\n"
+                        "  - step [direction]\n"
+                        "  - unset [name] options\n"
+                        "\n"
+                        "Supported widgets (types):\n"
+                        "  Standard: checkbox, combobox, frame, groupbox, label, listbox, page,\n"
+                        "            progressbar, pushbutton, radiobutton, separator, slider,\n"
+                        "            space, stretch, tabs, textbox, textview\n"
+                        "  Extended: calendar, chart, table\n"
+                        "\n"
+                        "Output format:\n"
+                        "  - on a pushbutton click:\n"
+                        "    <pushbutton name>=clicked\n"
+                        "  - on a toggle pushbutton click:\n"
+                        "    <pushbutton name>=pressed | released\n"
+                        "  - on a slider move:\n"
+                        "    <slider name>=<value>\n"
+                        "  - on item selection in a list box, drop-down list or combobox with\n"
+                        "    'selection' option set:\n"
+                        "    <list widget name>=<value>\n"
+                        "  - on item activation in a list box with 'activation' option set:\n"
+                        "    <list widget name>=<value>\n"
+                        "  - on table cell edit (if enabled):\n"
+                        "    <table name>[<row>][<col>]=<value>\n"
+                        "  - on chart slice click:\n"
+                        "    <chart name>.slice[\"<label>\"]=<value>\n"
+                        "  - on calendar selection:\n"
+                        "    <calendar name>=<date>\n"
+                        "  - on the dialog acceptance or 'query' command list all reportable\n"
+                        "    enabled named widgets in format:\n"
+                        "    <name>=<value>\n"
+                        "\n"
+                        "Full documentation at: <https://github.com/martynets/SHantilly/>\n";
 
     puts(usage);
     puts("");

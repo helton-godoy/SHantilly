@@ -1,4 +1,4 @@
-# Arquivo temporário para permitir a compilação da lib
+#Arquivo temporário para permitir a compilação da lib
 #include <iostream>
 
 void init_SHantilly_ui() {

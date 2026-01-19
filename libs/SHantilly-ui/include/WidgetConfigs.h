@@ -1,27 +1,25 @@
 #ifndef WIDGET_CONFIGS_H
 #define WIDGET_CONFIGS_H
 
-#include <QString>
-#include <QStringList>
 #include <QList>
 #include <QMap>
+#include <QString>
+#include <QStringList>
 
 namespace Sbx {
 namespace Models {
 
 struct BaseConfig {
     QString name;
-    
+
     virtual ~BaseConfig() = default;
-    
-    virtual bool isValid() const {
-        return !name.isEmpty();
-    }
+
+    virtual bool isValid() const { return !name.isEmpty(); }
 };
 
 /**
  * @brief Configuração de uma ação individual
- * 
+ *
  * Tipos suportados:
  * - "shell": Executa comando shell inline
  * - "script": Executa arquivo .sh externo
@@ -31,14 +29,14 @@ struct BaseConfig {
  */
 struct ActionConfig {
     enum Type { Shell, Script, Set, Query, Callback };
-    
+
     Type type = Shell;
-    QString command;        // Para Shell/Script: o comando ou caminho
-    QString targetWidget;   // Para Set/Query: nome do widget alvo
-    QString property;       // Para Set: propriedade a modificar
-    QString value;          // Para Set: novo valor
-    QString variable;       // Para Query: nome da variável de destino
-    
+    QString command;      // Para Shell/Script: o comando ou caminho
+    QString targetWidget; // Para Set/Query: nome do widget alvo
+    QString property;     // Para Set: propriedade a modificar
+    QString value;        // Para Set: novo valor
+    QString variable;     // Para Query: nome da variável de destino
+
     bool isValid() const {
         switch (type) {
             case Shell:
@@ -56,19 +54,17 @@ struct ActionConfig {
 
 /**
  * @brief Configuração de eventos/ações para um widget
- * 
+ *
  * Mapeia eventos (clicked, changed, etc.) para listas de ações
  */
 struct EventActionsConfig {
     QMap<QString, QList<ActionConfig>> events; // "clicked" -> [action1, action2, ...]
-    
+
     bool hasActions() const { return !events.isEmpty(); }
-    
-    QList<ActionConfig> actionsFor(const QString &event) const {
-        return events.value(event);
-    }
-    
-    void addAction(const QString &event, const ActionConfig &action) {
+
+    QList<ActionConfig> actionsFor(const QString& event) const { return events.value(event); }
+
+    void addAction(const QString& event, const ActionConfig& action) {
         events[event].append(action);
     }
 };
@@ -81,9 +77,7 @@ struct WindowConfig : public BaseConfig {
     // Window might not strictly need a 'name' if it's the main window,
     // but usually in SHantilly it's implicitly 'window'.
     // Overriding isValid to be permissive for Window title.
-    bool isValid() const override {
-        return width > 0 && height > 0;
-    }
+    bool isValid() const override { return width > 0 && height > 0; }
 };
 
 struct ButtonConfig : public BaseConfig {
@@ -91,7 +85,7 @@ struct ButtonConfig : public BaseConfig {
     bool checkable = false;
     bool checked = false;
     QString iconPath;
-    EventActionsConfig actions;  // Ações associadas ao botão
+    EventActionsConfig actions; // Ações associadas ao botão
 };
 
 struct LabelConfig : public BaseConfig {
@@ -142,7 +136,6 @@ struct SbxLayoutConfig : public BaseConfig {
     int margin = 5;
 };
 
-
 struct CheckBoxConfig : public BaseConfig {
     QString text = "CheckBox";
     bool checked = false;
@@ -169,7 +162,6 @@ struct SliderConfig : public BaseConfig {
     int orientation = 1; // Qt::Horizontal = 0x1
 };
 
-
 struct CalendarConfig : public BaseConfig {
     // Data atual ou selecionada pode ser adicionada aqui se necessário via QString ISO
 };
@@ -183,7 +175,6 @@ struct TextEditConfig : public BaseConfig {
 struct SeparatorConfig : public BaseConfig {
     int orientation = 1; // Qt::Horizontal
 };
-
 
 struct GroupBoxConfig : public BaseConfig {
     QString title = "Group";

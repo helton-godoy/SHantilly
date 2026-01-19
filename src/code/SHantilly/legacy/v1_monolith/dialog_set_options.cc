@@ -21,8 +21,8 @@
  */
 
 #include "SHantilly.h"
-#include "custom_table_widget.h"
 #include "custom_chart_widget.h"
+#include "custom_table_widget.h"
 #include "icon_helper.h"
 
 using namespace DialogCommandTokens;
@@ -34,9 +34,8 @@ using namespace DialogCommandTokens;
  *  option is to set or to unset.
  *  Text is the string used for options which require string values.
  ******************************************************************************/
-void SHantilly::setOptions(QWidget *widget, unsigned int options,
-                           unsigned int mask, const char *text)
-{
+void SHantilly::setOptions(QWidget* widget, unsigned int options, unsigned int mask,
+                           const char* text) {
     if (!widget)
         return;
 
@@ -48,12 +47,12 @@ void SHantilly::setOptions(QWidget *widget, unsigned int options,
     if (!(mask & type) || !(mask & PropertyMask))
         return;
 
-    QWidget *proxyWidget;
-    const QMetaObject *metaObj = widget->metaObject();
-    const QMetaObject *proxyMetaObj;
+    QWidget* proxyWidget;
+    const QMetaObject* metaObj = widget->metaObject();
+    const QMetaObject* proxyMetaObj;
     QMetaProperty property;
 
-    if ( (proxyWidget = widget->focusProxy()) ) {
+    if ((proxyWidget = widget->focusProxy())) {
         proxyMetaObj = proxyWidget->metaObject();
     } else {
         proxyWidget = widget;
@@ -63,12 +62,11 @@ void SHantilly::setOptions(QWidget *widget, unsigned int options,
     if (type & PropertyDefault && mask & PropertyDefault & PropertyMask) {
         property = metaObj->property(metaObj->indexOfProperty("default"));
         if (property.isWritable()) {
-            property.write(widget,
-                    QVariant((bool)(options & PropertyDefault & PropertyMask)));
+            property.write(widget, QVariant((bool) (options & PropertyDefault & PropertyMask)));
 
             if (options & PropertyDefault & PropertyMask)
-                defaultPushButton = (QPushButton *)widget;
-            else if (defaultPushButton == (QPushButton *)widget)
+                defaultPushButton = (QPushButton*) widget;
+            else if (defaultPushButton == (QPushButton*) widget)
                 defaultPushButton = nullptr;
         }
     }
@@ -76,20 +74,18 @@ void SHantilly::setOptions(QWidget *widget, unsigned int options,
     if (type & PropertyChecked && mask & PropertyChecked & PropertyMask) {
         property = metaObj->property(metaObj->indexOfProperty("checked"));
         if (property.isWritable()) {
-            property.write(widget,
-                           QVariant(options & PropertyChecked & PropertyMask));
+            property.write(widget, QVariant(options & PropertyChecked & PropertyMask));
         }
     }
 
     if (type & PropertyCheckable && mask & PropertyCheckable & PropertyMask) {
         property = metaObj->property(metaObj->indexOfProperty("checkable"));
         if (property.isWritable()) {
-            property.write(widget,
-                    QVariant(options & PropertyCheckable & PropertyMask));
+            property.write(widget, QVariant(options & PropertyCheckable & PropertyMask));
         }
         // Changing checkable status for some widgets might change their focus
         // policy to/from Qt::NoFocus (e.g. for QGroupBox)
-        QWidget *page = widget->parentWidget();
+        QWidget* page = widget->parentWidget();
         if (widgetType(page) != PageWidget)
             page = page->parentWidget();
         updateTabsOrder(page);
@@ -97,50 +93,45 @@ void SHantilly::setOptions(QWidget *widget, unsigned int options,
 
     // Password makes sense for QLineEdit objects only
     if (type & PropertyPassword && mask & PropertyPassword & PropertyMask) {
-        property = proxyMetaObj->property(
-                proxyMetaObj->indexOfProperty("echoMode"));
+        property = proxyMetaObj->property(proxyMetaObj->indexOfProperty("echoMode"));
         if (property.isWritable()) {
             property.write(proxyWidget,
-                           QVariant(options & PropertyPassword & PropertyMask
-                                    ? QLineEdit::Password
-                                    : QLineEdit::Normal));
+                           QVariant(options & PropertyPassword & PropertyMask ? QLineEdit::Password
+                                                                              : QLineEdit::Normal));
         }
     }
 
     // Placeholder makes sense for QLineEdit objects only
-    if (type & PropertyPlaceholder
-        && mask & PropertyPlaceholder & PropertyMask) {
-        property = proxyMetaObj->property(
-                proxyMetaObj->indexOfProperty("placeholderText"));
+    if (type & PropertyPlaceholder && mask & PropertyPlaceholder & PropertyMask) {
+        property = proxyMetaObj->property(proxyMetaObj->indexOfProperty("placeholderText"));
         if (property.isWritable()) {
-            property.write(proxyWidget,
-                           QVariant(QString(options & PropertyPlaceholder
-                                            & PropertyMask ? text : nullptr)));
+            property.write(
+                proxyWidget,
+                QVariant(QString(options & PropertyPlaceholder & PropertyMask ? text : nullptr)));
         }
     }
 
     // Text makes difference for QLineEdit objects only (editable combobox
     // includes QLineEdit object). For the rest it is the same as title.
     if (type & PropertyText && mask & PropertyText & PropertyMask) {
-        QWidget *leWidget = proxyWidget;
+        QWidget* leWidget = proxyWidget;
 
-        if (proxyWidget != widget
-            && (type == TextBoxWidget || (type == ComboBoxWidget
-            && (leWidget = ((QComboBox *)proxyWidget)->lineEdit())) )) {
-            const QMetaObject *leMetaObj = leWidget->metaObject();
+        if (proxyWidget != widget &&
+            (type == TextBoxWidget ||
+             (type == ComboBoxWidget && (leWidget = ((QComboBox*) proxyWidget)->lineEdit())))) {
+            const QMetaObject* leMetaObj = leWidget->metaObject();
             property = leMetaObj->property(leMetaObj->indexOfProperty("text"));
             if (property.isWritable()) {
-                property.write(leWidget,
-                               QVariant(QString(options & PropertyText
-                                            & PropertyMask ? text : nullptr)));
+                property.write(
+                    leWidget,
+                    QVariant(QString(options & PropertyText & PropertyMask ? text : nullptr)));
             }
         } else {
             // This is not a QLineEdit object
             if (PropertyTitle & type) {
                 // This option will be applied by the code below
                 mask |= PropertyTitle & PropertyMask;
-                options |= options & PropertyText & PropertyMask
-                           ? PropertyTitle & PropertyMask : 0;
+                options |= options & PropertyText & PropertyMask ? PropertyTitle & PropertyMask : 0;
             }
             // Else there is a bug in DialogCommandTokens::Control enum
         }
@@ -148,42 +139,38 @@ void SHantilly::setOptions(QWidget *widget, unsigned int options,
 
     if (type & PropertyTitle && mask & PropertyTitle & PropertyMask) {
         switch (type) {
-        case ItemWidget: {
-            QAbstractItemModel *model = chosenView->model();
-            if (chosenRow >= 0) {
-                model->setData(model->index(chosenRow, 0),
-                               QString(options & PropertyTitle & PropertyMask
-                                       ? text : nullptr), Qt::DisplayRole);
+            case ItemWidget: {
+                QAbstractItemModel* model = chosenView->model();
+                if (chosenRow >= 0) {
+                    model->setData(model->index(chosenRow, 0),
+                                   QString(options & PropertyTitle & PropertyMask ? text : nullptr),
+                                   Qt::DisplayRole);
+                }
+                break;
             }
-            break;
-        }
-        case PageWidget: {
-            QTabWidget *tabs = (QTabWidget *)widget->parent()->parent();
-            tabs->setTabText(tabs->indexOf(widget),
-                             QString(options & PropertyTitle & PropertyMask
-                                     ? text : nullptr));
-            break;
-        }
-        default:
-            if (// QGroupBox objects
-                (property = metaObj->property(
-                    metaObj->indexOfProperty("title"))).isWritable()
-                // the rest widgets
-                || (property = metaObj->property(
-                    metaObj->indexOfProperty("text"))).isWritable()
-                // the main window (QDialog object)
-                || (property = metaObj->property(
-                    metaObj->indexOfProperty("windowTitle"))).isWritable()) {
-                // Avoid to format labels of joint widgets (which have
-                // focusProxy set)
-                if (widget == proxyWidget)
-                    sanitizeLabel(widget, TextContent);
+            case PageWidget: {
+                QTabWidget* tabs = (QTabWidget*) widget->parent()->parent();
+                tabs->setTabText(tabs->indexOf(widget),
+                                 QString(options & PropertyTitle & PropertyMask ? text : nullptr));
+                break;
+            }
+            default:
+                if ( // QGroupBox objects
+                    (property = metaObj->property(metaObj->indexOfProperty("title"))).isWritable()
+                    // the rest widgets
+                    || (property = metaObj->property(metaObj->indexOfProperty("text"))).isWritable()
+                    // the main window (QDialog object)
+                    || (property = metaObj->property(metaObj->indexOfProperty("windowTitle")))
+                           .isWritable()) {
+                    // Avoid to format labels of joint widgets (which have
+                    // focusProxy set)
+                    if (widget == proxyWidget)
+                        sanitizeLabel(widget, TextContent);
 
-                property.write(widget,
-                               QVariant(QString(options & PropertyTitle
-                                                & PropertyMask
-                                                ? text : nullptr)));
-            }
+                    property.write(
+                        widget,
+                        QVariant(QString(options & PropertyTitle & PropertyMask ? text : nullptr)));
+                }
         }
     }
 
@@ -195,9 +182,8 @@ void SHantilly::setOptions(QWidget *widget, unsigned int options,
     if (type & PropertyAnimation && mask & PropertyAnimation & PropertyMask) {
         // There is no movie property for QLabel objects
         sanitizeLabel(widget, MovieContent);
-        if (QMovie *mv = new QMovie(options & PropertyAnimation & PropertyMask
-                                    ? text : nullptr)) {
-            ((QLabel *)widget)->setMovie(mv);
+        if (QMovie* mv = new QMovie(options & PropertyAnimation & PropertyMask ? text : nullptr)) {
+            ((QLabel*) widget)->setMovie(mv);
             mv->start();
             mv->setParent(widget);
         }
@@ -212,48 +198,46 @@ void SHantilly::setOptions(QWidget *widget, unsigned int options,
         property = metaObj->property(metaObj->indexOfProperty("pixmap"));
         if (property.isWritable()) {
             sanitizeLabel(widget, PixmapContent);
-            property.write(widget,
-                           QVariant(QPixmap(options & PropertyPicture
-                                            & PropertyMask ? text : nullptr)));
+            property.write(
+                widget,
+                QVariant(QPixmap(options & PropertyPicture & PropertyMask ? text : nullptr)));
         }
     }
 
     if (type & PropertyIcon && mask & PropertyIcon & PropertyMask) {
         switch (type) {
-        case ItemWidget: {
-            QAbstractItemModel *model = chosenView->model();
-            if (chosenRow >= 0) {
-                model->setData(model->index(chosenRow, 0),
-                               IconHelper::loadIcon(options & PropertyIcon & PropertyMask
-                                     ? text : nullptr), Qt::DecorationRole);
+            case ItemWidget: {
+                QAbstractItemModel* model = chosenView->model();
+                if (chosenRow >= 0) {
+                    model->setData(model->index(chosenRow, 0),
+                                   IconHelper::loadIcon(
+                                       options & PropertyIcon & PropertyMask ? text : nullptr),
+                                   Qt::DecorationRole);
+                }
+                break;
             }
-            break;
-        }
-        case PageWidget: {
-            QTabWidget *tabs = (QTabWidget *)widget->parent()->parent();
-            tabs->setTabIcon(tabs->indexOf(widget),
-                             IconHelper::loadIcon(options & PropertyIcon & PropertyMask
-                                   ? text : nullptr));
-            break;
-        }
-        default:
-            if ((property = metaObj->property(
-                    metaObj->indexOfProperty("icon"))).isWritable()
-                || (property = metaObj->property(
-                    metaObj->indexOfProperty("windowIcon"))).isWritable()) {
-                property.write(widget,
-                               QVariant(IconHelper::loadIcon(options & PropertyIcon
-                                              & PropertyMask
-                                              ? text : nullptr)));
+            case PageWidget: {
+                QTabWidget* tabs = (QTabWidget*) widget->parent()->parent();
+                tabs->setTabIcon(
+                    tabs->indexOf(widget),
+                    IconHelper::loadIcon(options & PropertyIcon & PropertyMask ? text : nullptr));
+                break;
             }
+            default:
+                if ((property = metaObj->property(metaObj->indexOfProperty("icon"))).isWritable() ||
+                    (property = metaObj->property(metaObj->indexOfProperty("windowIcon")))
+                        .isWritable()) {
+                    property.write(widget,
+                                   QVariant(IconHelper::loadIcon(
+                                       options & PropertyIcon & PropertyMask ? text : nullptr)));
+                }
         }
     }
 
     // Iconsize makes sense for set command only
-    if (type & PropertyIconSize && mask & PropertyIconSize & PropertyMask
-        && options & PropertyIconSize & PropertyMask) {
-        property = proxyMetaObj->property(
-                proxyMetaObj->indexOfProperty("iconSize"));
+    if (type & PropertyIconSize && mask & PropertyIconSize & PropertyMask &&
+        options & PropertyIconSize & PropertyMask) {
+        property = proxyMetaObj->property(proxyMetaObj->indexOfProperty("iconSize"));
         if (property.isWritable()) {
             if (text[0]) {
                 int size;
@@ -264,22 +248,22 @@ void SHantilly::setOptions(QWidget *widget, unsigned int options,
     }
 
     // below three shadow options make sense for set command only
-    if (type & PropertyRaised && mask & PropertyRaised & PropertyMask
-        && options & PropertyRaised & PropertyMask) {
+    if (type & PropertyRaised && mask & PropertyRaised & PropertyMask &&
+        options & PropertyRaised & PropertyMask) {
         property = metaObj->property(metaObj->indexOfProperty("frameShadow"));
         if (property.isWritable())
             property.write(widget, QVariant(QFrame::Raised));
     }
 
-    if (type & PropertySunken && mask & PropertySunken & PropertyMask
-        && options & PropertySunken & PropertyMask) {
+    if (type & PropertySunken && mask & PropertySunken & PropertyMask &&
+        options & PropertySunken & PropertyMask) {
         property = metaObj->property(metaObj->indexOfProperty("frameShadow"));
         if (property.isWritable())
             property.write(widget, QVariant(QFrame::Sunken));
     }
 
-    if (type & PropertyPlain && mask & PropertyPlain & PropertyMask
-        && options & PropertyPlain & PropertyMask) {
+    if (type & PropertyPlain && mask & PropertyPlain & PropertyMask &&
+        options & PropertyPlain & PropertyMask) {
         property = metaObj->property(metaObj->indexOfProperty("frameShadow"));
         if (property.isWritable())
             property.write(widget, QVariant(QFrame::Plain));
@@ -298,17 +282,18 @@ void SHantilly::setOptions(QWidget *widget, unsigned int options,
     if (type & PropertyBox && mask & PropertyBox & PropertyMask) {
         property = metaObj->property(metaObj->indexOfProperty("frameShape"));
         if (property.isWritable()) {
-            property.write(widget, QVariant(options & PropertyBox & PropertyMask
-                                            ? QFrame::Box : QFrame::NoFrame));
+            property.write(
+                widget,
+                QVariant(options & PropertyBox & PropertyMask ? QFrame::Box : QFrame::NoFrame));
         }
     }
 
     if (type & PropertyPanel && mask & PropertyPanel & PropertyMask) {
         property = metaObj->property(metaObj->indexOfProperty("frameShape"));
         if (property.isWritable()) {
-            property.write(widget,
-                           QVariant(options & PropertyPanel & PropertyMask
-                                    ? QFrame::Panel : QFrame::NoFrame));
+            property.write(
+                widget,
+                QVariant(options & PropertyPanel & PropertyMask ? QFrame::Panel : QFrame::NoFrame));
         }
     }
 
@@ -316,14 +301,14 @@ void SHantilly::setOptions(QWidget *widget, unsigned int options,
         property = metaObj->property(metaObj->indexOfProperty("frameShape"));
         if (property.isWritable()) {
             property.write(widget,
-                           QVariant(options & PropertyStyled & PropertyMask
-                                    ? QFrame::StyledPanel : QFrame::NoFrame));
+                           QVariant(options & PropertyStyled & PropertyMask ? QFrame::StyledPanel
+                                                                            : QFrame::NoFrame));
         }
     }
 
     // Noframe shape option makes sense for set command only
-    if (type & PropertyNoframe && mask & PropertyNoframe & PropertyMask
-        && options & PropertyNoframe & PropertyMask) {
+    if (type & PropertyNoframe && mask & PropertyNoframe & PropertyMask &&
+        options & PropertyNoframe & PropertyMask) {
         property = metaObj->property(metaObj->indexOfProperty("frameShape"));
         if (property.isWritable())
             property.write(widget, QVariant(QFrame::NoFrame));
@@ -332,7 +317,7 @@ void SHantilly::setOptions(QWidget *widget, unsigned int options,
     if (type & PropertyAxis && mask & PropertyAxis & PropertyMask) {
         if (type == ChartWidget) {
             if (options & PropertyAxis & PropertyMask) {
-                ((CustomChartWidget *)widget)->setAxis(QString(text));
+                ((CustomChartWidget*) widget)->setAxis(QString(text));
             }
         }
     }
@@ -340,7 +325,7 @@ void SHantilly::setOptions(QWidget *widget, unsigned int options,
     if (type & PropertyExport && mask & PropertyExport & PropertyMask) {
         if (type == ChartWidget) {
             if (options & PropertyExport & PropertyMask) {
-                ((CustomChartWidget *)widget)->exportChart(QString(text));
+                ((CustomChartWidget*) widget)->exportChart(QString(text));
             }
         }
     }
@@ -349,15 +334,14 @@ void SHantilly::setOptions(QWidget *widget, unsigned int options,
     if (type & PropertyAppend && mask & PropertyAppend & PropertyMask) {
         if (type == ChartWidget) {
             if (options & PropertyAppend & PropertyMask) {
-                ((CustomChartWidget *)widget)->appendData(QString(text));
+                ((CustomChartWidget*) widget)->appendData(QString(text));
             }
         }
     }
 
     // Apply and exit make sense for QPushButton objects only
-    if (type & PropertyApply & PropertyExit
-        && (mask & PropertyApply & PropertyMask
-        || mask & PropertyExit & PropertyMask)) {
+    if (type & PropertyApply & PropertyExit &&
+        (mask & PropertyApply & PropertyMask || mask & PropertyExit & PropertyMask)) {
         const unsigned int propertyApply = PropertyApply & PropertyMask;
         const unsigned int propertyExit = PropertyExit & PropertyMask;
         unsigned int pbOptions = 0;
@@ -386,70 +370,65 @@ void SHantilly::setOptions(QWidget *widget, unsigned int options,
     }
 
     if (type & PropertyActivation && mask & PropertyActivation & PropertyMask) {
-        disconnect(proxyWidget, SIGNAL(activated(const QModelIndex &)), this,
-                   SLOT(listBoxItemActivated(const QModelIndex &)));
-        ((ListBox *)proxyWidget)->setActivateFlag(false);
+        disconnect(proxyWidget, SIGNAL(activated(const QModelIndex&)), this,
+                   SLOT(listBoxItemActivated(const QModelIndex&)));
+        ((ListBox*) proxyWidget)->setActivateFlag(false);
         if (options & PropertyActivation & PropertyMask) {
-            connect(proxyWidget, SIGNAL(activated(const QModelIndex &)), this,
-                    SLOT(listBoxItemActivated(const QModelIndex &)));
-            ((ListBox *)proxyWidget)->setActivateFlag(true);
+            connect(proxyWidget, SIGNAL(activated(const QModelIndex&)), this,
+                    SLOT(listBoxItemActivated(const QModelIndex&)));
+            ((ListBox*) proxyWidget)->setActivateFlag(true);
         }
     }
 
     if (type & PropertySelection && mask & PropertySelection & PropertyMask) {
         switch (type) {
-        case ComboBoxWidget:
-            // Note: Qt::QueuedConnection type is used for this type widget
-            disconnect(proxyWidget, SIGNAL(currentIndexChanged(int)), this,
-                       SLOT(comboBoxItemSelected(int)));
-            if (options & PropertySelection & PropertyMask) {
-                connect(proxyWidget, SIGNAL(currentIndexChanged(int)), this,
-                        SLOT(comboBoxItemSelected(int)), Qt::QueuedConnection);
-            }
-            break;
-        case ListBoxWidget:
-            disconnect(proxyWidget,
-                       SIGNAL(currentItemChanged(QListWidgetItem *,
-                                                 QListWidgetItem *)),
-                       this, SLOT(listBoxItemSelected(QListWidgetItem *)));
-            if (options & PropertySelection & PropertyMask) {
-                connect(proxyWidget,
-                        SIGNAL(currentItemChanged(QListWidgetItem *,
-                                                  QListWidgetItem *)),
-                        this, SLOT(listBoxItemSelected(QListWidgetItem *)));
-            }
-            break;
-        case CalendarWidget:
-            disconnect(proxyWidget, SIGNAL(selectionChanged()), this,
-                       SLOT(calendarSelected()));
-            if (options & PropertySelection & PropertyMask) {
-                connect(proxyWidget, SIGNAL(selectionChanged()), this,
-                        SLOT(calendarSelected()));
-            }
-            break;
+            case ComboBoxWidget:
+                // Note: Qt::QueuedConnection type is used for this type widget
+                disconnect(proxyWidget, SIGNAL(currentIndexChanged(int)), this,
+                           SLOT(comboBoxItemSelected(int)));
+                if (options & PropertySelection & PropertyMask) {
+                    connect(proxyWidget, SIGNAL(currentIndexChanged(int)), this,
+                            SLOT(comboBoxItemSelected(int)), Qt::QueuedConnection);
+                }
+                break;
+            case ListBoxWidget:
+                disconnect(proxyWidget,
+                           SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this,
+                           SLOT(listBoxItemSelected(QListWidgetItem*)));
+                if (options & PropertySelection & PropertyMask) {
+                    connect(proxyWidget,
+                            SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this,
+                            SLOT(listBoxItemSelected(QListWidgetItem*)));
+                }
+                break;
+            case CalendarWidget:
+                disconnect(proxyWidget, SIGNAL(selectionChanged()), this, SLOT(calendarSelected()));
+                if (options & PropertySelection & PropertyMask) {
+                    connect(proxyWidget, SIGNAL(selectionChanged()), this,
+                            SLOT(calendarSelected()));
+                }
+                break;
         }
     }
 
     // Current option makes sense for set command only
-    if (type & PropertyCurrent && mask & PropertyCurrent & PropertyMask
-        && options & PropertyCurrent & PropertyMask) {
+    if (type & PropertyCurrent && mask & PropertyCurrent & PropertyMask &&
+        options & PropertyCurrent & PropertyMask) {
         switch (type) {
-        case ItemWidget:
-            if (chosenRow >= 0) {
-                if (chosenView != (ListBox *)chosenListWidget) {
-                    // QComboBox widget
-                    ((QComboBox *)chosenListWidget)->setCurrentIndex(chosenRow);
-                } else {
-                    // ListBox widget
-                    chosenView->setCurrentIndex(
-                            chosenView->model()->index(chosenRow, 0));
+            case ItemWidget:
+                if (chosenRow >= 0) {
+                    if (chosenView != (ListBox*) chosenListWidget) {
+                        // QComboBox widget
+                        ((QComboBox*) chosenListWidget)->setCurrentIndex(chosenRow);
+                    } else {
+                        // ListBox widget
+                        chosenView->setCurrentIndex(chosenView->model()->index(chosenRow, 0));
+                    }
                 }
-            }
-            break;
-        case PageWidget:
-            ((QTabWidget *)widget->parent()->parent())->setCurrentWidget(
-                    widget);
-            break;
+                break;
+            case PageWidget:
+                ((QTabWidget*) widget->parent()->parent())->setCurrentWidget(widget);
+                break;
         }
     }
 
@@ -458,7 +437,7 @@ void SHantilly::setOptions(QWidget *widget, unsigned int options,
             if (options & PropertyMinimum & PropertyMask && text && text[0]) {
                 QDate d = QDate::fromString(QString(text), Qt::ISODate);
                 if (d.isValid())
-                    ((QCalendarWidget *)widget)->setMinimumDate(d);
+                    ((QCalendarWidget*) widget)->setMinimumDate(d);
             }
         } else {
             property = metaObj->property(metaObj->indexOfProperty("minimum"));
@@ -477,7 +456,7 @@ void SHantilly::setOptions(QWidget *widget, unsigned int options,
             if (options & PropertyMaximum & PropertyMask && text && text[0]) {
                 QDate d = QDate::fromString(QString(text), Qt::ISODate);
                 if (d.isValid())
-                    ((QCalendarWidget *)widget)->setMaximumDate(d);
+                    ((QCalendarWidget*) widget)->setMaximumDate(d);
             }
         } else {
             property = metaObj->property(metaObj->indexOfProperty("maximum"));
@@ -496,17 +475,16 @@ void SHantilly::setOptions(QWidget *widget, unsigned int options,
         if (type == ChartWidget) {
             if (options & PropertyValue & PropertyMask) {
                 if (options & PropertyAppend & PropertyMask) {
-                    ((CustomChartWidget *)widget)->appendData(QString(text));
+                    ((CustomChartWidget*) widget)->appendData(QString(text));
                 } else {
-                    ((CustomChartWidget *)widget)->setData(QString(text));
+                    ((CustomChartWidget*) widget)->setData(QString(text));
                 }
             }
         } else {
             property = metaObj->property(metaObj->indexOfProperty("value"));
             if (property.isWritable()) {
-                if (!(options & PropertyValue & PropertyMask)
-                    && type == ProgressBarWidget) {
-                    ((QProgressBar *)widget)->reset();
+                if (!(options & PropertyValue & PropertyMask) && type == ProgressBarWidget) {
+                    ((QProgressBar*) widget)->reset();
                 } else {
                     int value = 0;
                     if (text[0])
@@ -521,9 +499,7 @@ void SHantilly::setOptions(QWidget *widget, unsigned int options,
     if (type & PropertyBusy && mask & PropertyBusy & PropertyMask) {
         property = metaObj->property(metaObj->indexOfProperty("maximum"));
         if (property.isWritable()) {
-            property.write(widget,
-                           QVariant(options & PropertyBusy & PropertyMask
-                                    ? 0 : 100));
+            property.write(widget, QVariant(options & PropertyBusy & PropertyMask ? 0 : 100));
         }
     }
 
@@ -531,50 +507,48 @@ void SHantilly::setOptions(QWidget *widget, unsigned int options,
     if (type & PropertyFile && mask & PropertyFile & PropertyMask) {
         if (options & PropertyFile & PropertyMask) {
             if (type == ChartWidget) {
-                ((CustomChartWidget *)widget)->loadFromFile(QString(text));
+                ((CustomChartWidget*) widget)->loadFromFile(QString(text));
             } else if (type == TableWidget) {
-                ((CustomTableWidget *)widget)->loadFromFile(QString(text));
+                ((CustomTableWidget*) widget)->loadFromFile(QString(text));
             } else {
                 // TextViewWidget
                 QFile txt(text);
                 if (txt.open(QFile::ReadOnly))
-                    ((QTextEdit *)widget)->setText(QTextStream(&txt).readAll());
+                    ((QTextEdit*) widget)->setText(QTextStream(&txt).readAll());
             }
         } else {
             if (type == TextViewWidget)
-                ((QTextEdit *)widget)->clear();
-            // Clear for other widgets if needed, but mostly unset file doesn't clear content unless specified
+                ((QTextEdit*) widget)->clear();
+            // Clear for other widgets if needed, but mostly unset file doesn't clear content unless
+            // specified
         }
     }
 
     // Below four position options make sense for set command only and for
     // QTabWidget objects only
-    if (type & PropertyPositionTop && mask & PropertyPositionTop & PropertyMask
-        && options & PropertyPositionTop & PropertyMask) {
+    if (type & PropertyPositionTop && mask & PropertyPositionTop & PropertyMask &&
+        options & PropertyPositionTop & PropertyMask) {
         property = metaObj->property(metaObj->indexOfProperty("tabPosition"));
         if (property.isWritable())
             property.write(widget, QVariant(QTabWidget::North));
     }
 
-    if (type & PropertyPositionBottom
-        && mask & PropertyPositionBottom & PropertyMask
-        && options & PropertyPositionBottom & PropertyMask) {
+    if (type & PropertyPositionBottom && mask & PropertyPositionBottom & PropertyMask &&
+        options & PropertyPositionBottom & PropertyMask) {
         property = metaObj->property(metaObj->indexOfProperty("tabPosition"));
         if (property.isWritable())
             property.write(widget, QVariant(QTabWidget::South));
     }
 
-    if (type & PropertyPositionLeft
-        && mask & PropertyPositionLeft & PropertyMask
-        && options & PropertyPositionLeft & PropertyMask) {
+    if (type & PropertyPositionLeft && mask & PropertyPositionLeft & PropertyMask &&
+        options & PropertyPositionLeft & PropertyMask) {
         property = metaObj->property(metaObj->indexOfProperty("tabPosition"));
         if (property.isWritable())
             property.write(widget, QVariant(QTabWidget::West));
     }
 
-    if (type & PropertyPositionRight
-        && mask & PropertyPositionRight & PropertyMask
-        && options & PropertyPositionRight & PropertyMask) {
+    if (type & PropertyPositionRight && mask & PropertyPositionRight & PropertyMask &&
+        options & PropertyPositionRight & PropertyMask) {
         property = metaObj->property(metaObj->indexOfProperty("tabPosition"));
         if (property.isWritable())
             property.write(widget, QVariant(QTabWidget::East));
@@ -585,26 +559,28 @@ void SHantilly::setOptions(QWidget *widget, unsigned int options,
             if (options & PropertyDate & PropertyMask && text && text[0]) {
                 QDate d = QDate::fromString(QString(text), Qt::ISODate);
                 if (d.isValid())
-                    ((QCalendarWidget *)widget)->setSelectedDate(d);
+                    ((QCalendarWidget*) widget)->setSelectedDate(d);
             }
         }
     }
 
     if (type & PropertyNavigation && mask & PropertyNavigation & PropertyMask) {
         if (type == CalendarWidget) {
-            ((QCalendarWidget *)widget)->setNavigationBarVisible(
-                    (bool)(options & PropertyNavigation & PropertyMask));
+            ((QCalendarWidget*) widget)
+                ->setNavigationBarVisible((bool) (options & PropertyNavigation & PropertyMask));
         }
     }
 
     if (type & TableWidget) {
-        CustomTableWidget *container = (CustomTableWidget *)widget;
-        QTableWidget *table = container->table();
-        
+        CustomTableWidget* container = (CustomTableWidget*) widget;
+        QTableWidget* table = container->table();
+
         if (mask & PropertyReadOnly & PropertyMask) {
             table->setEditTriggers(options & PropertyReadOnly & PropertyMask
-                                   ? QAbstractItemView::NoEditTriggers
-                                   : QAbstractItemView::DoubleClicked | QAbstractItemView::EditKeyPressed | QAbstractItemView::AnyKeyPressed);
+                                       ? QAbstractItemView::NoEditTriggers
+                                       : QAbstractItemView::DoubleClicked |
+                                             QAbstractItemView::EditKeyPressed |
+                                             QAbstractItemView::AnyKeyPressed);
         }
 
         if (mask & PropertyHeaders & PropertyMask && options & PropertyHeaders & PropertyMask) {

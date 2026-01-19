@@ -29,18 +29,16 @@ using namespace DialogCommandTokens;
  *  function with return value of the r which in turn is returned by the main
  *  function.
  ******************************************************************************/
-void SHantilly::done(int r)
-{
+void SHantilly::done(int r) {
     QCoreApplication::exit(r);
 }
 
 /*******************************************************************************
  *  Slot function. Removes page widget from pages list.
  ******************************************************************************/
-void SHantilly::removePage(QObject *page)
-{
+void SHantilly::removePage(QObject* page) {
     for (int i = 0, j = pages.count(); i < j; i++) {
-        if ((QObject *)pages.at(i) == page) {
+        if ((QObject*) pages.at(i) == page) {
             pages.removeAt(i);
             break;
         }
@@ -50,8 +48,7 @@ void SHantilly::removePage(QObject *page)
 /*******************************************************************************
  *  Slot function. Reports values of all reportable enabled widgets.
  ******************************************************************************/
-void SHantilly::report()
-{
+void SHantilly::report() {
     for (int i = 0, j = pages.count(); i < j; i++)
         printWidgetsRecursively(pages.at(i)->layout());
 }
@@ -59,10 +56,9 @@ void SHantilly::report()
 /*******************************************************************************
  *  Slot function. Reports the pushbutton is clicked.
  ******************************************************************************/
-void SHantilly::pushButtonClicked()
-{
-    QPushButton *pb = (QPushButton *)sender();
-    const char *objectName = pb->objectName().toLocal8Bit().constData();
+void SHantilly::pushButtonClicked() {
+    QPushButton* pb = (QPushButton*) sender();
+    const char* objectName = pb->objectName().toLocal8Bit().constData();
 
     if (objectName[0] && !pb->isCheckable()) {
         fprintf(output, "%s=clicked\n", objectName);
@@ -74,13 +70,11 @@ void SHantilly::pushButtonClicked()
  *  Slot function. Reports the pushbutton is toggled (pressed or released).
  *  Only checkable pushbutton can te toggled.
  ******************************************************************************/
-void SHantilly::pushButtonToggled(bool checked)
-{
-    const char *objectName = sender()->objectName().toLocal8Bit().constData();
+void SHantilly::pushButtonToggled(bool checked) {
+    const char* objectName = sender()->objectName().toLocal8Bit().constData();
 
     if (objectName[0]) {
-        fprintf(output, "%s=%s\n", objectName,
-                checked ? "pressed" : "released");
+        fprintf(output, "%s=%s\n", objectName, checked ? "pressed" : "released");
         fflush(output);
     }
 }
@@ -88,19 +82,17 @@ void SHantilly::pushButtonToggled(bool checked)
 /*******************************************************************************
  *  Slot function. Reports the listbox item is activated.
  ******************************************************************************/
-void SHantilly::listBoxItemActivated(const QModelIndex &index)
-{
-    ListBox *list = (ListBox *)sender();
-    QLayout *layout;
-    QWidget *label;
+void SHantilly::listBoxItemActivated(const QModelIndex& index) {
+    ListBox* list = (ListBox*) sender();
+    QLayout* layout;
+    QWidget* label;
 
     if ((layout = findLayout(list)) && (label = layout->itemAt(0)->widget())) {
-        const char *objectName = label->objectName().toLocal8Bit().constData();
+        const char* objectName = label->objectName().toLocal8Bit().constData();
 
         if (objectName[0]) {
             fprintf(output, "%s=", objectName);
-            fprintf(output, "%s\n",
-                    index.data().toString().toLocal8Bit().constData());
+            fprintf(output, "%s\n", index.data().toString().toLocal8Bit().constData());
             fflush(output);
         }
     }
@@ -109,19 +101,17 @@ void SHantilly::listBoxItemActivated(const QModelIndex &index)
 /*******************************************************************************
  *  Slot function. Reports the current item of the listbox is changed.
  ******************************************************************************/
-void SHantilly::listBoxItemSelected(QListWidgetItem *current)
-{
-    ListBox *list = (ListBox *)sender();
-    QLayout *layout;
-    QWidget *label;
+void SHantilly::listBoxItemSelected(QListWidgetItem* current) {
+    ListBox* list = (ListBox*) sender();
+    QLayout* layout;
+    QWidget* label;
 
     if ((layout = findLayout(list)) && (label = layout->itemAt(0)->widget())) {
-        const char *objectName = label->objectName().toLocal8Bit().constData();
+        const char* objectName = label->objectName().toLocal8Bit().constData();
 
         if (objectName[0]) {
             fprintf(output, "%s=", objectName);
-            fprintf(output, "%s\n",
-                    current ? current->text().toLocal8Bit().constData() : "");
+            fprintf(output, "%s\n", current ? current->text().toLocal8Bit().constData() : "");
             fflush(output);
         }
     }
@@ -130,47 +120,41 @@ void SHantilly::listBoxItemSelected(QListWidgetItem *current)
 /*******************************************************************************
  *  Slot function. Reports the current item of the combobox is changed.
  ******************************************************************************/
-void SHantilly::comboBoxItemSelected(int index)
-{
+void SHantilly::comboBoxItemSelected(int index) {
     Q_UNUSED(index);
     report();
 }
 
-void SHantilly::tableCellEdited(int row, int col, const QString &text)
-{
-    const char *objectName = sender()->objectName().toLocal8Bit().constData();
+void SHantilly::tableCellEdited(int row, int col, const QString& text) {
+    const char* objectName = sender()->objectName().toLocal8Bit().constData();
     if (objectName[0]) {
         fprintf(output, "%s[%d][%d]=%s\n", objectName, row, col, text.toLocal8Bit().constData());
         fflush(output);
     }
 }
 
-void SHantilly::tableRowSelected(int row)
-{
-    const char *objectName = sender()->objectName().toLocal8Bit().constData();
+void SHantilly::tableRowSelected(int row) {
+    const char* objectName = sender()->objectName().toLocal8Bit().constData();
     if (objectName[0]) {
         fprintf(output, "%s_selection=%d\n", objectName, row);
         fflush(output);
     }
 }
 
-void SHantilly::chartItemClicked(const QString &label)
-{
-    const char *objectName = sender()->objectName().toLocal8Bit().constData();
+void SHantilly::chartItemClicked(const QString& label) {
+    const char* objectName = sender()->objectName().toLocal8Bit().constData();
     if (objectName[0]) {
         fprintf(output, "%s_clicked=\"%s\"\n", objectName, label.toLocal8Bit().constData());
         fflush(output);
     }
 }
 
-void SHantilly::calendarSelected()
-{
+void SHantilly::calendarSelected() {
     report();
 }
 
-void SHantilly::sliderValueChanged(int value)
-{
-    const char *objectName = sender()->objectName().toLocal8Bit().constData();
+void SHantilly::sliderValueChanged(int value) {
+    const char* objectName = sender()->objectName().toLocal8Bit().constData();
 
     if (objectName[0]) {
         fprintf(output, "%s=%d\n", objectName, value);
@@ -181,9 +165,8 @@ void SHantilly::sliderValueChanged(int value)
 /*******************************************************************************
  *  Slot function. Updates tickInterval and pageStep values of the slider.
  ******************************************************************************/
-void SHantilly::sliderRangeChanged(int min, int max)
-{
-    QSlider *slider = (QSlider *)sender();
+void SHantilly::sliderRangeChanged(int min, int max) {
+    QSlider* slider = (QSlider*) sender();
     int ps;
     int ss;
 
@@ -204,291 +187,285 @@ void SHantilly::sliderRangeChanged(int min, int max)
  *  Slot function. Translates command object recevied from the parser thread
  *  to appropriate function call.
  ******************************************************************************/
-void SHantilly::executeCommand(DialogCommand command)
-{
-    QWidget *widget = nullptr;
+void SHantilly::executeCommand(DialogCommand command) {
+    QWidget* widget = nullptr;
 
     if (empty) {
         clearDialog();
         empty = false;
     }
     switch (command.command & CommandMask) {
-    case AddCommand:
-        if (command.command & OptionSpace & OptionMask) {
-            // Seems sscanf %d in some versions of standard C library has a bug
-            // returning 32k on sero-size strings
-            if (command.getText()[0]) {
-                int size;
-                sscanf(command.getText(), "%d", &size);
-                addSpace(size);
-            } else {
-                addSpace();
-            }
-            break;
-        }
-
-        if (command.command & OptionStretch & OptionMask) {
-            addStretch();
-            break;
-        }
-
-        switch (command.control & ~PropertyMask) {
-        case LabelWidget:
-            addLabel(command.getTitle(), command.getName(),
-                     command.control & PropertyPicture & PropertyMask
-                     ? PixmapContent
-                     : command.control & PropertyAnimation & PropertyMask
-                     ? MovieContent : TextContent);
-            break;
-        case GroupBoxWidget:
-            addGroupBox(command.getTitle(), command.getName(),
-                        command.control & PropertyVertical & PropertyMask,
-                        command.control & PropertyCheckable & PropertyMask,
-                        command.control & PropertyChecked & PropertyMask);
-            break;
-        case FrameWidget:
-            addFrame(command.getTitle(),
-                     command.control & PropertyVertical & PropertyMask,
-                     command.control);
-            break;
-        case PushButtonWidget:
-            addPushButton(command.getTitle(), command.getName(),
-                          command.control & PropertyApply & PropertyMask,
-                          command.control & PropertyExit & PropertyMask,
-                          command.control & PropertyDefault & PropertyMask);
-            break;
-        case CheckBoxWidget:
-            addCheckBox(command.getTitle(), command.getName(),
-                        command.control & PropertyChecked & PropertyMask);
-            break;
-        case RadioButtonWidget:
-            addRadioButton(command.getTitle(), command.getName(),
-                           command.control & PropertyChecked & PropertyMask);
-            break;
-        case TextBoxWidget:
-            addTextBox(command.getTitle(), command.getName(), command.getText(),
-                       command.getAuxText(),
-                       command.control & PropertyPassword & PropertyMask);
-            break;
-        case ListBoxWidget:
-            addListBox(command.getTitle(), command.getName(),
-                       command.control & PropertyActivation & PropertyMask,
-                       command.control & PropertySelection & PropertyMask);
-            break;
-        case ComboBoxWidget:
-            addComboBox(command.getTitle(), command.getName(),
-                        command.control & PropertyEditable & PropertyMask,
-                        command.control & PropertySelection & PropertyMask);
-            break;
-        case ItemWidget:
-            addItem(command.getTitle(), command.getName(),
-                    command.control & PropertyCurrent & PropertyMask);
-            break;
-        case SeparatorWidget:
-            addSeparator(command.getTitle(),
-                         command.control & PropertyVertical & PropertyMask,
-                         command.control);
-            break;
-        case ProgressBarWidget:
-            addProgressBar(command.getTitle(),
-                           command.control & PropertyVertical & PropertyMask,
-                           command.control & PropertyBusy & PropertyMask);
-            break;
-        case SliderWidget: {
-            int min = 0;
-            int max = 100;
-
-            if (command.getName()[0])
-                sscanf(command.getName(), "%d", &min);
-            if (command.getText()[0])
-                sscanf(command.getText(), "%d", &max);
-            addSlider(command.getTitle(),
-                      command.control & PropertyVertical & PropertyMask,
-                      min, max);
-            break;
-        }
-        case TextViewWidget:
-            addTextView(command.getTitle(), command.getName());
-            break;
-        case TabsWidget:
-            addTabs(command.getTitle(), command.control);
-            break;
-        case PageWidget:
-            addPage(command.getTitle(), command.getName(), command.getText(),
-                    command.control & PropertyCurrent & PropertyMask);
-            break;
-        case ChartWidget:
-            addChart(command.getTitle(), command.getName());
-            break;
-        case CalendarWidget:
-            addCalendar(command.getTitle(), command.getName(),
-                        command.getText(),  // date
-                        nullptr,            // min
-                        nullptr,            // max
-                        nullptr,            // format
-                        command.control & PropertySelection & PropertyMask);
-            break;
-        case TableWidget:
-            addTable(command.getTitle(), command.getName(),
-                     command.getText(),  // file
-                     command.control & PropertyReadOnly & PropertyMask,
-                     command.control & PropertySelection & PropertyMask,
-                     command.control & PropertySearch & PropertyMask);
-            break;
-        }
-        break;
-    case ClearCommand:
-        clear(command.getName());
-        break;
-    case EndCommand:
-        switch (command.control & ~PropertyMask) {
-        case GroupBoxWidget:
-        case FrameWidget:
-            endGroup();
-            break;
-        case ListBoxWidget:
-        case ComboBoxWidget:
-        case TableWidget:
-            endList();
-            break;
-        case TabsWidget:
-            endTabs();
-            break;
-        case PageWidget:
-            endPage();
-            break;
-        case WidgetMask:
-            // None type mentioned
-            if (currentView) {
-                endList();
-            } else if (groupLayout) {
-                endGroup();
-            } else if (currentTabsWidget) {
-                if (currentTabsWidget->indexOf(currentLayout->parentWidget())
-                    == -1) {
-                    endTabs();
+        case AddCommand:
+            if (command.command & OptionSpace & OptionMask) {
+                // Seems sscanf %d in some versions of standard C library has a bug
+                // returning 32k on sero-size strings
+                if (command.getText()[0]) {
+                    int size;
+                    sscanf(command.getText(), "%d", &size);
+                    addSpace(size);
                 } else {
-                    endPage();
+                    addSpace();
                 }
-            }
-            break;
-        }
-        break;
-    case StepCommand:
-        if (command.command & OptionVertical & OptionMask)
-            stepVertical();
-        else
-            stepHorizontal();
-        break;
-    case SetCommand:
-        if (command.getName()[0]) {
-            if (!(widget = findWidget(command.getName())))
                 break;
-        } else {
-            widget = this;
-        }
+            }
 
-        if (command.command & OptionEnabled & OptionMask)
-            setEnabled(widget, true);
+            if (command.command & OptionStretch & OptionMask) {
+                addStretch();
+                break;
+            }
 
-        if (command.command & OptionFocus & OptionMask) {
-            QTimer::singleShot(0, widget, SLOT(setFocus()));
-
-            // Select text for QLineEdit objects.
-            // selectedText property is not writable and this must be done in
-            // the class specific way.
-            if (QWidget *proxyWidget = widget->focusProxy()) {
-                switch (widgetType(proxyWidget)) {
-                case ComboBoxWidget:
-                    proxyWidget = ((QComboBox *)proxyWidget)->lineEdit();
+            switch (command.control & ~PropertyMask) {
+                case LabelWidget:
+                    addLabel(command.getTitle(), command.getName(),
+                             command.control & PropertyPicture & PropertyMask     ? PixmapContent
+                             : command.control & PropertyAnimation & PropertyMask ? MovieContent
+                                                                                  : TextContent);
+                    break;
+                case GroupBoxWidget:
+                    addGroupBox(command.getTitle(), command.getName(),
+                                command.control & PropertyVertical & PropertyMask,
+                                command.control & PropertyCheckable & PropertyMask,
+                                command.control & PropertyChecked & PropertyMask);
+                    break;
+                case FrameWidget:
+                    addFrame(command.getTitle(), command.control & PropertyVertical & PropertyMask,
+                             command.control);
+                    break;
+                case PushButtonWidget:
+                    addPushButton(command.getTitle(), command.getName(),
+                                  command.control & PropertyApply & PropertyMask,
+                                  command.control & PropertyExit & PropertyMask,
+                                  command.control & PropertyDefault & PropertyMask);
+                    break;
+                case CheckBoxWidget:
+                    addCheckBox(command.getTitle(), command.getName(),
+                                command.control & PropertyChecked & PropertyMask);
+                    break;
+                case RadioButtonWidget:
+                    addRadioButton(command.getTitle(), command.getName(),
+                                   command.control & PropertyChecked & PropertyMask);
                     break;
                 case TextBoxWidget:
+                    addTextBox(command.getTitle(), command.getName(), command.getText(),
+                               command.getAuxText(),
+                               command.control & PropertyPassword & PropertyMask);
                     break;
-                default:
-                    proxyWidget = nullptr;
+                case ListBoxWidget:
+                    addListBox(command.getTitle(), command.getName(),
+                               command.control & PropertyActivation & PropertyMask,
+                               command.control & PropertySelection & PropertyMask);
+                    break;
+                case ComboBoxWidget:
+                    addComboBox(command.getTitle(), command.getName(),
+                                command.control & PropertyEditable & PropertyMask,
+                                command.control & PropertySelection & PropertyMask);
+                    break;
+                case ItemWidget:
+                    addItem(command.getTitle(), command.getName(),
+                            command.control & PropertyCurrent & PropertyMask);
+                    break;
+                case SeparatorWidget:
+                    addSeparator(command.getTitle(),
+                                 command.control & PropertyVertical & PropertyMask,
+                                 command.control);
+                    break;
+                case ProgressBarWidget:
+                    addProgressBar(command.getTitle(),
+                                   command.control & PropertyVertical & PropertyMask,
+                                   command.control & PropertyBusy & PropertyMask);
+                    break;
+                case SliderWidget: {
+                    int min = 0;
+                    int max = 100;
+
+                    if (command.getName()[0])
+                        sscanf(command.getName(), "%d", &min);
+                    if (command.getText()[0])
+                        sscanf(command.getText(), "%d", &max);
+                    addSlider(command.getTitle(), command.control & PropertyVertical & PropertyMask,
+                              min, max);
                     break;
                 }
-                if (proxyWidget)
-                    ((QLineEdit *)proxyWidget)->selectAll();
+                case TextViewWidget:
+                    addTextView(command.getTitle(), command.getName());
+                    break;
+                case TabsWidget:
+                    addTabs(command.getTitle(), command.control);
+                    break;
+                case PageWidget:
+                    addPage(command.getTitle(), command.getName(), command.getText(),
+                            command.control & PropertyCurrent & PropertyMask);
+                    break;
+                case ChartWidget:
+                    addChart(command.getTitle(), command.getName());
+                    break;
+                case CalendarWidget:
+                    addCalendar(command.getTitle(), command.getName(),
+                                command.getText(), // date
+                                nullptr,           // min
+                                nullptr,           // max
+                                nullptr,           // format
+                                command.control & PropertySelection & PropertyMask);
+                    break;
+                case TableWidget:
+                    addTable(command.getTitle(), command.getName(),
+                             command.getText(), // file
+                             command.control & PropertyReadOnly & PropertyMask,
+                             command.control & PropertySelection & PropertyMask,
+                             command.control & PropertySearch & PropertyMask);
+                    break;
             }
-        }
+            break;
+        case ClearCommand:
+            clear(command.getName());
+            break;
+        case EndCommand:
+            switch (command.control & ~PropertyMask) {
+                case GroupBoxWidget:
+                case FrameWidget:
+                    endGroup();
+                    break;
+                case ListBoxWidget:
+                case ComboBoxWidget:
+                case TableWidget:
+                    endList();
+                    break;
+                case TabsWidget:
+                    endTabs();
+                    break;
+                case PageWidget:
+                    endPage();
+                    break;
+                case WidgetMask:
+                    // None type mentioned
+                    if (currentView) {
+                        endList();
+                    } else if (groupLayout) {
+                        endGroup();
+                    } else if (currentTabsWidget) {
+                        if (currentTabsWidget->indexOf(currentLayout->parentWidget()) == -1) {
+                            endTabs();
+                        } else {
+                            endPage();
+                        }
+                    }
+                    break;
+            }
+            break;
+        case StepCommand:
+            if (command.command & OptionVertical & OptionMask)
+                stepVertical();
+            else
+                stepHorizontal();
+            break;
+        case SetCommand:
+            if (command.getName()[0]) {
+                if (!(widget = findWidget(command.getName())))
+                    break;
+            } else {
+                widget = this;
+            }
 
-        // See http://doc.qt.io/qt-4.8/stylesheet.html for reference
-        if (command.command & OptionStyleSheet & OptionMask) {
-            widget->setStyleSheet(command.getText());
-            if (QWidget *proxyWidget = widget->focusProxy())
-                proxyWidget->setStyleSheet(command.getText());
-        }
+            if (command.command & OptionEnabled & OptionMask)
+                setEnabled(widget, true);
 
-        if (command.command & OptionVisible & OptionMask) {
-            widget->show();
-            if (QWidget *proxyWidget = widget->focusProxy())
-                proxyWidget->show();
-        }
+            if (command.command & OptionFocus & OptionMask) {
+                QTimer::singleShot(0, widget, SLOT(setFocus()));
 
-        if (command.control) {
-            setOptions(widget, command.control, command.control,
-                       command.getText());
-        }
+                // Select text for QLineEdit objects.
+                // selectedText property is not writable and this must be done in
+                // the class specific way.
+                if (QWidget* proxyWidget = widget->focusProxy()) {
+                    switch (widgetType(proxyWidget)) {
+                        case ComboBoxWidget:
+                            proxyWidget = ((QComboBox*) proxyWidget)->lineEdit();
+                            break;
+                        case TextBoxWidget:
+                            break;
+                        default:
+                            proxyWidget = nullptr;
+                            break;
+                    }
+                    if (proxyWidget)
+                        ((QLineEdit*) proxyWidget)->selectAll();
+                }
+            }
 
-        // Setting of some properties (calls like show and hide) generates
-        // events which are optimised next or sets widget attributes which might
-        // impact next calls. To avoid races and to ensure the command is
-        // executed as expected we process all events that have been generated:
-        QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents
-                                        | QEventLoop::ExcludeSocketNotifiers);
-        break;
-    case UnsetCommand:
-        if (command.getName()[0]) {
-            if (!(widget = findWidget(command.getName())))
-                break;
-        } else {
-            widget = this;
-        }
+            // See http://doc.qt.io/qt-4.8/stylesheet.html for reference
+            if (command.command & OptionStyleSheet & OptionMask) {
+                widget->setStyleSheet(command.getText());
+                if (QWidget* proxyWidget = widget->focusProxy())
+                    proxyWidget->setStyleSheet(command.getText());
+            }
 
-        if (command.command & OptionEnabled & OptionMask)
-            setEnabled(widget, false);
+            if (command.command & OptionVisible & OptionMask) {
+                widget->show();
+                if (QWidget* proxyWidget = widget->focusProxy())
+                    proxyWidget->show();
+            }
 
-        // See http://doc.qt.io/qt-4.8/stylesheet.html for reference
-        if (command.command & OptionStyleSheet & OptionMask) {
-            // Rarely it was seen this fails (unset stylesheet or set it to
-            // empty string). Hopefully this was caused by the race which is now
-            // fixed (queued signaling between threads and optimisation of
-            // queued GUI events).
-            widget->setStyleSheet(QString());
-            if (QWidget *proxywidget = widget->focusProxy())
-                proxywidget->setStyleSheet(QString());
-        }
+            if (command.control) {
+                setOptions(widget, command.control, command.control, command.getText());
+            }
 
-        if (command.command & OptionVisible & OptionMask) {
-            widget->hide();
-            if (QWidget *proxywidget = widget->focusProxy())
-                proxywidget->hide();
-        }
+            // Setting of some properties (calls like show and hide) generates
+            // events which are optimised next or sets widget attributes which might
+            // impact next calls. To avoid races and to ensure the command is
+            // executed as expected we process all events that have been generated:
+            QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents |
+                                            QEventLoop::ExcludeSocketNotifiers);
+            break;
+        case UnsetCommand:
+            if (command.getName()[0]) {
+                if (!(widget = findWidget(command.getName())))
+                    break;
+            } else {
+                widget = this;
+            }
 
-        if (command.control)
-            setOptions(widget, 0, command.control, nullptr);
+            if (command.command & OptionEnabled & OptionMask)
+                setEnabled(widget, false);
 
-        // Setting of some properties (calls like show and hide) generates
-        // events which are optimised next or sets widget attributes which might
-        // impact next calls. To avoid races and to ensure the command is
-        // executed as expected we process all events that have been generated:
-        QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents
-                                        | QEventLoop::ExcludeSocketNotifiers);
-        break;
-    case RemoveCommand:
-        removeWidget(command.getName());
-        break;
-    case PositionCommand:
-        position(command.getText(), command.command & OptionBehind & OptionMask,
-                 command.command & OptionOnto & OptionMask);
-        break;
-    case QueryCommand:
-        report();
-        break;
-    case NoopCommand:
-    default:
-        break;
+            // See http://doc.qt.io/qt-4.8/stylesheet.html for reference
+            if (command.command & OptionStyleSheet & OptionMask) {
+                // Rarely it was seen this fails (unset stylesheet or set it to
+                // empty string). Hopefully this was caused by the race which is now
+                // fixed (queued signaling between threads and optimisation of
+                // queued GUI events).
+                widget->setStyleSheet(QString());
+                if (QWidget* proxywidget = widget->focusProxy())
+                    proxywidget->setStyleSheet(QString());
+            }
+
+            if (command.command & OptionVisible & OptionMask) {
+                widget->hide();
+                if (QWidget* proxywidget = widget->focusProxy())
+                    proxywidget->hide();
+            }
+
+            if (command.control)
+                setOptions(widget, 0, command.control, nullptr);
+
+            // Setting of some properties (calls like show and hide) generates
+            // events which are optimised next or sets widget attributes which might
+            // impact next calls. To avoid races and to ensure the command is
+            // executed as expected we process all events that have been generated:
+            QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents |
+                                            QEventLoop::ExcludeSocketNotifiers);
+            break;
+        case RemoveCommand:
+            removeWidget(command.getName());
+            break;
+        case PositionCommand:
+            position(command.getText(), command.command & OptionBehind & OptionMask,
+                     command.command & OptionOnto & OptionMask);
+            break;
+        case QueryCommand:
+            report();
+            break;
+        case NoopCommand:
+        default:
+            break;
     }
     // Clean up after possible findWidget call
     chosenView = nullptr;

@@ -24,11 +24,8 @@
 
 using namespace DialogCommandTokens;
 
-DialogParser::DialogParser(SHantilly *parent, FILE *in) :
-    QThread(parent),
-    dialog(parent),
-    input(in)
-{
+DialogParser::DialogParser(SHantilly* parent, FILE* in)
+    : QThread(parent), dialog(parent), input(in) {
     command = NoopCommand;
     control = WidgetMask;
     stage = StageCommand;
@@ -39,37 +36,32 @@ DialogParser::DialogParser(SHantilly *parent, FILE *in) :
     // sequentially. This avoids races e.g. show hide show sequence in v1.0.
     if (parent) {
         connect(this, SIGNAL(sendCommand(DialogCommand)), parent,
-                SLOT(executeCommand(DialogCommand)),
-                Qt::BlockingQueuedConnection);
+                SLOT(executeCommand(DialogCommand)), Qt::BlockingQueuedConnection);
     }
 }
 
-DialogParser::~DialogParser()
-{
+DialogParser::~DialogParser() {
     // We cannot gracefully terminate this thread as input from stdin may be
     // blocking when attached to a terminal.
     terminate();
     wait();
 }
 
-void DialogParser::setParent(SHantilly *parent)
-{
+void DialogParser::setParent(SHantilly* parent) {
     if (dialog) {
-        disconnect(this, SIGNAL(sendCommand(DialogCommand)),
-                   dialog, SLOT(executeCommand(DialogCommand)));
+        disconnect(this, SIGNAL(sendCommand(DialogCommand)), dialog,
+                   SLOT(executeCommand(DialogCommand)));
     }
 
     dialog = parent;
     QObject::setParent(parent);
     if (parent) {
         connect(this, SIGNAL(sendCommand(DialogCommand)), parent,
-                SLOT(executeCommand(DialogCommand)),
-                Qt::BlockingQueuedConnection);
+                SLOT(executeCommand(DialogCommand)), Qt::BlockingQueuedConnection);
     }
 }
 
-void DialogParser::run()
-{
+void DialogParser::run() {
     bool quoted;
     bool backslash;
     bool endOfLine;
@@ -138,131 +130,120 @@ void DialogParser::run()
 /*******************************************************************************
  *  DialogParser::processToken analyses tokens and assembles commands of them.
  ******************************************************************************/
-void DialogParser::processToken()
-{
+void DialogParser::processToken() {
     const struct {
-        const char *commandKeyword;  // keyword to recognize
-        unsigned int commandCode;    // command code to assign
-        unsigned int commandStages;  // stages set to assign
+        const char* commandKeyword; // keyword to recognize
+        unsigned int commandCode;   // command code to assign
+        unsigned int commandStages; // stages set to assign
     } commandsParser[] = {
         {"add", AddCommand,
-            StageType | StageTitle | StageName | StageOptions | StageText
-            | StageAuxText | StageCommand},
+         StageType | StageTitle | StageName | StageOptions | StageText | StageAuxText |
+             StageCommand},
         {"end", EndCommand, StageType | StageCommand},
         {"position", PositionCommand, StageOptions | StageText | StageCommand},
         {"remove", RemoveCommand, StageName | StageCommand},
         {"clear", ClearCommand, StageName | StageCommand},
         {"step", StepCommand, StageOptions | StageCommand},
-        {"set", SetCommand,
-            StageName | StageOptions | StageText | StageCommand},
+        {"set", SetCommand, StageName | StageOptions | StageText | StageCommand},
         {"unset", UnsetCommand, StageName | StageOptions | StageCommand},
-        {"enable", SetCommand | (OptionEnabled & OptionMask),
-            StageName | StageCommand},
-        {"disable", UnsetCommand | (OptionEnabled & OptionMask),
-            StageName | StageCommand},
-        {"show", SetCommand | (OptionVisible & OptionMask),
-            StageName | StageCommand},
-        {"hide", UnsetCommand | (OptionVisible & OptionMask),
-            StageName | StageCommand},
+        {"enable", SetCommand | (OptionEnabled & OptionMask), StageName | StageCommand},
+        {"disable", UnsetCommand | (OptionEnabled & OptionMask), StageName | StageCommand},
+        {"show", SetCommand | (OptionVisible & OptionMask), StageName | StageCommand},
+        {"hide", UnsetCommand | (OptionVisible & OptionMask), StageName | StageCommand},
         {"query", QueryCommand, StageCommand},
-        {nullptr, 0, 0}
-    };
+        {nullptr, 0, 0}};
 
     const struct {
-        const char *controlKeyword;  // keyword to recognize
-        unsigned int controlCode;    // control type code to assign
-    } controlsParser[] = {
-        {"checkbox", CheckBoxWidget},
-        {"frame", FrameWidget},
-        {"groupbox", GroupBoxWidget},
-        {"label", LabelWidget},
-        {"pushbutton", PushButtonWidget},
-        {"radiobutton", RadioButtonWidget},
-        {"separator", SeparatorWidget},
-        {"textbox", TextBoxWidget},
-        {"listbox", ListBoxWidget},
-        {"dropdownlist", ComboBoxWidget},
-        {"combobox", ComboBoxWidget | (PropertyEditable & PropertyMask)},
-        {"item", ItemWidget},
-        {"progressbar", ProgressBarWidget},
-        {"slider", SliderWidget},
-        {"textview", TextViewWidget},
-        {"tabs", TabsWidget},
-        {"page", PageWidget},
-        {"table", TableWidget},
-        {"chart", ChartWidget},
-        {"calendar", CalendarWidget},
-        {nullptr, 0}
-    };
+        const char* controlKeyword; // keyword to recognize
+        unsigned int controlCode;   // control type code to assign
+    } controlsParser[] = {{"checkbox", CheckBoxWidget},
+                          {"frame", FrameWidget},
+                          {"groupbox", GroupBoxWidget},
+                          {"label", LabelWidget},
+                          {"pushbutton", PushButtonWidget},
+                          {"radiobutton", RadioButtonWidget},
+                          {"separator", SeparatorWidget},
+                          {"textbox", TextBoxWidget},
+                          {"listbox", ListBoxWidget},
+                          {"dropdownlist", ComboBoxWidget},
+                          {"combobox", ComboBoxWidget | (PropertyEditable & PropertyMask)},
+                          {"item", ItemWidget},
+                          {"progressbar", ProgressBarWidget},
+                          {"slider", SliderWidget},
+                          {"textview", TextViewWidget},
+                          {"tabs", TabsWidget},
+                          {"page", PageWidget},
+                          {"table", TableWidget},
+                          {"chart", ChartWidget},
+                          {"calendar", CalendarWidget},
+                          {nullptr, 0}};
 
     // Each item of the array below defines properties or options of a control.
     // If the same keyword applies to different properties/options it must be
     // repeated as a separate item.
     const struct {
-        const char *optionKeyword;  // keyword to recognize
-        unsigned int optionCode;    // command option or control property to set
-        bool optionReset;           // flag to reset the option
-        bool commandFlag;           // flag to process command option
-    } optionsParser[] = {
-        {"checkable", PropertyCheckable, false, false},
-        {"checked", PropertyChecked, false, false},
-        {"text", PropertyText, false, false},
-        {"title", PropertyTitle, false, false},
-        {"password", PropertyPassword, false, false},
-        {"placeholder", PropertyPlaceholder, false, false},
-        {"icon", PropertyIcon, false, false},
-        {"iconsize", PropertyIconSize, false, false},
-        {"animation", PropertyAnimation, false, false},
-        {"picture", PropertyPicture, false, false},
-        {"apply", PropertyApply, false, false},
-        {"exit", PropertyExit, false, false},
-        {"default", PropertyDefault, false, false},
-        // space and stretch are a kind of controls without options
-        {"space", OptionSpace, false, true},
-        {"stretch", OptionStretch, false, true},
-        {"behind", OptionBehind, false, true},
-        {"onto", OptionOnto, false, true},
-        {"enabled", OptionEnabled, false, true},
-        {"focus", OptionFocus, false, true},
-        {"stylesheet", OptionStyleSheet, false, true},
-        {"visible", OptionVisible, false, true},
-        {"horizontal", OptionVertical, true, true},
-        {"horizontal", PropertyVertical, true, false},
-        {"vertical", OptionVertical, false, true},
-        {"vertical", PropertyVertical, false, false},
-        {"plain", PropertyPlain, false, false},
-        {"raised", PropertyRaised, false, false},
-        {"sunken", PropertySunken, false, false},
-        {"noframe", PropertyNoframe, false, false},
-        {"box", PropertyBox, false, false},
-        {"panel", PropertyPanel, false, false},
-        {"styled", PropertyStyled, false, false},
-        {"current", PropertyCurrent, false, false},
-        {"activation", PropertyActivation, false, false},
-        {"selection", PropertySelection, false, false},
-        {"minimum", PropertyMinimum, false, false},
-        {"maximum", PropertyMaximum, false, false},
-        {"value", PropertyValue, false, false},
-        {"busy", PropertyBusy, false, false},
-        {"file", PropertyFile, false, false},
-        {"top", PropertyPositionTop, false, false},
-        {"bottom", PropertyPositionBottom, false, false},
-        {"left", PropertyPositionLeft, false, false},
-        {"right", PropertyPositionRight, false, false},
-        {"readonly", PropertyReadOnly, false, false},
-        {"headers", PropertyHeaders, false, false},
-        {"add_line", PropertyAddLine, false, false},
-        {"del_line", PropertyDelLine, false, false},
-        {"search", PropertySearch, false, false},
-        {"data", PropertyValue, false, false},
-        {"append", PropertyAppend, false, false},
-        {"axis", PropertyAxis, false, false},
-        {"export", PropertyExport, false, false},
-        {"date", PropertyDate, false, false},
-        {"format", PropertyFormat, false, false},
-        {"navigation", PropertyNavigation, false, false},
-        {nullptr, 0, false, false}
-    };
+        const char* optionKeyword; // keyword to recognize
+        unsigned int optionCode;   // command option or control property to set
+        bool optionReset;          // flag to reset the option
+        bool commandFlag;          // flag to process command option
+    } optionsParser[] = {{"checkable", PropertyCheckable, false, false},
+                         {"checked", PropertyChecked, false, false},
+                         {"text", PropertyText, false, false},
+                         {"title", PropertyTitle, false, false},
+                         {"password", PropertyPassword, false, false},
+                         {"placeholder", PropertyPlaceholder, false, false},
+                         {"icon", PropertyIcon, false, false},
+                         {"iconsize", PropertyIconSize, false, false},
+                         {"animation", PropertyAnimation, false, false},
+                         {"picture", PropertyPicture, false, false},
+                         {"apply", PropertyApply, false, false},
+                         {"exit", PropertyExit, false, false},
+                         {"default", PropertyDefault, false, false},
+                         // space and stretch are a kind of controls without options
+                         {"space", OptionSpace, false, true},
+                         {"stretch", OptionStretch, false, true},
+                         {"behind", OptionBehind, false, true},
+                         {"onto", OptionOnto, false, true},
+                         {"enabled", OptionEnabled, false, true},
+                         {"focus", OptionFocus, false, true},
+                         {"stylesheet", OptionStyleSheet, false, true},
+                         {"visible", OptionVisible, false, true},
+                         {"horizontal", OptionVertical, true, true},
+                         {"horizontal", PropertyVertical, true, false},
+                         {"vertical", OptionVertical, false, true},
+                         {"vertical", PropertyVertical, false, false},
+                         {"plain", PropertyPlain, false, false},
+                         {"raised", PropertyRaised, false, false},
+                         {"sunken", PropertySunken, false, false},
+                         {"noframe", PropertyNoframe, false, false},
+                         {"box", PropertyBox, false, false},
+                         {"panel", PropertyPanel, false, false},
+                         {"styled", PropertyStyled, false, false},
+                         {"current", PropertyCurrent, false, false},
+                         {"activation", PropertyActivation, false, false},
+                         {"selection", PropertySelection, false, false},
+                         {"minimum", PropertyMinimum, false, false},
+                         {"maximum", PropertyMaximum, false, false},
+                         {"value", PropertyValue, false, false},
+                         {"busy", PropertyBusy, false, false},
+                         {"file", PropertyFile, false, false},
+                         {"top", PropertyPositionTop, false, false},
+                         {"bottom", PropertyPositionBottom, false, false},
+                         {"left", PropertyPositionLeft, false, false},
+                         {"right", PropertyPositionRight, false, false},
+                         {"readonly", PropertyReadOnly, false, false},
+                         {"headers", PropertyHeaders, false, false},
+                         {"add_line", PropertyAddLine, false, false},
+                         {"del_line", PropertyDelLine, false, false},
+                         {"search", PropertySearch, false, false},
+                         {"data", PropertyValue, false, false},
+                         {"append", PropertyAppend, false, false},
+                         {"axis", PropertyAxis, false, false},
+                         {"export", PropertyExport, false, false},
+                         {"date", PropertyDate, false, false},
+                         {"format", PropertyFormat, false, false},
+                         {"navigation", PropertyNavigation, false, false},
+                         {nullptr, 0, false, false}};
 
     if (stage & StageCommand) {
         int i = 0;
@@ -308,8 +289,7 @@ void DialogParser::processToken()
                     if (optionsParser[i].optionCode & command) {
                         if (optionsParser[i].optionReset) {
                             // Reset option bit
-                            command &= ~(optionsParser[i].optionCode
-                                       & OptionMask);
+                            command &= ~(optionsParser[i].optionCode & OptionMask);
                         } else {
                             // Set option bit
                             command |= optionsParser[i].optionCode & OptionMask;
@@ -329,12 +309,10 @@ void DialogParser::processToken()
 
                         if (optionsParser[i].optionReset) {
                             // Reset property bit
-                            control &= ~(optionsParser[i].optionCode
-                                       & PropertyMask);
+                            control &= ~(optionsParser[i].optionCode & PropertyMask);
                         } else {
                             // Set property bit
-                            control |= optionsParser[i].optionCode
-                                       & PropertyMask;
+                            control |= optionsParser[i].optionCode & PropertyMask;
                         }
 
                         stage &= ~(StageTitle | StageName);
@@ -390,8 +368,7 @@ void DialogParser::processToken()
     bufferIndex = token;
 }
 
-void DialogParser::issueCommand()
-{
+void DialogParser::issueCommand() {
     if (command != NoopCommand) {
         emit sendCommand(*this);
 

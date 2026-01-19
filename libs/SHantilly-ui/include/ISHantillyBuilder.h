@@ -1,20 +1,20 @@
 #ifndef ISHANTILLYBUILDER_H
 #define ISHANTILLYBUILDER_H
 
-#include <QWidget>
 #include <QLayout>
+#include <QWidget>
+
 #include "WidgetConfigs.h"
 
 // Forward declaration if needed for legacy support
 class PushButtonWidget;
 
-class ISHantillyBuilder
-{
+class ISHantillyBuilder {
 public:
     virtual ~ISHantillyBuilder() = default;
 
     // --- New Architecture Methods (Phase 1 & 2) ---
-    
+
     virtual QWidget* buildWindow(const Sbx::Models::WindowConfig& config) = 0;
     virtual QWidget* buildButton(const Sbx::Models::ButtonConfig& config) = 0;
     virtual QWidget* buildLabel(const Sbx::Models::LabelConfig& config) = 0;
@@ -37,7 +37,7 @@ public:
     virtual QLayout* buildLayoutStructure(const Sbx::Models::SbxLayoutConfig& config) = 0;
 
     // --- Legacy Methods (To be deprecated/removed) ---
-    virtual PushButtonWidget* buildPushButton(const QString &title, const QString &name) = 0;
+    virtual PushButtonWidget* buildPushButton(const QString& title, const QString& name) = 0;
 };
 
 #endif // ISHANTILLYBUILDER_H

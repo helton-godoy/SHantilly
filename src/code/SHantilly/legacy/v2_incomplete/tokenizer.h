@@ -5,13 +5,13 @@
 #include <QString>
 
 struct Token {
-  QString text;
-  // We can add Type later if needed
+    QString text;
+    // We can add Type later if needed
 };
 
 class Tokenizer {
 public:
-  QList<Token> tokenize(const QString &input);
+    QList<Token> tokenize(const QString& input);
 };
 
 #endif // TOKENIZER_H

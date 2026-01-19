@@ -4,10 +4,9 @@
 #include <QIcon>
 #include <QString>
 
-class IconHelper
-{
+class IconHelper {
 public:
-    static QIcon loadIcon(const QString &iconSource);
+    static QIcon loadIcon(const QString& iconSource);
 };
 
 #endif // ICON_HELPER_H

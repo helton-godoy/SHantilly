@@ -57,3 +57,13 @@ ui_*.h
 
 # Local setup
 /template/bootstrap.sh.done
+
+# Generated documentation (CI builds these)
+site/
+public/
+coverage_report/
+dist/
+
+# Core dumps
+core
+core.*

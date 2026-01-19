@@ -1,7 +1,6 @@
 #ifndef PARSERMAIN_H
 #define PARSERMAIN_H
 
-#include "CommandParser.h"
 #include <QMap>
 #include <QObject>
 #include <QPointer>
@@ -9,37 +8,39 @@
 #include <QStringList>
 #include <functional>
 
+#include "CommandParser.h"
+
 class ISHantillyBuilder;
 class QWidget;
 
 class ParserMain : public QObject {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  explicit ParserMain(ISHantillyBuilder *builder, QObject *parent = nullptr);
-  void run();
-  void processLine(const QString &line);
+    explicit ParserMain(ISHantillyBuilder* builder, QObject* parent = nullptr);
+    void run();
+    void processLine(const QString& line);
 
 signals:
-  void showRequested();
+    void showRequested();
 
 private:
-  void handleAdd(const QStringList &args);
-  void handleEnd(const QStringList &args);
-  void handleSet(const QStringList &args);
-  void handleUnset(const QStringList &args);
-  void handleQuery(const QStringList &args);
-  void handleRemove(const QStringList &args);
-  void handleClear(const QStringList &args);
+    void handleAdd(const QStringList& args);
+    void handleEnd(const QStringList& args);
+    void handleSet(const QStringList& args);
+    void handleUnset(const QStringList& args);
+    void handleQuery(const QStringList& args);
+    void handleRemove(const QStringList& args);
+    void handleClear(const QStringList& args);
 
-  // Helper to add created widget to current context and registry
-  void addToContext(QWidget *widget);
+    // Helper to add created widget to current context and registry
+    void addToContext(QWidget* widget);
 
-  void runInMainThread(std::function<void()> func);
+    void runInMainThread(std::function<void()> func);
 
-  ISHantillyBuilder *m_builder;
-  CommandParser m_commandParser;
-  QStack<QWidget *> m_contextStack;
-  QMap<QString, QPointer<QWidget>> m_widgetRegistry;
+    ISHantillyBuilder* m_builder;
+    CommandParser m_commandParser;
+    QStack<QWidget*> m_contextStack;
+    QMap<QString, QPointer<QWidget>> m_widgetRegistry;
 };
 
 #endif // PARSERMAIN_H

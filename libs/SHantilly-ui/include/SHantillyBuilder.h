@@ -1,14 +1,14 @@
 #ifndef SHANTILLYBUILDER_H
 #define SHANTILLYBUILDER_H
 
-#include "ISHantillyBuilder.h"
 #include <QObject>
 
-class SHantillyBuilder : public QObject, public ISHantillyBuilder
-{
+#include "ISHantillyBuilder.h"
+
+class SHantillyBuilder : public QObject, public ISHantillyBuilder {
     Q_OBJECT
 public:
-    explicit SHantillyBuilder(QObject *parent = nullptr);
+    explicit SHantillyBuilder(QObject* parent = nullptr);
 
     QWidget* buildWindow(const Sbx::Models::WindowConfig& config) override;
     QWidget* buildButton(const Sbx::Models::ButtonConfig& config) override;
@@ -32,7 +32,7 @@ public:
     QLayout* buildLayoutStructure(const Sbx::Models::SbxLayoutConfig& config) override;
 
     // Legacy support
-    PushButtonWidget* buildPushButton(const QString &title, const QString &name) override;
+    PushButtonWidget* buildPushButton(const QString& title, const QString& name) override;
 };
 
 #endif // SHANTILLYBUILDER_H

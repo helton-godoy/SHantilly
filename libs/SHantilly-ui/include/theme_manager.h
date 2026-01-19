@@ -1,23 +1,18 @@
 #ifndef THEME_MANAGER_H
 #define THEME_MANAGER_H
 
-#include <QObject>
 #include <QGuiApplication>
+#include <QObject>
 #include <QStyleHints>
 #include <QtGlobal>
 
-class ThemeManager : public QObject
-{
+class ThemeManager : public QObject {
     Q_OBJECT
 public:
-    explicit ThemeManager(QObject *parent = nullptr);
-    
-    enum ThemeMode {
-        Light,
-        Dark,
-        Unknown
-    };
-    
+    explicit ThemeManager(QObject* parent = nullptr);
+
+    enum ThemeMode { Light, Dark, Unknown };
+
     ThemeMode currentTheme() const;
 
 signals:

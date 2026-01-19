@@ -7,14 +7,14 @@ class SHantilly;
 
 class ExecutionContext {
 public:
-  explicit ExecutionContext(SHantilly *dialogBox);
-  SHantilly *dialogBox() const;
+    explicit ExecutionContext(SHantilly* dialogBox);
+    SHantilly* dialogBox() const;
 
-  // Execute function on the GUI thread (blocking)
-  void executeOnGui(std::function<void()> func);
+    // Execute function on the GUI thread (blocking)
+    void executeOnGui(std::function<void()> func);
 
 private:
-  SHantilly *m_dialogBox;
+    SHantilly* m_dialogBox;
 };
 
 #endif // EXECUTION_CONTEXT_H

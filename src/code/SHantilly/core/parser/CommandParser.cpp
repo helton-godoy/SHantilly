@@ -1,22 +1,23 @@
 #include "CommandParser.h"
+
 #include "Tokenizer.h"
 
-CommandParser::CommandParser() {}
-
-void CommandParser::registerCommand(const QString &name,
-                                    CommandHandler handler) {
-  m_commands[name.toLower()] = handler;
+CommandParser::CommandParser() {
 }
 
-void CommandParser::parseLine(const QString &line) {
-  Tokenizer tokenizer(line);
-  QStringList tokens = tokenizer.tokenize();
+void CommandParser::registerCommand(const QString& name, CommandHandler handler) {
+    m_commands[name.toLower()] = handler;
+}
 
-  if (tokens.isEmpty())
-    return;
+void CommandParser::parseLine(const QString& line) {
+    Tokenizer tokenizer(line);
+    QStringList tokens = tokenizer.tokenize();
 
-  QString verb = tokens[0].toLower();
-  if (m_commands.contains(verb)) {
-    m_commands[verb](tokens.mid(1));
-  }
+    if (tokens.isEmpty())
+        return;
+
+    QString verb = tokens[0].toLower();
+    if (m_commands.contains(verb)) {
+        m_commands[verb](tokens.mid(1));
+    }
 }
