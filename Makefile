@@ -191,9 +191,10 @@ sonar: ## Run SonarCloud analysis (requires SONAR_TOKEN env var)
 	fi
 	@echo "Running SonarCloud analysis..."
 	docker run --rm \
-		-e SONAR_TOKEN="$(SONAR_TOKEN)" \
+		-e SONAR_TOKEN="${SONAR_TOKEN}" \
 		-e SONAR_HOST_URL="https://sonarcloud.io" \
-		-v "$(PWD):/usr/src" \
+		-v "$(CURDIR):$(CURDIR)" \
+		-w "$(CURDIR)" \
 		sonarsource/sonar-scanner-cli
 
 docs:  ## Generate documentation (runs inside Docker)
