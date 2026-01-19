@@ -8,7 +8,7 @@ SHANTILLY="${SCRIPT_DIR}/../../build/bin/SHantilly"
 
 # Verificar se o SHantilly foi compilado
 if [[ ! -x ${SHANTILLY} ]]; then
-	echo "ERRO: SHantilly não encontrado em${$SHOWBO}X"
+	echo "ERRO: SHantilly não encontrado em ${SHANTILLY}"
 	exit 1
 fi
 
@@ -35,7 +35,7 @@ echo ""
 			callback_name="${line#CALLBACK:}"
 			echo ""
 			echo "╔════════════════════════════════════════╗"
-			echo "║  [CALLBACK RECEBIDO${ $callback_na}me"
+			echo "║  [CALLBACK RECEBIDO] ${callback_name}"
 			echo "║  Timestamp: $(date '+%Y-%m-%d %H:%M:%S')"
 			echo "╚════════════════════════════════════════╝"
 

@@ -12,7 +12,7 @@ while IFS=$'=' read key value; do
 		echo "Apply button clicked: ${value}"
 		;;
 	btn_toggle)
-		if [[ "${value}" == "pressed" ]]; then
+		if [[ ${value} == "pressed" ]]; then
 			echo "Toggle button pressed"
 		else
 			echo "Toggle button released"
