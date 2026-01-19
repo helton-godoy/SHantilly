@@ -2,14 +2,15 @@
 set -e
 
 # Image name
-IMAGE_NAME="SHantilly-dev:latest"
+IMAGE_NAME="shantilly-dev:latest"
 
 # Build the image ensuring freshness
 echo "Cleaning up old images and building fresh (Debian 13 Trixie)..."
 # Using --pull to ensure we have the latest base image
 # Using --no-cache is safer but slower. For iterative dev, we can omit it if we trust the cache.
 # We will trust cache for now to speed up tests.
-docker build --pull -t "${IMAGE_NAME}" -f src/dev.Dockerfile .
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+docker build --pull -t "${IMAGE_NAME}" -f "${SCRIPT_DIR}/dev.Dockerfile" "${SCRIPT_DIR}/.."
 
 # Get current user UID and GID
 USER_ID=$(id -u)

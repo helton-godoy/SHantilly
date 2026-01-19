@@ -1,0 +1,18 @@
+# Doxyfile for SHantilly
+PROJECT_NAME           = "SHantilly"
+PROJECT_NUMBER         = "1.0.0"
+OUTPUT_DIRECTORY       = docs
+CREATE_SUBDIRS         = YES
+OUTPUT_LANGUAGE        = Portuguese
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+RECURSIVE              = YES
+INPUT                  = src libs
+FILE_PATTERNS          = *.cpp *.h *.cc *.c
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+HAVE_DOT               = NO
+HTML_OUTPUT            = html
+# Customizations
+USE_MATHJAX            = YES
+SEARCHENGINE           = YES

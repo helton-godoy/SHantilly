@@ -1,8 +1,8 @@
 #!/bin/bash
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/SHantilly/bin/SHantilly}"
+SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
 
-if [[ ! -f ${SHOWBOX_BIN} ]]; then
-	echo "Error: Binary not found at ${SHOWBOX_BIN}"
+if [[ ! -f ${SHANTILLY_BIN} ]]; then
+	echo "Error: Binary not found at ${SHANTILLY_BIN}"
 	exit 1
 fi
 
@@ -12,7 +12,7 @@ echo "Running manual integration test for calendar..."
 # We use --new-parser and --hidden to run non-interactively
 # We send 'query' command to get current state
 echo 'add calendar "Birth Day" my_cal date "2026-01-10"
-query' | timeout 2s "${SHOWBOX_BIN}" --new-parser --hidden >test_out.txt || true
+query' | timeout 2s "${SHANTILLY_BIN}" --new-parser --hidden >test_out.txt || true
 
 if grep -q "my_cal=2026-01-10" test_out.txt; then
 	echo "Test 1 Passed: Initial date reported correctly."
@@ -25,7 +25,7 @@ fi
 # Test 2: Update calendar date via 'set' command
 echo 'add calendar "Birth Day" my_cal date "2026-01-10"
 set my_cal date "2026-12-25"
-query' | timeout 2s "${SHOWBOX_BIN}" --new-parser --hidden >test_out.txt || true
+query' | timeout 2s "${SHANTILLY_BIN}" --new-parser --hidden >test_out.txt || true
 
 if grep -q "my_cal=2026-12-25" test_out.txt; then
 	echo "Test 2 Passed: Date updated via 'set' reported correctly."

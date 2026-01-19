@@ -3,8 +3,8 @@
 #include "commands/set_command.h"
 #include "execution_context.h"
 
-// Forward declare ShowBox if needed
-class ShowBox;
+// Forward declare SHantilly if needed
+class SHantilly;
 
 class TestCommands : public QObject
 {
@@ -26,17 +26,17 @@ private slots:
 
 void TestCommands::initTestCase()
 {
-    qDebug() << "Starting ShowBox command tests...";
+    qDebug() << "Starting SHantilly command tests...";
 }
 
 void TestCommands::cleanupTestCase()
 {
-    qDebug() << "Finished ShowBox command tests.";
+    qDebug() << "Finished SHantilly command tests.";
 }
 
 void TestCommands::testAddCommandLabel()
 {
-    ShowBox* mockDialog = nullptr;
+    SHantilly* mockDialog = nullptr;
     ExecutionContext context(mockDialog);
     AddCommand cmd;
     
@@ -47,7 +47,7 @@ void TestCommands::testAddCommandLabel()
 
 void TestCommands::testAddCommandButton()
 {
-    ShowBox* mockDialog = nullptr;
+    SHantilly* mockDialog = nullptr;
     ExecutionContext context(mockDialog);
     AddCommand cmd;
     
@@ -58,7 +58,7 @@ void TestCommands::testAddCommandButton()
 
 void TestCommands::testAddCommandCalendar()
 {
-    ShowBox* mockDialog = nullptr;
+    SHantilly* mockDialog = nullptr;
     ExecutionContext context(mockDialog);
     AddCommand cmd;
     
@@ -69,7 +69,7 @@ void TestCommands::testAddCommandCalendar()
 
 void TestCommands::testSetCommandTitle()
 {
-    ShowBox* mockDialog = nullptr;
+    SHantilly* mockDialog = nullptr;
     ExecutionContext context(mockDialog);
     SetCommand cmd;
     
@@ -80,7 +80,7 @@ void TestCommands::testSetCommandTitle()
 
 void TestCommands::testSetCommandEnabled()
 {
-    ShowBox* mockDialog = nullptr;
+    SHantilly* mockDialog = nullptr;
     ExecutionContext context(mockDialog);
     SetCommand cmd;
     

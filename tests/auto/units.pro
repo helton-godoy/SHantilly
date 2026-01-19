@@ -6,16 +6,16 @@ TEMPLATE = app
 TARGET = tst_units
 
 # Path to SHantilly source code (from tests/auto/)
-SHOWBOX_SRC = ../../src/code/SHantilly
+SHANTILLY_SRC = ../../src/code/SHantilly
 
 SOURCES += tst_units.cpp \
-           $$SHOWBOX_SRC/execution_context.cpp \
-           $$SHOWBOX_SRC/logger.cpp
+           $$SHANTILLY_SRC/execution_context.cpp \
+           $$SHANTILLY_SRC/logger.cpp
 
-HEADERS += $$SHOWBOX_SRC/execution_context.h \
-           $$SHOWBOX_SRC/logger.h
+HEADERS += $$SHANTILLY_SRC/execution_context.h \
+           $$SHANTILLY_SRC/logger.h
 
-INCLUDEPATH += $$SHOWBOX_SRC
+INCLUDEPATH += $$SHANTILLY_SRC
 
 CONFIG += c++17
 QMAKE_CXXFLAGS += -Wall -Wextra

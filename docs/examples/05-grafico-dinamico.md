@@ -31,7 +31,7 @@ FIFO_OUT="/tmp/SHantilly_$$_out"
 
 # Cleanup
 cleanup() {
-    kill $SHOWBOX_PID 2>/dev/null
+    kill $SHANTILLY_PID 2>/dev/null
     rm -f "$FIFO_IN" "$FIFO_OUT"
 }
 trap cleanup EXIT
@@ -41,7 +41,7 @@ mkfifo "$FIFO_IN" "$FIFO_OUT"
 
 # Iniciar SHantilly
 SHantilly --resizable < "$FIFO_OUT" > "$FIFO_IN" &
-SHOWBOX_PID=$!
+SHANTILLY_PID=$!
 
 # Construir interface
 cat > "$FIFO_OUT" << 'EOF'
@@ -188,7 +188,7 @@ set chart_nome axis "vertical"    # Linha/Área
 
 ```
 ┌─────────────┐     FIFO_OUT      ┌─────────────┐
-│   Script    │ ─────────────────▶│   Showbox   │
+│   Script    │ ─────────────────▶│   SHantilly   │
 │   (bash)    │                   │   (Qt GUI)  │
 │             │◀───────────────── │             │
 └─────────────┘     FIFO_IN       └─────────────┘

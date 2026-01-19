@@ -1,12 +1,12 @@
 #!/bin/bash
 #
-# Demo1 adaptado para ShowBox
+# Demo1 adaptado para SHantilly
 # Teste de compatibilidade - exit codes
 #
 
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/SHantilly/bin/SHantilly}"
+SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
 
-${SHOWBOX_BIN} <<EODEMO
+${SHANTILLY_BIN} <<EODEMO
 add label "<small>This script demonstrates the SHantilly application exit codes usage." note
 set note stylesheet "qproperty-textInteractionFlags: NoTextInteraction;"
 add separator
@@ -19,7 +19,7 @@ add stretch
 add pushbutton C&ontinue apply exit
 add pushbutton C&ancel exit
 end frame
-set title "ShowBox Demo 1"
+set title "SHantilly Demo 1"
 show
 EODEMO
 

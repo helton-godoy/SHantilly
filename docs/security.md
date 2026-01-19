@@ -1,6 +1,6 @@
 # Segurança
 
-Práticas de segurança para scripts Showbox.
+Práticas de segurança para scripts SHantilly.
 
 ---
 
@@ -267,7 +267,7 @@ log_action "Login attempt: user=$txt_user"
 
 ## Considerações para Scripts de Instalação
 
-Se usar Showbox para instaladores:
+Se usar SHantilly para instaladores:
 
 ### 1. Verificar Integridade de Downloads
 

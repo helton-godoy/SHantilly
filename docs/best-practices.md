@@ -1,6 +1,6 @@
 # Boas Práticas
 
-Recomendações para escrever scripts Showbox eficientes e manuteníveis.
+Recomendações para escrever scripts SHantilly eficientes e manuteníveis.
 
 ---
 

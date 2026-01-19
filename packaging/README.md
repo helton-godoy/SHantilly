@@ -1,6 +1,6 @@
-# ShowBox Packaging
+# SHantilly Packaging
 
-Este diretório contém os scripts e configurações para empacotar o ShowBox em diferentes formatos de distribuição.
+Este diretório contém os scripts e configurações para empacotar o SHantilly em diferentes formatos de distribuição.
 
 ## Formatos Suportados
 
@@ -13,7 +13,7 @@ Este diretório contém os scripts e configurações para empacotar o ShowBox em
 
 ## Dependências Runtime
 
-O ShowBox requer as seguintes bibliotecas Qt6:
+O SHantilly requer as seguintes bibliotecas Qt6:
 
 - `libqt6core6` - Core Qt6
 - `libqt6gui6` - GUI Qt6
@@ -53,7 +53,7 @@ cd packaging/flatpak
 ```bash
 cd packaging/appimage
 ./build.sh
-# AppImage gerado em: dist/ShowBox-1.0.0-x86_64.AppImage
+# AppImage gerado em: dist/SHantilly-1.0.0-x86_64.AppImage
 ```
 
 ## Instalação
@@ -81,8 +81,8 @@ flatpak run io.github.SHantilly
 ### AppImage
 
 ```bash
-chmod +x dist/ShowBox-1.0.0-x86_64.AppImage
-./dist/ShowBox-1.0.0-x86_64.AppImage
+chmod +x dist/SHantilly-1.0.0-x86_64.AppImage
+./dist/SHantilly-1.0.0-x86_64.AppImage
 ```
 
 ## Estrutura

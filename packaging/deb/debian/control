@@ -20,7 +20,7 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Recommends: libqt6svg6
 Description: GUI widgets for shell scripts
- ShowBox is a Qt6-based tool that provides GUI widgets for shell scripts.
+ SHantilly is a Qt6-based tool that provides GUI widgets for shell scripts.
  It allows creating dialogs, forms, and interactive interfaces directly
  from bash scripts using a simple command-based syntax.
  .

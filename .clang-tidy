@@ -1,0 +1,17 @@
+---
+Checks:          'bugprone-*,performance-*,readability-*,modernize-*,cppcoreguidelines-*,clang-analyzer-*,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-cppcoreguidelines-pro-type-member-init'
+WarningsAsErrors: ''
+HeaderFilterRegex: '^(src/|libs/).*'
+FormatStyle:     file
+CheckOptions:
+  - key:             readability-identifier-naming.ClassCase
+    value:           CamelCase
+  - key:             readability-identifier-naming.FunctionCase
+    value:           camelCase
+  - key:             readability-identifier-naming.MemberCase
+    value:           m_camelCase
+  - key:             readability-identifier-naming.ParameterCase
+    value:           camelCase
+  - key:             readability-identifier-naming.VariableCase
+    value:           camelCase
+...

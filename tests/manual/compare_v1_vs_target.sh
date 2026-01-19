@@ -8,7 +8,7 @@ if [[ ! -f "CMakeLists.txt" ]]; then
 fi
 
 # Build Legacy (QMake)
-echo "=== Building Legacy Showbox ==="
+echo "=== Building Legacy SHantilly ==="
 pushd src/code/SHantilly
 if command -v qmake6 &>/dev/null; then
 	qmake6 SHantilly.pro
@@ -21,7 +21,7 @@ fi
 popd
 
 # Build Target (CMake)
-echo "=== Building Target Showbox ==="
+echo "=== Building Target SHantilly ==="
 mkdir -p build
 pushd build
 if command -v cmake &>/dev/null; then

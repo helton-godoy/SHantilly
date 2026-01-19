@@ -30,13 +30,13 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 QT_WARNING_DISABLE_GCC("-Wuseless-cast")
 namespace {
-struct qt_meta_tag_ZN16TestShowBoxUnitsE_t {};
+struct qt_meta_tag_ZN16TestSHantillyUnitsE_t {};
 } // unnamed namespace
 
 
 #ifdef QT_MOC_HAS_STRINGDATA
-static constexpr auto qt_meta_stringdata_ZN16TestShowBoxUnitsE = QtMocHelpers::stringData(
-    "TestShowBoxUnits",
+static constexpr auto qt_meta_stringdata_ZN16TestSHantillyUnitsE = QtMocHelpers::stringData(
+    "TestSHantillyUnits",
     "initTestCase",
     "",
     "cleanupTestCase",
@@ -49,7 +49,7 @@ static constexpr auto qt_meta_stringdata_ZN16TestShowBoxUnitsE = QtMocHelpers::s
 #error "qtmochelpers.h not found or too old."
 #endif // !QT_MOC_HAS_STRINGDATA
 
-Q_CONSTINIT static const uint qt_meta_data_ZN16TestShowBoxUnitsE[] = {
+Q_CONSTINIT static const uint qt_meta_data_ZN16TestSHantillyUnitsE[] = {
 
  // content:
       12,       // revision
@@ -81,15 +81,15 @@ Q_CONSTINIT static const uint qt_meta_data_ZN16TestShowBoxUnitsE[] = {
        0        // eod
 };
 
-Q_CONSTINIT const QMetaObject TestShowBoxUnits::staticMetaObject = { {
+Q_CONSTINIT const QMetaObject TestSHantillyUnits::staticMetaObject = { {
     QMetaObject::SuperData::link<QObject::staticMetaObject>(),
-    qt_meta_stringdata_ZN16TestShowBoxUnitsE.offsetsAndSizes,
-    qt_meta_data_ZN16TestShowBoxUnitsE,
+    qt_meta_stringdata_ZN16TestSHantillyUnitsE.offsetsAndSizes,
+    qt_meta_data_ZN16TestSHantillyUnitsE,
     qt_static_metacall,
     nullptr,
-    qt_incomplete_metaTypeArray<qt_meta_tag_ZN16TestShowBoxUnitsE_t,
+    qt_incomplete_metaTypeArray<qt_meta_tag_ZN16TestSHantillyUnitsE_t,
         // Q_OBJECT / Q_GADGET
-        QtPrivate::TypeAndForceComplete<TestShowBoxUnits, std::true_type>,
+        QtPrivate::TypeAndForceComplete<TestSHantillyUnits, std::true_type>,
         // method 'initTestCase'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'cleanupTestCase'
@@ -106,9 +106,9 @@ Q_CONSTINIT const QMetaObject TestShowBoxUnits::staticMetaObject = { {
     nullptr
 } };
 
-void TestShowBoxUnits::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void TestSHantillyUnits::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    auto *_t = static_cast<TestShowBoxUnits *>(_o);
+    auto *_t = static_cast<TestSHantillyUnits *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: _t->initTestCase(); break;
@@ -123,20 +123,20 @@ void TestShowBoxUnits::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
     (void)_a;
 }
 
-const QMetaObject *TestShowBoxUnits::metaObject() const
+const QMetaObject *TestSHantillyUnits::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *TestShowBoxUnits::qt_metacast(const char *_clname)
+void *TestSHantillyUnits::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_ZN16TestShowBoxUnitsE.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_ZN16TestSHantillyUnitsE.stringdata0))
         return static_cast<void*>(this);
     return QObject::qt_metacast(_clname);
 }
 
-int TestShowBoxUnits::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int TestSHantillyUnits::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)

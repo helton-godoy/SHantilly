@@ -1,13 +1,13 @@
 #!/bin/bash
 #
-# Demo do ShowBox: Painel de Configuração do Samba
+# Demo do SHantilly: Painel de Configuração do Samba
 # Interface com menu lateral (sidebar) à esquerda e três abas à direita
 # Simula um painel de configuração avançada do Samba com opções realistas
 #
 
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/SHantilly/bin/SHantilly}"
+SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
 
-${SHOWBOX_BIN} <<EODEMO
+${SHANTILLY_BIN} <<EODEMO
 # Layout principal: frame horizontal
 add frame horizontal main_frame
 
@@ -166,7 +166,7 @@ add pushbutton "&Salvar Configuração" btn_save_config
 add pushbutton "&Cancelar" btn_cancel exit
 end frame
 
-set title "Painel de Configuração do Samba - ShowBox Demo"
+set title "Painel de Configuração do Samba - SHantilly Demo"
 set btn_apply_all icon "dialog-ok"
 set btn_save_config icon "document-save"
 set btn_cancel icon "dialog-cancel"

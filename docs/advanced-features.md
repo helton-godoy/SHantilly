@@ -1,12 +1,12 @@
 # Funcionalidades Avançadas
 
-Recursos avançados para usuários experientes do Showbox.
+Recursos avançados para usuários experientes do SHantilly.
 
 ---
 
 ## Comunicação Bidirecional
 
-O Showbox suporta modificação dinâmica da interface em resposta a eventos do usuário.
+O SHantilly suporta modificação dinâmica da interface em resposta a eventos do usuário.
 
 ### Usando Pipes (coproc)
 
@@ -66,10 +66,10 @@ mkfifo "$FIFO_IN" "$FIFO_OUT"
 
 # Iniciar SHantilly em background
 SHantilly < "$FIFO_OUT" > "$FIFO_IN" &
-SHOWBOX_PID=$!
+SHANTILLY_PID=$!
 
 # Cleanup ao sair
-trap "kill $SHOWBOX_PID 2>/dev/null; rm -f '$FIFO_IN' '$FIFO_OUT'" EXIT
+trap "kill $SHANTILLY_PID 2>/dev/null; rm -f '$FIFO_IN' '$FIFO_OUT'" EXIT
 
 # Construir interface
 cat > "$FIFO_OUT" << 'EOF'
@@ -96,7 +96,7 @@ done < "$FIFO_IN"
 
 ## Stylesheets Qt
 
-O Showbox suporta stylesheets CSS-like do Qt para customização visual completa.
+O SHantilly suporta stylesheets CSS-like do Qt para customização visual completa.
 
 ### Sintaxe Básica
 
@@ -201,7 +201,7 @@ set chk_terms stylesheet "
 
 ### Tema Global do Sistema
 
-O Showbox respeita o tema Qt do sistema. Para forçar:
+O SHantilly respeita o tema Qt do sistema. Para forçar:
 
 ```bash
 # Via variável de ambiente
@@ -383,7 +383,7 @@ wait $COPROC_PID
 
 ## Ícones do Sistema
 
-O Showbox suporta ícones do tema do sistema por nome:
+O SHantilly suporta ícones do tema do sistema por nome:
 
 ```bash
 add pushbutton "Salvar" btn_save

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ShowBox DEB Package Builder
+# SHantilly DEB Package Builder
 # Orchestrates Docker build for DEB packages
 #
 # Usage:

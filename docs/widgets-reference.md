@@ -1,6 +1,6 @@
 # Referência de Widgets
 
-Documentação completa de todos os widgets disponíveis no Showbox.
+Documentação completa de todos os widgets disponíveis no SHantilly.
 
 ---
 

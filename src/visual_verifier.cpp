@@ -1,5 +1,3 @@
-#include "ShowboxBuilder.h"
-#include "WidgetConfigs.h"
 #include <QApplication>
 #include <QCheckBox>
 #include <QGroupBox>
@@ -12,185 +10,188 @@
 #include <QVBoxLayout>
 #include <QWidget>
 
-int main(int argc, char *argv[]) {
-  QApplication app(argc, argv);
+#include "SHantillyBuilder.h"
+#include "WidgetConfigs.h"
 
-  ShowboxBuilder builder;
+int main(int argc, char* argv[]) {
+    QApplication app(argc, argv);
 
-  // 1. Main Window
-  Showbox::Models::WindowConfig winConfig;
-  winConfig.title = "Showbox Suite - Full Widget Gallery (V1 Parity)";
-  winConfig.width = 800;
-  winConfig.height = 900;
-  QWidget *mainWindow = builder.buildWindow(winConfig);
-  QVBoxLayout *mainLayout = qobject_cast<QVBoxLayout *>(mainWindow->layout());
+    SHantillyBuilder builder;
 
-  // Header
-  QLabel *header = new QLabel("<h1>Showbox Suite - Parity Demo</h1>");
-  header->setAlignment(Qt::AlignCenter);
-  mainLayout->addWidget(header);
+    // 1. Main Window
+    Sbx::Models::WindowConfig winConfig;
+    winConfig.title = "SHantilly Suite - Full Widget Gallery (V1 Parity)";
+    winConfig.width = 800;
+    winConfig.height = 900;
+    QWidget* mainWindow = builder.buildWindow(winConfig);
+    QVBoxLayout* mainLayout = qobject_cast<QVBoxLayout*>(mainWindow->layout());
 
-  // Scroll Area for content
-  QScrollArea *scroll = new QScrollArea();
-  QWidget *content = new QWidget();
-  QVBoxLayout *contentLayout = new QVBoxLayout(content);
-  scroll->setWidget(content);
-  scroll->setWidgetResizable(true);
-  mainLayout->addWidget(scroll);
+    // Header
+    QLabel* header = new QLabel("<h1>SHantilly Suite - Parity Demo</h1>");
+    header->setAlignment(Qt::AlignCenter);
+    mainLayout->addWidget(header);
 
-  // --- Tab Widget as Top Level Organizer ---
-  Showbox::Models::TabWidgetConfig mainTabs;
-  Showbox::Models::PageConfig pBasics, pInputs, pContainers, pAdvanced;
+    // Scroll Area for content
+    QScrollArea* scroll = new QScrollArea();
+    QWidget* content = new QWidget();
+    QVBoxLayout* contentLayout = new QVBoxLayout(content);
+    scroll->setWidget(content);
+    scroll->setWidgetResizable(true);
+    mainLayout->addWidget(scroll);
 
-  pBasics.title = "Basic Controls";
-  pBasics.layout.type = Showbox::Models::LayoutConfig::VBox;
+    // --- Tab Widget as Top Level Organizer ---
+    Sbx::Models::TabWidgetConfig mainTabs;
+    Sbx::Models::PageConfig pBasics, pInputs, pContainers, pAdvanced;
 
-  pInputs.title = "Complex Inputs";
-  pInputs.layout.type = Showbox::Models::LayoutConfig::VBox;
+    pBasics.title = "Basic Controls";
+    pBasics.layout.type = Sbx::Models::SbxLayoutConfig::VBox;
 
-  pContainers.title = "Layout & Containers";
-  pContainers.layout.type = Showbox::Models::LayoutConfig::VBox;
+    pInputs.title = "Complex Inputs";
+    pInputs.layout.type = Sbx::Models::SbxLayoutConfig::VBox;
 
-  pAdvanced.title = "Advanced & Charts";
-  pAdvanced.layout.type = Showbox::Models::LayoutConfig::VBox;
+    pContainers.title = "Layout & Containers";
+    pContainers.layout.type = Sbx::Models::SbxLayoutConfig::VBox;
 
-  mainTabs.pages << pBasics << pInputs << pContainers << pAdvanced;
-  QWidget *tabWidget = builder.buildTabWidget(mainTabs);
-  QTabWidget *realTabs = qobject_cast<QTabWidget *>(tabWidget);
-  contentLayout->addWidget(tabWidget);
+    pAdvanced.title = "Advanced & Charts";
+    pAdvanced.layout.type = Sbx::Models::SbxLayoutConfig::VBox;
 
-  // --- TAB 1: BASIC CONTROLS ---
-  QWidget *t1 = realTabs->widget(0);
-  if (t1->layout()) {
-    Showbox::Models::LabelConfig lbl;
-    lbl.name = "lbl1";
-    lbl.text = "Standard Text Label";
-    t1->layout()->addWidget(builder.buildLabel(lbl));
+    mainTabs.pages << pBasics << pInputs << pContainers << pAdvanced;
+    QWidget* tabWidget = builder.buildTabWidget(mainTabs);
+    QTabWidget* realTabs = qobject_cast<QTabWidget*>(tabWidget);
+    contentLayout->addWidget(tabWidget);
 
-    Showbox::Models::ButtonConfig btn;
-    btn.text = "Push Button";
-    t1->layout()->addWidget(builder.buildButton(btn));
+    // --- TAB 1: BASIC CONTROLS ---
+    QWidget* t1 = realTabs->widget(0);
+    if (t1->layout()) {
+        Sbx::Models::LabelConfig lbl;
+        lbl.name = "lbl1";
+        lbl.text = "Standard Text Label";
+        t1->layout()->addWidget(builder.buildLabel(lbl));
 
-    Showbox::Models::CheckBoxConfig cb;
-    cb.name = "cb1";
-    cb.text = "CheckBox Option";
-    cb.checked = true;
-    t1->layout()->addWidget(builder.buildCheckBox(cb));
+        Sbx::Models::ButtonConfig btn;
+        btn.text = "Push Button";
+        t1->layout()->addWidget(builder.buildButton(btn));
 
-    QHBoxLayout *radioLay = new QHBoxLayout();
-    Showbox::Models::RadioButtonConfig rb1;
-    rb1.name = "rb1";
-    rb1.text = "Radio 1";
-    rb1.checked = true;
-    radioLay->addWidget(builder.buildRadioButton(rb1));
+        Sbx::Models::CheckBoxConfig cb;
+        cb.name = "cb1";
+        cb.text = "CheckBox Option";
+        cb.checked = true;
+        t1->layout()->addWidget(builder.buildCheckBox(cb));
 
-    Showbox::Models::RadioButtonConfig rb2;
-    rb2.name = "rb2";
-    rb2.text = "Radio 2";
-    radioLay->addWidget(builder.buildRadioButton(rb2));
-    static_cast<QVBoxLayout *>(t1->layout())->addLayout(radioLay);
+        QHBoxLayout* radioLay = new QHBoxLayout();
+        Sbx::Models::RadioButtonConfig rb1;
+        rb1.name = "rb1";
+        rb1.text = "Radio 1";
+        rb1.checked = true;
+        radioLay->addWidget(builder.buildRadioButton(rb1));
 
-    Showbox::Models::SeparatorConfig sep;
-    sep.name = "sep1";
-    sep.orientation = 1; // Horizontal
-    t1->layout()->addWidget(builder.buildSeparator(sep));
+        Sbx::Models::RadioButtonConfig rb2;
+        rb2.name = "rb2";
+        rb2.text = "Radio 2";
+        radioLay->addWidget(builder.buildRadioButton(rb2));
+        static_cast<QVBoxLayout*>(t1->layout())->addLayout(radioLay);
 
-    Showbox::Models::ComboBoxConfig combo;
-    combo.name = "combo1";
-    combo.items << "Choice 1" << "Choice 2" << "Choice 3";
-    combo.currentIndex = 0;
-    t1->layout()->addWidget(builder.buildComboBox(combo));
-  }
+        Sbx::Models::SeparatorConfig sep;
+        sep.name = "sep1";
+        sep.orientation = 1; // Horizontal
+        t1->layout()->addWidget(builder.buildSeparator(sep));
 
-  // --- TAB 2: COMPLEX INPUTS ---
-  QWidget *t2 = realTabs->widget(1);
-  if (t2->layout()) {
-    t2->layout()->addWidget(new QLabel("LineEdit & TextEdit:"));
-    Showbox::Models::LineEditConfig le;
-    le.name = "le1";
-    le.text = "Value";
-    le.placeholder = "Placeholder...";
-    t2->layout()->addWidget(builder.buildLineEdit(le));
+        Sbx::Models::ComboBoxConfig combo;
+        combo.name = "combo1";
+        combo.items << "Choice 1" << "Choice 2" << "Choice 3";
+        combo.currentIndex = 0;
+        t1->layout()->addWidget(builder.buildComboBox(combo));
+    }
 
-    Showbox::Models::TextEditConfig te;
-    te.name = "te1";
-    te.text = "Multi-line <b>Rich Text</b> Editor";
-    te.richText = true;
-    t2->layout()->addWidget(builder.buildTextEdit(te));
+    // --- TAB 2: COMPLEX INPUTS ---
+    QWidget* t2 = realTabs->widget(1);
+    if (t2->layout()) {
+        t2->layout()->addWidget(new QLabel("LineEdit & TextEdit:"));
+        Sbx::Models::LineEditConfig le;
+        le.name = "le1";
+        le.text = "Value";
+        le.placeholder = "Placeholder...";
+        t2->layout()->addWidget(builder.buildLineEdit(le));
 
-    t2->layout()->addWidget(new QLabel("Numerical (SpinBox & Slider):"));
-    Showbox::Models::SpinBoxConfig sb;
-    sb.name = "spin1";
-    sb.value = 42;
-    sb.min = 0;
-    sb.max = 100;
-    sb.step = 1;
-    sb.prefix = "$ ";
-    t2->layout()->addWidget(builder.buildSpinBox(sb));
+        Sbx::Models::TextEditConfig te;
+        te.name = "te1";
+        te.text = "Multi-line <b>Rich Text</b> Editor";
+        te.richText = true;
+        t2->layout()->addWidget(builder.buildTextEdit(te));
 
-    Showbox::Models::SliderConfig sl;
-    sl.name = "sl1";
-    sl.value = 75;
-    sl.min = 0;
-    sl.max = 100;
-    sl.orientation = 1; // Horizontal
-    t2->layout()->addWidget(builder.buildSlider(sl));
+        t2->layout()->addWidget(new QLabel("Numerical (SpinBox & Slider):"));
+        Sbx::Models::SpinBoxConfig sb;
+        sb.name = "spin1";
+        sb.value = 42;
+        sb.min = 0;
+        sb.max = 100;
+        sb.step = 1;
+        sb.prefix = "$ ";
+        t2->layout()->addWidget(builder.buildSpinBox(sb));
 
-    t2->layout()->addWidget(new QLabel("Calendar:"));
-    Showbox::Models::CalendarConfig cal;
-    cal.name = "cal1";
-    t2->layout()->addWidget(builder.buildCalendar(cal));
-  }
+        Sbx::Models::SliderConfig sl;
+        sl.name = "sl1";
+        sl.value = 75;
+        sl.min = 0;
+        sl.max = 100;
+        sl.orientation = 1; // Horizontal
+        t2->layout()->addWidget(builder.buildSlider(sl));
 
-  // --- TAB 3: LAYOUT & CONTAINERS ---
-  QWidget *t3 = realTabs->widget(2);
-  if (t3->layout()) {
-    // GroupBox
-    Showbox::Models::GroupBoxConfig gb;
-    gb.title = "Group Box with VBox Layout";
-    gb.layout.type = Showbox::Models::LayoutConfig::VBox;
-    QWidget *groupBox = builder.buildGroupBox(gb);
-    groupBox->layout()->addWidget(new QPushButton("Inside Group"));
-    groupBox->layout()->addWidget(new QCheckBox("Also inside"));
-    t3->layout()->addWidget(groupBox);
+        t2->layout()->addWidget(new QLabel("Calendar:"));
+        Sbx::Models::CalendarConfig cal;
+        cal.name = "cal1";
+        t2->layout()->addWidget(builder.buildCalendar(cal));
+    }
 
-    // Frame
-    Showbox::Models::FrameConfig fr;
-    fr.layout.type = Showbox::Models::LayoutConfig::HBox;
-    QWidget *frame = builder.buildFrame(fr);
-    frame->layout()->addWidget(new QLabel("Inside Frame:"));
-    frame->layout()->addWidget(new QLineEdit("Value A"));
-    frame->layout()->addWidget(new QLineEdit("Value B"));
-    t3->layout()->addWidget(frame);
-  }
+    // --- TAB 3: LAYOUT & CONTAINERS ---
+    QWidget* t3 = realTabs->widget(2);
+    if (t3->layout()) {
+        // GroupBox
+        Sbx::Models::GroupBoxConfig gb;
+        gb.title = "Group Box with VBox Layout";
+        gb.layout.type = Sbx::Models::SbxLayoutConfig::VBox;
+        QWidget* groupBox = builder.buildGroupBox(gb);
+        groupBox->layout()->addWidget(new QPushButton("Inside Group"));
+        groupBox->layout()->addWidget(new QCheckBox("Also inside"));
+        t3->layout()->addWidget(groupBox);
 
-  // --- TAB 4: ADVANCED ---
-  QWidget *t4 = realTabs->widget(3);
-  if (t4->layout()) {
-    t4->layout()->addWidget(new QLabel("Progress & Lists:"));
-    Showbox::Models::ProgressBarConfig pb;
-    pb.name = "pb1";
-    pb.value = 65;
-    pb.format = "Loading %p%";
-    t4->layout()->addWidget(builder.buildProgressBar(pb));
+        // Frame
+        Sbx::Models::FrameConfig fr;
+        fr.layout.type = Sbx::Models::SbxLayoutConfig::HBox;
+        QWidget* frame = builder.buildFrame(fr);
+        frame->layout()->addWidget(new QLabel("Inside Frame:"));
+        frame->layout()->addWidget(new QLineEdit("Value A"));
+        frame->layout()->addWidget(new QLineEdit("Value B"));
+        t3->layout()->addWidget(frame);
+    }
 
-    Showbox::Models::ListConfig list;
-    list.name = "list1";
-    list.items << "Alpha" << "Beta" << "Gamma";
-    list.multipleSelection = true;
-    t4->layout()->addWidget(builder.buildList(list));
+    // --- TAB 4: ADVANCED ---
+    QWidget* t4 = realTabs->widget(3);
+    if (t4->layout()) {
+        t4->layout()->addWidget(new QLabel("Progress & Lists:"));
+        Sbx::Models::ProgressBarConfig pb;
+        pb.name = "pb1";
+        pb.value = 65;
+        pb.format = "Loading %p%";
+        t4->layout()->addWidget(builder.buildProgressBar(pb));
 
-    t4->layout()->addWidget(new QLabel("Data Chart (Phase 1):"));
-    Showbox::Models::ChartConfig chart;
-    chart.title = "Sales 2026";
-    chart.data["Q1"] = 120.5;
-    chart.data["Q2"] = 240.0;
-    chart.data["Q3"] = 180.2;
-    t4->layout()->addWidget(builder.buildChart(chart));
-  }
+        Sbx::Models::ListConfig list;
+        list.name = "list1";
+        list.items << "Alpha" << "Beta" << "Gamma";
+        list.multipleSelection = true;
+        t4->layout()->addWidget(builder.buildList(list));
 
-  // Show
-  mainWindow->show();
+        t4->layout()->addWidget(new QLabel("Data Chart (Phase 1):"));
+        Sbx::Models::ChartConfig chart;
+        chart.title = "Sales 2026";
+        chart.data["Q1"] = 120.5;
+        chart.data["Q2"] = 240.0;
+        chart.data["Q3"] = 180.2;
+        t4->layout()->addWidget(builder.buildChart(chart));
+    }
 
-  return app.exec();
+    // Show
+    mainWindow->show();
+
+    return app.exec();
 }

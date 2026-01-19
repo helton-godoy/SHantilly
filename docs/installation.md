@@ -1,6 +1,6 @@
 # Guia de Instalação
 
-Este guia cobre todas as formas de instalar o Showbox no seu sistema.
+Este guia cobre todas as formas de instalar o SHantilly no seu sistema.
 
 ---
 
@@ -140,7 +140,7 @@ Se uma janela aparecer com a mensagem, a instalação foi bem sucedida! 🎉
 
 ### Configuração de Tema (Opcional)
 
-O Showbox detecta automaticamente o tema Qt do sistema. Para forçar um tema específico:
+O SHantilly detecta automaticamente o tema Qt do sistema. Para forçar um tema específico:
 
 ```bash
 # Usar tema Fusion (neutro)
@@ -156,7 +156,7 @@ SHantilly --style fusion < comandos.txt
 | ------------------- | ------------------------------------ |
 | `QT_STYLE_OVERRIDE` | Força um estilo Qt específico        |
 | `QT_SCALE_FACTOR`   | Escala da interface (HiDPI)          |
-| `SHOWBOX_RC`        | Caminho para arquivo de configuração |
+| `SHANTILLY_RC`        | Caminho para arquivo de configuração |
 
 ---
 

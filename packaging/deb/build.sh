@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ShowBox DEB Package Builder
+# SHantilly DEB Package Builder
 # Builds a Debian package with automatic dependency detection
 #
 
@@ -10,7 +10,7 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 DIST_DIR="${PROJECT_ROOT}/dist"
 
-echo "=== ShowBox DEB Package Builder ==="
+echo "=== SHantilly DEB Package Builder ==="
 echo "Project root: ${PROJECT_ROOT}"
 
 # Create dist directory

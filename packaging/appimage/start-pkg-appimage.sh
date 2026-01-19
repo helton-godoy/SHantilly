@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ShowBox AppImage Builder
+# SHantilly AppImage Builder
 # Orchestrates Docker build for AppImage
 #
 

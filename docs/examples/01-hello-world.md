@@ -1,6 +1,6 @@
 # Tutorial 01: Hello World
 
-Seu primeiro diálogo com Showbox.
+Seu primeiro diálogo com SHantilly.
 
 **Nível:** 🟢 Básico  
 **Tempo estimado:** 5 minutos
@@ -19,14 +19,14 @@ Criar um diálogo simples com uma mensagem e um botão para fechar.
 #!/bin/bash
 #
 # Tutorial 01: Hello World
-# O exemplo mais simples de Showbox
+# O exemplo mais simples de SHantilly
 
 SHantilly << 'EOF'
 # Configurar título da janela
 set title "Meu Primeiro Diálogo"
 
 # Adicionar um rótulo com mensagem de boas-vindas
-add label "<h2>Olá, Mundo!</h2><p>Bem-vindo ao Showbox!</p>" lbl_welcome
+add label "<h2>Olá, Mundo!</h2><p>Bem-vindo ao SHantilly!</p>" lbl_welcome
 
 # Adicionar um botão para fechar
 add pushbutton "OK" btn_ok exit default

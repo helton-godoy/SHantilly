@@ -38,12 +38,12 @@ void TestTokenizer::testQuotedStrings()
 
 void TestTokenizer::testEscapedCharacters()
 {
-    // String: add label "Name: \"Showbox\"" lbl
-    Tokenizer tokenizer("add label \"Name: \\\"Showbox\\\"\" lbl");
+    // String: add label "Name: \"SHantilly\"" lbl
+    Tokenizer tokenizer("add label \"Name: \\\"SHantilly\\\"\" lbl");
     QStringList tokens = tokenizer.tokenize();
     
     QCOMPARE(tokens.size(), 4);
-    QCOMPARE(tokens[2], QString("Name: \"Showbox\""));
+    QCOMPARE(tokens[2], QString("Name: \"SHantilly\""));
 }
 
 void TestTokenizer::testEmptyAndWhitespace()

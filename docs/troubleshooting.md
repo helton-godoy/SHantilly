@@ -1,6 +1,6 @@
 # Resolução de Problemas
 
-Soluções para problemas comuns ao usar o Showbox.
+Soluções para problemas comuns ao usar o SHantilly.
 
 ---
 
@@ -273,7 +273,7 @@ SHantilly < comandos.txt
 Não há comando direto. Alternativas:
 
 1. Simule clique em botão exit
-2. Termine o processo: `kill $SHOWBOX_PID`
+2. Termine o processo: `kill $SHANTILLY_PID`
 
 ---
 

@@ -1,6 +1,6 @@
 # Referência do Dialogbox
 
-> Documentação técnica das funcionalidades do Dialogbox versão 1.0 para referência e validação do Showbox (Qt6).
+> Documentação técnica das funcionalidades do Dialogbox versão 1.0 para referência e validação do SHantilly (Qt6).
 
 ## Sumário
 
@@ -360,7 +360,7 @@ enum Stage {
                  │ emit sendCommand(DialogCommand)
                  ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                        ShowBox                              │
+│                        SHantilly                              │
 │  executeCommand() : Executa comandos do parser              │
 │  - add*()         : Métodos de criação de widgets           │
 │  - setOptions()   : Configura propriedades                  │
@@ -435,7 +435,7 @@ echo "Dialog started"
 ### Diferenças Qt5 vs Qt6
 
 - O código atual é compatível com Qt5
-- Showbox deve ser portado para Qt6:
+- SHantilly deve ser portado para Qt6:
   - Atualizar includes: `QtCharts/QPieSeries` → `QtCharts`
   - Verificar deprecated APIs
   - Atualizar conectores de sinais
@@ -454,4 +454,4 @@ echo "Dialog started"
 
 ---
 
-_Documentação gerada para referência do projeto Showbox (Qt6)._
+_Documentação gerada para referência do projeto SHantilly (Qt6)._
