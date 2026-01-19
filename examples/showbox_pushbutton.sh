@@ -4,7 +4,7 @@
 # Demonstrates various pushbutton styles and behaviors
 #
 
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/showbox/bin/showbox}"
+SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/SHantilly/bin/SHantilly}"
 
 while IFS=$'=' read key value; do
 	case ${key} in

@@ -17,13 +17,13 @@ mkdir -p ~/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
 
 # Create tarball
 cd "${PROJECT_ROOT}/.."
-tar czf ~/rpmbuild/SOURCES/showbox-"${VERSION}".tar.gz showbox
+tar czf ~/rpmbuild/SOURCES/SHantilly-"${VERSION}".tar.gz SHantilly
 
 # Copy spec file
-cp "${SCRIPT_DIR}/showbox.spec" ~/rpmbuild/SPECS/
+cp "${SCRIPT_DIR}/SHantilly.spec" ~/rpmbuild/SPECS/
 
 # Build RPM
-rpmbuild -ba ~/rpmbuild/SPECS/showbox.spec
+rpmbuild -ba ~/rpmbuild/SPECS/SHantilly.spec
 
 # Copy to dist
 mkdir -p "${DIST_DIR}"

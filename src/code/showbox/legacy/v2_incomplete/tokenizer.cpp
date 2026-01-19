@@ -15,7 +15,7 @@ QList<Token> Tokenizer::tokenize(const QString &input) {
         inQuote = false;
       } else {
         // Inside quote, append everything (including spaces)
-        // Handle escaped quote? Standard showbox syntax says:
+        // Handle escaped quote? Standard SHantilly syntax says:
         // "If a token contains a white space character (including new line) it
         // must be quoted by double quote characters (`"`). To use double quote
         // character within a token (either quoted or not) the former must be

@@ -25,17 +25,17 @@
 
 ### Legacy V1 (Dialogbox Monolith)
 
-- **Status:** 🟡 Mantido para referência em `src/code/showbox/legacy/v1_monolith`
-- **Build:** Target `showbox-legacy` (QMake)
+- **Status:** 🟡 Mantido para referência em `src/code/SHantilly/legacy/v1_monolith`
+- **Build:** Target `SHantilly-legacy` (QMake)
 
 ### Legacy V2 (Tentativa anterior)
 
-- **Status:** 🔴 Deprecado em `src/code/showbox/legacy/v2_incomplete`
+- **Status:** 🔴 Deprecado em `src/code/SHantilly/legacy/v2_incomplete`
 - **Nota:** Código incompleto, não deve ser usado como referência.
 
 ### Target Architecture (Golden Sample)
 
-- **Status:** 🟢 Ativo em `src/code/showbox/core` e `libs/showbox-ui`
+- **Status:** 🟢 Ativo em `src/code/SHantilly/core` e `libs/SHantilly-ui`
 - **Padrões:**
   - **Builder Pattern:** `CLIBuilder` (implementado)
   - **Passive View:** `PushButtonWidget` (implementado)

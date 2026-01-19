@@ -1,12 +1,12 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'showbox.h'
+** Meta object code from reading C++ file 'SHantilly.h'
 **
 ** Created by: The Qt Meta Object Compiler version 68 (Qt 6.8.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../showbox.h"
+#include "../SHantilly.h"
 #include <QtGui/qtextcursor.h>
 #include <QtGui/qscreen.h>
 #include <QtCore/qmetatype.h>
@@ -18,7 +18,7 @@
 
 #include <QtCore/qxptype_traits.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'showbox.h' doesn't include <QObject>."
+#error "The header file 'SHantilly.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 68
 #error "This file was generated using the moc from 6.8.2. It"
 #error "cannot be used with the include files from this version of Qt."

@@ -26,8 +26,8 @@ Criar um formulário de login com:
 # Tutorial 02: Formulário de Login
 # Demonstra campos de entrada e processamento de dados
 
-# Capturar a saída do showbox
-OUTPUT=$(showbox << 'EOF'
+# Capturar a saída do SHantilly
+OUTPUT=$(SHantilly << 'EOF'
 set title "Login"
 
 # Ícone do sistema (opcional)
@@ -118,11 +118,11 @@ Agrupa widgets visualmente com uma borda e título.
 ### Captura de Dados
 
 ```bash
-OUTPUT=$(showbox << 'EOF' ... EOF)
+OUTPUT=$(SHantilly << 'EOF' ... EOF)
 eval "$OUTPUT"
 ```
 
-- Captura a saída do showbox na variável `OUTPUT`
+- Captura a saída do SHantilly na variável `OUTPUT`
 - `eval` transforma as linhas `nome=valor` em variáveis shell
 
 ### Código de Saída

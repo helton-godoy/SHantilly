@@ -1,11 +1,11 @@
 #!/bin/bash
 #
 # Test de compatibilidade: ShowBox vs DialogBox
-# Execute este script para verificar se o showbox produz outputs
+# Execute este script para verificar se o SHantilly produz outputs
 # idênticos ao dialogbox original.
 #
 
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/showbox/bin/showbox}"
+SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/SHantilly/bin/SHantilly}"
 DIALOGBOX_BIN="${DIALOGBOX_BIN:-dialogbox}"
 
 echo "=== ShowBox Compatibility Test ==="

@@ -1,22 +1,22 @@
 #!/bin/bash
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/showbox/bin/showbox}"
+SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/SHantilly/bin/SHantilly}"
 
-FIFOIN="./pipe-in"   # FIFO the showbox process writes to
-FIFOOUT="./pipe-out" # FIFO the showbox process reads from
+FIFOIN="./pipe-in"   # FIFO the SHantilly process writes to
+FIFOOUT="./pipe-out" # FIFO the SHantilly process reads from
 
 rm -rf "${FIFOIN}" "${FIFOOUT}" # sanity removal
 
 mkfifo "${FIFOIN}" "${FIFOOUT}"
 
 ${SHOWBOX_BIN} <"${FIFOOUT}" >"${FIFOIN}" &
-DBPID=$! # PID of the showbox, if you need it for any purpose... e.g. to kill it
+DBPID=$! # PID of the SHantilly, if you need it for any purpose... e.g. to kill it
 
 trap "kill ${DBPID} &>/dev/null; wait ${DBPID}; rm -rf \"${FIFOIN}\" \"${FIFOOUT}\"" EXIT
 
 # If your script doesn't use standard input/output you may redirect them to the pipes
 # and don't bore with redirection for each input/output command.
 # Tools used might output something to the pipe but it is unlikely it will be understood by the
-# showbox application. So, this is 99.99% safe...
+# SHantilly application. So, this is 99.99% safe...
 # The following two commands will do the job:
 #  exec >"$FIFOOUT"
 #  exec <"$FIFOIN"
@@ -25,7 +25,7 @@ trap "kill ${DBPID} &>/dev/null; wait ${DBPID}; rm -rf \"${FIFOIN}\" \"${FIFOOUT
 # And, finally, you can omit the exit trap as it is safe to exit from the script at any point now.
 
 cat >"${FIFOOUT}" <<EODEMO
-add label "<small>This script demonstrates bidirectional communication with the showbox application using FIFOs." note
+add label "<small>This script demonstrates bidirectional communication with the SHantilly application using FIFOs." note
 set note stylesheet "qproperty-textInteractionFlags: NoTextInteraction;"
 add separator
 add frame horizontal

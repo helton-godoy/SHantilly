@@ -4,7 +4,7 @@
 # Demonstrates the calendar widget with date selection
 #
 
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/showbox/bin/showbox}"
+SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/SHantilly/bin/SHantilly}"
 
 ${SHOWBOX_BIN} <<EODEMO
 add label "<b>Select a date:</b>" title

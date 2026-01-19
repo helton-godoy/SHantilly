@@ -1,6 +1,6 @@
 **Diretório `examples`:**
 
-Destinado a scripts de exemplo, com o propósito de demonstrar ao usuário como criar um script que incorpore os recursos disponíveis no showbox.
+Destinado a scripts de exemplo, com o propósito de demonstrar ao usuário como criar um script que incorpore os recursos disponíveis no SHantilly.
 
 Cada recurso existente deve possuir um shell script correspondente de exemplo de uso padrão.
 

@@ -20,11 +20,11 @@ mkdir -p "${DIST_DIR}"
 cd "${SCRIPT_DIR}"
 
 # Build Flatpak
-flatpak-builder --force-clean --repo=repo build-dir io.github.showbox.yaml
+flatpak-builder --force-clean --repo=repo build-dir io.github.SHantilly.yaml
 
 # Create bundle
-flatpak build-bundle repo "${DIST_DIR}/showbox.flatpak" io.github.showbox
+flatpak build-bundle repo "${DIST_DIR}/SHantilly.flatpak" io.github.SHantilly
 
 echo ""
 echo "=== Build Complete ==="
-echo "Flatpak bundle: ${DIST_DIR}/showbox.flatpak"
+echo "Flatpak bundle: ${DIST_DIR}/SHantilly.flatpak"

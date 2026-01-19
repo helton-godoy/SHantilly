@@ -26,8 +26,8 @@ Criar um dashboard com:
 # Tutorial 05: Gráfico Dinâmico
 # Demonstra chart widget com interatividade
 
-FIFO_IN="/tmp/showbox_$$_in"
-FIFO_OUT="/tmp/showbox_$$_out"
+FIFO_IN="/tmp/SHantilly_$$_in"
+FIFO_OUT="/tmp/SHantilly_$$_out"
 
 # Cleanup
 cleanup() {
@@ -39,8 +39,8 @@ trap cleanup EXIT
 # Criar FIFOs
 mkfifo "$FIFO_IN" "$FIFO_OUT"
 
-# Iniciar showbox
-showbox --resizable < "$FIFO_OUT" > "$FIFO_IN" &
+# Iniciar SHantilly
+SHantilly --resizable < "$FIFO_OUT" > "$FIFO_IN" &
 SHOWBOX_PID=$!
 
 # Construir interface

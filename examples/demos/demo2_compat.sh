@@ -4,7 +4,7 @@
 # Teste de compatibilidade - widgets de entrada
 #
 
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/showbox/bin/showbox}"
+SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/SHantilly/bin/SHantilly}"
 
 while IFS=$'=' read key value; do
 	case ${key} in

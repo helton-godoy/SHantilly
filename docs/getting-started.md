@@ -24,7 +24,7 @@ Script ──stdin──▶ Showbox ──GUI──▶ Usuário
 ```bash
 #!/bin/bash
 
-showbox << 'EOF'
+SHantilly << 'EOF'
 # Configurar a janela
 set title "Meu Programa"
 
@@ -49,7 +49,7 @@ O diálogo mais simples possível.
 ```bash
 #!/bin/bash
 
-showbox << 'EOF'
+SHantilly << 'EOF'
 set title "Olá Mundo"
 add label "Bem-vindo ao Showbox!"
 add pushbutton "OK" btn_ok exit default
@@ -75,7 +75,7 @@ Coletando informações do usuário.
 ```bash
 #!/bin/bash
 
-OUTPUT=$(showbox << 'EOF'
+OUTPUT=$(SHantilly << 'EOF'
 set title "Cadastro"
 
 add textbox "Nome:" txt_nome
@@ -106,7 +106,7 @@ fi
 
 - `textbox` - Campo de entrada de texto
 - `apply` - Botão reporta valores dos widgets
-- `$(...)` - Captura a saída do showbox
+- `$(...)` - Captura a saída do SHantilly
 - `eval "$OUTPUT"` - Transforma em variáveis shell
 
 ---
@@ -118,7 +118,7 @@ Permitindo múltiplas seleções.
 ```bash
 #!/bin/bash
 
-OUTPUT=$(showbox << 'EOF'
+OUTPUT=$(SHantilly << 'EOF'
 set title "Configurações"
 
 add groupbox "Opções" grp_opcoes vertical
@@ -158,7 +158,7 @@ Quando apenas uma opção é válida.
 ```bash
 #!/bin/bash
 
-OUTPUT=$(showbox << 'EOF'
+OUTPUT=$(SHantilly << 'EOF'
 set title "Escolha o Tema"
 
 add groupbox "Tema da Interface" grp_tema vertical
@@ -200,7 +200,7 @@ Escolhendo de uma lista predefinida.
 ```bash
 #!/bin/bash
 
-OUTPUT=$(showbox << 'EOF'
+OUTPUT=$(SHantilly << 'EOF'
 set title "Selecione o Sistema"
 
 add listbox "Sistemas Disponíveis:" lst_sistemas selection
@@ -238,7 +238,7 @@ fi
 Use `<< 'EOF'` (com aspas) para texto literal:
 
 ```bash
-showbox << 'EOF'
+SHantilly << 'EOF'
 add label "Texto literal $variavel não expande"
 EOF
 ```
@@ -247,7 +247,7 @@ Use `<< EOF` (sem aspas) para expandir variáveis:
 
 ```bash
 NOME="João"
-showbox << EOF
+SHantilly << EOF
 add label "Olá, $NOME!"
 EOF
 ```
@@ -264,7 +264,7 @@ set btn_style stylesheet "background-color: #2196F3; color: white; padding: 10px
 Para evitar "piscadas" ao construir interfaces complexas:
 
 ```bash
-showbox --hidden << 'EOF'
+SHantilly --hidden << 'EOF'
 # ... muitos widgets ...
 show  # Mostra só quando tudo estiver pronto
 EOF

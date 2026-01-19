@@ -1,4 +1,4 @@
-Source: showbox
+Source: SHantilly
 Section: x11
 Priority: optional
 Maintainer: Helton Godoy <helton@example.com>
@@ -12,10 +12,10 @@ Build-Depends: debhelper-compat (= 13),
                libgl-dev,
                libopengl-dev
 Standards-Version: 4.6.2
-Homepage: https://github.com/helton-godoy/showbox
+Homepage: https://github.com/helton-godoy/SHantilly
 Rules-Requires-Root: no
 
-Package: showbox
+Package: SHantilly
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Recommends: libqt6svg6

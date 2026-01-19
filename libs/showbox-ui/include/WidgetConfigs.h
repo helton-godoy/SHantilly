@@ -79,7 +79,7 @@ struct WindowConfig : public BaseConfig {
     int height = 600;
 
     // Window might not strictly need a 'name' if it's the main window,
-    // but usually in showbox it's implicitly 'window'.
+    // but usually in SHantilly it's implicitly 'window'.
     // Overriding isValid to be permissive for Window title.
     bool isValid() const override {
         return width > 0 && height > 0;

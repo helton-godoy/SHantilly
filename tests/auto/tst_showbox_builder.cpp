@@ -370,4 +370,4 @@ void TestShowboxBuilder::testPerformance()
 }
 
 QTEST_MAIN(TestShowboxBuilder)
-#include "tst_showbox_builder.moc"
+#include "tst_SHantilly_builder.moc"

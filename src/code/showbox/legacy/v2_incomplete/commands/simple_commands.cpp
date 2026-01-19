@@ -1,7 +1,7 @@
 #include "commands/simple_commands.h"
 #include "commands/command_utils.h"
 #include "execution_context.h"
-#include "showbox.h"
+#include "SHantilly.h"
 
 void ShowCommand::execute(ExecutionContext &context,
                           const QList<QString> &args) {

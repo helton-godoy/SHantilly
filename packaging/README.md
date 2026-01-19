@@ -29,7 +29,7 @@ O ShowBox requer as seguintes bibliotecas Qt6:
 ```bash
 cd packaging/deb
 ./build.sh
-# Pacote gerado em: dist/showbox_1.0.0-1_amd64.deb
+# Pacote gerado em: dist/SHantilly_1.0.0-1_amd64.deb
 ```
 
 ### RPM (Fedora/RHEL)
@@ -37,7 +37,7 @@ cd packaging/deb
 ```bash
 cd packaging/rpm
 ./build.sh
-# Pacote gerado em: dist/showbox-1.0.0-1.x86_64.rpm
+# Pacote gerado em: dist/SHantilly-1.0.0-1.x86_64.rpm
 ```
 
 ### Flatpak
@@ -45,7 +45,7 @@ cd packaging/rpm
 ```bash
 cd packaging/flatpak
 ./build.sh
-# Bundle gerado em: dist/showbox.flatpak
+# Bundle gerado em: dist/SHantilly.flatpak
 ```
 
 ### AppImage
@@ -61,21 +61,21 @@ cd packaging/appimage
 ### DEB
 
 ```bash
-sudo dpkg -i dist/showbox_1.0.0-1_amd64.deb
+sudo dpkg -i dist/SHantilly_1.0.0-1_amd64.deb
 sudo apt-get install -f  # Instala dependências faltantes
 ```
 
 ### RPM
 
 ```bash
-sudo dnf install dist/showbox-1.0.0-1.x86_64.rpm
+sudo dnf install dist/SHantilly-1.0.0-1.x86_64.rpm
 ```
 
 ### Flatpak
 
 ```bash
-flatpak install dist/showbox.flatpak
-flatpak run io.github.showbox
+flatpak install dist/SHantilly.flatpak
+flatpak run io.github.SHantilly
 ```
 
 ### AppImage
@@ -100,13 +100,13 @@ packaging/
 │       └── compat      # Nível de compatibilidade
 ├── rpm/
 │   ├── build.sh        # Script de build RPM
-│   └── showbox.spec    # Spec file
+│   └── SHantilly.spec    # Spec file
 ├── flatpak/
 │   ├── build.sh        # Script de build Flatpak
-│   ├── io.github.showbox.yaml      # Manifest
-│   ├── io.github.showbox.desktop   # Desktop entry
-│   └── io.github.showbox.metainfo.xml  # AppStream metadata
+│   ├── io.github.SHantilly.yaml      # Manifest
+│   ├── io.github.SHantilly.desktop   # Desktop entry
+│   └── io.github.SHantilly.metainfo.xml  # AppStream metadata
 └── appimage/
     ├── build.sh        # Script de build AppImage
-    └── showbox.desktop # Desktop entry
+    └── SHantilly.desktop # Desktop entry
 ```

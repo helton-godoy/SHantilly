@@ -1,9 +1,9 @@
 /*
- * GUI widgets for shell scripts - showbox version 1.0
+ * GUI widgets for shell scripts - SHantilly version 1.0
  *
  * Copyright (C) 2015-2016, 2020 Andriy Martynets <andy.martynets@gmail.com>
  *------------------------------------------------------------------------------
- * This file is part of showbox.
+ * This file is part of SHantilly.
  *
  * Showbox is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,11 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with showbox. If not, see http://www.gnu.org/licenses/.
+ * along with SHantilly. If not, see http://www.gnu.org/licenses/.
  *------------------------------------------------------------------------------
  */
 
-#include "showbox.h"
+#include "SHantilly.h"
 #include "theme_manager.h"
 #include "command_registry.h"
 #include "parser_driver.h"
@@ -36,7 +36,7 @@
 #define E_SUCCESS 0
 #define E_ARG 1
 
-#define PROGRAM_NAME "showbox"
+#define PROGRAM_NAME "SHantilly"
 #define VERSION "1.0"
 
 static const char *about_message =
@@ -48,7 +48,7 @@ static const char *about_message =
                  "This program comes with ABSOLUTELY NO WARRANTY.\n"
                  "This is free software, and you are welcome to redistribute it\n"
                  "under certain conditions. See the GNU GPL for details.\n\n"
-                 "More information on <https://github.com/martynets/showbox/>.\n";
+                 "More information on <https://github.com/martynets/SHantilly/>.\n";
 
 static const char *about_html_message =
     "<h3>" PROGRAM_NAME " version " VERSION "</h3>"
@@ -61,8 +61,8 @@ static const char *about_html_message =
     "This is free software, and you are welcome to redistribute it "
     "under certain conditions. See the GNU GPL for details.</p>"
     "<p>More information on <a href="
-    "\"https://github.com/martynets/showbox/\">"
-    "https://github.com/martynets/showbox/</a>.</p>";
+    "\"https://github.com/martynets/SHantilly/\">"
+    "https://github.com/martynets/SHantilly/</a>.</p>";
 
 static const char *default_title = PROGRAM_NAME " v" VERSION;
 
@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
 {
     QApplication::setApplicationName(PROGRAM_NAME);
     QApplication::setApplicationVersion(VERSION);
-    QApplication::setDesktopFileName("showbox");
+    QApplication::setDesktopFileName("SHantilly");
     QApplication app(argc, argv);
     bool resizable = false;
     bool hidden = false;
@@ -165,7 +165,7 @@ static void help()
 {
     const char *usage =
         "Usage: " PROGRAM_NAME " [options]\n"
-        "Translate commands on stdin into widgets of GUI showbox and output "
+        "Translate commands on stdin into widgets of GUI SHantilly and output "
         "user\n"
         "actions to stdout.\n"
         "\n"
@@ -219,7 +219,7 @@ static void help()
         "    enabled named widgets in format:\n"
         "    <name>=<value>\n"
         "\n"
-        "Full documentation at: <https://github.com/martynets/showbox/>\n";
+        "Full documentation at: <https://github.com/martynets/SHantilly/>\n";
 
     puts(usage);
     puts("");

@@ -4,7 +4,7 @@
 # Demonstrates horizontal and vertical separators
 #
 
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/showbox/bin/showbox}"
+SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/SHantilly/bin/SHantilly}"
 
 ${SHOWBOX_BIN} <<EODEMO
 add label "<b>Separator Demo</b>" title

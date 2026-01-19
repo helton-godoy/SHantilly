@@ -4,11 +4,11 @@
 # Usa FIFO para capturar callbacks continuamente
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SHOWBOX="${SCRIPT_DIR}/../../build/bin/showbox"
+SHOWBOX="${SCRIPT_DIR}/../../build/bin/SHantilly"
 
-# Verificar se o showbox foi compilado
+# Verificar se o SHantilly foi compilado
 if [[ ! -x ${SHOWBOX} ]]; then
-	echo "ERRO: showbox não encontrado em${$SHOWBO}X"
+	echo "ERRO: SHantilly não encontrado em${$SHOWBO}X"
 	exit 1
 fi
 
@@ -54,7 +54,7 @@ echo ""
 	done <"${FIFO}"
 ) &
 
-# Executar showbox com output redirecionado para o FIFO
+# Executar SHantilly com output redirecionado para o FIFO
 cat <<'EOF' | "${SHOWBOX}" >"${FIFO}" 2>&1
 add window "Teste de Actions" main width=400 height=300
 add button "Testar Callback" btn_test action="btn_test_clicked"

@@ -4,7 +4,7 @@
 # Demonstrates the textbox widget with normal, password and placeholder modes
 #
 
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/showbox/bin/showbox}"
+SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/SHantilly/bin/SHantilly}"
 
 while IFS=$'=' read key value; do
 	case ${key} in

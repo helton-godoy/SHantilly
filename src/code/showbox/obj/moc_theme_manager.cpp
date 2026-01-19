@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../../../../libs/showbox-ui/include/theme_manager.h"
+#include "../../../../libs/SHantilly-ui/include/theme_manager.h"
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>

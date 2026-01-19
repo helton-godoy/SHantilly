@@ -22,7 +22,7 @@ graph TD
     end
 
     subgraph "Showbox Shared Ecosystem"
-        Lib[libs/showbox-ui]
+        Lib[libs/SHantilly-ui]
     end
 
     CLI --> Lib
@@ -36,20 +36,20 @@ graph TD
 Para manter a compatibilidade com o sistema de empacotamento existente (`packaging/deb`, `packaging/rpm`, etc.), adotamos uma abordagem de build duplo durante a transição:
 
 1.  **Build Legado (QMake):**
-    - Mantido em `src/code/showbox/showbox.pro`.
-    - Configurado para incluir arquivos fonte (`SOURCES`) e cabeçalhos (`HEADERS`) diretamente da pasta `libs/showbox-ui` usando caminhos relativos (`../../../libs/...`).
+    - Mantido em `src/code/SHantilly/SHantilly.pro`.
+    - Configurado para incluir arquivos fonte (`SOURCES`) e cabeçalhos (`HEADERS`) diretamente da pasta `libs/SHantilly-ui` usando caminhos relativos (`../../../libs/...`).
     - **Garante:** Que os pacotes `.deb`, `.rpm`, `.AppImage` continuem sendo gerados sem alteração nos scripts de CI/CD.
 
 2.  **Build Moderno (CMake):**
-    - Configurado na raiz (`CMakeLists.txt`) e em `libs/showbox-ui`.
-    - Trata `showbox-ui` como uma biblioteca estática real.
+    - Configurado na raiz (`CMakeLists.txt`) e em `libs/SHantilly-ui`.
+    - Trata `SHantilly-ui` como uma biblioteca estática real.
     - Usado para o desenvolvimento do **Showbox Studio** e testes unitários.
 
 ---
 
 ## 3. Log de Migração de Componentes
 
-Este registro rastreia quais componentes foram movidos do monólito (`src/code/showbox`) para a biblioteca (`libs/showbox-ui`).
+Este registro rastreia quais componentes foram movidos do monólito (`src/code/SHantilly`) para a biblioteca (`libs/SHantilly-ui`).
 
 | Componente     | Data       | Motivo da Migração                                      | Dependências           |
 | :------------- | :--------- | :------------------------------------------------------ | :--------------------- |
@@ -91,13 +91,13 @@ Os Widgets Qt atuais contêm lógica de execução de shell script (ex: `system(
 /
 ├── CMakeLists.txt          # Build system mestre (Novo)
 ├── libs/
-│   └── showbox-ui/         # A Biblioteca (Static/Shared Lib)
+│   └── SHantilly-ui/         # A Biblioteca (Static/Shared Lib)
 │       ├── include/        # Headers públicos (icon_helper.h, logger.h)
 │       └── src/            # Implementação (icon_helper.cpp, logger.cpp)
 ├── src/
 │   └── code/
-│       └── showbox/        # Aplicação CLI (Legacy path mantido)
-│           ├── showbox.pro # Build Legacy (Aponta para ../../../libs)
+│       └── SHantilly/        # Aplicação CLI (Legacy path mantido)
+│           ├── SHantilly.pro # Build Legacy (Aponta para ../../../libs)
 │           └── ...
 └── apps/
     └── studio/             # O novo Editor (IDE)

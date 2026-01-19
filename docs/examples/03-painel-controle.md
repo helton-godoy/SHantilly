@@ -25,7 +25,7 @@ Criar um painel de controle profissional com:
 # Tutorial 03: Painel de Controle
 # Demonstra layout sidebar + tabs
 
-showbox --resizable << 'EOF'
+SHantilly --resizable << 'EOF'
 set title "Painel de Controle"
 
 # ============================================

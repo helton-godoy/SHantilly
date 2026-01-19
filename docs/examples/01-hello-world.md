@@ -21,7 +21,7 @@ Criar um diálogo simples com uma mensagem e um botão para fechar.
 # Tutorial 01: Hello World
 # O exemplo mais simples de Showbox
 
-showbox << 'EOF'
+SHantilly << 'EOF'
 # Configurar título da janela
 set title "Meu Primeiro Diálogo"
 
@@ -45,12 +45,12 @@ echo "Diálogo fechado!"
 ### 1. O Heredoc
 
 ```bash
-showbox << 'EOF'
+SHantilly << 'EOF'
 ...
 EOF
 ```
 
-O heredoc (`<< 'EOF'`) permite enviar múltiplas linhas para o showbox. As aspas em `'EOF'` impedem a expansão de variáveis dentro do bloco.
+O heredoc (`<< 'EOF'`) permite enviar múltiplas linhas para o SHantilly. As aspas em `'EOF'` impedem a expansão de variáveis dentro do bloco.
 
 ### 2. Configurar a Janela
 

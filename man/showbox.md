@@ -1,16 +1,16 @@
-# showbox(1) - Manual do Usuário
+# SHantilly(1) - Manual do Usuário
 
 ## NOME
 
-**showbox** — Uma ferramenta para criar interfaces gráficas de usuário (GUI) a partir de scripts de shell.
+**SHantilly** — Uma ferramenta para criar interfaces gráficas de usuário (GUI) a partir de scripts de shell.
 
 ## SINOPSE
 
-`showbox` [**opções_globais**] [**comandos**]
+`SHantilly` [**opções_globais**] [**comandos**]
 
 ## DESCRIÇÃO
 
-O **showbox** é uma aplicação poderosa que interpreta um script de comandos, lido da entrada padrão, para construir e exibir uma janela de diálogo gráfica. Ele permite que desenvolvedores e administradores de sistema criem interfaces de usuário interativas para seus scripts de shell sem a necessidade de compilar código em C++ ou usar toolkits de GUI complexos diretamente.
+O **SHantilly** é uma aplicação poderosa que interpreta um script de comandos, lido da entrada padrão, para construir e exibir uma janela de diálogo gráfica. Ele permite que desenvolvedores e administradores de sistema criem interfaces de usuário interativas para seus scripts de shell sem a necessidade de compilar código em C++ ou usar toolkits de GUI complexos diretamente.
 
 A interface é definida por uma sequência de comandos que adicionam, configuram e gerenciam widgets (elementos de interface como botões, rótulos, tabelas, etc.) dentro de uma janela.
 
@@ -40,7 +40,7 @@ Modifica uma propriedade de um widget existente ou do diálogo principal.
 
 ### **query**
 
-Instrui o `showbox` a imprimir o estado atual de todos os widgets interativos para a saída padrão (stdout). A saída é formatada como `nome_do_widget="valor"`. É útil para capturar a entrada do usuário em um script de shell.
+Instrui o `SHantilly` a imprimir o estado atual de todos os widgets interativos para a saída padrão (stdout). A saída é formatada como `nome_do_widget="valor"`. É útil para capturar a entrada do usuário em um script de shell.
 
 ---
 
@@ -108,9 +108,9 @@ Este script cria uma janela com um rótulo e um botão de "Sair".
 ```bash
 #!/bin/bash
 
-showbox << EOF
+SHantilly << EOF
 set title "Exemplo Simples"
-add label "Olá, Mundo! Bem-vindo ao dishowbox
+add label "Olá, Mundo! Bem-vindo ao diSHantilly
 add pushbutton "Sair" btn_sair exit
 EOF
 ```
@@ -122,7 +122,7 @@ Este exemplo demonstra um formulário com campos de entrada, uma caixa de seleç
 ```bash
 #!/bin/bash
 
-# Define a interface do showbox
+# Define a interface do SHantilly
 read -r -d '' UI_SCRIPT << EOM
 set title "Acesso ao Sistema"
 set icon "./images/logo.png"
@@ -148,8 +148,8 @@ add frame "" btn_frame horizontal
 end
 EOM
 
-# Executa o dishowbox captura a saída
-OUTPUT=$(echo "$UI_SCRIPT" | dialshowbox Verifica se o usuário pressionou "Login"
+# Executa o diSHantilly captura a saída
+OUTPUT=$(echo "$UI_SCRIPT" | dialSHantilly Verifica se o usuário pressionou "Login"
 if [ $? -eq 0 ]; then
   # Extrai os valores usando o comando 'query'
   eval "$OUTPUT"
@@ -169,11 +169,11 @@ _Neste exemplo, assumimos que `add textbox` é um widget válido para entrada de
 
 ## ARQUIVOS
 
-- `~/.config/showbox/dialogrc`: Arquivo de configuração do usuário (se aplicável).
+- `~/.config/SHantilly/dialogrc`: Arquivo de configuração do usuário (se aplicável).
 
 ## AMBIENTE
 
-- `showbox_RC`: Pode apontar para um arquivo de configuração alternativo.
+- `SHantilly_RC`: Pode apontar para um arquivo de configuração alternativo.
 
 ## BUGS
 

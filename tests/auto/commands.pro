@@ -5,8 +5,8 @@ CONFIG -= app_bundle
 TEMPLATE = app
 TARGET = tst_commands
 
-# Path to showbox source code (from tests/auto/)
-SHOWBOX_SRC = ../../src/code/showbox
+# Path to SHantilly source code (from tests/auto/)
+SHOWBOX_SRC = ../../src/code/SHantilly
 
 SOURCES += tst_commands.cpp \
            $$SHOWBOX_SRC/commands/add_command.cpp \

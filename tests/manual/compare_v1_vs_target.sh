@@ -3,15 +3,15 @@ set -e
 
 # Ensure we are in project root
 if [[ ! -f "CMakeLists.txt" ]]; then
-	echo "Please run from showbox project root"
+	echo "Please run from SHantilly project root"
 	exit 1
 fi
 
 # Build Legacy (QMake)
 echo "=== Building Legacy Showbox ==="
-pushd src/code/showbox
+pushd src/code/SHantilly
 if command -v qmake6 &>/dev/null; then
-	qmake6 showbox.pro
+	qmake6 SHantilly.pro
 else
 	echo "qmake6 not found, skipping legacy build (assuming it is built or environment issue)"
 fi
@@ -34,16 +34,16 @@ popd
 
 echo "=== Launching Comparison ==="
 echo "Legacy (expecting 'Legacy Button'):"
-if [[ -f src/code/showbox/bin/showbox-legacy ]]; then
-	echo 'add pushbutton "Legacy Button" btn1' | ./src/code/showbox/bin/showbox-legacy &
+if [[ -f src/code/SHantilly/bin/SHantilly-legacy ]]; then
+	echo 'add pushbutton "Legacy Button" btn1' | ./src/code/SHantilly/bin/SHantilly-legacy &
 	LEGACY_PID=$!
 else
 	echo "Legacy binary not found."
 fi
 
 echo "Target (expecting 'Target Button'):"
-if [[ -f build/bin/showbox ]]; then
-	echo 'add pushbutton "Target Button" btn2' | ./build/bin/showbox &
+if [[ -f build/bin/SHantilly ]]; then
+	echo 'add pushbutton "Target Button" btn2' | ./build/bin/SHantilly &
 	TARGET_PID=$!
 else
 	echo "Target binary not found."

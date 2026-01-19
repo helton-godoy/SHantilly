@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(showbox-cli)
+project(SHantilly-cli)
 
 # Configuração Automática do Qt (MOC, UIC, RCC)
 set(CMAKE_AUTOMOC ON)
@@ -16,21 +16,21 @@ file(GLOB_RECURSE SRCS
 list(FILTER SRCS EXCLUDE REGEX ".*/obj/.*")
 list(FILTER SRCS EXCLUDE REGEX ".*/legacy/v1_monolith/dialog_main.cc")
 
-add_executable(showbox 
+add_executable(SHantilly 
     ${SRCS}
 )
 
 # Dependências
-target_link_libraries(showbox PRIVATE 
+target_link_libraries(SHantilly PRIVATE 
     Qt6::Widgets 
     Qt6::Charts
     Qt6::PrintSupport
     Qt6::Network
-    showbox-ui
+    SHantilly-ui
 )
 
 # Includes
-target_include_directories(showbox PRIVATE 
+target_include_directories(SHantilly PRIVATE 
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/core/builder
     ${CMAKE_CURRENT_SOURCE_DIR}/core/parser

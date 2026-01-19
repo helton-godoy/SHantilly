@@ -2,7 +2,7 @@
 set -e
 
 # Image name
-IMAGE_NAME="showbox-dev:latest"
+IMAGE_NAME="SHantilly-dev:latest"
 
 # Build the image ensuring freshness
 echo "Cleaning up old images and building fresh (Debian 13 Trixie)..."
@@ -48,7 +48,7 @@ if [[ $# -eq 0 ]]; then
 fi
 
 # Run the container
-# Mount the PARENT directory to /workspace to allow access to sibling repos (like showbox-studio accessing showbox)
+# Mount the PARENT directory to /workspace to allow access to sibling repos (like SHantilly-studio accessing SHantilly)
 PARENT_DIR="$(dirname "$(pwd)")"
 CURRENT_DIR_NAME="$(basename "$(pwd)")"
 

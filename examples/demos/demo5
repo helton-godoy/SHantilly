@@ -1,16 +1,16 @@
 #!/bin/bash
 
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/showbox/bin/showbox}"
+SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/SHantilly/bin/SHantilly}"
 
 coproc ${SHOWBOX_BIN}
-INPUTFD=${COPROC[0]}  # file descriptor the showbox process writes to
-OUTPUTFD=${COPROC[1]} # file descriptor the showbox process reads from
-DBPID=${COPROC_PID}   # PID of the showbox, if you need it for any purpose... e.g. to kill it
+INPUTFD=${COPROC[0]}  # file descriptor the SHantilly process writes to
+OUTPUTFD=${COPROC[1]} # file descriptor the SHantilly process reads from
+DBPID=${COPROC_PID}   # PID of the SHantilly, if you need it for any purpose... e.g. to kill it
 
 # If your script doesn't use standard input/output you may redirect them to the pipes
 # and don't bore with redirection for each input/output command.
 # Tools used might output something to the pipe but it is unlikely it will be understood by the
-# showbox application. So, this is 99.99% safe...
+# SHantilly application. So, this is 99.99% safe...
 # The following two commands will do the job:
 #  exec <&${COPROC[0]}
 #  exec >&${COPROC[1]}
@@ -19,13 +19,13 @@ DBPID=${COPROC_PID}   # PID of the showbox, if you need it for any purpose... e.
 E_SUCCESS=0
 E_CANCEL=1
 
-# The trap checks whether the showbox application was terminated and if so
+# The trap checks whether the SHantilly application was terminated and if so
 # kills the current job and exits the script
 trap "if ! kill -0 ${DBPID} &>/dev/null; then kill %; echo The script cancelled by user; exit ${E_CANCEL}; fi" CHLD
 set -o monitor # Enable SIGCHLD
 
 cat >&"${OUTPUTFD}" <<EODEMO
-add label "<small>This script demonstrates the showbox application monitoring technique during bidirectional communication with it using pipes." note
+add label "<small>This script demonstrates the SHantilly application monitoring technique during bidirectional communication with it using pipes." note
 set note stylesheet "qproperty-textInteractionFlags: NoTextInteraction;"
 add separator
 add label "Click Next to start a long-run process" msg

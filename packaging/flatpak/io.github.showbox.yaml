@@ -1,8 +1,8 @@
-app-id: io.github.showbox
+app-id: io.github.SHantilly
 runtime: org.kde.Platform
 runtime-version: "6.6"
 sdk: org.kde.Sdk
-command: showbox
+command: SHantilly
 
 finish-args:
   - --share=ipc
@@ -12,15 +12,15 @@ finish-args:
   - --filesystem=home
 
 modules:
-  - name: showbox
+  - name: SHantilly
     buildsystem: qmake
     sources:
       - type: dir
         path: ../..
     build-commands:
-      - cd src/code/showbox && qmake6 showbox.pro
-      - make -C src/code/showbox
+      - cd src/code/SHantilly && qmake6 SHantilly.pro
+      - make -C src/code/SHantilly
     post-install:
-      - install -D -m 755 src/code/showbox/bin/showbox /app/bin/showbox
-      - install -D -m 644 packaging/flatpak/io.github.showbox.desktop /app/share/applications/io.github.showbox.desktop
-      - install -D -m 644 packaging/flatpak/io.github.showbox.metainfo.xml /app/share/metainfo/io.github.showbox.metainfo.xml
+      - install -D -m 755 src/code/SHantilly/bin/SHantilly /app/bin/SHantilly
+      - install -D -m 644 packaging/flatpak/io.github.SHantilly.desktop /app/share/applications/io.github.SHantilly.desktop
+      - install -D -m 644 packaging/flatpak/io.github.SHantilly.metainfo.xml /app/share/metainfo/io.github.SHantilly.metainfo.xml

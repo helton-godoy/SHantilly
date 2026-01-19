@@ -1,9 +1,9 @@
 /*
- * GUI widgets for shell scripts - showbox version 1.0
+ * GUI widgets for shell scripts - SHantilly version 1.0
  *
  * Copyright (C) 2015-2016, 2020 Andriy Martynets <andy.martynets@gmail.com>
  *------------------------------------------------------------------------------
- * This file is part of showbox.
+ * This file is part of SHantilly.
  *
  * Showbox is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with showbox. If not, see http://www.gnu.org/licenses/.
+ * along with SHantilly. If not, see http://www.gnu.org/licenses/.
  *------------------------------------------------------------------------------
  */
 

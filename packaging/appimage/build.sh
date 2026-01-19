@@ -33,9 +33,9 @@ if [[ ! -f "${TOOLS_DIR}/linuxdeploy-plugin-qt-x86_64.AppImage" ]]; then
 fi
 
 # Build ShowBox if not already built
-if [[ ! -f "${PROJECT_ROOT}/src/code/showbox/bin/showbox" ]]; then
+if [[ ! -f "${PROJECT_ROOT}/src/code/SHantilly/bin/SHantilly" ]]; then
 	echo "Building ShowBox..."
-	make -C "${PROJECT_ROOT}/src/code/showbox"
+	make -C "${PROJECT_ROOT}/src/code/SHantilly"
 fi
 
 # Create AppDir structure
@@ -45,15 +45,15 @@ mkdir -p "${APPDIR}/usr/share/applications"
 mkdir -p "${APPDIR}/usr/share/icons/hicolor/256x256/apps"
 
 # Copy files
-cp "${PROJECT_ROOT}/src/code/showbox/bin/showbox" "${APPDIR}/usr/bin/"
-cp "${SCRIPT_DIR}/showbox.desktop" "${APPDIR}/usr/share/applications/"
+cp "${PROJECT_ROOT}/src/code/SHantilly/bin/SHantilly" "${APPDIR}/usr/bin/"
+cp "${SCRIPT_DIR}/SHantilly.desktop" "${APPDIR}/usr/share/applications/"
 
 # Create a simple icon (placeholder - replace with actual icon)
-if [[ ! -f "${SCRIPT_DIR}/showbox.png" ]]; then
+if [[ ! -f "${SCRIPT_DIR}/SHantilly.png" ]]; then
 	echo "Warning: No icon found, using placeholder"
 	convert -size 256x256 xc:steelblue -fill white -gravity center \
-		-pointsize 48 -annotate 0 "SB" "${APPDIR}/usr/share/icons/hicolor/256x256/apps/showbox.png" 2>/dev/null ||
-		touch "${APPDIR}/usr/share/icons/hicolor/256x256/apps/showbox.png"
+		-pointsize 48 -annotate 0 "SB" "${APPDIR}/usr/share/icons/hicolor/256x256/apps/SHantilly.png" 2>/dev/null ||
+		touch "${APPDIR}/usr/share/icons/hicolor/256x256/apps/SHantilly.png"
 fi
 
 # Create dist directory
@@ -70,7 +70,7 @@ cd "${SCRIPT_DIR}"
 	--appdir "${APPDIR}" \
 	--plugin qt \
 	--output appimage \
-	--desktop-file "${APPDIR}/usr/share/applications/showbox.desktop"
+	--desktop-file "${APPDIR}/usr/share/applications/SHantilly.desktop"
 
 # Move to dist
 mv ShowBox*.AppImage "${DIST_DIR}/" 2>/dev/null || true

@@ -1,10 +1,10 @@
-Name:           showbox
+Name:           SHantilly
 Version:        1.0.0
 Release:        1%{?dist}
 Summary:        GUI widgets for shell scripts
 
 License:        GPL-3.0-or-later
-URL:            https://github.com/helton-godoy/showbox
+URL:            https://github.com/helton-godoy/SHantilly
 Source0:        %{name}-%{version}.tar.gz
 
 # Build dependencies
@@ -38,19 +38,19 @@ Features:
 %autosetup
 
 %build
-cd src/code/showbox
-qmake6 showbox.pro
+cd src/code/SHantilly
+qmake6 SHantilly.pro
 %make_build
 
 %install
-install -D -m 755 src/code/showbox/bin/showbox %{buildroot}%{_bindir}/showbox
-install -D -m 644 packaging/rpm/showbox.desktop %{buildroot}%{_datadir}/applications/showbox.desktop
+install -D -m 755 src/code/SHantilly/bin/SHantilly %{buildroot}%{_bindir}/SHantilly
+install -D -m 644 packaging/rpm/SHantilly.desktop %{buildroot}%{_datadir}/applications/SHantilly.desktop
 
 %files
 %license LICENSE
 %doc README.md
-%{_bindir}/showbox
-%{_datadir}/applications/showbox.desktop
+%{_bindir}/SHantilly
+%{_datadir}/applications/SHantilly.desktop
 
 %changelog
 * Sun Jan 12 2026 Helton Godoy <helton@example.com> - 1.0.0-1

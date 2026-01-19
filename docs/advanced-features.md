@@ -13,10 +13,10 @@ O Showbox suporta modificação dinâmica da interface em resposta a eventos do 
 ```bash
 #!/bin/bash
 
-# Iniciar showbox como co-processo
-coproc showbox --hidden
-INPUTFD=${COPROC[0]}    # Leitura (saída do showbox)
-OUTPUTFD=${COPROC[1]}   # Escrita (entrada do showbox)
+# Iniciar SHantilly como co-processo
+coproc SHantilly --hidden
+INPUTFD=${COPROC[0]}    # Leitura (saída do SHantilly)
+OUTPUTFD=${COPROC[1]}   # Escrita (entrada do SHantilly)
 
 # Construir interface
 cat >&$OUTPUTFD << 'EOF'
@@ -57,15 +57,15 @@ Para scripts mais complexos ou quando coproc não está disponível.
 ```bash
 #!/bin/bash
 
-FIFO_IN="./showbox_in"
-FIFO_OUT="./showbox_out"
+FIFO_IN="./SHantilly_in"
+FIFO_OUT="./SHantilly_out"
 
 # Criar FIFOs
 rm -f "$FIFO_IN" "$FIFO_OUT"
 mkfifo "$FIFO_IN" "$FIFO_OUT"
 
-# Iniciar showbox em background
-showbox < "$FIFO_OUT" > "$FIFO_IN" &
+# Iniciar SHantilly em background
+SHantilly < "$FIFO_OUT" > "$FIFO_IN" &
 SHOWBOX_PID=$!
 
 # Cleanup ao sair
@@ -206,10 +206,10 @@ O Showbox respeita o tema Qt do sistema. Para forçar:
 ```bash
 # Via variável de ambiente
 export QT_STYLE_OVERRIDE=Fusion
-showbox < comandos.txt
+SHantilly < comandos.txt
 
 # Via linha de comando
-showbox --style fusion < comandos.txt
+SHantilly --style fusion < comandos.txt
 ```
 
 ### Tema Escuro via Stylesheet
@@ -262,7 +262,7 @@ set stylesheet "
 ```bash
 #!/bin/bash
 
-showbox << 'EOF'
+SHantilly << 'EOF'
 set title "Vendas por Região"
 
 add chart "Distribuição Regional" chart_vendas
@@ -343,7 +343,7 @@ cal_entrega=2026-01-20
 ```bash
 #!/bin/bash
 
-coproc showbox --hidden
+coproc SHantilly --hidden
 INPUTFD=${COPROC[0]}
 OUTPUTFD=${COPROC[1]}
 

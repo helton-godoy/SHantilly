@@ -8,7 +8,7 @@
 
 ```bash
 # Seu primeiro diálogo em uma linha!
-echo 'add label "Olá, Showbox!" | add pushbutton "Fechar" exit' | showbox
+echo 'add label "Olá, Showbox!" | add pushbutton "Fechar" exit' | SHantilly
 ```
 
 ---
@@ -78,9 +78,9 @@ echo 'add label "Olá, Showbox!" | add pushbutton "Fechar" exit' | showbox
 
 ## 🔗 Links Úteis
 
-- **Código-fonte**: [GitHub](https://github.com/seu-usuario/showbox)
+- **Código-fonte**: [GitHub](https://github.com/seu-usuario/SHantilly)
 - **Exemplos**: [examples/](../examples/)
-- **Man page**: `man showbox`
+- **Man page**: `man SHantilly`
 
 ---
 

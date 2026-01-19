@@ -4,7 +4,7 @@
 # Demonstrates the tabs widget with multiple pages
 #
 
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/showbox/bin/showbox}"
+SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/SHantilly/bin/SHantilly}"
 
 ${SHOWBOX_BIN} <<EODEMO
 add label "<b>Settings</b>" title

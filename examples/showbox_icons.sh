@@ -4,7 +4,7 @@
 # Demonstrates buttons and labels with icons
 #
 
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/showbox/bin/showbox}"
+SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/SHantilly/bin/SHantilly}"
 
 ${SHOWBOX_BIN} <<EODEMO
 add label "<b>Icons Demo</b>" title

@@ -1,7 +1,7 @@
 #include "commands/query_command.h"
 #include "execution_context.h"
 #include "logger.h"
-#include "showbox.h"
+#include "SHantilly.h"
 
 void QueryCommand::execute(ExecutionContext &context,
                            const QList<QString> &args) {

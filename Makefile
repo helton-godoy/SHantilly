@@ -10,7 +10,7 @@
 QMAKE := qmake6
 MAKE := make
 NPROC := $(shell nproc)
-BUILD_DIR := src/code/showbox
+BUILD_DIR := src/code/SHantilly
 BIN_DIR := $(BUILD_DIR)/bin
 
 # Default target
@@ -20,7 +20,7 @@ all: docker-check-deps build
 # Docker Integration
 # ============================================================================
 
-DOCKER_IMAGE := showbox-dev:latest
+DOCKER_IMAGE := SHantilly-dev:latest
 IS_DOCKER := $(shell [ -f /.dockerenv ] && echo 1 || echo 0)
 
 # Check if we are running inside docker
@@ -67,7 +67,7 @@ clean:  ## Clean build artifacts (runs inside Docker)
 clean_internal: ## Internal clean target
 	@echo "Cleaning build artifacts..."
 	cd $(BUILD_DIR) && $(MAKE) clean || true
-	rm -f $(BIN_DIR)/showbox
+	rm -f $(BIN_DIR)/SHantilly
 	rm -rf dist/
 	find . -name "*.o" -delete
 	find . -name "moc_*" -delete
@@ -154,13 +154,13 @@ test:  ## Run tests (runs inside Docker)
 
 test_internal: ## Internal test target
 	@echo "Running examples..."
-	./examples/showbox_demo.sh || true
+	./examples/SHantilly_demo.sh || true
 
 test-icons:  ## Test icons demo (runs inside Docker)
 	$(call IN_DOCKER_WRAPPER,test-icons)
 
 test-icons_internal: ## Internal test-icons target
-	./examples/showbox_icons.sh
+	./examples/SHantilly_icons.sh
 
 # ============================================================================
 # Packaging

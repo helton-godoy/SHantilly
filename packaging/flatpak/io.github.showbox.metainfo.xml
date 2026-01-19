@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>io.github.showbox</id>
+  <id>io.github.SHantilly</id>
   <name>ShowBox</name>
   <summary>GUI widgets for shell scripts</summary>
   <metadata_license>CC0-1.0</metadata_license>
@@ -22,13 +22,13 @@
     </ul>
   </description>
   
-  <launchable type="desktop-id">io.github.showbox.desktop</launchable>
+  <launchable type="desktop-id">io.github.SHantilly.desktop</launchable>
   
-  <url type="homepage">https://github.com/helton-godoy/showbox</url>
-  <url type="bugtracker">https://github.com/helton-godoy/showbox/issues</url>
+  <url type="homepage">https://github.com/helton-godoy/SHantilly</url>
+  <url type="bugtracker">https://github.com/helton-godoy/SHantilly/issues</url>
   
   <provides>
-    <binary>showbox</binary>
+    <binary>SHantilly</binary>
   </provides>
   
   <releases>

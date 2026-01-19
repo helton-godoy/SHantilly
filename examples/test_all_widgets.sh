@@ -1,6 +1,6 @@
 #!/bin/bash
-BINARY=./build/bin/showbox
-FIFO=/tmp/showbox_test_all.fifo
+BINARY=./build/bin/SHantilly
+FIFO=/tmp/SHantilly_test_all.fifo
 
 rm -f "${FIFO}"
 mkfifo "${FIFO}"

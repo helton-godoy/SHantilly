@@ -5,7 +5,7 @@
 
 #include "commands/position_command.h"
 #include "execution_context.h"
-#include "showbox.h"
+#include "SHantilly.h"
 
 void PositionCommand::execute(ExecutionContext &context,
                               const QList<QString> &args) {

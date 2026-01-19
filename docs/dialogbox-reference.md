@@ -411,7 +411,7 @@ struct DialogCommand {
 
 ```bash
 #!/bin/bash
-# Exemplo de diálogo com showbox
+# Exemplo de diálogo com SHantilly
 
 # Criar diálogo principal
 add groupbox "Configurações" main

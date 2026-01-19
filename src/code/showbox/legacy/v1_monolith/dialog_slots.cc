@@ -20,7 +20,7 @@
  *------------------------------------------------------------------------------
  */
 
-#include "showbox.h"
+#include "SHantilly.h"
 
 using namespace DialogCommandTokens;
 

@@ -1,8 +1,8 @@
 #!/bin/bash
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/showbox/bin/showbox}"
+SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/SHantilly/bin/SHantilly}"
 
 ${SHOWBOX_BIN} <<EODEMO
-add label "<small>This script demonstrates the showbox application exit codes usage." note
+add label "<small>This script demonstrates the SHantilly application exit codes usage." note
 set note stylesheet "qproperty-textInteractionFlags: NoTextInteraction;"
 add separator
 add label "<big>Please confirm the operation" msg

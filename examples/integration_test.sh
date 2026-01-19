@@ -11,9 +11,9 @@ echo "=== Running Integration Test (V1 Parser -> Modern Architecture) ==="
 # But for automated testing without visual verification, we rely on 'query' output.
 
 # We need to capture stdout
-# WORKDIR is /workspace/showbox-studio
-# So we need to go to ../showbox
-OUTPUT=$(./src/start-dev.sh "cd ../showbox && ./build/bin/poc_modern_cli < test_script.sbx")
+# WORKDIR is /workspace/SHantilly-studio
+# So we need to go to ../SHantilly
+OUTPUT=$(./src/start-dev.sh "cd ../SHantilly && ./build/bin/poc_modern_cli < test_script.sbx")
 
 echo "--- CLI Output ---"
 echo "${OUTPUT}"

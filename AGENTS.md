@@ -13,7 +13,7 @@ ShowBox is a C++/Qt6 application that provides GUI widgets for shell scripts. It
 make build
 
 # Or manually
-cd src/code/showbox && qmake6 && make -j$(nproc)
+cd src/code/SHantilly && qmake6 && make -j$(nproc)
 
 # Clean build artifacts
 make clean
@@ -65,8 +65,8 @@ trunk check --filter markdownlint
 
 ### File Structure
 
-- Headers: `showbox.h`, `tokenizer.h`, `commands/*.h`
-- Sources: `showbox.cc`, `tokenizer.cpp`, `commands/*.cpp`
+- Headers: `SHantilly.h`, `tokenizer.h`, `commands/*.h`
+- Sources: `SHantilly.cc`, `tokenizer.cpp`, `commands/*.cpp`
 - Use `.cc` for main implementation files, `.cpp` for others (established pattern)
 
 ### Headers
@@ -78,11 +78,11 @@ trunk check --filter markdownlint
 
 ```cpp
 /*
- * GUI widgets for shell scripts - showbox version 1.0
+ * GUI widgets for shell scripts - SHantilly version 1.0
  *
  * Copyright (C) 2015-2016, 2020 Andriy Martynets <andy.martynets@gmail.com>
  *------------------------------------------------------------------------------
- * This file is part of showbox.
+ * This file is part of SHantilly.
  * [GPLv3+ license text]
  *------------------------------------------------------------------------------
  */
@@ -103,7 +103,7 @@ trunk check --filter markdownlint
 - **Methods**: camelCase (`executeCommand`, `setOptions`, `findWidget`)
 - **Variables**: camelCase for class members, underscore_case for locals (mixed - follow existing pattern)
 - **Constants**: UPPER_SNAKE_CASE (`BUFFER_SIZE`, `DEFAULT_ALIGNMENT`)
-- **Files**: lowercase_with_underscores (`showbox.h`, `command_utils.cpp`)
+- **Files**: lowercase_with_underscores (`SHantilly.h`, `command_utils.cpp`)
 
 ### Qt Conventions
 
@@ -146,8 +146,8 @@ trunk check --filter markdownlint
 
 ## Repository Structure
 
-- `src/code/showbox/` - Main source code (C++/Qt)
-- `src/code/showbox/commands/` - Command implementations (factory pattern)
+- `src/code/SHantilly/` - Main source code (C++/Qt)
+- `src/code/SHantilly/commands/` - Command implementations (factory pattern)
 - `tests/auto/` - Unit tests
 - `examples/` - Shell script examples demonstrating ShowBox usage
 - `docs/` - Project documentation
@@ -166,5 +166,5 @@ trunk check --filter markdownlint
 
 - Documentation index: `.context/docs/README.md`
 - Agent playbooks: `.context/agents/README.md`
-- Commands knowledge base: `src/code/showbox/commands/AGENTS.md`
+- Commands knowledge base: `src/code/SHantilly/commands/AGENTS.md`
 - Contributor guide: `docs/README.md`

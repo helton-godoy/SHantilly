@@ -4,7 +4,7 @@
 # Demonstrates the listbox widget with items, selection and activation
 #
 
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/showbox/bin/showbox}"
+SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/SHantilly/bin/SHantilly}"
 
 ${SHOWBOX_BIN} <<EODEMO
 add label "<b>Select items from the list:</b>" title

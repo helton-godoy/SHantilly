@@ -4,7 +4,7 @@
 # Reproduz a interface completa de demonstração de widgets
 #
 
-SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/showbox/bin/showbox}"
+SHOWBOX_BIN="${SHOWBOX_BIN:-./src/code/SHantilly/bin/SHantilly}"
 
 ${SHOWBOX_BIN} -r <<EODEMO
 # === Tabs principais (laterais à esquerda) ===
