@@ -1,6 +1,9 @@
-# SHantilly Makefile# Load optional .env file (for local secrets like SONAR_TOKEN)
+# SHantilly Makefile
+# Load optional .env file (for local secrets like SONAR_TOKEN)
 -include .env
-export# Build, test, and package automation
+export
+
+# Build, test, and package automation
 
 .PHONY: all build clean install test help
 .PHONY: dev start-dev start-dev-build
