@@ -52,7 +52,15 @@ RUN apt-get update -qq && apt-get install -qqy \
     mkdocs \
     mkdocs-material \
     lcov \
+    default-jre-headless \
+    unzip \
     && rm -rf /var/lib/apt/lists/*
+
+# Install Sonar Scanner
+RUN curl -sSLo /tmp/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.1.4610-linux-x64.zip \
+    && unzip -q /tmp/sonar-scanner.zip -d /opt \
+    && ln -s /opt/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner /usr/local/bin/sonar-scanner \
+    && rm /tmp/sonar-scanner.zip
 
 # Generate locale
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
