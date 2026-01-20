@@ -23,7 +23,5 @@ target_link_libraries(
 target_include_directories(
   shantilly
   PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
-          ${CMAKE_CURRENT_SOURCE_DIR}/core/builder
-          ${CMAKE_CURRENT_SOURCE_DIR}/core/parser
           ${CMAKE_CURRENT_SOURCE_DIR}/legacy/v2_incomplete
           ${CMAKE_CURRENT_SOURCE_DIR}/legacy/v1_monolith)

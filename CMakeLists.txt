@@ -36,28 +36,29 @@ endif()
 
 # Subprojetos
 add_subdirectory(libs/SHantilly-ui)
-add_subdirectory(src/code/SHantilly)
+add_subdirectory(src/code/shantilly)
 # add_subdirectory(apps/studio) # Habilitaremos quando iniciarmos o Studio
 
 enable_testing()
 add_subdirectory(tests)
 
-add_executable(
-  poc_modern_cli
-  src/poc_modern_cli.cpp
-  src/code/SHantilly/core/parser/ParserMain.cpp
-  src/code/SHantilly/core/parser/ParserMain.h
-  src/code/SHantilly/core/parser/CommandParser.cpp
-  src/code/SHantilly/core/parser/Tokenizer.cpp
-  src/code/SHantilly/core/parser/WidgetParserUtils.cpp)
+# poc_modern_cli removido devido à refatoração
+# add_executable(
+#   poc_modern_cli
+#   src/poc_modern_cli.cpp
+#   src/code/shantilly/core/parser/ParserMain.cpp
+#   src/code/shantilly/core/parser/ParserMain.h
+#   src/code/shantilly/core/parser/CommandParser.cpp
+#   src/code/shantilly/core/parser/Tokenizer.cpp
+#   src/code/shantilly/core/parser/WidgetParserUtils.cpp)
 
-target_link_libraries(poc_modern_cli PRIVATE Qt6::Widgets SHantilly-ui)
+# target_link_libraries(poc_modern_cli PRIVATE Qt6::Widgets SHantilly-ui)
 
-target_include_directories(
-  poc_modern_cli PRIVATE src/code/SHantilly/core/parser
-                         src/code/SHantilly/core/builder)
+# target_include_directories(
+#   poc_modern_cli PRIVATE src/code/shantilly/core/parser
+#                          src/code/shantilly/core/builder)
 
-set_property(TARGET poc_modern_cli PROPERTY AUTOMOC ON)
+# set_property(TARGET poc_modern_cli PROPERTY AUTOMOC ON)
 
 add_executable(visual_verifier src/visual_verifier.cpp)
 
@@ -68,7 +69,7 @@ target_link_libraries(visual_verifier PRIVATE Qt6::Widgets SHantilly-ui)
 # ============================================================================
 include(GNUInstallDirs)
 
-install(TARGETS shantilly poc_modern_cli visual_verifier
+install(TARGETS shantilly visual_verifier
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(DIRECTORY libs/SHantilly-ui/include/
