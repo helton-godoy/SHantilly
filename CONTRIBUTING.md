@@ -4,13 +4,16 @@ Obrigado pelo interesse em contribuir com o SHantilly! Este documento define as 
 
 ## 🚀 Como Começar
 
-1.  **Fork** o repositório no GitHub.
-2.  **Clone** seu fork localmente:
+1. **Fork** o repositório no GitHub.
+2. **Clone** seu fork localmente:
+
     ```bash
     git clone https://github.com/SEU_USUARIO/SHantilly.git
     cd SHantilly
     ```
-3.  Configure o ambiente de desenvolvimento (Docker recomendado):
+
+3. Configure o ambiente de desenvolvimento (Docker recomendado):
+
     ```bash
     make build
     ```
@@ -42,21 +45,27 @@ Seguimos a convenção [Conventional Commits](https://www.conventionalcommits.or
 
 ## 📦 Processo de Pull Request
 
-1.  Crie uma nova branch para sua feature ou correção:
+1. Crie uma nova branch para sua feature ou correção:
+
     ```bash
     git checkout -b feat/minha-feature
     ```
-2.  Faça suas alterações e commits.
-3.  Garanta que os testes passem:
+
+2. Faça suas alterações e commits.
+3. Garanta que os testes passem:
+
     ```bash
     make test
     ```
-4.  Envie para o seu fork:
+
+4. Envie para o seu fork:
+
     ```bash
     git push origin feat/minha-feature
     ```
-5.  Abra um Pull Request (PR) para a branch `main` do repositório oficial.
-6.  Preencha o template do PR com detalhes sobre o que foi alterado.
+
+5. Abra um Pull Request (PR) para a branch `main` do repositório oficial.
+6. Preencha o template do PR com detalhes sobre o que foi alterado.
 
 ## 🧪 Testes
 

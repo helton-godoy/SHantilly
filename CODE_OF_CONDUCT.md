@@ -24,4 +24,4 @@ Exemplos de comportamentos inaceitáveis:
 
 ## Aplicação
 
-Violações do Código de Conduta podem ser relatadas entrando em contato com a equipe do projeto em contact@shantilly.org. Todas as reclamações serão analisadas e investigadas e resultarão em uma resposta considerada necessária e apropriada às circunstâncias.
+Violações do Código de Conduta podem ser relatadas entrando em contato com a equipe do projeto em <contact@shantilly.org>. Todas as reclamações serão analisadas e investigadas e resultarão em uma resposta considerada necessária e apropriada às circunstâncias.
