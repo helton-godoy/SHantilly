@@ -1,13 +1,22 @@
 #!/bin/bash
 #
-# SHantilly Example: Themes Demo
+# shantilly Example: Themes Demo
 # Demonstrates the theme manager (dark/light/system)
 #
 
-SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
+# Detect shantilly binary
+if [ -z "${SHANTILLY_BIN}" ]; then
+    if [ -f "../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../build/bin/shantilly"
+    elif [ -f "./build/bin/shantilly" ]; then
+        SHANTILLY_BIN="./build/bin/shantilly"
+    else
+        SHANTILLY_BIN="shantilly"
+    fi
+fi
 
 ${SHANTILLY_BIN} <<EODEMO
-add label "<h2>SHantilly Theme Demo</h2>" title
+add label "<h2>shantilly Theme Demo</h2>" title
 set title stylesheet "qproperty-textInteractionFlags: NoTextInteraction;"
 
 add separator
@@ -28,7 +37,7 @@ add pushbutton "&Close" close apply exit
 end frame
 
 set close default
-set title "SHantilly Theme Test"
+set title "shantilly Theme Test"
 show
 EODEMO
 

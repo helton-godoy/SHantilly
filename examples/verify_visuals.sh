@@ -6,7 +6,7 @@ set -e
 
 echo "=== Compilando e Executando Verificador Visual ==="
 
-./src/start-dev.sh "cd ../SHantilly && \
+../src/start-dev.sh "cd ../shantilly && \
     mkdir -p build && cd build && \
     cmake .. && \
     make -j$(nproc) visual_verifier && \

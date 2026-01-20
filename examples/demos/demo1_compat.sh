@@ -1,13 +1,22 @@
 #!/bin/bash
 #
-# Demo1 adaptado para SHantilly
+# Demo1 adaptado para shantilly
 # Teste de compatibilidade - exit codes
 #
 
-SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
+# Detect shantilly binary
+if [ -z "${SHANTILLY_BIN}" ]; then
+    if [ -f "../../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../../build/bin/shantilly"
+    elif [ -f "../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../build/bin/shantilly"
+    else
+        SHANTILLY_BIN="shantilly"
+    fi
+fi
 
 ${SHANTILLY_BIN} <<EODEMO
-add label "<small>This script demonstrates the SHantilly application exit codes usage." note
+add label "<small>This script demonstrates the shantilly application exit codes usage." note
 set note stylesheet "qproperty-textInteractionFlags: NoTextInteraction;"
 add separator
 add label "<big>Please confirm the operation" msg
@@ -19,7 +28,7 @@ add stretch
 add pushbutton C&ontinue apply exit
 add pushbutton C&ancel exit
 end frame
-set title "SHantilly Demo 1"
+set title "shantilly Demo 1"
 show
 EODEMO
 

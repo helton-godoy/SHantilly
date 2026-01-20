@@ -1,17 +1,26 @@
 #!/bin/bash
 #
-# SHantilly Example: Icon Panel / Dashboard
+# shantilly Example: Icon Panel / Dashboard
 # Demonstrates a grid-like layout with icon buttons
 #
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
+# Detect shantilly binary
+if [ -z "${SHANTILLY_BIN}" ]; then
+    if [ -f "../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../build/bin/shantilly"
+    elif [ -f "./build/bin/shantilly" ]; then
+        SHANTILLY_BIN="./build/bin/shantilly"
+    else
+        SHANTILLY_BIN="shantilly"
+    fi
+fi
 
 # Use Adwaita icons (available on most Linux systems)
 # Or replace with your own SVG/PNG files
 
 ${SHANTILLY_BIN} <<'EODEMO'
-set title "SHantilly - Painel de Widgets"
+set title "shantilly - Painel de Widgets"
 
 add label "<h2>Selecione um Tipo de Campo</h2>" header
 set header stylesheet "color: #2196F3; margin: 10px;"

@@ -1,10 +1,19 @@
 #!/bin/bash
 #
-# SHantilly Example: TextBox Widget
+# shantilly Example: TextBox Widget
 # Demonstrates the textbox widget with normal, password and placeholder modes
 #
 
-SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
+# Detect shantilly binary
+if [ -z "${SHANTILLY_BIN}" ]; then
+    if [ -f "../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../build/bin/shantilly"
+    elif [ -f "./build/bin/shantilly" ]; then
+        SHANTILLY_BIN="./build/bin/shantilly"
+    else
+        SHANTILLY_BIN="shantilly"
+    fi
+fi
 
 while IFS=$'=' read key value; do
 	case ${key} in
@@ -47,7 +56,7 @@ add pushbutton "&Cancel" cancel exit
 end frame
 
 set username focus
-set title "SHantilly TextBox"
+set title "shantilly TextBox"
 show
 EODEMO
 

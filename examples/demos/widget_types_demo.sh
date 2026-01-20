@@ -1,10 +1,19 @@
 #!/bin/bash
 #
-# SHantilly Demo: Widget Types Demo
+# shantilly Demo: Widget Types Demo
 # Reproduz a interface completa de demonstração de widgets
 #
 
-SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
+# Detect shantilly binary
+if [ -z "${SHANTILLY_BIN}" ]; then
+    if [ -f "../../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../../build/bin/shantilly"
+    elif [ -f "../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../build/bin/shantilly"
+    else
+        SHANTILLY_BIN="shantilly"
+    fi
+fi
 
 ${SHANTILLY_BIN} -r <<EODEMO
 # === Tabs principais (laterais à esquerda) ===

@@ -1,10 +1,19 @@
 #!/bin/bash
 #
-# SHantilly Example: ListBox Widget
+# shantilly Example: ListBox Widget
 # Demonstrates the listbox widget with items, selection and activation
 #
 
-SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
+# Detect shantilly binary
+if [ -z "${SHANTILLY_BIN}" ]; then
+    if [ -f "../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../build/bin/shantilly"
+    elif [ -f "./build/bin/shantilly" ]; then
+        SHANTILLY_BIN="./build/bin/shantilly"
+    else
+        SHANTILLY_BIN="shantilly"
+    fi
+fi
 
 ${SHANTILLY_BIN} <<EODEMO
 add label "<b>Select items from the list:</b>" title
@@ -27,7 +36,7 @@ add pushbutton "&Cancel" cancel exit
 end frame
 
 set ok default
-set title "SHantilly ListBox"
+set title "shantilly ListBox"
 show
 EODEMO
 

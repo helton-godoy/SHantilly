@@ -1,16 +1,25 @@
 #!/bin/bash
 #
-# SHantilly Example: Sidebar + Tabs Layout
+# shantilly Example: Sidebar + Tabs Layout
 # Demonstrates a control panel layout with:
 # - Left sidebar menu
 # - Right panel with tabs
 #
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
+# Detect shantilly binary
+if [ -z "${SHANTILLY_BIN}" ]; then
+    if [ -f "../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../build/bin/shantilly"
+    elif [ -f "./build/bin/shantilly" ]; then
+        SHANTILLY_BIN="./build/bin/shantilly"
+    else
+        SHANTILLY_BIN="shantilly"
+    fi
+fi
 
 ${SHANTILLY_BIN} --resizable <<'EODEMO'
-set title "SHantilly - Painel de Controle"
+set title "shantilly - Painel de Controle"
 
 # === SIDEBAR ESQUERDA ===
 # Widgets adicionados na coluna 1 (padrão)
