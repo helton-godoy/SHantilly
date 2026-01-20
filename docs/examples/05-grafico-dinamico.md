@@ -202,7 +202,7 @@ set chart_nome axis "vertical"    # Linha/Área
 
 ---
 
-## Parabéns!
+## Parabéns
 
 Você completou todos os tutoriais básicos e intermediários!
 

@@ -35,12 +35,12 @@ graph TD
 
 Para manter a compatibilidade com o sistema de empacotamento existente (`packaging/deb`, `packaging/rpm`, etc.), adotamos uma abordagem de build duplo durante a transição:
 
-1.  **Build Legado (QMake):**
+1. **Build Legado (QMake):**
     - Mantido em `src/code/SHantilly/SHantilly.pro`.
     - Configurado para incluir arquivos fonte (`SOURCES`) e cabeçalhos (`HEADERS`) diretamente da pasta `libs/SHantilly-ui` usando caminhos relativos (`../../../libs/...`).
     - **Garante:** Que os pacotes `.deb`, `.rpm`, `.AppImage` continuem sendo gerados sem alteração nos scripts de CI/CD.
 
-2.  **Build Moderno (CMake):**
+2. **Build Moderno (CMake):**
     - Configurado na raiz (`CMakeLists.txt`) e em `libs/SHantilly-ui`.
     - Trata `SHantilly-ui` como uma biblioteca estática real.
     - Usado para o desenvolvimento do **SHantilly Studio** e testes unitários.
