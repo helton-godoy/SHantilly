@@ -1,4 +1,4 @@
-**Diretório `demos`:**
+# Diretório `demos`
 
 Este diretório é dedicado a scripts de demonstração, com o objetivo de fornecer exemplos práticos em formato de prova de conceito para aplicações mais robustas, integrando diversos elementos do SHantilly de forma harmoniosa, demonstrando sua versatilidade e potencial em cenários reais.
 

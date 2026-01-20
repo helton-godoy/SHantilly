@@ -1,4 +1,4 @@
-**Diretório `examples`:**
+# Diretório `examples`
 
 Destinado a scripts de exemplo, com o propósito de demonstrar ao usuário como criar um script que incorpore os recursos disponíveis no SHantilly.
 
