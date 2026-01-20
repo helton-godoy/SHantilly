@@ -1,10 +1,19 @@
 #!/bin/bash
 #
-# SHantilly Example: Tabs Widget
+# shantilly Example: Tabs Widget
 # Demonstrates the tabs widget with multiple pages
 #
 
-SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
+# Detect shantilly binary
+if [ -z "${SHANTILLY_BIN}" ]; then
+    if [ -f "../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../build/bin/shantilly"
+    elif [ -f "./build/bin/shantilly" ]; then
+        SHANTILLY_BIN="./build/bin/shantilly"
+    else
+        SHANTILLY_BIN="shantilly"
+    fi
+fi
 
 ${SHANTILLY_BIN} <<EODEMO
 add label "<b>Settings</b>" title
@@ -45,7 +54,7 @@ add pushbutton "&Cancel" cancel exit
 end frame
 
 set ok default
-set title "SHantilly Tabs"
+set title "shantilly Tabs"
 show
 EODEMO
 

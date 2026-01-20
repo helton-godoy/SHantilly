@@ -8,7 +8,7 @@ if(NOT DEFINED CMAKE_TOOLCHAIN_FILE
       CACHE STRING "")
 endif()
 
-project(SHantilly-suite LANGUAGES CXX)
+project(shantilly-suite LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)

@@ -1,5 +1,14 @@
 #!/bin/bash
-SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
+# Detect shantilly binary
+if [ -z "${SHANTILLY_BIN}" ]; then
+    if [ -f "../../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../../build/bin/shantilly"
+    elif [ -f "../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../build/bin/shantilly"
+    else
+        SHANTILLY_BIN="shantilly"
+    fi
+fi
 
 if [[ ! -f ${SHANTILLY_BIN} ]]; then
 	echo "Error: Binary not found at ${SHANTILLY_BIN}"

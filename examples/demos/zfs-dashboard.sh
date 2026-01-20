@@ -1,5 +1,14 @@
 j#!/bin/bash
-SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
+# Detect shantilly binary
+if [ -z "${SHANTILLY_BIN}" ]; then
+    if [ -f "../../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../../build/bin/shantilly"
+    elif [ -f "../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../build/bin/shantilly"
+    else
+        SHANTILLY_BIN="shantilly"
+    fi
+fi
 DIALOGBOX=${1:-./dist_qt6/dialogbox}
 
 if [[ ! -x ${SHANTILLY_BIN} ]]; then

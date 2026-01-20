@@ -1,10 +1,19 @@
 #!/bin/bash
 #
-# SHantilly Example: Table Widget
+# shantilly Example: Table Widget
 # Demonstrates the table widget with editable cells, headers and search
 #
 
-SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
+# Detect shantilly binary
+if [ -z "${SHANTILLY_BIN}" ]; then
+    if [ -f "../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../build/bin/shantilly"
+    elif [ -f "./build/bin/shantilly" ]; then
+        SHANTILLY_BIN="./build/bin/shantilly"
+    else
+        SHANTILLY_BIN="shantilly"
+    fi
+fi
 
 while IFS=$'=' read key value; do
 	# Table cell edits are reported as table1[row][col]=value
@@ -38,7 +47,7 @@ add pushbutton "&Cancel" cancel exit
 end frame
 
 set save default
-set title "SHantilly Table"
+set title "shantilly Table"
 show
 EODEMO
 

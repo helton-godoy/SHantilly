@@ -1,10 +1,19 @@
 #!/bin/bash
 #
-# SHantilly Example: TextView Widget
+# shantilly Example: TextView Widget
 # Demonstrates the textview widget for multi-line text
 #
 
-SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
+# Detect shantilly binary
+if [ -z "${SHANTILLY_BIN}" ]; then
+    if [ -f "../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../build/bin/shantilly"
+    elif [ -f "./build/bin/shantilly" ]; then
+        SHANTILLY_BIN="./build/bin/shantilly"
+    else
+        SHANTILLY_BIN="shantilly"
+    fi
+fi
 
 ${SHANTILLY_BIN} <<EODEMO
 add label "<b>Text Editor</b>" title
@@ -38,7 +47,7 @@ add pushbutton "&Cancel" cancel exit
 end frame
 
 set save default
-set title "SHantilly TextView"
+set title "shantilly TextView"
 show
 EODEMO
 

@@ -1,6 +1,17 @@
 #!/bin/bash
-BINARY=./build/bin/SHantilly
-FIFO=/tmp/SHantilly_test_all.fifo
+# Detect shantilly binary
+if [ -z "${SHANTILLY_BIN}" ]; then
+    if [ -f "../build/bin/shantilly" ]; then
+        BINARY="../build/bin/shantilly"
+    elif [ -f "./build/bin/shantilly" ]; then
+        BINARY="./build/bin/shantilly"
+    else
+        BINARY="shantilly"
+    fi
+else
+    BINARY="${SHANTILLY_BIN}"
+fi
+FIFO=/tmp/shantilly_test_all.fifo
 
 rm -f "${FIFO}"
 mkfifo "${FIFO}"

@@ -1,10 +1,19 @@
 #!/bin/bash
 #
-# SHantilly Example: Icons Demo
+# shantilly Example: Icons Demo
 # Demonstrates buttons and labels with icons
 #
 
-SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
+# Detect shantilly binary
+if [ -z "${SHANTILLY_BIN}" ]; then
+    if [ -f "../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../build/bin/shantilly"
+    elif [ -f "./build/bin/shantilly" ]; then
+        SHANTILLY_BIN="./build/bin/shantilly"
+    else
+        SHANTILLY_BIN="shantilly"
+    fi
+fi
 
 ${SHANTILLY_BIN} <<EODEMO
 add label "<b>Icons Demo</b>" title
@@ -54,7 +63,7 @@ add pushbutton "&Close" close exit
 end frame
 
 set close default
-set title "SHantilly Icons"
+set title "shantilly Icons"
 show
 EODEMO
 

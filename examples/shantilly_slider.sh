@@ -1,10 +1,19 @@
 #!/bin/bash
 #
-# SHantilly Example: Slider Widget
+# shantilly Example: Slider Widget
 # Demonstrates the slider widget with min/max values
 #
 
-SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
+# Detect shantilly binary
+if [ -z "${SHANTILLY_BIN}" ]; then
+    if [ -f "../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../build/bin/shantilly"
+    elif [ -f "./build/bin/shantilly" ]; then
+        SHANTILLY_BIN="./build/bin/shantilly"
+    else
+        SHANTILLY_BIN="shantilly"
+    fi
+fi
 
 while IFS=$'=' read key value; do
 	case ${key} in
@@ -52,7 +61,7 @@ add pushbutton "&Cancel" cancel exit
 end frame
 
 set ok default
-set title "SHantilly Slider"
+set title "shantilly Slider"
 show
 EODEMO
 

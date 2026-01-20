@@ -1,4 +1,4 @@
-# Teste de Integração SHantilly V1 -> Modern Architecture
+# Teste de Integração shantilly V1 -> Modern Architecture
 
 # 1. Janela Principal
 add window "Integration Test" main_win width 400 height 600

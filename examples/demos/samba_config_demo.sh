@@ -1,11 +1,20 @@
 #!/bin/bash
 #
-# Demo do SHantilly: Painel de Configuração do Samba
+# Demo do shantilly: Painel de Configuração do Samba
 # Interface com menu lateral (sidebar) à esquerda e três abas à direita
 # Simula um painel de configuração avançada do Samba com opções realistas
 #
 
-SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
+# Detect shantilly binary
+if [ -z "${SHANTILLY_BIN}" ]; then
+    if [ -f "../../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../../build/bin/shantilly"
+    elif [ -f "../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../build/bin/shantilly"
+    else
+        SHANTILLY_BIN="shantilly"
+    fi
+fi
 
 ${SHANTILLY_BIN} <<EODEMO
 # Layout principal: frame horizontal
@@ -166,7 +175,7 @@ add pushbutton "&Salvar Configuração" btn_save_config
 add pushbutton "&Cancelar" btn_cancel exit
 end frame
 
-set title "Painel de Configuração do Samba - SHantilly Demo"
+set title "Painel de Configuração do Samba - shantilly Demo"
 set btn_apply_all icon "dialog-ok"
 set btn_save_config icon "document-save"
 set btn_cancel icon "dialog-cancel"

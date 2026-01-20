@@ -1,10 +1,19 @@
 #!/bin/bash
 #
-# SHantilly Example: ProgressBar Widget
+# shantilly Example: ProgressBar Widget
 # Demonstrates the progressbar widget with normal and busy modes
 #
 
-SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
+# Detect shantilly binary
+if [ -z "${SHANTILLY_BIN}" ]; then
+    if [ -f "../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../build/bin/shantilly"
+    elif [ -f "./build/bin/shantilly" ]; then
+        SHANTILLY_BIN="./build/bin/shantilly"
+    else
+        SHANTILLY_BIN="shantilly"
+    fi
+fi
 
 # Demo with static progress bar
 ${SHANTILLY_BIN} <<EODEMO
@@ -34,7 +43,7 @@ add pushbutton "&Close" close exit
 end frame
 
 set close default
-set title "SHantilly ProgressBar"
+set title "shantilly ProgressBar"
 show
 EODEMO
 

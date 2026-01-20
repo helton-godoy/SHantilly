@@ -1,10 +1,19 @@
 #!/bin/bash
 #
-# SHantilly Example: Calendar Widget
+# shantilly Example: Calendar Widget
 # Demonstrates the calendar widget with date selection
 #
 
-SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
+# Detect shantilly binary
+if [ -z "${SHANTILLY_BIN}" ]; then
+    if [ -f "../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../build/bin/shantilly"
+    elif [ -f "./build/bin/shantilly" ]; then
+        SHANTILLY_BIN="./build/bin/shantilly"
+    else
+        SHANTILLY_BIN="shantilly"
+    fi
+fi
 
 ${SHANTILLY_BIN} <<EODEMO
 add label "<b>Select a date:</b>" title
@@ -19,7 +28,7 @@ add pushbutton "&Cancel" cancel exit
 end frame
 
 set ok default
-set title "SHantilly Calendar"
+set title "shantilly Calendar"
 show
 EODEMO
 

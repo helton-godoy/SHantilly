@@ -1,10 +1,19 @@
 #!/bin/bash
 #
-# SHantilly Example: PushButton Widget
+# shantilly Example: PushButton Widget
 # Demonstrates various pushbutton styles and behaviors
 #
 
-SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
+# Detect shantilly binary
+if [ -z "${SHANTILLY_BIN}" ]; then
+    if [ -f "../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../build/bin/shantilly"
+    elif [ -f "./build/bin/shantilly" ]; then
+        SHANTILLY_BIN="./build/bin/shantilly"
+    else
+        SHANTILLY_BIN="shantilly"
+    fi
+fi
 
 while IFS=$'=' read key value; do
 	case ${key} in
@@ -46,7 +55,7 @@ add pushbutton "&OK" btn_ok default apply exit
 add pushbutton "&Cancel" btn_cancel exit
 end frame
 
-set title "SHantilly PushButton"
+set title "shantilly PushButton"
 show
 EODEMO
 

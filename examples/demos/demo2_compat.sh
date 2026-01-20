@@ -1,10 +1,19 @@
 #!/bin/bash
 #
-# Demo2 - Input de dados com SHantilly
+# Demo2 - Input de dados com shantilly
 # Teste de compatibilidade - widgets de entrada
 #
 
-SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
+# Detect shantilly binary
+if [ -z "${SHANTILLY_BIN}" ]; then
+    if [ -f "../../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../../build/bin/shantilly"
+    elif [ -f "../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../build/bin/shantilly"
+    else
+        SHANTILLY_BIN="shantilly"
+    fi
+fi
 
 while IFS=$'=' read key value; do
 	case ${key} in
@@ -37,7 +46,7 @@ add pushbutton &Cancel cancel exit
 end frame
 set okay default
 set cb1 focus
-set title "SHantilly Demo 2"
+set title "shantilly Demo 2"
 show
 EODEMO
 

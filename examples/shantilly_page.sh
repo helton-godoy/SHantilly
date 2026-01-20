@@ -1,10 +1,19 @@
 #!/bin/bash
 #
-# SHantilly Example: Page Widget
+# shantilly Example: Page Widget
 # Demonstrates pages within tabs with icons and customization
 #
 
-SHANTILLY_BIN="${SHANTILLY_BIN:-./src/code/SHantilly/bin/SHantilly}"
+# Detect shantilly binary
+if [ -z "${SHANTILLY_BIN}" ]; then
+    if [ -f "../build/bin/shantilly" ]; then
+        SHANTILLY_BIN="../build/bin/shantilly"
+    elif [ -f "./build/bin/shantilly" ]; then
+        SHANTILLY_BIN="./build/bin/shantilly"
+    else
+        SHANTILLY_BIN="shantilly"
+    fi
+fi
 
 ${SHANTILLY_BIN} <<EODEMO
 add label "<b>Wizard Example</b>" title
@@ -47,7 +56,7 @@ add pushbutton "&Finish" finish apply exit
 end frame
 
 set next default
-set title "SHantilly Page"
+set title "shantilly Page"
 show
 EODEMO
 
